@@ -34,3 +34,6 @@ import { IATecNephosBlockHeader } from '@iatec/nephos';
 })
 export class SeuModulo {}
 ```
+## Contribuindo
+
+A contribuição para o Nephos é muito bem-vinda! Seja adicionando novos componentes, melhorando a documentação ou reportando bugs, sua ajuda é fundamental para o crescimento deste projeto. Veja nosso guia de contribuição para saber como começar.
