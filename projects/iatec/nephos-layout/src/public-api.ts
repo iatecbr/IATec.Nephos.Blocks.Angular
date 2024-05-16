@@ -2,5 +2,6 @@
  * Public API Surface of nephos-layout
  */
 
-export * from './lib/services/nephos-layout.service';
-export * from './lib/component/nephos-layout.component';
+export * from './lib/app.layout.module';
+export * from './lib/service/app.layout.service';
+export * from './lib/app.layout.component';
