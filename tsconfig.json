@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@iatec/nephos-layout": [
+        "./dist/iatec/nephos-layout/*",
+        "./dist/iatec/nephos-layout"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
