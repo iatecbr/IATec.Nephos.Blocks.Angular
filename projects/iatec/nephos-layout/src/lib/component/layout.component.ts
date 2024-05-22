@@ -1,13 +1,13 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { MenuService } from '../service/app.menu.service';
+import { MenuService } from '../service/menu.service';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { TopbarComponent } from '../components/topbar/topbar.component';
-import { LayoutService } from '../service/app.layout.service';
+import { LayoutService } from '../service/layout.service';
 
 @Component({
-    selector: 'nephos-layout',
+    selector: 'nph-layout',
     templateUrl: './layout.component.html',
 })
 export class LayoutComponent implements OnDestroy {

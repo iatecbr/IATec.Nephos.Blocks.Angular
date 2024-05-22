@@ -3,8 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { animate, state, style, transition, trigger,AnimationEvent } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { MenuService } from '../../../../service/app.menu.service';
-import { LayoutService } from '../../../../service/app.layout.service';
+import { MenuService } from '../../../../service/menu.service';
+import { LayoutService } from '../../../../service/layout.service';
 import {DomHandler} from 'primeng/dom';
 
 @Component({
