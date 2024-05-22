@@ -4,9 +4,9 @@ import { LayoutService } from '../../service/app.layout.service';
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html'
+    templateUrl: './topbar.component.html'
 })
-export class AppTopbarComponent {
+export class TopbarComponent {
 
     @ViewChild('menubutton') menuButton!: ElementRef;
 

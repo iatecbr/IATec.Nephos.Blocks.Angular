@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { LayoutService } from '../../service/app.layout.service';
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'app-profilemenu',
-    templateUrl: './app.profilesidebar.component.html'
+    templateUrl: './profile-sidebar.component.html'
 })
-export class AppProfileSidebarComponent {
+export class ProfileSidebarComponent {
 
     constructor(public layoutService: LayoutService) { }
 

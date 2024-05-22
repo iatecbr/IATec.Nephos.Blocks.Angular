@@ -2,8 +2,8 @@ import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { MenuService } from '../service/app.menu.service';
-import { AppSidebarComponent } from '../components/sidebar/app.sidebar.component';
-import { AppTopbarComponent } from '../components/Topbar/app.topbar.component';
+import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { TopbarComponent } from '../components/topbar/topbar.component';
 import { LayoutService } from '../service/app.layout.service';
 
 @Component({
@@ -17,9 +17,9 @@ export class LayoutComponent implements OnDestroy {
 
     menuScrollListener: any;
 
-    @ViewChild(AppSidebarComponent) appSidebar!: AppSidebarComponent;
+    @ViewChild(SidebarComponent) appSidebar!: SidebarComponent;
 
-    @ViewChild(AppTopbarComponent) appTopbar!: AppTopbarComponent;
+    @ViewChild(TopbarComponent) appTopbar!: TopbarComponent;
 
     constructor(
         private menuService: MenuService,
