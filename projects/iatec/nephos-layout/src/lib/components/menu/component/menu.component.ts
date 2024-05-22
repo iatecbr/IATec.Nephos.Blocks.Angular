@@ -163,7 +163,12 @@ export class MenuComponent implements OnInit {
                         label: 'Menu',
                         icon: 'pi pi-fw pi-bars',
                         routerLink: ['/uikit/menu'],
-                        routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
+                        routerLinkActiveOptions: {
+                            paths: 'subset',
+                            queryParams: 'ignored',
+                            matrixParams: 'ignored',
+                            fragment: 'ignored'
+                        }
                     },
                     {
                         label: 'Message',

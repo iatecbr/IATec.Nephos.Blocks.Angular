@@ -8,7 +8,8 @@ import { LayoutService } from '../../service/layout.service';
 })
 export class ProfileSidebarComponent {
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService) {
+    }
 
     get visible(): boolean {
         return this.layoutService.state.profileSidebarVisible;

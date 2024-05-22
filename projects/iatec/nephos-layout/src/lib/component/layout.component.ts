@@ -99,8 +99,8 @@ export class LayoutComponent implements OnDestroy {
             document.body.className = document.body.className.replace(
                 new RegExp(
                     '(^|\\b)' +
-                        'blocked-scroll'.split(' ').join('|') +
-                        '(\\b|$)',
+                    'blocked-scroll'.split(' ').join('|') +
+                    '(\\b|$)',
                     'gi'
                 ),
                 ' '
@@ -153,7 +153,7 @@ export class LayoutComponent implements OnDestroy {
                 this.layoutService.config().menuMode === 'static',
             'layout-overlay-active': this.layoutService.state.overlayMenuActive,
             'layout-mobile-active':
-                this.layoutService.state.staticMenuMobileActive,
+            this.layoutService.state.staticMenuMobileActive,
             'p-input-filled':
                 this.layoutService.config().inputStyle === 'filled',
             'p-ripple-disabled': !this.layoutService.config().ripple,
