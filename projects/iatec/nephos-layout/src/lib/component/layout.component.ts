@@ -7,10 +7,10 @@ import { AppTopbarComponent } from '../components/Topbar/app.topbar.component';
 import { LayoutService } from '../service/app.layout.service';
 
 @Component({
-    selector: 'app-layout',
-    templateUrl: './app.layout.component.html',
+    selector: 'nephos-layout',
+    templateUrl: './layout.component.html',
 })
-export class AppLayoutComponent implements OnDestroy {
+export class LayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;
 
     menuOutsideClickListener: any;

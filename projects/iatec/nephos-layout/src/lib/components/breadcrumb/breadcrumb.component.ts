@@ -10,9 +10,9 @@ interface Breadcrumb {
 
 @Component({
     selector: 'app-breadcrumb',
-    templateUrl: './app.breadcrumb.component.html'
+    templateUrl: './breadcrumb.component.html'
 })
-export class AppBreadcrumbComponent {
+export class BreadcrumbComponent {
 
     private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
 

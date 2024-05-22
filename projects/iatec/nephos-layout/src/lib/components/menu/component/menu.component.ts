@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-menu',
-    templateUrl: './app.menu.component.html'
+    templateUrl: './menu.component.html'
 })
-export class AppMenuComponent implements OnInit {
+export class MenuComponent implements OnInit {
 
     model: any[] = [];
 

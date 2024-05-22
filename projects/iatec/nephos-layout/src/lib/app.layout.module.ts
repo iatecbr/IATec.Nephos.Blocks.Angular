@@ -9,12 +9,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { AppConfigModule } from './config/app.config.module';
-import { AppLayoutComponent } from './component/app.layout.component';
-import { AppBreadcrumbComponent } from './components/breadcrumb/app.breadcrumb.component';
+import { LayoutComponent } from './component/layout.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AppSidebarComponent } from './components/sidebar/app.sidebar.component';
 import { AppTopbarComponent } from './components/Topbar/app.topbar.component';
 import { AppProfileSidebarComponent } from './components/profile-sidebar/app.profilesidebar.component';
-import { AppMenuComponent } from './components/menu/component/app.menu.component';
+import { MenuComponent } from './components/menu/component/menu.component';
 import { AppMenuitemComponent } from './components/menu/components/menuitem/app.menuitem.component';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -22,12 +22,12 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
-        AppLayoutComponent,
-        AppBreadcrumbComponent,
+        LayoutComponent,
+        BreadcrumbComponent,
         AppSidebarComponent,
         AppTopbarComponent,
         AppProfileSidebarComponent,
-        AppMenuComponent,
+        MenuComponent,
         AppMenuitemComponent
     ],
     imports: [
@@ -46,7 +46,7 @@ import { CommonModule } from '@angular/common';
         AppConfigModule
     ],
     exports: [
-        AppLayoutComponent
+        LayoutComponent
     ]
 })
 export class AppLayoutModule {
