@@ -8,7 +8,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
-import { AppConfigModule } from './config/app.config.module';
 import { LayoutComponent } from './component/layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -42,8 +41,7 @@ import { MenuItemComponent } from './components/menu/components/menu-item/menu-i
         ButtonModule,
         TooltipModule,
         RippleModule,
-        RouterModule,
-        AppConfigModule
+        RouterModule
     ],
     exports: [
         LayoutComponent
