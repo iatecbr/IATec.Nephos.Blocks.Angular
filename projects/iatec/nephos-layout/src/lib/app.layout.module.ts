@@ -15,10 +15,10 @@ import { AppSidebarComponent } from './components/sidebar/app.sidebar.component'
 import { AppTopbarComponent } from './components/Topbar/app.topbar.component';
 import { AppProfileSidebarComponent } from './components/profile-sidebar/app.profilesidebar.component';
 import { MenuComponent } from './components/menu/component/menu.component';
-import { AppMenuitemComponent } from './components/menu/components/menuitem/app.menuitem.component';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { MenuItemComponent } from './components/menu/components/menu-item/menu-item.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
         AppTopbarComponent,
         AppProfileSidebarComponent,
         MenuComponent,
-        AppMenuitemComponent
+        MenuItemComponent
     ],
     imports: [
         CommonModule,
