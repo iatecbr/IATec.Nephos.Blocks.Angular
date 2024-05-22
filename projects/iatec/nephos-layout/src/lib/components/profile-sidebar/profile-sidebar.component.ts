@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LayoutService } from '../../service/layout.service';
+import { LayoutService } from '../../service';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector

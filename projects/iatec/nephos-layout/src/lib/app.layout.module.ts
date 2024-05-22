@@ -43,7 +43,8 @@ import { CommonModule } from '@angular/common';
         RouterModule
     ],
     exports: [
-        LayoutComponent
+        LayoutComponent,
+        BreadcrumbComponent,
     ]
 })
 export class AppLayoutModule {

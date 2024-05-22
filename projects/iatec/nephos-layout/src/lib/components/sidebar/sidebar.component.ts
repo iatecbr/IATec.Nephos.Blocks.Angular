@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../service/layout.service';
+import { LayoutService } from '../../service';
 
 @Component({
     selector: 'nph-sidebar',

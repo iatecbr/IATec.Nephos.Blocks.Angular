@@ -3,5 +3,6 @@
  */
 
 export * from './lib/app.layout.module';
-export * from './lib/service/layout.service';
-export * from './lib/component/layout.component';
+export * from './lib/service/';
+export * from './lib/component/';
+export * from './lib/components/breadcrumb/';
