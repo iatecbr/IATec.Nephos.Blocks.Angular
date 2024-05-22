@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MenuChangeEvent } from '../api/menuchangeevent';
+import { MenuChangeEventModel } from '../models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuService {
 
-    private menuSource = new Subject<MenuChangeEvent>();
+    private menuSource = new Subject<MenuChangeEventModel>();
     private resetSource = new Subject();
 
     menuSource$ = this.menuSource.asObservable();
     resetSource$ = this.resetSource.asObservable();
 
-    onMenuStateChange(event: MenuChangeEvent) {
+    onMenuStateChange(event: MenuChangeEventModel) {
         this.menuSource.next(event);
     }
 

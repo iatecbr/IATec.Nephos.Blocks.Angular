@@ -13,11 +13,10 @@ import { BreadcrumbComponent } from './components/breadcrumb';
 import { SidebarComponent } from './components/sidebar';
 import { TopbarComponent } from './components/topbar';
 import { ProfileSidebarComponent } from './components/profile-sidebar';
-import { MenuComponent } from './components/menu';
+import { MenuComponent, MenuItemComponent } from './components/menu';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { MenuItemComponent } from './components/menu';
 
 @NgModule({
     declarations: [
