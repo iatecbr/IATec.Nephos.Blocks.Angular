@@ -10,7 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { LayoutComponent } from './component';
 import { BreadcrumbComponent } from './components/breadcrumb';
-import { SidebarComponent } from './components/sidebar';
+import { SidebarComponent, SidebarLogoComponent } from './components/sidebar';
 import { TopbarComponent } from './components/topbar';
 import { ProfileSidebarComponent } from './components/profile-sidebar';
 import { MenuComponent, MenuItemComponent } from './components/menu';
@@ -18,11 +18,13 @@ import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 
+
 @NgModule({
     declarations: [
         LayoutComponent,
         BreadcrumbComponent,
         SidebarComponent,
+        SidebarLogoComponent,
         TopbarComponent,
         ProfileSidebarComponent,
         MenuComponent,
@@ -45,7 +47,8 @@ import { CommonModule } from '@angular/common';
     exports: [
         LayoutComponent,
         BreadcrumbComponent,
+        SidebarLogoComponent
     ]
 })
-export class AppLayoutModule {
+export class NephosLayoutModule {
 }

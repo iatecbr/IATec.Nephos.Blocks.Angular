@@ -1,6 +1,10 @@
 <div class="layout-container"
      [ngClass]="containerClass">
-    <nph-sidebar></nph-sidebar>
+    <nph-sidebar>
+        <nph-sidebar-logo>
+            <ng-content select="nph-sidebar-logo"></ng-content>
+        </nph-sidebar-logo>
+    </nph-sidebar>
     <div class="layout-content-wrapper">
         <nph-topbar></nph-topbar>
         <nph-breadcrumb class="content-breadcrumb"></nph-breadcrumb>

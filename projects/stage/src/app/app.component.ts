@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AppLayoutModule } from '@iatec/nephos-layout';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [
-        RouterOutlet,
-        AppLayoutModule
+        RouterOutlet
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

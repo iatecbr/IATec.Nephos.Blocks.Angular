@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../service';
+import { LayoutService } from '../../../service';
 
 @Component({
     selector: 'nph-sidebar',
@@ -10,9 +10,10 @@ export class SidebarComponent {
 
     @ViewChild('menuContainer') menuContainer!: ElementRef;
 
-    constructor(public layoutService: LayoutService, public el: ElementRef) {
+    constructor(
+        public layoutService: LayoutService,
+        public el: ElementRef) {
     }
-
 
     onMouseEnter() {
         if (!this.layoutService.state.anchored) {
@@ -21,8 +22,6 @@ export class SidebarComponent {
                 this.timeout = null;
             }
             this.layoutService.state.sidebarActive = true;
-
-
         }
     }
 
@@ -37,5 +36,4 @@ export class SidebarComponent {
     anchor() {
         this.layoutService.state.anchored = !this.layoutService.state.anchored;
     }
-
 }
