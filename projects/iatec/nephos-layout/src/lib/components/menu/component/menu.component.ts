@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-menu',
+    selector: 'nph-menu',
     templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {

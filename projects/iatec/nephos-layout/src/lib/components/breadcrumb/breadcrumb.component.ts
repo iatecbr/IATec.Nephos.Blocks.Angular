@@ -9,7 +9,7 @@ interface Breadcrumb {
 }
 
 @Component({
-    selector: 'app-breadcrumb',
+    selector: 'nph-breadcrumb',
     templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {

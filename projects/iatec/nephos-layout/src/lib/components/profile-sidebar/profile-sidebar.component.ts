@@ -3,7 +3,7 @@ import { LayoutService } from '../../service/layout.service';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'app-profilemenu',
+    selector: 'nph-profile-menu',
     templateUrl: './profile-sidebar.component.html'
 })
 export class ProfileSidebarComponent {

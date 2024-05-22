@@ -3,7 +3,7 @@ import { LayoutService } from '../../service/layout.service';
 
 
 @Component({
-    selector: 'app-topbar',
+    selector: 'nph-topbar',
     templateUrl: './topbar.component.html'
 })
 export class TopbarComponent {

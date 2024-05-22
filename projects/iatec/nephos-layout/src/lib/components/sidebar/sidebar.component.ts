@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LayoutService } from '../../service/layout.service';
 
 @Component({
-    selector: 'app-sidebar',
+    selector: 'nph-sidebar',
     templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent {
