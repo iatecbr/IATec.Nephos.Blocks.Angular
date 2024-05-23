@@ -29,8 +29,6 @@ export class MenuService {
     }
 
     set menus(menus: MenuItem[]) {
-        console.log('MenuService.setMenus');
-        console.log('MenuService.setMenus', menus);
         this._menus.next(menus);
     }
 }

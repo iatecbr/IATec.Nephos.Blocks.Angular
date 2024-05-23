@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NephosLayoutModule } from '@iatec/nephos-layout';
-import { MenuService } from '../../../../../iatec/nephos-layout/src/lib/service';
+import { MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
 
 @Component({
     selector: 'nephos-template',
@@ -11,12 +10,12 @@ import { MenuService } from '../../../../../iatec/nephos-layout/src/lib/service'
     templateUrl: './nephos-template.component.html'
 })
 export class NephosTemplateComponent implements OnInit {
-    constructor(private _menuService: MenuService) {
-
+    constructor(
+        private _menuService: MenuService
+    ) {
     }
 
     ngOnInit(): void {
-        console.log('NephosTemplateComponent.ngOnInit');
         this._menuService.menus = [
             {
                 label: 'Dashboards',

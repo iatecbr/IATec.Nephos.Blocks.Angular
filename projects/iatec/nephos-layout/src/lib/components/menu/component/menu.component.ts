@@ -13,10 +13,8 @@ export class MenuComponent {
     constructor(
         private _menuService: MenuService
     ) {
-        console.log('MenuComponent.constructor');
         this._menuService.menus$.subscribe({
             next: (menus) => {
-                console.log('MenuComponent.ngOnInit', menus);
                 this.model = menus;
             }
         });
