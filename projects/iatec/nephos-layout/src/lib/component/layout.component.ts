@@ -1,10 +1,10 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { MenuService } from '../service';
+import { MenuService } from '../services';
 import { SidebarComponent } from '../components/sidebar';
 import { TopbarComponent } from '../components/topbar';
-import { LayoutService } from '../service';
+import { LayoutService } from '../services';
 
 @Component({
     selector: 'nph-layout',

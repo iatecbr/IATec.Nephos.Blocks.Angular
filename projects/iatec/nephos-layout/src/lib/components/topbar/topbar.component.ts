@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../service';
+import { LayoutService } from '../../services';
 
 
 @Component({

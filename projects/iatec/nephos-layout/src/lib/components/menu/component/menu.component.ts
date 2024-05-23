@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { MenuService } from '../../../service';
+import { MenuService } from '../../../services';
 
 @Component({
     selector: 'nph-menu',

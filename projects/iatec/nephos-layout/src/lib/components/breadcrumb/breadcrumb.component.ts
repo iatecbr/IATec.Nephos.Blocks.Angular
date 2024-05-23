@@ -44,5 +44,4 @@ export class BreadcrumbComponent {
             this.addBreadcrumb(route.firstChild, routeUrl, breadcrumbs);
         }
     }
-
 }

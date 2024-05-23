@@ -32,9 +32,10 @@ import { CommonModule } from '@angular/common';
     ],
     exports: [
         LayoutComponent,
-        BreadcrumbComponent,
         SidebarLogoComponent
-    ], imports: [CommonModule,
+    ],
+    imports: [
+        CommonModule,
         FormsModule,
         InputTextModule,
         SidebarModule,
@@ -44,7 +45,10 @@ import { CommonModule } from '@angular/common';
         ButtonModule,
         TooltipModule,
         RippleModule,
-        RouterModule], providers: [provideHttpClient(withInterceptorsFromDi())]
+        RouterModule],
+    providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ]
 })
 export class NephosLayoutModule {
 }

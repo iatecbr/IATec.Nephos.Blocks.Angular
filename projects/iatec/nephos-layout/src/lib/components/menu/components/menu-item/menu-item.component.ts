@@ -12,7 +12,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { LayoutService, MenuService } from '../../../../service';
+import { LayoutService, MenuService } from '../../../../services';
 import { DomHandler } from 'primeng/dom';
 
 @Component({

@@ -16,10 +16,6 @@ export class MenuService {
     resetSource$ = this._resetSource.asObservable();
     menus$ = this._menus.asObservable();
 
-    constructor() {
-        console.log('MenuService.constructor');
-    }
-
     onMenuStateChange(event: MenuChangeEventModel) {
         this._menuSource.next(event);
     }
