@@ -1,5 +1,5 @@
-import { Component, effect } from '@angular/core';
-import { LayoutService } from '../../services';
+import { Component } from '@angular/core';
+import { LayoutService } from '../../../services';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -8,13 +8,7 @@ import { LayoutService } from '../../services';
 })
 export class ProfileSidebarComponent {
 
-    name: string | undefined;
-
     constructor(public layoutService: LayoutService) {
-        effect(() => {
-            const profile = this.layoutService.profile();
-            this.name = profile.name;
-        });
     }
 
     get visible(): boolean {

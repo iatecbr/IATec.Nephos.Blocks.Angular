@@ -60,4 +60,55 @@
                   style="stroke-width:0.354849"/>
         </svg>
     </ng-container>
+
+    <ng-container profileSidebar>
+        <nph-profile-sidebar-block>
+            <nph-profile-sidebar-block-title>
+                Welcome
+            </nph-profile-sidebar-block-title>
+
+            <nph-profile-sidebar-block-subtitle>
+                {{ name }}
+            </nph-profile-sidebar-block-subtitle>
+
+            <nph-profile-sidebar-block-item icon="pi pi-user"
+                                            (click)="onProfileClick()">
+                <span class="mb-2 font-semibold">Profile</span>
+                <p class="text-color-secondary m-0">Lorem ipsum date visale</p>
+            </nph-profile-sidebar-block-item>
+
+            <nph-profile-sidebar-block-item icon="pi pi-power-off"
+                                            (click)="onSignOutClick()">
+                <span class="mb-2 font-semibold">Sign Out</span>
+                <p class="text-color-secondary m-0">Sed ut perspiciatis</p>
+            </nph-profile-sidebar-block-item>
+        </nph-profile-sidebar-block>
+
+        <nph-profile-sidebar-block>
+            <nph-profile-sidebar-block-title>
+                Messages
+            </nph-profile-sidebar-block-title>
+
+            <nph-profile-sidebar-block-subtitle>
+                You have 3 notifications
+            </nph-profile-sidebar-block-subtitle>
+
+            <nph-profile-sidebar-block-item icon="pi pi-comment"
+                                            (click)="onCommentClick()">
+                <span class="mb-2 font-semibold">Your post has new comments</span>
+                <p class="text-color-secondary m-0">5 min ago</p>
+            </nph-profile-sidebar-block-item>
+
+            <nph-profile-sidebar-block-item icon="pi pi-trash">
+                <span class="mb-2 font-semibold">Your post has been deleted</span>
+                <p class="text-color-secondary m-0">15min ago</p>
+            </nph-profile-sidebar-block-item>
+
+            <nph-profile-sidebar-block-item icon="pi pi-folder"
+                                            badge="2">
+                <span class="mb-2 font-semibold">Aisha Webb</span>
+                <p class="text-color-secondary m-0">3h ago</p>
+            </nph-profile-sidebar-block-item>
+        </nph-profile-sidebar-block>
+    </ng-container>
 </nph-layout>

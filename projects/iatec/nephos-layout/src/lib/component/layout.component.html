@@ -12,6 +12,8 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <nph-profile-menu></nph-profile-menu>
+    <nph-profile-menu>
+        <ng-content select="[profileSidebar]"></ng-content>
+    </nph-profile-menu>
     <div class="layout-mask"></div>
 </div>

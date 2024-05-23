@@ -12,7 +12,13 @@ import { LayoutComponent } from './component';
 import { BreadcrumbComponent } from './components/breadcrumb';
 import { SidebarComponent } from './components/sidebar';
 import { TopbarComponent, TopbarItemComponent } from './components/topbar';
-import { ProfileSidebarComponent } from './components/profile-sidebar';
+import {
+    ProfileSidebarBlockComponent,
+    ProfileSidebarBlockItemComponent,
+    ProfileSidebarBlockSubtitleComponent,
+    ProfileSidebarBlockTitleComponent,
+    ProfileSidebarComponent
+} from './components/profile-sidebar';
 import { MenuComponent, MenuItemComponent } from './components/menu';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -27,12 +33,20 @@ import { CommonModule } from '@angular/common';
         TopbarComponent,
         TopbarItemComponent,
         ProfileSidebarComponent,
+        ProfileSidebarBlockComponent,
+        ProfileSidebarBlockTitleComponent,
+        ProfileSidebarBlockSubtitleComponent,
+        ProfileSidebarBlockItemComponent,
         MenuComponent,
         MenuItemComponent
     ],
     exports: [
         LayoutComponent,
-        TopbarItemComponent
+        TopbarItemComponent,
+        ProfileSidebarBlockComponent,
+        ProfileSidebarBlockTitleComponent,
+        ProfileSidebarBlockSubtitleComponent,
+        ProfileSidebarBlockItemComponent,
     ],
     imports: [
         CommonModule,

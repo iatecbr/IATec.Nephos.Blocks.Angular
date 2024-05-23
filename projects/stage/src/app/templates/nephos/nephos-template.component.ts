@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { AppConfig, LayoutService, MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
 import { PrimeNGConfig } from 'primeng/api';
 
@@ -11,12 +11,17 @@ import { PrimeNGConfig } from 'primeng/api';
     templateUrl: './nephos-template.component.html'
 })
 export class NephosTemplateComponent implements OnInit {
+    name: string | undefined;
+
     constructor(
         private _primengConfig: PrimeNGConfig,
         private _layoutService: LayoutService,
         private _menuService: MenuService
     ) {
-
+        effect(() => {
+            const profile = this._layoutService.profile();
+            this.name = profile.name;
+        });
     }
 
     ngOnInit(): void {
@@ -510,5 +515,17 @@ export class NephosTemplateComponent implements OnInit {
                 ]
             }
         ];
+    }
+
+    onCommentClick() {
+        console.log('Comment clicked');
+    }
+
+    onProfileClick() {
+        console.log('Profile clicked');
+    }
+
+    onSignOutClick() {
+        console.log('SignOut clicked');
     }
 }
