@@ -14,11 +14,15 @@
         <ul class="topbar-menu">
             <ng-content></ng-content>
             <li class="topbar-profile">
-                <button type="button"
+                <button type="button "
                         class="p-link"
                         (click)="onProfileButtonClick()">
-                    <img src="assets/layout/images/avatar.png"
+                    <img *ngIf="urlAvatar; else lettersTemplate"
+                         [src]="urlAvatar"
                          alt="Profile"/>
+                    <ng-template #lettersTemplate>
+                        <div>{{ letters }}</div>
+                    </ng-template>
                 </button>
             </li>
         </ul>

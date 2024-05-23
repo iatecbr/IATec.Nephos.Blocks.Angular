@@ -24,6 +24,11 @@ export interface AppConfig {
     menuTheme: MenuColorScheme;
 }
 
+export interface Profile {
+    urlAvatar?: string | undefined;
+    name?: string | undefined;
+}
+
 interface LayoutState {
     staticMenuDesktopInactive: boolean;
     overlayMenuActive: boolean;
@@ -59,6 +64,8 @@ export class LayoutService {
         sidebarActive: false,
         anchored: false,
     };
+
+    profile = signal<Profile>({});
 
     private configUpdate = new Subject<AppConfig>();
 

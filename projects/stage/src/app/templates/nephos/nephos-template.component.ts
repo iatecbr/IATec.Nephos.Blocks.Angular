@@ -35,6 +35,8 @@ export class NephosTemplateComponent implements OnInit {
 
         this._layoutService.config.set(config);
 
+        this._layoutService.profile.set({name: 'Apostle Paul', urlAvatar: './assets/images/avatar/example.png'});
+
         this._menuService.menus = [
             {
                 label: 'Dashboards',
