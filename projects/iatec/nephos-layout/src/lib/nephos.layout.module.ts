@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { BadgeModule } from 'primeng/badge';
@@ -30,10 +30,12 @@ import { CommonModule } from '@angular/common';
         MenuComponent,
         MenuItemComponent
     ],
-    imports: [
-        CommonModule,
+    exports: [
+        LayoutComponent,
+        BreadcrumbComponent,
+        SidebarLogoComponent
+    ], imports: [CommonModule,
         FormsModule,
-        HttpClientModule,
         InputTextModule,
         SidebarModule,
         BadgeModule,
@@ -42,13 +44,7 @@ import { CommonModule } from '@angular/common';
         ButtonModule,
         TooltipModule,
         RippleModule,
-        RouterModule
-    ],
-    exports: [
-        LayoutComponent,
-        BreadcrumbComponent,
-        SidebarLogoComponent
-    ]
+        RouterModule], providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class NephosLayoutModule {
 }

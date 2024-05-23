@@ -1,9 +1,9 @@
 {
   "name": "@iatec/nephos-layout",
-  "version": "2.1.0",
+  "version": "17.1.0",
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0"
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
