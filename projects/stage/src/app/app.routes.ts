@@ -13,6 +13,10 @@ export const routes: Routes = [
                 data: {
                     breadcrumb: 'Exemplo de Dashboard'
                 }
+            },
+            {
+                path: 'examples',
+                loadChildren: () => import('./modules/examples/examples.module').then(m => m.ExamplesModule)
             }
         ]
     }
