@@ -1,5 +1,5 @@
 import {
-    ChangeDetectorRef,
+    AfterViewChecked,
     Component,
     ElementRef,
     HostBinding,
@@ -12,8 +12,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { MenuService } from '../../../../service';
-import { LayoutService } from '../../../../service';
+import { LayoutService, MenuService } from '../../../../service';
 import { DomHandler } from 'primeng/dom';
 
 @Component({
@@ -38,7 +37,7 @@ import { DomHandler } from 'primeng/dom';
         ])
     ]
 })
-export class MenuItemComponent implements OnInit, OnDestroy {
+export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     @Input() item: any;
 
@@ -58,11 +57,15 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
     key: string = '';
 
-    constructor(public layoutService: LayoutService, private cd: ChangeDetectorRef, public router: Router, private menuService: MenuService) {
+    constructor(
+        public layoutService: LayoutService,
+        public router: Router,
+        private menuService: MenuService
+    ) {
         this.menuSourceSubscription = this.menuService.menuSource$.subscribe(value => {
             Promise.resolve(null).then(() => {
                 if (value.routeEvent) {
-                    this.active = (value.key === this.key || value.key.startsWith(this.key + '-')) ? true : false;
+                    this.active = (value.key === this.key || value.key.startsWith(this.key + '-'));
                 } else {
                     if (value.key !== this.key && !value.key.startsWith(this.key + '-')) {
                         this.active = false;
@@ -76,7 +79,7 @@ export class MenuItemComponent implements OnInit, OnDestroy {
         });
 
         this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(params => {
+            .subscribe(() => {
                 if (this.isSlimPlus || this.isSlim || this.isHorizontal) {
                     this.active = false;
                 } else {

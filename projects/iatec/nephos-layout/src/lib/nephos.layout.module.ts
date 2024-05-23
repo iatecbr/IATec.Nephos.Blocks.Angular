@@ -17,6 +17,7 @@ import { MenuComponent, MenuItemComponent } from './components/menu';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { LayoutService, MenuService } from './service';
 
 
 @NgModule({

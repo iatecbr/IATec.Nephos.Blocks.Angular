@@ -36,7 +36,7 @@ interface LayoutState {
 }
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class LayoutService {
     _config: AppConfig = {

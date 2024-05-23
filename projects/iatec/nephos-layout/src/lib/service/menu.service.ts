@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MenuChangeEventModel } from '../models';
+import { MenuItem } from 'primeng/api';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuService {
 
-    private menuSource = new Subject<MenuChangeEventModel>();
-    private resetSource = new Subject();
+    private _menuSource = new Subject<MenuChangeEventModel>();
+    private _resetSource = new Subject();
+    private _menus: Subject<MenuItem[]> = new Subject<MenuItem[]>();
 
-    menuSource$ = this.menuSource.asObservable();
-    resetSource$ = this.resetSource.asObservable();
+    menuSource$ = this._menuSource.asObservable();
+    resetSource$ = this._resetSource.asObservable();
+    menus$ = this._menus.asObservable();
+
+    constructor() {
+        console.log('MenuService.constructor');
+    }
 
     onMenuStateChange(event: MenuChangeEventModel) {
-        this.menuSource.next(event);
+        this._menuSource.next(event);
     }
 
     reset() {
-        this.resetSource.next(true);
+        this._resetSource.next(true);
+    }
+
+    set menus(menus: MenuItem[]) {
+        console.log('MenuService.setMenus');
+        console.log('MenuService.setMenus', menus);
+        this._menus.next(menus);
     }
 }
