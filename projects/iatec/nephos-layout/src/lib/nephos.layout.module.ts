@@ -10,8 +10,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { LayoutComponent } from './component';
 import { BreadcrumbComponent } from './components/breadcrumb';
-import { SidebarComponent, SidebarLogoComponent } from './components/sidebar';
-import { TopbarComponent } from './components/topbar';
+import { SidebarComponent } from './components/sidebar';
+import { TopbarComponent, TopbarItemComponent } from './components/topbar';
 import { ProfileSidebarComponent } from './components/profile-sidebar';
 import { MenuComponent, MenuItemComponent } from './components/menu';
 import { RouterModule } from '@angular/router';
@@ -24,15 +24,15 @@ import { CommonModule } from '@angular/common';
         LayoutComponent,
         BreadcrumbComponent,
         SidebarComponent,
-        SidebarLogoComponent,
         TopbarComponent,
+        TopbarItemComponent,
         ProfileSidebarComponent,
         MenuComponent,
         MenuItemComponent
     ],
     exports: [
         LayoutComponent,
-        SidebarLogoComponent
+        TopbarItemComponent
     ],
     imports: [
         CommonModule,

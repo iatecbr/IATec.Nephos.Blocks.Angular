@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConfig, MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
+import { AppConfig, LayoutService, MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
 import { PrimeNGConfig } from 'primeng/api';
-import { LayoutService } from '@iatec/nephos-layout';
 
 @Component({
     selector: 'nephos-template',

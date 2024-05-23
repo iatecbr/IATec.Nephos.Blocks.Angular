@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../services';
+import { LayoutService } from '../../../services';
 
 
 @Component({
@@ -9,6 +9,7 @@ import { LayoutService } from '../../services';
 export class TopbarComponent {
 
     @ViewChild('menubutton') menuButton!: ElementRef;
+
 
     constructor(public layoutService: LayoutService) {
     }
@@ -20,9 +21,4 @@ export class TopbarComponent {
     onProfileButtonClick() {
         this.layoutService.showProfileSidebar();
     }
-
-    onConfigButtonClick() {
-        this.layoutService.showConfigSidebar();
-    }
-
 }
