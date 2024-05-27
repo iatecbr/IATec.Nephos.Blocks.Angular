@@ -23,6 +23,8 @@ import { MenuComponent, MenuItemComponent } from './components/menu';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { UserAppsComponent } from './components/topbar/components/user-apps/user-apps.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { CommonModule } from '@angular/common';
         SidebarComponent,
         TopbarComponent,
         TopbarItemComponent,
+        UserAppsComponent,
         ProfileSidebarComponent,
         ProfileSidebarBlockComponent,
         ProfileSidebarBlockTitleComponent,
@@ -43,6 +46,7 @@ import { CommonModule } from '@angular/common';
     exports: [
         LayoutComponent,
         TopbarItemComponent,
+        UserAppsComponent,
         ProfileSidebarBlockComponent,
         ProfileSidebarBlockTitleComponent,
         ProfileSidebarBlockSubtitleComponent,
@@ -59,7 +63,9 @@ import { CommonModule } from '@angular/common';
         ButtonModule,
         TooltipModule,
         RippleModule,
-        RouterModule],
+        RouterModule,
+        OverlayPanelModule
+    ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
     ]

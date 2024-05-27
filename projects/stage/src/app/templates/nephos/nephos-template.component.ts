@@ -2,17 +2,61 @@ import { Component, effect, OnInit } from '@angular/core';
 import { AppConfig, LayoutService, MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
 import { PrimeNGConfig } from 'primeng/api';
 import { HttpMenuService } from '../../services';
+import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CommonModule } from '@angular/common';
+import { UserAppModel } from '@iatec/nephos-layout';
+
 
 @Component({
     selector: 'nephos-template',
     standalone: true,
     imports: [
-        NephosLayoutModule
+        NephosLayoutModule,
+        ButtonModule,
+        OverlayPanelModule,
+        CommonModule
     ],
     templateUrl: './nephos-template.component.html'
 })
 export class NephosTemplateComponent implements OnInit {
     name: string | undefined;
+
+    apps: UserAppModel[] = [
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-components.svg',
+            name: 'App 1',
+            url: 'https://www.primefaces.org/primeng'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-community.svg',
+            name: 'App 2'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-productivity.svg',
+            name: 'App 3'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-accessibility.svg',
+            name: 'App 4'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-support.svg',
+            name: 'App 5'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-mobile.svg',
+            name: 'App 6'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-theme.svg',
+            name: 'App 7'
+        },
+        {
+            icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-ts.svg',
+            name: 'App 8'
+        }
+    ]
 
     constructor(
         private _primengConfig: PrimeNGConfig,
