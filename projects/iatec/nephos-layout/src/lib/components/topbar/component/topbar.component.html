@@ -12,9 +12,9 @@
 
     <div class="topbar-end">
         <ul class="topbar-menu">
-            <ng-content></ng-content>
+            <ng-content class="flex"></ng-content>
             <li class="topbar-profile">
-                <button type="button "
+                <button type="button"
                         class="p-link"
                         (click)="onProfileButtonClick()">
                     <img *ngIf="urlAvatar; else lettersTemplate"

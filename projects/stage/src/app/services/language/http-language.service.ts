@@ -6,12 +6,12 @@ import { LanguageModel } from '@iatec/nephos-layout';
 @Injectable({
     providedIn: 'root'
 })
-export class LanguageService {
+export class HttpLanguageService {
 
-    constructor(private _httpClient: HttpClient) {
+    constructor(private _http: HttpClient) {
     }
 
     public getLanguages(): Observable<LanguageModel[]> {
-        return this._httpClient.get<LanguageModel[]>('assets/mock/languages.json');
+        return this._http.get<LanguageModel[]>('assets/mock/languages.json');
     }
 }

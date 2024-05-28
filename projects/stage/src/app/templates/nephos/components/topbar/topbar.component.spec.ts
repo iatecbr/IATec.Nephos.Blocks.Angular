@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmptyPageComponent } from './empty-page.component';
+import { TopbarComponent } from './topbar.component';
 
-describe('EmptyPageComponent', () => {
-    let component: EmptyPageComponent;
-    let fixture: ComponentFixture<EmptyPageComponent>;
+describe('TopbarComponent', () => {
+    let component: TopbarComponent;
+    let fixture: ComponentFixture<TopbarComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [EmptyPageComponent]
+            imports: [TopbarComponent]
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(EmptyPageComponent);
+        fixture = TestBed.createComponent(TopbarComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
