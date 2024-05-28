@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 import { LanguageModel } from '../../../../models';
 
 @Component({
-    selector: 'nph-topbar-language',
+    selector: 'nph-layout-topbar-language',
     templateUrl: './language.component.html',
     styleUrl: './language.component.scss',
     encapsulation: ViewEncapsulation.None

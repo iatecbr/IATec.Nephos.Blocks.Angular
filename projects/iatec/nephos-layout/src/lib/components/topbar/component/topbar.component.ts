@@ -3,7 +3,7 @@ import { LayoutService } from '../../../services';
 
 
 @Component({
-    selector: 'nph-topbar',
+    selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
     styleUrls: ['./topbar.component.scss']
 })

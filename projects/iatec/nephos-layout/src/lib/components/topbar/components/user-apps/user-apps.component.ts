@@ -3,7 +3,7 @@ import { UserAppModel } from '../../../../models';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'nph-topbar-user-apps',
+    selector: 'nph-layout-topbar-user-apps',
     templateUrl: './user-apps.component.html'
 })
 export class UserAppsComponent {
