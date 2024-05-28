@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultComponent } from './default.component';
+import { EmptyComponent } from './empty.component';
 
 describe('DefaultComponent', () => {
-    let component: DefaultComponent;
-    let fixture: ComponentFixture<DefaultComponent>;
+    let component: EmptyComponent;
+    let fixture: ComponentFixture<EmptyComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [DefaultComponent]
+            imports: [EmptyComponent]
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(DefaultComponent);
+        fixture = TestBed.createComponent(EmptyComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

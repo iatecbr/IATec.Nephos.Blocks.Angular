@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DefaultComponent } from './default/default.component';
+import { EmptyComponent } from './empty/empty.component';
 
 
 export const routes: Routes = [
@@ -10,7 +10,7 @@ export const routes: Routes = [
     },
     {
         path: 'default',
-        component: DefaultComponent,
+        component: EmptyComponent,
         data: {
             breadcrumb: 'Default Page Example'
         }

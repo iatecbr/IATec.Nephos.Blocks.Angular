@@ -6,6 +6,10 @@
       "@iatec/nephos-layout": [
         "./dist/iatec/nephos-layout/*",
         "./dist/iatec/nephos-layout"
+      ],
+      "@iatec/nephos-pages": [
+        "./dist/iatec/nephos-pages/*",
+        "./dist/iatec/nephos-pages"
       ]
     },
     "outDir": "./dist/out-tsc",
