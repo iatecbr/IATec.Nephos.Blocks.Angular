@@ -1,11 +1,20 @@
-import { Component, effect, OnInit } from '@angular/core';
-import { AppConfig, LayoutService, MenuService, NephosLayoutModule } from '@iatec/nephos-layout';
+import { Component, effect, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    AppConfig,
+    LanguageModel,
+    LayoutService,
+    MenuService,
+    NephosLayoutModule,
+    UserAppModel
+} from '@iatec/nephos-layout';
 import { PrimeNGConfig } from 'primeng/api';
-import { HttpMenuService } from '../../services';
+import { HttpMenuService, LanguageService } from '../../services';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CommonModule } from '@angular/common';
-import { UserAppModel } from '@iatec/nephos-layout';
+import { SkeletonModule } from 'primeng/skeleton';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -15,9 +24,13 @@ import { UserAppModel } from '@iatec/nephos-layout';
         NephosLayoutModule,
         ButtonModule,
         OverlayPanelModule,
-        CommonModule
+        CommonModule,
+        SkeletonModule,
+        DropdownModule,
+        FormsModule
     ],
-    templateUrl: './nephos-template.component.html'
+    templateUrl: './nephos-template.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class NephosTemplateComponent implements OnInit {
     name: string | undefined;
@@ -56,13 +69,17 @@ export class NephosTemplateComponent implements OnInit {
             icon: 'https://apollo.primeng.org/assets/demo/images/landing/icon-ts.svg',
             name: 'App 8'
         }
-    ]
+    ];
+
+    languages: LanguageModel[] = [];
+    selectedLanguage: LanguageModel | undefined;
 
     constructor(
         private _primengConfig: PrimeNGConfig,
         private _layoutService: LayoutService,
         private _menuService: MenuService,
-        private _httpMenuService: HttpMenuService
+        private _httpMenuService: HttpMenuService,
+        private _languageService: LanguageService
     ) {
         effect(() => {
             const profile = this._layoutService.profile();
@@ -88,6 +105,7 @@ export class NephosTemplateComponent implements OnInit {
 
         this._layoutService.profile.set({name: 'Apostle Paul', urlAvatar: './assets/images/avatar/example.png'});
 
+        this._getLanguages();
         this._getMenus();
     }
 
@@ -95,6 +113,23 @@ export class NephosTemplateComponent implements OnInit {
         this._httpMenuService.getMenus().subscribe(menus => {
             this._menuService.menus = menus;
         });
+    }
+
+    private _getLanguages() {
+        this._languageService.getLanguages()
+            .subscribe(x => {
+                this.languages = x;
+                this._afterGetLanguages();
+            });
+    }
+
+    private _afterGetLanguages(): void {
+        const lang = localStorage.getItem('lang');
+
+        //this._translateService.setAvailableLangs(this.languages.map(x => `${x.code}-${x.country.code}`));
+
+        this.selectedLanguage = this.languages.find(x => x.code === lang?.split('-')[0]
+            && x.country.code === lang?.split('-')[1]) || this.languages[0];
     }
 
     onCommentClick() {
@@ -107,5 +142,9 @@ export class NephosTemplateComponent implements OnInit {
 
     onSignOutClick() {
         console.log('SignOut clicked');
+    }
+
+    onChangeSelectedLanguage(options: LanguageModel | undefined) {
+        console.log('Language changed');
     }
 }

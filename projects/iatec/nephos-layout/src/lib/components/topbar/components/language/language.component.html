@@ -1,0 +1,36 @@
+<nph-topbar-item>
+    <p-dropdown styleClass="border-none  bg-transparent"
+                [options]="languages"
+                [(ngModel)]="selectedLanguage"
+                (ngModelChange)="onChangeSelectedLanguage($event)"
+                placeholder="Select a Country"
+                *ngIf="languages && selectedLanguage; else languageSkeleton">
+        <ng-template pTemplate="selectedItem"
+                     let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{selectedLanguage.country.code | uppercase}}.svg"
+                     class="border-circle flag border-1 border-white shadow-2"
+                     alt="flag"/>
+                <div>
+                    {{ selectedOption.code }}-{{ selectedOption.country.code | uppercase }}
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-language
+                     pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{language.country.code | uppercase}}.svg"
+                     class="border-circle flag border-1 border-white shadow-2"
+                     alt="flag"/>
+                <div>
+                    {{ language.name }}
+                </div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <ng-template #languageSkeleton>
+        <p-skeleton width="10rem"
+                    height="3rem"></p-skeleton>
+    </ng-template>
+</nph-topbar-item>

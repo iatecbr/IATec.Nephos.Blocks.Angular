@@ -61,6 +61,8 @@
         </svg>
     </ng-container>
     <ng-container topbar>
+        <nph-topbar-language [languages]="languages"
+                             [(selectedLanguage)]="selectedLanguage"/>
         <nph-topbar-user-apps [apps]="apps"/>
     </ng-container>
 

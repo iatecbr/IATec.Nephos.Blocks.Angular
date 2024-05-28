@@ -1,4 +1,4 @@
-export interface UserAppModel{
+export interface UserAppModel {
     icon: string;
     name: string;
     url?: string;

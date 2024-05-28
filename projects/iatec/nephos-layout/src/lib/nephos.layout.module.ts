@@ -11,7 +11,7 @@ import { RippleModule } from 'primeng/ripple';
 import { LayoutComponent } from './component';
 import { BreadcrumbComponent } from './components/breadcrumb';
 import { SidebarComponent } from './components/sidebar';
-import { TopbarComponent, TopbarItemComponent } from './components/topbar';
+import { LanguageComponent, TopbarComponent, TopbarItemComponent } from './components/topbar';
 import {
     ProfileSidebarBlockComponent,
     ProfileSidebarBlockItemComponent,
@@ -25,6 +25,8 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { UserAppsComponent } from './components/topbar/components/user-apps/user-apps.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         TopbarComponent,
         TopbarItemComponent,
         UserAppsComponent,
+        LanguageComponent,
         ProfileSidebarComponent,
         ProfileSidebarBlockComponent,
         ProfileSidebarBlockTitleComponent,
@@ -47,6 +50,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         LayoutComponent,
         TopbarItemComponent,
         UserAppsComponent,
+        LanguageComponent,
         ProfileSidebarBlockComponent,
         ProfileSidebarBlockTitleComponent,
         ProfileSidebarBlockSubtitleComponent,
@@ -64,7 +68,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         TooltipModule,
         RippleModule,
         RouterModule,
-        OverlayPanelModule
+        OverlayPanelModule,
+        PaginatorModule,
+        SkeletonModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
