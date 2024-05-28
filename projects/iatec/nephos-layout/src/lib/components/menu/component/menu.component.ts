@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { MenuService } from '../../../services';
 
 @Component({
-    selector: 'nph-menu',
+    selector: 'nph-layout-menu',
     templateUrl: './menu.component.html'
 })
 export class MenuComponent {

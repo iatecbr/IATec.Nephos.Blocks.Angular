@@ -17,7 +17,7 @@ import { DomHandler } from 'primeng/dom';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[nph-menu-item]',
+    selector: '[nph-layout-menu-item]',
     templateUrl: `menu-item.component.html`,
     animations: [
         trigger('children', [
