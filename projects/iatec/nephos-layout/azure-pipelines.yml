@@ -18,6 +18,11 @@ variables:
   - group: nuget-credentials
 
 steps:
+  - task: NodeTool@0
+    displayName: 'Update Node.js'
+    inputs:
+      versionSpec: 'latest'
+
   - task: CmdLine@2
     displayName: 'Rename .npmrc.pipeline To .npmrc'
     inputs:
