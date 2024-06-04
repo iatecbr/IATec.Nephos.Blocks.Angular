@@ -1,12 +1,13 @@
-registry=https://sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/registry/
+registry=https://registry.npmjs.org/
+@iatec:registry=https://sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/registry/
 
 always-auth=true
 
 ; begin auth token
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:username=sda-iatec
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:_password=#{Base64_Password}#
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:email=arch.dev@iatec.com
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:username=sda-iatec
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:_password=#{Base64_Password}#
-//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:email=arch.dev@iatec.com
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/registry/:username=sda-iatec
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/registry/:_password=#{Base64_Password}#
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/registry/:email=arch.dev@iatec.com
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/:username=sda-iatec
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/:_password=#{Base64_Password}#
+//sda-iatec.pkgs.visualstudio.com/_packaging/IATec.Community/npm/:email=arch.dev@iatec.com
 ; end auth token
