@@ -21,7 +21,7 @@ steps:
   - task: NodeTool@0
     displayName: 'Update Node.js'
     inputs:
-      versionSpec: 'latest'
+      versionSpec: '20.x'
 
   - task: CmdLine@2
     displayName: 'Rename .npmrc.pipeline To .npmrc'
