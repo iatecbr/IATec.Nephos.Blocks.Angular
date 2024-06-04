@@ -1,7 +1,7 @@
 trigger:
   branches:
     exclude:
-      - main
+      - '*'
   tags:
     include:
       - '@iatec/nephos-layout@*'
