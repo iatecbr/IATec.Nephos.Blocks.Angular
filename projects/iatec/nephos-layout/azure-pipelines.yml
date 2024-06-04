@@ -2,12 +2,9 @@ trigger:
   branches:
     include:
       - main
-  paths:
-    include:
-      - projects/iatec/nephos-layout
   tags:
     include:
-      - v*
+      - '@iatec/nephos-layou@*'
 
 pool:
   vmImage: IATec-Builds-Agents-Linux
