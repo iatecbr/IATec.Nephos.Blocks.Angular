@@ -1,0 +1,26 @@
+[
+  {
+    "code": "en",
+    "name": "English",
+    "country": {
+      "name": "United States",
+      "code": "US"
+    }
+  },
+  {
+    "code": "es",
+    "name": "Español",
+    "country": {
+      "name": "España",
+      "code": "ES"
+    }
+  },
+  {
+    "code": "pt",
+    "name": "Português",
+    "country": {
+      "name": "Brazil",
+      "code": "BR"
+    }
+  }
+]

@@ -1,0 +1,12 @@
+registry=https://pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/
+
+always-auth=true
+
+; begin auth token
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:username=sda-iatec
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:_password=#{Password}#
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/registry/:email=arch.dev@iatec.com
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:username=sda-iatec
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:_password=#{Password}#
+//pkgs.dev.azure.com/sda-iatec/7You/_packaging/7You/npm/:email=arch.dev@iatec.com
+; end auth token

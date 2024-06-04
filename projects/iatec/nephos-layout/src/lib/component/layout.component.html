@@ -1,0 +1,19 @@
+<div class="layout-container"
+     [ngClass]="containerClass">
+    <nph-layout-sidebar>
+        <ng-content select="[logo]"></ng-content>
+    </nph-layout-sidebar>
+    <div class="layout-content-wrapper">
+        <nph-layout-topbar>
+            <ng-content select="[topbar]"></ng-content>
+        </nph-layout-topbar>
+        <nph-layout-breadcrumb class="content-breadcrumb"></nph-layout-breadcrumb>
+        <div class="layout-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <nph-layout-profile-sidebar>
+        <ng-content select="[profileSidebar]"></ng-content>
+    </nph-layout-profile-sidebar>
+    <div class="layout-mask"></div>
+</div>

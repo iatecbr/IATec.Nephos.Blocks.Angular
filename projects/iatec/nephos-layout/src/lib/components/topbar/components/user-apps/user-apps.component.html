@@ -1,0 +1,55 @@
+<nph-layout-topbar-item>
+    <button pButton
+            type="button"
+            size="small"
+            class="p-button-text p-button-secondary flex-shrink-0"
+            (click)="appsPanel.toggle($event)">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24"
+             fill="-var()">
+            <rect x="2"
+                  y="2"
+                  width="9"
+                  height="9"
+                  rx="2"
+                  fill="var(--logo-color)"/>
+            <rect opacity="0.3"
+                  x="13"
+                  y="2"
+                  width="9"
+                  height="9"
+                  rx="2"
+                  fill="var(--logo-color)"/>
+            <rect opacity="0.3"
+                  x="13"
+                  y="13"
+                  width="9"
+                  height="9"
+                  rx="2"
+                  fill="var(--logo-color)"/>
+            <rect opacity="0.3"
+                  x="2"
+                  y="13"
+                  width="9"
+                  height="9"
+                  rx="2"
+                  fill="var(--logo-color)"/>
+        </svg>
+    </button>
+    <p-overlayPanel #appsPanel>
+        <div class="grid w-25rem">
+            <div *ngFor="let app of apps"
+                 class="col-4 flex justify-content-center p-1 cursor-pointer">
+                <a class="box p-2 w-full surface-card surface-border border-1 border-round"
+                   (click)="navigateTo(app)">
+                    <img [src]="app.icon"
+                         alt="components icon"
+                         class="block"/>
+                    <span class="text-900 block font-semibold mb-3 text-lg">{{ app.name }}</span>
+                </a>
+            </div>
+        </div>
+    </p-overlayPanel>
+</nph-layout-topbar-item>

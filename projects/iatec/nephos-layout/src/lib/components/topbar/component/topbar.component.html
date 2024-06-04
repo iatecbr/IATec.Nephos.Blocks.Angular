@@ -1,0 +1,30 @@
+<div class="layout-topbar">
+    <div class="topbar-start">
+        <button #menubutton
+                type="button"
+                class="topbar-menubutton p-link p-trigger"
+                (click)="onMenuButtonClick()">
+            <i class="pi pi-bars"></i>
+        </button>
+
+        <nph-layout-breadcrumb class="topbar-breadcrumb"/>
+    </div>
+
+    <div class="topbar-end">
+        <ul class="topbar-menu">
+            <ng-content class="flex"></ng-content>
+            <li class="topbar-profile">
+                <button type="button"
+                        class="p-link"
+                        (click)="onProfileButtonClick()">
+                    <img *ngIf="urlAvatar; else lettersTemplate"
+                         [src]="urlAvatar"
+                         alt="Profile"/>
+                    <ng-template #lettersTemplate>
+                        <div>{{ letters }}</div>
+                    </ng-template>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

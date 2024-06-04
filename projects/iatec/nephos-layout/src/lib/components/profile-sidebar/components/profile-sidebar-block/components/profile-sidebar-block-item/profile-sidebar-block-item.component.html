@@ -1,0 +1,14 @@
+<li>
+    <a class="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
+        <span>
+            <i [ngClass]="icon"
+               class="text-xl text-primary"></i>
+        </span>
+        <div class="ml-3">
+            <ng-content></ng-content>
+        </div>
+        <p-badge *ngIf="badge"
+                 [value]="badge"
+                 class="ml-auto"></p-badge>
+    </a>
+</li>
