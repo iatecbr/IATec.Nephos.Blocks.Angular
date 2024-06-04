@@ -4,7 +4,7 @@ trigger:
       - main
   tags:
     include:
-      - '@iatec/nephos-layou@*'
+      - '@iatec/nephos-layout@*'
 
 pool:
   vmImage: IATec-Builds-Agents-Linux
