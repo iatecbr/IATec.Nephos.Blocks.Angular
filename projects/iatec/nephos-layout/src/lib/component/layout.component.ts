@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { LayoutService, MenuService } from '../services';
+import { AppConfig, ColorScheme, LayoutService, MenuService } from '../services';
 import { SidebarComponent } from '../components/sidebar';
 import { TopbarComponent } from '../components/topbar';
 
@@ -26,6 +26,19 @@ export class LayoutComponent implements OnDestroy {
         public renderer: Renderer2,
         public router: Router
     ) {
+        //Default configuration
+        const config: AppConfig = {
+            ripple: true,                      //toggles ripple on and off
+            inputStyle: 'outlined',             //default style for input elements
+            menuMode: 'static',                 //layout mode of the menu, valid values are "static", "overlay", "slim", "horizontal", "reveal" and "drawer"
+            colorScheme: (localStorage.getItem('colorScheme') ?? 'light') as ColorScheme,               //color scheme of the template, valid values are "light", "dim" and "dark"
+            theme: 'indigo',                    //default component theme for PrimeNG
+            menuTheme: 'colorScheme',           //theme of the menu, valid values are "colorScheme", "primaryColor" and "transparent"
+            scale: 14                           //size of the body font size to scale the whole application
+        };
+
+        this.layoutService.config.set(config);
+
         this.overlayMenuOpenSubscription =
             this.layoutService.overlayOpen$.subscribe(() => {
                 if (!this.menuOutsideClickListener) {

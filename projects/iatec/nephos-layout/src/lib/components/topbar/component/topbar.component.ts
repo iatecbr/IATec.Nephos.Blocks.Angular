@@ -1,13 +1,16 @@
-import { Component, effect, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../../services';
+import { Component, effect, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ColorScheme, LayoutService } from '../../../services';
 
 
 @Component({
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
-    styleUrls: ['./topbar.component.scss']
+    styleUrls: ['./topbar.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TopbarComponent {
+
+    colorScheme = 'light' as ColorScheme;
 
     @ViewChild('menubutton') menuButton!: ElementRef;
 
@@ -34,5 +37,15 @@ export class TopbarComponent {
 
     onProfileButtonClick() {
         this.layoutService.showProfileSidebar();
+    }
+
+    onThemeChange() {
+        this.colorScheme = this.colorScheme == 'light' ? 'dark' : 'light'
+
+        this.layoutService.config.update(
+            (config) => ({
+                ...config,
+                colorScheme: this.colorScheme,
+            }));
     }
 }

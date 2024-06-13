@@ -170,6 +170,8 @@ export class LayoutService {
             .join('/');
 
         this.replaceThemeLink(newHref);
+
+        localStorage.setItem('colorScheme', config.colorScheme);
     }
 
     replaceThemeLink(href: string) {
