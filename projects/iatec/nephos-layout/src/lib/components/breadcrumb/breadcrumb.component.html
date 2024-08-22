@@ -4,7 +4,7 @@
                      let-item
                      let-last="last"
                      [ngForOf]="breadcrumbs$ | async">
-            <li>{{ item.label }}</li>
+            <li>{{ item.label | transloco }}</li>
             <li *ngIf="!last"
                 class="layout-breadcrumb-chevron"> /
             </li>

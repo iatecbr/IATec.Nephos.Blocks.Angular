@@ -27,6 +27,7 @@ import { UserAppsComponent } from './components/topbar/components/user-apps/user
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SkeletonModule } from 'primeng/skeleton';
         RouterModule,
         OverlayPanelModule,
         PaginatorModule,
-        SkeletonModule
+        SkeletonModule,
+        TranslocoPipe
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
