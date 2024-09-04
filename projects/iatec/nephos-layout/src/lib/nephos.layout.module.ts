@@ -28,6 +28,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { TranslocoPipe } from '@jsverse/transloco';
         OverlayPanelModule,
         PaginatorModule,
         SkeletonModule,
-        TranslocoPipe
+        TranslocoPipe,
+        ToastModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
