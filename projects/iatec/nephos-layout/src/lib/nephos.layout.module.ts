@@ -29,6 +29,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ToastModule } from 'primeng/toast';
         PaginatorModule,
         SkeletonModule,
         TranslocoPipe,
-        ToastModule
+        ToastModule,
+        ConfirmPopupModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
