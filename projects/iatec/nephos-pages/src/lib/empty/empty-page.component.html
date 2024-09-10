@@ -1,6 +1,6 @@
 <div class="grid">
     <div class="col-12">
-        <div class="card">
+        <div [class]="{'card':contentStyle == 'card'}">
             <h4>
                 <ng-content select="[title]"/>
             </h4>
