@@ -30,6 +30,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -79,7 +80,9 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
         ConfirmPopupModule
     ],
     providers: [
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        MessageService,
+        ConfirmationService
     ]
 })
 export class NephosLayoutModule {

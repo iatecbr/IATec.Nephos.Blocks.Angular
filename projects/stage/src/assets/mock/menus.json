@@ -20,14 +20,14 @@
         "label": "Empty Page",
         "icon": "fa-duotone fa-solid fa-page",
         "routerLink": [
-          "/examples/pages/default"
+          "/examples/pages/empty"
         ]
       },
       {
         "label": "Header Page",
         "icon": "fa-duotone fa-solid fa-page",
         "routerLink": [
-          "/examples/pages/default"
+          "/examples/pages/header"
         ]
       }
     ]

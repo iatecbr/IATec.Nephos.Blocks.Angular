@@ -13,14 +13,14 @@ export const routes: Routes = [
         path: 'empty',
         component: EmptyComponent,
         data: {
-            breadcrumb: 'Default Page Example'
+            breadcrumb: 'Empty Example'
         }
     },
     {
         path: 'header',
         component: HeaderComponent,
         data: {
-            breadcrumb: 'Default Page Example'
+            breadcrumb: 'Header Example'
         }
     }
 ];

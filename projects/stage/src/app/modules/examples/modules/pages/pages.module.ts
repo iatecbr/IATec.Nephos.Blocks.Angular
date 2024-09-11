@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routes } from './pages.routes';
 import { EmptyComponent } from './empty/empty.component';
-import { EmptyPageComponent } from '@iatec/nephos-pages';
+import { EmptyPageComponent, HeaderPageComponent } from '@iatec/nephos-pages';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
     declarations: [
-        EmptyComponent
+        EmptyComponent,
+        HeaderComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        EmptyPageComponent
+        EmptyPageComponent,
+        HeaderPageComponent
     ]
 })
 export class PagesModule {

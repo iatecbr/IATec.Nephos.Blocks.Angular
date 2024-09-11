@@ -16,7 +16,11 @@ export const routes: Routes = [
             },
             {
                 path: 'examples',
-                loadChildren: () => import('./modules/examples/examples.module').then(m => m.ExamplesModule)
+                loadChildren: () => import('./modules/examples/examples.module').then(m => m.ExamplesModule),
+                data: {
+                    breadcrumb: 'Examples'
+                }
+
             }
         ]
     }
