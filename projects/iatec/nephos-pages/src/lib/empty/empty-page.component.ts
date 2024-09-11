@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
     templateUrl: './empty-page.component.html'
 })
 export class EmptyPageComponent {
-    @Input() contentStyle: 'card' | 'none' = 'card';
+    @Input() pageStyle: 'card' | 'none' = 'card';
 }

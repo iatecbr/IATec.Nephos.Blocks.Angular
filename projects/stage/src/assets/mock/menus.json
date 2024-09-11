@@ -5,7 +5,7 @@
     "items": [
       {
         "label": "Example Dashboard",
-        "icon": "pi pi-fw pi-home",
+        "icon": "fa-duotone fa-solid fa-house",
         "routerLink": [
           "/"
         ]
@@ -17,8 +17,15 @@
     "icon": "pi pi-palette",
     "items": [
       {
-        "label": "Default Page",
-        "icon": "pi pi-fw pi-tablet",
+        "label": "Empty Page",
+        "icon": "fa-duotone fa-solid fa-page",
+        "routerLink": [
+          "/examples/pages/default"
+        ]
+      },
+      {
+        "label": "Header Page",
+        "icon": "fa-duotone fa-solid fa-page",
         "routerLink": [
           "/examples/pages/default"
         ]

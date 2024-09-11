@@ -1,0 +1,13 @@
+<div class="grid">
+    <div class="col-12">
+        <h4>
+            <ng-content select="[title]"/>
+        </h4>
+        <div [class]="{'card':headerStyle == 'card'}">
+            <ng-content select="[header]"/>
+        </div>
+        <div [class]="{'card':bodyStyle == 'card'}">
+            <ng-content select="[body]"/>
+        </div>
+    </div>
+</div>

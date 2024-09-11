@@ -3,3 +3,4 @@
  */
 
 export * from './lib/empty/empty-page.component';
+export * from './lib/header/header-page.component';
