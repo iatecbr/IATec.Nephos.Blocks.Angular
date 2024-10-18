@@ -1,5 +1,6 @@
 import { Component, effect, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ColorScheme, LayoutService } from '../../../services';
+import { ColorScheme, LayoutService, MenuService } from '../../../services';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class TopbarComponent {
     urlAvatar: string | undefined;
     letters: string | undefined;
 
-    constructor(public layoutService: LayoutService) {
+    constructor(
+        public layoutService: LayoutService
+    ) {
         effect(() => {
             const profile = this.layoutService.profile();
             this.urlAvatar = profile.urlAvatar;

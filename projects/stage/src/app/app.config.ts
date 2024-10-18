@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -18,6 +19,8 @@ export const appConfig: ApplicationConfig = {
                 reRenderOnLangChange: true,
                 prodMode: !isDevMode(),
             },
-        })
+        }),
+        MessageService,
+        ConfirmationService
     ]
 };

@@ -12,9 +12,11 @@ export class MenuService {
     private _resetSource = new Subject();
     private _menus: Subject<MenuItem[]> = new Subject<MenuItem[]>();
 
+
     menuSource$ = this._menuSource.asObservable();
     resetSource$ = this._resetSource.asObservable();
     menus$ = this._menus.asObservable();
+
 
     onMenuStateChange(event: MenuChangeEventModel) {
         this._menuSource.next(event);

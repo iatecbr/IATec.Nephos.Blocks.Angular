@@ -1,40 +1,44 @@
 div.topbar-end {
   li {
+    margin-left: 8px !important;
+
     button {
-      padding-left: 4px !important;
-      padding-right: 4px !important;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
     }
   }
 
   li.topBar-language {
-    margin-right: 6px !important;
+    margin-right: 10px !important;
   }
 
   li.topbar-profile {
-    margin-left: initial !important;
-    padding: 0 0 3px 0;
+    button {
+      width: initial !important;
+      height: initial !important;
 
-    img {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      border: 1px solid white;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    }
+      img {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        border-radius: 50%;
+        border: 1px solid white;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      }
 
-    div {
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 1px solid white;
-      border-radius: 50%;
-      background-color: var(--primary-color);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-      font-weight: 700;
-      letter-spacing: -0.9px;
+      div {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid white;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        font-weight: 700;
+        letter-spacing: -0.9px;
+      }
     }
   }
 }

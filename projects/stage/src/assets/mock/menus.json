@@ -2,14 +2,8 @@
   {
     "label": "Dashboards",
     "icon": "pi pi-home",
-    "items": [
-      {
-        "label": "Example Dashboard",
-        "icon": "fa-duotone fa-solid fa-house",
-        "routerLink": [
-          "/"
-        ]
-      }
+    "routerLink": [
+      "/"
     ]
   },
   {
