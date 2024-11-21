@@ -1,21 +1,24 @@
-import { FormGroupChanges } from '../forms';
+import { FormGroupChanges } from './index';
 import { ErrorMessages, GeneralTranslationKeys, MessageKeys, MessageSeverities, WaringMessages } from '../../constants';
 import { inject } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TranslocoService } from '@jsverse/transloco';
 
 // noinspection JSUnusedGlobalSymbols
-export abstract class SidebarHelper extends FormGroupChanges {
+export abstract class FormSidebarHelper extends FormGroupChanges {
 
     protected _massageService = inject(MessageService);
     protected _translateService = inject(TranslocoService);
     private _confirmationService = inject(ConfirmationService);
 
     // noinspection JSUnusedGlobalSymbols
-    protected abstract _beforeLeave(): Promise<void>;
+    protected abstract _beforeClose(): Promise<void>;
 
     // noinspection JSUnusedGlobalSymbols
-    protected abstract _startLeave(): void;
+    protected abstract _closeWithoutChanges(): void;
+
+    // noinspection JSUnusedGlobalSymbols
+    protected abstract _closeWithChanges(): void;
 
     // noinspection JSUnusedGlobalSymbols
     protected _showSuccessMessage(summary: string, detail: string): void {
@@ -40,8 +43,8 @@ export abstract class SidebarHelper extends FormGroupChanges {
 
     protected _close(event: Event): void {
         if (!this._form.dirty) {
-            this._beforeLeave().then(() => {
-                this._startLeave();
+            this._beforeClose().then(() => {
+                this._closeWithoutChanges();
             });
         } else {
             this._confirmationService.confirm({
@@ -52,8 +55,8 @@ export abstract class SidebarHelper extends FormGroupChanges {
                 rejectLabel: this._translateService.translate(GeneralTranslationKeys.singular.no),
                 icon: 'fa-duotone fa-solid fa-triangle-exclamation',
                 accept: () => {
-                    this._beforeLeave().then(() => {
-                        this._startLeave();
+                    this._beforeClose().then(() => {
+                        this._closeWithoutChanges();
                     });
                 },
                 reject: () => {
