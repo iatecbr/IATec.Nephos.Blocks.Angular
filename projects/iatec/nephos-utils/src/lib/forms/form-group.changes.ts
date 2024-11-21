@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { inject } from '@angular/core';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IDBPDatabase, openDB } from 'idb';
 import { FormSettingsModel } from './form-settings.model';
 import { FormModeType } from './form-mode.type';
@@ -9,16 +9,15 @@ import { FormModeType } from './form-mode.type';
 
 export abstract class FormGroupChanges {
     protected _formSubject$: Subject<void> = new Subject<void>();
-    protected _activeRouter = inject(ActivatedRoute);
     protected _router = inject(Router);
-    protected _db: IDBPDatabase | undefined;
 
     protected _formBuilder = inject(FormBuilder);
     protected _form: FormGroup = new FormGroup({});
     protected _formMode: FormModeType = 'create';
-    protected _enableToReset: boolean = false;
+    protected _enableFormReset: boolean = false;
 
-    private _key: string | undefined;
+    private _db: IDBPDatabase | undefined;
+    private _formKey: string | undefined;
     private _formVersion: string | undefined;
     private _dbVersion: number = 1;
 
@@ -31,16 +30,20 @@ export abstract class FormGroupChanges {
         });
     }
 
+    private get _getCurrentRouteWithoutQueryString(): string {
+        return this._router.url.split('?')[0];
+    }
+
     protected async _initFormStorage(settings: FormSettingsModel): Promise<void> {
 
-        this._key = `${this._router.url}:${this.constructor.name}`;
+        this._formKey = `${this._getCurrentRouteWithoutQueryString}:${this.constructor.name}`;
         this._formVersion = settings.version
 
         await this._initDB();
 
         if (this._db) {
             const txHistory = this._db.transaction('formsHistory', 'readonly');
-            const existingHistory = await txHistory.objectStore('formsHistory').get(this._key);
+            const existingHistory = await txHistory.objectStore('formsHistory').get(this._formKey);
             await txHistory.done;
 
             let shouldDeleteCache = false;
@@ -72,10 +75,10 @@ export abstract class FormGroupChanges {
                 takeUntil(this._formSubject$)
             ).subscribe(async () => {
                 if (this._formMode == 'create' && this._db) {
-                    const key = this._key;
+                    const key = this._formKey;
                     const data = this._form.getRawValue();
 
-                    if (!this._enableToReset) {
+                    if (!this._enableFormReset) {
                         const writeCache = this._db.transaction('formsCache', 'readwrite');
                         await writeCache.objectStore('formsCache').put({key, data});
                         await writeCache.done;
@@ -93,9 +96,9 @@ export abstract class FormGroupChanges {
     }
 
     private async _loadFormCache(): Promise<void> {
-        if (this._db && this._key) {
+        if (this._db && this._formKey) {
             const txCache = this._db.transaction('formsCache', 'readonly');
-            const existingCache = await txCache.objectStore('formsCache').get(this._key);
+            const existingCache = await txCache.objectStore('formsCache').get(this._formKey);
             await txCache.done;
 
             if (existingCache) {
@@ -106,16 +109,16 @@ export abstract class FormGroupChanges {
     }
 
     protected async _clearFormCache(): Promise<void> {
-        if (this._db && this._key) {
+        if (this._db && this._formKey) {
             const txCacheDelete = this._db.transaction('formsCache', 'readwrite');
-            await txCacheDelete.objectStore('formsCache').delete(this._key);
+            await txCacheDelete.objectStore('formsCache').delete(this._formKey);
             await txCacheDelete.done;
 
             const txHistoryDelete = this._db.transaction('formsHistory', 'readwrite');
-            await txHistoryDelete.objectStore('formsHistory').delete(this._key);
+            await txHistoryDelete.objectStore('formsHistory').delete(this._formKey);
             await txHistoryDelete.done
 
-            this._enableToReset = false;
+            this._enableFormReset = false;
         }
     }
 
