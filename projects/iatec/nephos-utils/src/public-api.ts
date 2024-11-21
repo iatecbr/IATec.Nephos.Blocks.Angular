@@ -10,4 +10,3 @@ export * from './lib/types';
 export * from './lib/validators';
 export * from './lib/helpers/forms';
 export * from './lib/helpers/summary';
-export * from './lib/helpers/sidebar';
