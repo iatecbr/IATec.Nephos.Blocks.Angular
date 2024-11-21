@@ -5,11 +5,18 @@ import { Router } from '@angular/router';
 import { IDBPDatabase, openDB } from 'idb';
 import { FormSettingsModel } from './form-settings.model';
 import { FormModeType } from './form-mode.type';
+import { MessageService } from 'primeng/api';
+import { ErrorMessages, MessageKeys, MessageSeverities } from '../../constants';
+import { TranslocoService } from '@jsverse/transloco';
 
 
 export abstract class FormGroupChanges {
+
     protected _formSubject$: Subject<void> = new Subject<void>();
     protected _router = inject(Router);
+
+    protected _massageService = inject(MessageService);
+    protected _translateService = inject(TranslocoService);
 
     protected _formBuilder = inject(FormBuilder);
     protected _form: FormGroup = new FormGroup({});
@@ -122,8 +129,31 @@ export abstract class FormGroupChanges {
         }
     }
 
+    protected abstract _beforeLeave(): Promise<void>;
+
+    protected abstract _startLeave(): void;
+
     protected _stopWatchForm(): void {
         this._formSubject$.next();
         this._formSubject$.complete();
+    }
+
+    protected _showSuccessMessage(summary: string, detail: string): void {
+        this._massageService.add({
+            key: MessageKeys.default,
+            severity: MessageSeverities.success,
+            summary: this._translateService.translate(summary),
+            detail: this._translateService.translate(detail),
+        });
+    }
+
+    protected _showErrorMessage(detail: string | undefined): void {
+        this._massageService.add({
+            key: MessageKeys.default,
+            severity: MessageSeverities.error,
+            summary: this._translateService.translate(ErrorMessages.ops),
+            detail: detail,
+            life: 5000
+        })
     }
 }

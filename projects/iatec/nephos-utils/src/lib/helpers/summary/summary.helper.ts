@@ -2,13 +2,13 @@ import { Subject } from 'rxjs';
 import { inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { MessageService } from 'primeng/api';
-import { PageModel } from '../models';
-import { ErrorMessages, MessageKeys, MessageSeverities } from '../constants';
+import { PageModel } from '../../models';
+import { ErrorMessages, MessageKeys, MessageSeverities } from '../../constants';
 
-export abstract class SummaryChanges<F, M> {
+export abstract class SummaryHelper<F, M> {
 
     protected _massageService = inject(MessageService);
-    protected _translocoService = inject(TranslocoService);
+    protected _translateService = inject(TranslocoService);
 
     protected _destroy$ = new Subject<void>();
     protected _filterSubject = new Subject<void>();
@@ -19,7 +19,7 @@ export abstract class SummaryChanges<F, M> {
         this._page = new PageModel<F, M>(filterFactory);
     }
 
-    protected _search() {
+    protected _search(): void {
         this._filterSubject.next();
     }
 
@@ -31,8 +31,8 @@ export abstract class SummaryChanges<F, M> {
         this._massageService.add({
             key: MessageKeys.default,
             severity: MessageSeverities.success,
-            summary: this._translocoService.translate(summary),
-            detail: this._translocoService.translate(detail),
+            summary: this._translateService.translate(summary),
+            detail: this._translateService.translate(detail),
             life: 5000
         });
     }
@@ -41,7 +41,7 @@ export abstract class SummaryChanges<F, M> {
         this._massageService.add({
             key: MessageKeys.default,
             severity: MessageSeverities.error,
-            summary: this._translocoService.translate(ErrorMessages.ops),
+            summary: this._translateService.translate(ErrorMessages.ops),
             detail: detail,
             life: 5000
         })
