@@ -10,13 +10,36 @@ import {
 import { inject } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TranslocoService } from '@jsverse/transloco';
+import { Observable } from 'rxjs';
+import { LoadingService } from '../../services';
 
 // noinspection JSUnusedGlobalSymbols
 export abstract class FormSidebarHelper extends FormGroupChanges {
 
+    protected loadingService = inject(LoadingService);
     protected _massageService = inject(MessageService);
     protected _translateService = inject(TranslocoService);
     private _confirmationService = inject(ConfirmationService);
+
+    // noinspection JSUnusedLocalSymbols
+    protected _handleSubscription(observable: Observable<void>, successMessage: string): void {
+        observable.subscribe(
+            {
+                next: () => {
+                    this._showSuccessMessage(successMessage);
+
+                    this._beforeClose().then(() => {
+                        this._closeWithChanges();
+                    });
+                },
+                error: (error) => {
+                    this._showErrorMessage(error.code ? error.messages[0] : error.message);
+
+                    this.loadingService.isBusy = false;
+                }
+            }
+        );
+    }
 
     // noinspection JSUnusedGlobalSymbols
     protected abstract _beforeClose(): Promise<void>;
