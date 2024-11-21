@@ -1,0 +1,71 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    exclude:
+      - '*'
+  tags:
+    include:
+      - '@iatec/nephos-utils*'
+
+pool:
+  name: IATec-Builds-Agents-Linux
+
+variables:
+  - group: nuget-credentials
+
+steps:
+  - task: NodeTool@0
+    displayName: 'Update Node.js'
+    inputs:
+      versionSpec: '20.x'
+
+  - task: CmdLine@2
+    displayName: 'Rename .npmrc.pipeline To .npmrc'
+    inputs:
+      script: 'mv .npmrc.pipeline .npmrc'
+
+  - task: replacetokens@6
+    displayName: 'Replace variables in .npmrc'
+    inputs:
+      targetFiles: '**/.npmrc'
+      encoding: 'auto'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      tokenPrefix: '#{'
+      tokenSuffix: '}#'
+
+  - task: Npm@1
+    displayName: 'Install'
+    inputs:
+      command: 'install'
+      workingDir: '$(Build.SourcesDirectory)'
+
+  - task: Npm@1
+    displayName: 'Build - @iatec/nephos-utils'
+    inputs:
+      command: 'custom'
+      customCommand: 'run ng build @iatec/nephos-utils'
+      workingDir: '$(Build.SourcesDirectory)'
+
+  - task: npmAuthenticate@0
+    displayName: Authenticate
+    inputs:
+      workingFile: .npmrc
+
+  - task: Npm@1
+    displayName: Publish
+    inputs:
+      command: publish
+      publishRegistry: useFeed
+      publishFeed: IATec.Community
+      workingDir: '$(Build.SourcesDirectory)/dist/iatec/nephos-utils'
+
+  - task: CmdLine@2
+    displayName: 'Remove .npmrc'
+    inputs:
+      script: 'rm -r .npmrc'
