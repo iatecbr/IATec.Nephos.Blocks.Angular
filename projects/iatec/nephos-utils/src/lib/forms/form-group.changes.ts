@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { inject } from '@angular/core';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDBPDatabase, openDB } from 'idb';
 import { FormSettingsModel } from './form-settings.model';
 
@@ -9,6 +9,7 @@ export type FormModeType = 'create' | 'edit';
 
 export class FormGroupChanges {
     protected _formSubject$: Subject<void> = new Subject<void>();
+    protected _activeRouter = inject(ActivatedRoute);
     protected _router = inject(Router);
     protected _db: IDBPDatabase | undefined;
 
@@ -31,6 +32,8 @@ export class FormGroupChanges {
     }
 
     protected async _initFormStorage(settings: FormSettingsModel): Promise<void> {
+
+        console.log('init Form Storage', this._activeRouter.snapshot.routeConfig?.path);
 
         this._key = `${this._router.url}:${this.constructor.name}`;
         this._formVersion = settings.version
