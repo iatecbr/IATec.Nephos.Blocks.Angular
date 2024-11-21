@@ -16,7 +16,7 @@ export class FormGroupChanges {
     protected _formBuilder = inject(FormBuilder);
     protected _form: FormGroup = new FormGroup({});
     protected _formMode: FormModeType = 'create';
-    protected _resetAfterDiscard: boolean = false;
+    protected _enableToReset: boolean = false;
 
     private _key: string | undefined;
     private _formVersion: string | undefined;
@@ -32,8 +32,6 @@ export class FormGroupChanges {
     }
 
     protected async _initFormStorage(settings: FormSettingsModel): Promise<void> {
-
-        console.log('init Form Storage', this._activeRouter.snapshot.routeConfig?.path);
 
         this._key = `${this._router.url}:${this.constructor.name}`;
         this._formVersion = settings.version
@@ -77,7 +75,7 @@ export class FormGroupChanges {
                     const key = this._key;
                     const data = this._form.getRawValue();
 
-                    if (!this._resetAfterDiscard) {
+                    if (!this._enableToReset) {
                         const writeCache = this._db.transaction('formsCache', 'readwrite');
                         await writeCache.objectStore('formsCache').put({key, data});
                         await writeCache.done;
@@ -117,7 +115,7 @@ export class FormGroupChanges {
             await txHistoryDelete.objectStore('formsHistory').delete(this._key);
             await txHistoryDelete.done
 
-            this._resetAfterDiscard = false;
+            this._enableToReset = false;
         }
     }
 
