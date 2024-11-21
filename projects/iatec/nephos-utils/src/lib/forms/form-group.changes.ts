@@ -4,10 +4,10 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDBPDatabase, openDB } from 'idb';
 import { FormSettingsModel } from './form-settings.model';
+import { FormModeType } from './form-mode.type';
 
-export type FormModeType = 'create' | 'edit';
 
-export class FormGroupChanges {
+export abstract class FormGroupChanges {
     protected _formSubject$: Subject<void> = new Subject<void>();
     protected _activeRouter = inject(ActivatedRoute);
     protected _router = inject(Router);
