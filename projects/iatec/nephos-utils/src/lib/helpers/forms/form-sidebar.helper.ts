@@ -1,5 +1,12 @@
 import { FormGroupChanges } from './index';
-import { ErrorMessages, GeneralTranslationKeys, MessageKeys, MessageSeverities, WaringMessages } from '../../constants';
+import {
+    ErrorMessages,
+    GeneralTranslationKeys,
+    MessageKeys,
+    MessageSeverities,
+    SuccessMessages,
+    WaringMessages
+} from '../../constants';
 import { inject } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TranslocoService } from '@jsverse/transloco';
@@ -21,11 +28,11 @@ export abstract class FormSidebarHelper extends FormGroupChanges {
     protected abstract _closeWithChanges(): void;
 
     // noinspection JSUnusedGlobalSymbols
-    protected _showSuccessMessage(summary: string, detail: string): void {
+    protected _showSuccessMessage(detail: string): void {
         this._massageService.add({
             key: MessageKeys.default,
             severity: MessageSeverities.success,
-            summary: this._translateService.translate(summary),
+            summary: this._translateService.translate(SuccessMessages.everythingOk),
             detail: this._translateService.translate(detail),
         });
     }
