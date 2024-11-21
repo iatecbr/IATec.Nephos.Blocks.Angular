@@ -10,6 +10,10 @@
       "@iatec/nephos-pages": [
         "./dist/iatec/nephos-pages/*",
         "./dist/iatec/nephos-pages"
+      ],
+      "@iatec/nephos-utils": [
+        "./dist/iatec/nephos-utils/*",
+        "./dist/iatec/nephos-utils"
       ]
     },
     "outDir": "./dist/out-tsc",
