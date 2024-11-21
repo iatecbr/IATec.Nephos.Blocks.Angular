@@ -9,3 +9,4 @@ export * from './lib/services';
 export * from './lib/tests';
 export * from './lib/types';
 export * from './lib/validators';
+export * from './lib/summary';
