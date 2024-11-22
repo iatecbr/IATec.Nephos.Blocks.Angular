@@ -9,14 +9,14 @@ import { FormModeType } from './form-mode.type';
 
 export abstract class FormGroupChanges {
 
-    protected _formSubject$: Subject<void> = new Subject<void>();
-    protected _router = inject(Router);
+    protected formSubject$: Subject<void> = new Subject<void>();
+    protected router = inject(Router);
 
     // noinspection JSUnusedGlobalSymbols
-    protected _formBuilder = inject(FormBuilder);
-    protected _form: FormGroup = new FormGroup({});
-    protected _formMode: FormModeType = 'create';
-    protected _enableFormReset: boolean = false;
+    protected formBuilder = inject(FormBuilder);
+    protected form: FormGroup = new FormGroup({});
+    protected formMode: FormModeType = 'create';
+    protected enableFormReset: boolean = false;
 
     private _db: IDBPDatabase | undefined;
     private _formKey: string | undefined;
@@ -33,11 +33,11 @@ export abstract class FormGroupChanges {
     }
 
     private get _getCurrentRouteWithoutQueryString(): string {
-        return this._router.url.split('?')[0];
+        return this.router.url.split('?')[0];
     }
 
     // noinspection JSUnusedGlobalSymbols
-    protected async _initFormStorage(settings: FormSettingsModel): Promise<void> {
+    protected async initFormStorage(settings: FormSettingsModel): Promise<void> {
 
         this._formKey = `${this._getCurrentRouteWithoutQueryString}:${this.constructor.name}`;
         this._formVersion = settings.version
@@ -63,7 +63,7 @@ export abstract class FormGroupChanges {
             }
 
             if (shouldDeleteCache) {
-                await this._clearFormCache();
+                await this.clearFormCache();
             }
 
             await this._loadFormCache();
@@ -72,16 +72,16 @@ export abstract class FormGroupChanges {
     }
 
     private async _initWatchForm(): Promise<void> {
-        this._form.valueChanges
+        this.form.valueChanges
             .pipe(
                 debounceTime(1000),
-                takeUntil(this._formSubject$)
+                takeUntil(this.formSubject$)
             ).subscribe(async () => {
-                if (this._formMode == 'create' && this._db) {
+                if (this.formMode == 'create' && this._db) {
                     const key = this._formKey;
-                    const data = this._form.getRawValue();
+                    const data = this.form.getRawValue();
 
-                    if (!this._enableFormReset) {
+                    if (!this.enableFormReset) {
                         const writeCache = this._db.transaction('formsCache', 'readwrite');
                         await writeCache.objectStore('formsCache').put({key, data});
                         await writeCache.done;
@@ -91,7 +91,7 @@ export abstract class FormGroupChanges {
                         const writeHistory = this._db.transaction('formsHistory', 'readwrite');
                         await writeHistory.objectStore('formsHistory').put({key, history});
                     } else {
-                        await this._clearFormCache();
+                        await this.clearFormCache();
                     }
                 }
             }
@@ -105,13 +105,13 @@ export abstract class FormGroupChanges {
             await txCache.done;
 
             if (existingCache) {
-                this._form.patchValue(existingCache.data);
-                this._form.markAsDirty();
+                this.form.patchValue(existingCache.data);
+                this.form.markAsDirty();
             }
         }
     }
 
-    protected async _clearFormCache(): Promise<void> {
+    protected async clearFormCache(): Promise<void> {
         if (this._db && this._formKey) {
             const txCacheDelete = this._db.transaction('formsCache', 'readwrite');
             await txCacheDelete.objectStore('formsCache').delete(this._formKey);
@@ -121,13 +121,13 @@ export abstract class FormGroupChanges {
             await txHistoryDelete.objectStore('formsHistory').delete(this._formKey);
             await txHistoryDelete.done
 
-            this._enableFormReset = false;
+            this.enableFormReset = false;
         }
     }
 
     // noinspection JSUnusedGlobalSymbols
-    protected _stopWatchForm(): void {
-        this._formSubject$.next();
-        this._formSubject$.complete();
+    protected stopWatchForm(): void {
+        this.formSubject$.next();
+        this.formSubject$.complete();
     }
 }
