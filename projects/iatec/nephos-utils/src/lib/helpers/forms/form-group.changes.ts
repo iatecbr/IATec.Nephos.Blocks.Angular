@@ -95,7 +95,7 @@ export abstract class FormGroupChanges {
     private async _initWatchForm(): Promise<void> {
         this.form.valueChanges
             .pipe(
-                debounceTime(1000),
+                debounceTime(600),
                 takeUntil(this.formSubject$)
             ).subscribe(async () => {
                 await this._workChanges();
