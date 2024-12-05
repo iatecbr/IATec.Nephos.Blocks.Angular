@@ -76,18 +76,19 @@ export abstract class FormGroupChanges {
             const key = this._formKey;
             const data = this.form.getRawValue();
 
-            if (!this.enableFormReset) {
-                const writeCache = this._db.transaction('formsCache', 'readwrite');
-                await writeCache.objectStore('formsCache').put({key, data});
-                await writeCache.done;
-
-                let history = {'version': this._formVersion, 'date': new Date().getTime()}
-
-                const writeHistory = this._db.transaction('formsHistory', 'readwrite');
-                await writeHistory.objectStore('formsHistory').put({key, history});
-            } else {
+            if (this.enableFormReset) {
                 await this.clearFormCache();
+                return;
             }
+
+            const writeCache = this._db.transaction('formsCache', 'readwrite');
+            await writeCache.objectStore('formsCache').put({key, data});
+            await writeCache.done;
+
+            let history = {'version': this._formVersion, 'date': new Date().getTime()}
+
+            const writeHistory = this._db.transaction('formsHistory', 'readwrite');
+            await writeHistory.objectStore('formsHistory').put({key, history});
         }
     }
 
