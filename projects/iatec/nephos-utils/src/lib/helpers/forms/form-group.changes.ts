@@ -71,34 +71,33 @@ export abstract class FormGroupChanges {
         }
     }
 
+    private async _workChanges(): Promise<void> {
+        if (this.formMode == 'create' && this._db) {
+            const key = this._formKey;
+            const data = this.form.getRawValue();
+
+            if (!this.enableFormReset) {
+                const writeCache = this._db.transaction('formsCache', 'readwrite');
+                await writeCache.objectStore('formsCache').put({key, data});
+                await writeCache.done;
+
+                let history = {'version': this._formVersion, 'date': new Date().getTime()}
+
+                const writeHistory = this._db.transaction('formsHistory', 'readwrite');
+                await writeHistory.objectStore('formsHistory').put({key, history});
+            } else {
+                await this.clearFormCache();
+            }
+        }
+    }
+
     private async _initWatchForm(): Promise<void> {
         this.form.valueChanges
             .pipe(
                 debounceTime(1000),
                 takeUntil(this.formSubject$)
             ).subscribe(async () => {
-                console.log('form mode', this.formMode);
-                console.log('enable form reset', this.enableFormReset);
-                console.log('db', this._db);
-                console.log('form key', this._formKey);
-
-                if (this.formMode == 'create' && this._db) {
-                    const key = this._formKey;
-                    const data = this.form.getRawValue();
-
-                    if (!this.enableFormReset) {
-                        const writeCache = this._db.transaction('formsCache', 'readwrite');
-                        await writeCache.objectStore('formsCache').put({key, data});
-                        await writeCache.done;
-
-                        let history = {'version': this._formVersion, 'date': new Date().getTime()}
-
-                        const writeHistory = this._db.transaction('formsHistory', 'readwrite');
-                        await writeHistory.objectStore('formsHistory').put({key, history});
-                    } else {
-                        await this.clearFormCache();
-                    }
-                }
+                await this._workChanges();
             }
         );
     }
@@ -132,7 +131,9 @@ export abstract class FormGroupChanges {
 
     // noinspection JSUnusedGlobalSymbols
     protected stopWatchForm(): void {
-        this.formSubject$.next();
-        this.formSubject$.complete();
+        this._workChanges().then(() => {
+            this.formSubject$.next();
+            this.formSubject$.complete();
+        });
     }
 }
