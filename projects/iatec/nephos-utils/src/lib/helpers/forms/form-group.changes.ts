@@ -77,6 +77,11 @@ export abstract class FormGroupChanges {
                 debounceTime(1000),
                 takeUntil(this.formSubject$)
             ).subscribe(async () => {
+                console.log('form mode', this.formMode);
+                console.log('enable form reset', this.enableFormReset);
+                console.log('db', this._db);
+                console.log('form key', this._formKey);
+
                 if (this.formMode == 'create' && this._db) {
                     const key = this._formKey;
                     const data = this.form.getRawValue();
