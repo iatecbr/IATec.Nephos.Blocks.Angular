@@ -5,11 +5,11 @@
 
 trigger:
   branches:
-    exclude:
-      - '*'
-  tags:
     include:
-      - '@iatec/nephos-utils*'
+      - main
+  paths:
+    include:
+      - projects/iatec/nephos-utils/*
 
 pool:
   name: IATec-Builds-Agents-Linux

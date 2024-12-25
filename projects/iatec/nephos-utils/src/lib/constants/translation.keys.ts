@@ -9,9 +9,9 @@ export const GeneralTranslationKeys = {
         disable: 'general.action.disable',
         enable: 'general.action.enable'
     },
-    singular: {
-        yes: 'general.singular.yes',
-        no: 'general.singular.no'
+    response: {
+        yes: 'general.response.yes',
+        no: 'general.response.no'
     },
     verb: {
         showing: 'general.verb.showing',

@@ -5,11 +5,11 @@
 
 trigger:
   branches:
-    exclude:
-      - '*'
-  tags:
     include:
-      - '@iatec/nephos-layout@*'
+      - main
+  paths:
+    include:
+      - projects/iatec/neptuno-layout/*
 
 pool:
   name: IATec-Builds-Agents-Linux
