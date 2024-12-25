@@ -1,5 +1,6 @@
 export const GeneralTranslationKeys = {
     action: {
+        add: 'general.action.add',
         cancel: 'general.action.cancel',
         save: 'general.action.save',
         search: 'general.action.search',
@@ -11,5 +12,12 @@ export const GeneralTranslationKeys = {
     singular: {
         yes: 'general.singular.yes',
         no: 'general.singular.no'
+    },
+    verb: {
+        showing: 'general.verb.showing',
+    },
+    preposition: {
+        to: 'general.preposition.to',
+        of: 'general.preposition.of'
     }
 }
