@@ -81,8 +81,8 @@ export abstract class FormSidebarHelper extends FormGroupChanges {
                 key: MessageKeys.default,
                 target: event.target || new EventTarget,
                 message: this.translateService.translate(WaringMessages.wantToProceed),
-                acceptLabel: this.translateService.translate(GeneralTranslationKeys.singular.yes),
-                rejectLabel: this.translateService.translate(GeneralTranslationKeys.singular.no),
+                acceptLabel: this.translateService.translate(GeneralTranslationKeys.response.yes),
+                rejectLabel: this.translateService.translate(GeneralTranslationKeys.response.no),
                 icon: 'fa-duotone fa-solid fa-triangle-exclamation',
                 accept: () => {
                     this.beforeClose().then(() => {
