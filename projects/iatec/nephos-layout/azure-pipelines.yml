@@ -9,7 +9,7 @@ trigger:
       - main
   paths:
     include:
-      - projects/iatec/neptuno-layout/*
+      - projects/iatec/nephos-layout/*
 
 pool:
   name: IATec-Builds-Agents-Linux
