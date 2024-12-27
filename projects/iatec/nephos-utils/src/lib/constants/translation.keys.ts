@@ -23,7 +23,7 @@ export const GeneralTranslationKeys = {
     message: {
         default: {
             page: {
-                report: '{{general.verb.showing}} {first} {{general.preposition.to}} {last} {{general.preposition.of}} {totalRecords}'
+                report: 'general.message.default.page.report'
             }
         },
         error: {
