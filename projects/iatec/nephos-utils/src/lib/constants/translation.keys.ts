@@ -21,6 +21,11 @@ export const GeneralTranslationKeys = {
         of: 'general.preposition.of'
     },
     message: {
+        default: {
+            page: {
+                report: '{{general.verb.showing}} {first} {{general.preposition.to}} {last} {{general.preposition.of}} {totalRecords}'
+            }
+        },
         error: {
             forbidden: 'general.message.error.forbidden',
             internalServerError: 'general.message.error.internalServerError',
