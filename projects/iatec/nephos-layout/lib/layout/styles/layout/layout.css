@@ -331,7 +331,7 @@ a {
     position: absolute;
     left: 5rem;
     top: 0;
-    min-width: 20rem;
+    min-width: 17rem;
     background-color: var(--surface-overlay);
     border-radius: var(--border-radius);
     box-shadow: var(--sidebar-shadow);
