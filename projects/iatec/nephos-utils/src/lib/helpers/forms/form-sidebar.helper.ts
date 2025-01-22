@@ -84,6 +84,7 @@ export abstract class FormSidebarHelper extends FormGroupChanges {
                 acceptLabel: this.translateService.translate(GeneralTranslationKeys.response.yes),
                 rejectLabel: this.translateService.translate(GeneralTranslationKeys.response.no),
                 icon: 'fa-duotone fa-solid fa-triangle-exclamation',
+                acceptButtonStyleClass: 'p-button-text',
                 accept: () => {
                     this.beforeClose().then(() => {
                         this.closeWithoutChanges();
