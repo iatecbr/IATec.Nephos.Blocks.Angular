@@ -20,6 +20,10 @@ export const GeneralTranslationKeys = {
         to: 'general.preposition.to',
         of: 'general.preposition.of'
     },
+    adjective: {
+        active: 'general.adjective.active',
+        inactive: 'general.adjective.inactive'
+    },
     message: {
         default: {
             page: {
