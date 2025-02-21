@@ -8,6 +8,7 @@ export class LoadingService {
 
     private _document = inject(DOCUMENT);
     private _isBusy: Array<number> = [];
+    private _isBusyKeys: Array<string> = [];
     private _isLoading: Array<number> = [];
     private _isLoadingText: Array<string> = [];
 
@@ -18,10 +19,26 @@ export class LoadingService {
     }
 
     set isBusy(status: boolean) {
-        if (status) {
+        if (typeof status) {
             this._isBusy.push(1);
         } else {
             this._isBusy.shift();
+        }
+    }
+
+    set isBusyFor(key: string) {
+        if (!this._isBusyKeys.includes(key)) {
+            this._isBusy.push(1);
+            this._isBusyKeys.push(key);
+        }
+    }
+
+    set doneFor(key: string) {
+        const keyExists = this._isBusyKeys.includes(key);
+
+        if (keyExists) {
+            this._isBusy.shift();
+            this._isBusyKeys = this._isBusyKeys.filter(x => x != key);
         }
     }
 
