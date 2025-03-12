@@ -4,7 +4,8 @@ import { LanguageModel } from '../../../../models';
 @Component({
     selector: 'nph-layout-topbar-language',
     templateUrl: './language.component.html',
-    styleUrl: './language.component.scss'
+    styleUrl: './language.component.scss',
+    standalone: false
 })
 export class LanguageComponent {
     @Input() languages: LanguageModel[] = [];

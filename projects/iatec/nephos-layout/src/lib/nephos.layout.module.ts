@@ -31,6 +31,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MenubarModule } from 'primeng/menubar';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { MenubarModule } from 'primeng/menubar';
         TranslocoPipe,
         ToastModule,
         ConfirmPopupModule,
-        MenubarModule
+        MenubarModule,
+        DropdownModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())

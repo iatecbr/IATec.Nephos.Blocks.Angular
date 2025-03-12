@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'nph-layout-topbar-user-apps',
-    templateUrl: './user-apps.component.html'
+    templateUrl: './user-apps.component.html',
+    standalone: false
 })
 export class UserAppsComponent {
     @Input() apps: UserAppModel[] | undefined = [];
