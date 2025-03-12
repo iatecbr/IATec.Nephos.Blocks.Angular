@@ -7,7 +7,6 @@ import { ProfileSidebarComponent } from '../components/profile-sidebar/profile-s
 
 @Component({
     selector: 'app-nephos-template',
-    standalone: true,
     imports: [
         NephosLayoutModule,
         LogoComponent,

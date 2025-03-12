@@ -3,7 +3,6 @@ import { LayoutService, NephosLayoutModule } from '@iatec/nephos-layout';
 
 @Component({
     selector: 'app-nephos-template-profile-sidebar',
-    standalone: true,
     imports: [
         NephosLayoutModule
     ],
