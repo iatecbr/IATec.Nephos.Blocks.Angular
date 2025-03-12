@@ -11,6 +11,8 @@ trigger:
     include:
       - projects/iatec/nephos-layout/*
 
+pr: none
+
 pool:
   name: IATec-Builds-Agents-Linux
 
