@@ -5,7 +5,6 @@ import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-nephos-template-topbar',
-    standalone: true,
     imports: [
         NephosLayoutModule
     ],

@@ -8,6 +8,7 @@ import { TopbarComponent } from '../components/topbar';
 @Component({
     selector: 'nph-layout',
     templateUrl: './layout.component.html',
+    standalone: false
 })
 export class LayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;

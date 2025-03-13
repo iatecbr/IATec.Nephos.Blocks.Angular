@@ -3,7 +3,6 @@ import { MenuService } from '@iatec/nephos-layout';
 
 @Component({
     selector: 'app-dashboard',
-    standalone: true,
     imports: [],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss'

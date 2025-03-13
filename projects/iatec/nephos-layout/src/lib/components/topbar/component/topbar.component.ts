@@ -7,7 +7,8 @@ import { MenuItem } from 'primeng/api';
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
     styleUrls: ['./topbar.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class TopbarComponent {
 

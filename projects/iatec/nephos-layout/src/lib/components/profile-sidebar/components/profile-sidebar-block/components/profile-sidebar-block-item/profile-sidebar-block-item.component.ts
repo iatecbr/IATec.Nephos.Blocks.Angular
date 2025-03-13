@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'nph-layout-profile-sidebar-block-item',
     templateUrl: './profile-sidebar-block-item.component.html',
+    standalone: false
 })
 export class ProfileSidebarBlockItemComponent {
     @Input() icon: string | undefined;

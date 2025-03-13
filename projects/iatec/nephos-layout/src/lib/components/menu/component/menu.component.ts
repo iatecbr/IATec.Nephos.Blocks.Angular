@@ -4,7 +4,8 @@ import { MenuService } from '../../../services';
 
 @Component({
     selector: 'nph-layout-menu',
-    templateUrl: './menu.component.html'
+    templateUrl: './menu.component.html',
+    standalone: false
 })
 export class MenuComponent {
 

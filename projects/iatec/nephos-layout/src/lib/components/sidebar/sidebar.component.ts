@@ -3,7 +3,8 @@ import { LayoutService } from '../../services';
 
 @Component({
     selector: 'nph-layout-sidebar',
-    templateUrl: './sidebar.component.html'
+    templateUrl: './sidebar.component.html',
+    standalone: false
 })
 export class SidebarComponent {
     timeout: any = null;

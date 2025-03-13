@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'nph-pages-header',
-    standalone: true,
     imports: [],
     templateUrl: './header-page.component.html'
 })
