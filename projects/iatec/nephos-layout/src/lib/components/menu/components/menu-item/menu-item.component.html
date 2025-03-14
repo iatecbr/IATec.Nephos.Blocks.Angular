@@ -1,10 +1,10 @@
 <ng-container>
-    <div *ngIf="root && item.visible"
+    <div *ngIf="root && item.visible !== false"
          class="layout-menuitem-root-text">
         {{ item.label | transloco }}
     </div>
     <a
-        *ngIf="(!item.routerLink || item.items) && item.visible"
+        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
         [attr.href]="item.url"
         (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
@@ -22,7 +22,7 @@
            *ngIf="item.items"></i>
     </a>
     <a
-        *ngIf="item.routerLink && !item.items && item.visible"
+        *ngIf="item.routerLink && !item.items && item.visible !== false"
         (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
         [ngClass]="item.class"
@@ -57,7 +57,7 @@
     </a>
 
     <ul #submenu
-        *ngIf="item.items && item.visible"
+        *ngIf="item.items && item.visible !== false"
         [@children]="submenuAnimation"
         (@children.done)="onSubmenuAnimated($event)">
         <ng-template ngFor
