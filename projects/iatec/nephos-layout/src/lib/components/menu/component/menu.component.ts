@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenuService } from '../../../services';
+import { MenuItemComponent } from '../components/menu-item/menu-item.component';
+import { NgForOf, NgIf } from '@angular/common';
 
 @Component({
     selector: 'nph-layout-menu',
-    templateUrl: './menu.component.html',
-    standalone: false
+    imports: [
+        MenuItemComponent,
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './menu.component.html'
 })
 export class MenuComponent {
 

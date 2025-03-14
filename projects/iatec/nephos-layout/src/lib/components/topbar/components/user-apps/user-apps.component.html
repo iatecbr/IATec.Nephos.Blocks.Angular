@@ -38,7 +38,7 @@
                   fill="var(--logo-color)"/>
         </svg>
     </button>
-    <p-overlayPanel #appsPanel>
+    <p-popover #appsPanel>
         <div class="grid w-25rem">
             <div *ngFor="let app of apps"
                  class="col-4 flex justify-content-center p-1 cursor-pointer">
@@ -51,5 +51,5 @@
                 </a>
             </div>
         </div>
-    </p-overlayPanel>
+    </p-popover>
 </nph-layout-topbar-item>

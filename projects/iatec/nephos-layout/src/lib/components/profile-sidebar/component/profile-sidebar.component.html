@@ -1,6 +1,8 @@
-<p-sidebar [(visible)]="visible"
-           position="right"
-           [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-           styleClass="layout-profile-sidebar w-full sm:w-25rem">
+<p-drawer
+    [visible]="visible()"
+    (onHide)="onDrawerHide()"
+    position="right"
+    [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
+    styleClass="layout-profile-sidebar w-full sm:w-25rem">
     <ng-content/>
-</p-sidebar>
+</p-drawer>

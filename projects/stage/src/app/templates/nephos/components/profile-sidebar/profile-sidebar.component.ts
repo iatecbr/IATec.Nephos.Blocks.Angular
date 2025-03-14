@@ -1,10 +1,18 @@
 import { Component, effect } from '@angular/core';
-import { LayoutService, NephosLayoutModule } from '@iatec/nephos-layout';
+import { LayoutService, ProfileSidebarBlockTitleComponent} from '@iatec/nephos-layout';
+import {
+    ProfileSidebarBlockComponent,
+    ProfileSidebarBlockItemComponent,
+    ProfileSidebarBlockSubtitleComponent
+} from '../../../../../../../iatec/nephos-layout/src/lib/components/profile-sidebar';
 
 @Component({
     selector: 'app-nephos-template-profile-sidebar',
     imports: [
-        NephosLayoutModule
+        ProfileSidebarBlockTitleComponent,
+        ProfileSidebarBlockSubtitleComponent,
+        ProfileSidebarBlockItemComponent,
+        ProfileSidebarBlockComponent
     ],
     templateUrl: './profile-sidebar.component.html'
 })

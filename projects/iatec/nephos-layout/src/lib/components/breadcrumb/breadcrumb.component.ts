@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 interface Breadcrumb {
     label: string;
@@ -10,8 +12,13 @@ interface Breadcrumb {
 
 @Component({
     selector: 'nph-layout-breadcrumb',
-    templateUrl: './breadcrumb.component.html',
-    standalone: false
+    imports: [
+        NgForOf,
+        AsyncPipe,
+        TranslocoPipe,
+        NgIf
+    ],
+    templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
 

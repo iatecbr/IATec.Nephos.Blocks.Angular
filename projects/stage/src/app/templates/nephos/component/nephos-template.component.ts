@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { LayoutService, NephosLayoutModule } from '@iatec/nephos-layout';
+import { LayoutComponent, LayoutService } from '@iatec/nephos-layout';
 import { LogoComponent } from '../components/logo/logo.component';
 import { TopbarComponent } from '../components/topbar/topbar.component';
 import { ProfileSidebarComponent } from '../components/profile-sidebar/profile-sidebar.component';
 
-
 @Component({
     selector: 'app-nephos-template',
     imports: [
-        NephosLayoutModule,
+        LayoutComponent,
         LogoComponent,
         TopbarComponent,
         ProfileSidebarComponent
@@ -24,12 +23,13 @@ export class NephosTemplateComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._layoutService.config.update(
+
+        this._layoutService.layoutConfig.update(
             (config) => ({
                 ...config,
-                theme: 'default',
                 menuMode: 'slim'
             }));
+
 
         this._layoutService.profile.set({name: 'Apostle Paul', urlAvatar: './assets/images/avatar/example.png'});
     }

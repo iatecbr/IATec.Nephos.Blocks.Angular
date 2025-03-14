@@ -1,6 +1,7 @@
 import {
     AfterViewChecked,
     Component,
+    computed,
     ElementRef,
     HostBinding,
     Input,
@@ -8,38 +9,62 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { LayoutService, MenuService } from '../../../../services';
+import { LayoutService } from '../../../../services';
 import { DomHandler } from 'primeng/dom';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { Tooltip } from 'primeng/tooltip';
+import { Ripple } from 'primeng/ripple';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[nph-layout-menu-item]',
     templateUrl: `menu-item.component.html`,
+    imports: [
+        TranslocoPipe,
+        NgClass,
+        Tooltip,
+        RouterLinkActive,
+        RouterLink,
+        NgForOf,
+        Ripple,
+        NgIf
+    ],
     animations: [
         trigger('children', [
-            state('collapsed', style({
-                height: '0'
-            })),
-            state('expanded', style({
-                height: '*'
-            })),
-            state('hidden', style({
-                display: 'none'
-            })),
-            state('visible', style({
-                display: 'block'
-            })),
+            state(
+                'collapsed',
+                style({
+                    height: '0'
+                })
+            ),
+            state(
+                'expanded',
+                style({
+                    height: '*'
+                })
+            ),
+            state(
+                'hidden',
+                style({
+                    display: 'none'
+                })
+            ),
+            state(
+                'visible',
+                style({
+                    display: 'block'
+                })
+            ),
             transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
         ])
-    ],
-    standalone: false
+    ]
 })
 export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
-
     @Input() item: any;
 
     @Input() index!: number;
@@ -50,6 +75,11 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     @ViewChild('submenu') submenu!: ElementRef;
 
+    @HostBinding('class.active-menuitem')
+    get activeClass() {
+        return this.active;
+    }
+
     active = false;
 
     menuSourceSubscription: Subscription;
@@ -58,15 +88,30 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     key: string = '';
 
+    get submenuAnimation() {
+        if (this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
+            return this.active ? 'visible' : 'hidden';
+        } else return this.root ? 'expanded' : this.active ? 'expanded' : 'collapsed';
+    }
+
+    isSlim = computed(() => this.layoutService.isSlim());
+
+    isSlimPlus = computed(() => this.layoutService.isSlimPlus());
+
+    isHorizontal = computed(() => this.layoutService.isHorizontal());
+
+    get isDesktop() {
+        return this.layoutService.isDesktop();
+    }
+
     constructor(
         public layoutService: LayoutService,
-        public router: Router,
-        private menuService: MenuService
+        public router: Router
     ) {
-        this.menuSourceSubscription = this.menuService.menuSource$.subscribe(value => {
+        this.menuSourceSubscription = this.layoutService.menuSource$.subscribe((value) => {
             Promise.resolve(null).then(() => {
                 if (value.routeEvent) {
-                    this.active = (value.key === this.key || value.key.startsWith(this.key + '-'));
+                    this.active = value.key === this.key || value.key.startsWith(this.key + '-');
                 } else {
                     if (value.key !== this.key && !value.key.startsWith(this.key + '-')) {
                         this.active = false;
@@ -75,32 +120,31 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
             });
         });
 
-        this.menuResetSubscription = this.menuService.resetSource$.subscribe(() => {
+        this.menuResetSubscription = this.layoutService.resetSource$.subscribe(() => {
             this.active = false;
         });
 
-        this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => {
-                if (this.isSlimPlus || this.isSlim || this.isHorizontal) {
-                    this.active = false;
-                } else {
-                    if (this.item.routerLink) {
-                        this.updateActiveStateFromRoute();
-                    }
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+            if (this.isSlimPlus() || this.isSlim() || this.isHorizontal()) {
+                this.active = false;
+            } else {
+                if (this.item.routerLink) {
+                    this.updateActiveStateFromRoute();
                 }
-            });
+            }
+        });
     }
 
     ngOnInit() {
         this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
 
-        if (!(this.isSlimPlus || this.isSlim || this.isHorizontal) && this.item.routerLink) {
+        if (!(this.isSlimPlus() || this.isSlim() || this.isHorizontal()) && this.item.routerLink) {
             this.updateActiveStateFromRoute();
         }
     }
 
     ngAfterViewChecked() {
-        if (this.root && this.active && this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
+        if (this.root && this.active && this.isDesktop && (this.isHorizontal() || this.isSlim() || this.isSlimPlus())) {
             this.calculatePosition(this.submenu?.nativeElement, this.submenu?.nativeElement.parentElement);
         }
     }
@@ -114,12 +158,15 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
         });
 
         if (activeRoute) {
-            this.menuService.onMenuStateChange({key: this.key, routeEvent: true});
+            this.layoutService.onMenuStateChange({
+                key: this.key,
+                routeEvent: true
+            });
         }
     }
 
     onSubmenuAnimated(event: AnimationEvent) {
-        if (event.toState === 'visible' && this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
+        if (event.toState === 'visible' && this.isDesktop && (this.isHorizontal() || this.isSlim() || this.isSlimPlus())) {
             const el = <HTMLUListElement>event.element;
             const elParent = <HTMLUListElement>el.parentElement;
             this.calculatePosition(el, elParent);
@@ -154,8 +201,11 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
 
         // navigate with hover
-        if (this.root && this.isSlim || this.isHorizontal || this.isSlimPlus) {
-            this.layoutService.state.menuHoverActive = !this.layoutService.state.menuHoverActive;
+        if ((this.root && this.isSlim()) || this.isHorizontal() || this.isSlimPlus()) {
+            this.layoutService.layoutState.update((val) => ({
+                ...val,
+                menuHoverActive: !val.menuHoverActive
+            }));
         }
 
         // execute command
@@ -167,55 +217,37 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (this.item.items) {
             this.active = !this.active;
 
-            if (this.root && this.active && (this.isSlim || this.isHorizontal || this.isSlimPlus)) {
+            if (this.root && this.active && (this.isSlim() || this.isHorizontal() || this.isSlimPlus())) {
                 this.layoutService.onOverlaySubmenuOpen();
             }
         } else {
             if (this.layoutService.isMobile()) {
-                this.layoutService.state.staticMenuMobileActive = false;
+                this.layoutService.layoutState.update((val) => ({
+                    ...val,
+                    staticMenuMobileActive: false
+                }));
             }
 
-            if (this.isSlim || this.isHorizontal || this.isSlimPlus) {
-                this.menuService.reset();
-                this.layoutService.state.menuHoverActive = false;
+            if (this.isSlim() || this.isHorizontal() || this.isSlimPlus()) {
+                this.layoutService.reset();
+                this.layoutService.layoutState.update((val) => ({
+                    ...val,
+                    menuHoverActive: false
+                }));
             }
         }
 
-        this.menuService.onMenuStateChange({key: this.key});
+        this.layoutService.onMenuStateChange({key: this.key});
     }
 
     onMouseEnter() {
         // activate item on hover
-        if (this.root && (this.isSlim || this.isHorizontal || this.isSlimPlus) && this.layoutService.isDesktop()) {
-            if (this.layoutService.state.menuHoverActive) {
+        if (this.root && (this.isSlim() || this.isHorizontal() || this.isSlimPlus()) && this.layoutService.isDesktop()) {
+            if (this.layoutService.layoutState().menuHoverActive) {
                 this.active = true;
-                this.menuService.onMenuStateChange({key: this.key});
+                this.layoutService.onMenuStateChange({key: this.key});
             }
         }
-    }
-
-    get submenuAnimation() {
-        if (this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
-            return this.active ? 'visible' : 'hidden';
-        } else
-            return this.root ? 'expanded' : (this.active ? 'expanded' : 'collapsed');
-    }
-
-    get isHorizontal() {
-        return this.layoutService.isHorizontal();
-    }
-
-    get isSlim() {
-        return this.layoutService.isSlim();
-    }
-
-    get isSlimPlus() {
-        return this.layoutService.isSlimPlus();
-    }
-
-    @HostBinding('class.active-menuitem')
-    get activeClass() {
-        return this.active && !this.root;
     }
 
     ngOnDestroy() {

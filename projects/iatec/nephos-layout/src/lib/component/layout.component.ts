@@ -1,14 +1,30 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { AppConfig, ColorScheme, LayoutService, MenuService } from '../services';
+import { LayoutService } from '../services';
 import { SidebarComponent } from '../components/sidebar';
 import { TopbarComponent } from '../components/topbar';
+import { NgClass } from '@angular/common';
+import { BreadcrumbComponent } from '../components/breadcrumb';
+import { ProfileSidebarComponent } from '../components/profile-sidebar';
+import { ConfirmPopup } from 'primeng/confirmpopup';
+import { Toast } from 'primeng/toast';
+import { AppConfigurator } from '../components/app.configurator';
 
 @Component({
     selector: 'nph-layout',
     templateUrl: './layout.component.html',
-    standalone: false
+    imports: [
+        NgClass,
+        SidebarComponent,
+        TopbarComponent,
+        BreadcrumbComponent,
+        RouterOutlet,
+        ProfileSidebarComponent,
+        ConfirmPopup,
+        Toast,
+        AppConfigurator
+    ]
 })
 export class LayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;
@@ -19,82 +35,64 @@ export class LayoutComponent implements OnDestroy {
 
     @ViewChild(SidebarComponent) appSidebar!: SidebarComponent;
 
-    @ViewChild(TopbarComponent) appTopbar!: TopbarComponent;
+    @ViewChild(TopbarComponent) appTopBar!: TopbarComponent;
 
     constructor(
-        private menuService: MenuService,
         public layoutService: LayoutService,
         public renderer: Renderer2,
         public router: Router
     ) {
-        //Default configuration
-        const config: AppConfig = {
-            ripple: true,                      //toggles ripple on and off
-            inputStyle: 'outlined',             //default style for input elements
-            menuMode: 'static',                 //layout mode of the menu, valid values are "static", "overlay", "slim", "horizontal", "reveal" and "drawer"
-            colorScheme: (localStorage.getItem('colorScheme') ?? 'light') as ColorScheme,               //color scheme of the template, valid values are "light", "dim" and "dark"
-            theme: 'indigo',                    //default component theme for PrimeNG
-            menuTheme: 'colorScheme',           //theme of the menu, valid values are "colorScheme", "primaryColor" and "transparent"
-            scale: 14                           //size of the body font size to scale the whole application
-        };
+        this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
+            if (!this.menuOutsideClickListener) {
+                this.menuOutsideClickListener = this.renderer.listen('document', 'click', (event) => {
+                    if (this.isOutsideClicked(event)) {
+                        this.hideMenu();
+                    }
+                });
+            }
+            if ((this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus()) && !this.menuScrollListener) {
+                this.menuScrollListener = this.renderer.listen(this.appSidebar.menuContainer.nativeElement, 'scroll', (event) => {
+                    if (this.layoutService.isDesktop()) {
+                        this.hideMenu();
+                    }
+                });
+            }
+            if (this.layoutService.layoutState().staticMenuMobileActive) {
+                this.blockBodyScroll();
+            }
+        });
 
-        this.layoutService.config.set(config);
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+            this.hideMenu();
+        });
+    }
 
-        this.overlayMenuOpenSubscription =
-            this.layoutService.overlayOpen$.subscribe(() => {
-                if (!this.menuOutsideClickListener) {
-                    this.menuOutsideClickListener = this.renderer.listen(
-                        'document',
-                        'click',
-                        (event) => {
-                            const isOutsideClicked = !(
-                                this.appSidebar.el.nativeElement.isSameNode(
-                                    event.target
-                                ) ||
-                                this.appSidebar.el.nativeElement.contains(
-                                    event.target
-                                ) ||
-                                this.appTopbar.menuButton.nativeElement.isSameNode(
-                                    event.target
-                                ) ||
-                                this.appTopbar.menuButton.nativeElement.contains(
-                                    event.target
-                                )
-                            );
-                            if (isOutsideClicked) {
-                                this.hideMenu();
-                            }
-                        }
-                    );
-                }
+    isOutsideClicked(event: any) {
+        const sidebarEl = document.querySelector('.layout-sidebar');
+        const topbarButtonEl = document.querySelector('.topbar-menubutton');
 
-                if (
-                    (this.layoutService.isHorizontal() ||
-                        this.layoutService.isSlim() ||
-                        this.layoutService.isSlimPlus()) &&
-                    !this.menuScrollListener
-                ) {
-                    this.menuScrollListener = this.renderer.listen(
-                        this.appSidebar.menuContainer.nativeElement,
-                        'scroll',
-                        (event) => {
-                            if (this.layoutService.isDesktop()) {
-                                this.hideMenu();
-                            }
-                        }
-                    );
-                }
+        return !(sidebarEl?.isSameNode(event.target) || sidebarEl?.contains(event.target) || topbarButtonEl?.isSameNode(event.target) || topbarButtonEl?.contains(event.target));
+    }
 
-                if (this.layoutService.state.staticMenuMobileActive) {
-                    this.blockBodyScroll();
-                }
-            });
+    hideMenu() {
+        this.layoutService.layoutState.update((prev) => ({
+            ...prev,
+            overlayMenuActive: false,
+            staticMenuMobileActive: false,
+            menuHoverActive: false
+        }));
+        this.layoutService.reset();
+        if (this.menuOutsideClickListener) {
+            this.menuOutsideClickListener();
+            this.menuOutsideClickListener = null;
+        }
 
-        this.router.events
-            .pipe(filter((event) => event instanceof NavigationEnd))
-            .subscribe(() => {
-                this.hideMenu();
-            });
+        if (this.menuScrollListener) {
+            this.menuScrollListener();
+            this.menuScrollListener = null;
+        }
+
+        this.unblockBodyScroll();
     }
 
     blockBodyScroll(): void {
@@ -114,64 +112,38 @@ export class LayoutComponent implements OnDestroy {
                     '(^|\\b)' +
                     'blocked-scroll'.split(' ').join('|') +
                     '(\\b|$)',
-                    'gi'
+                    'gi',
                 ),
-                ' '
+                ' ',
             );
         }
     }
 
-    hideMenu() {
-        this.layoutService.state.overlayMenuActive = false;
-        this.layoutService.state.staticMenuMobileActive = false;
-        this.layoutService.state.menuHoverActive = false;
-        this.menuService.reset();
-
-        if (this.menuOutsideClickListener) {
-            this.menuOutsideClickListener();
-            this.menuOutsideClickListener = null;
-        }
-
-        if (this.menuScrollListener) {
-            this.menuScrollListener();
-            this.menuScrollListener = null;
-        }
-
-        this.unblockBodyScroll();
-    }
-
     get containerClass() {
+        const layoutConfig = this.layoutService.layoutConfig();
+        const layoutState = this.layoutService.layoutState();
+
         return {
-            'layout-light': this.layoutService.config().colorScheme === 'light',
-            'layout-dim': this.layoutService.config().colorScheme === 'dim',
-            'layout-dark': this.layoutService.config().colorScheme === 'dark',
-            'layout-colorscheme-menu':
-                this.layoutService.config().menuTheme === 'colorScheme',
+            'layout-light': !layoutConfig.darkTheme,
+            'layout-dark': layoutConfig.darkTheme,
+            'layout-colorscheme-menu': layoutConfig.menuTheme === 'colorScheme',
             'layout-primarycolor-menu':
-                this.layoutService.config().menuTheme === 'primaryColor',
-            'layout-transparent-menu':
-                this.layoutService.config().menuTheme === 'transparent',
-            'layout-overlay':
-                this.layoutService.config().menuMode === 'overlay',
-            'layout-static': this.layoutService.config().menuMode === 'static',
-            'layout-slim': this.layoutService.config().menuMode === 'slim',
-            'layout-slim-plus':
-                this.layoutService.config().menuMode === 'slim-plus',
-            'layout-horizontal':
-                this.layoutService.config().menuMode === 'horizontal',
-            'layout-reveal': this.layoutService.config().menuMode === 'reveal',
-            'layout-drawer': this.layoutService.config().menuMode === 'drawer',
+                layoutConfig.menuTheme === 'primaryColor',
+            'layout-transparent-menu': layoutConfig.menuTheme === 'transparent',
+            'layout-overlay': layoutConfig.menuMode === 'overlay',
+            'layout-static': layoutConfig.menuMode === 'static',
+            'layout-slim': layoutConfig.menuMode === 'slim',
+            'layout-slim-plus': layoutConfig.menuMode === 'slim-plus',
+            'layout-horizontal': layoutConfig.menuMode === 'horizontal',
+            'layout-reveal': layoutConfig.menuMode === 'reveal',
+            'layout-drawer': layoutConfig.menuMode === 'drawer',
             'layout-static-inactive':
-                this.layoutService.state.staticMenuDesktopInactive &&
-                this.layoutService.config().menuMode === 'static',
-            'layout-overlay-active': this.layoutService.state.overlayMenuActive,
-            'layout-mobile-active':
-            this.layoutService.state.staticMenuMobileActive,
-            'p-input-filled':
-                this.layoutService.config().inputStyle === 'filled',
-            'p-ripple-disabled': !this.layoutService.config().ripple,
-            'layout-sidebar-active': this.layoutService.state.sidebarActive,
-            'layout-sidebar-anchored': this.layoutService.state.anchored,
+                layoutState.staticMenuDesktopInactive &&
+                layoutConfig.menuMode === 'static',
+            'layout-overlay-active': layoutState.overlayMenuActive,
+            'layout-mobile-active': layoutState.staticMenuMobileActive,
+            'layout-sidebar-active': layoutState.sidebarActive,
+            'layout-sidebar-anchored': layoutState.anchored,
         };
     }
 

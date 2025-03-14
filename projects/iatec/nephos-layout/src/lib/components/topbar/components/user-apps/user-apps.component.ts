@@ -1,11 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { UserAppModel } from '../../../../models';
 import { Router } from '@angular/router';
+import { TopbarItemComponent } from '../topbar-item/topbar-item.component';
+import { ButtonDirective } from 'primeng/button';
+import { NgForOf } from '@angular/common';
+import { Popover } from 'primeng/popover';
 
 @Component({
     selector: 'nph-layout-topbar-user-apps',
-    templateUrl: './user-apps.component.html',
-    standalone: false
+    imports: [
+        TopbarItemComponent,
+        ButtonDirective,
+        NgForOf,
+        Popover
+    ],
+    templateUrl: './user-apps.component.html'
 })
 export class UserAppsComponent {
     @Input() apps: UserAppModel[] | undefined = [];

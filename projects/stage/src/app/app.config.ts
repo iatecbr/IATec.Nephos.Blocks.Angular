@@ -1,18 +1,18 @@
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideAnimations(),
+        provideAnimationsAsync(),
         provideRouter(routes),
-        provideHttpClient(),
+        provideHttpClient(withFetch()),
         provideTransloco({
             config: {
                 availableLangs: ['pt-BR', 'en-US', 'es-ES'],
@@ -23,7 +23,10 @@ export const appConfig: ApplicationConfig = {
         }),
         providePrimeNG({
             theme: {
-                preset: Lara
+                preset: Lara,
+                options: {
+                    darkModeSelector: '.app-dark'
+                }
             }
         }),
         MessageService,

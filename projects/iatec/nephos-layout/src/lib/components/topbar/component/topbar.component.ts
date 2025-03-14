@@ -1,14 +1,19 @@
-import { Component, effect, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ColorScheme, LayoutService, MenuService } from '../../../services';
-import { MenuItem } from 'primeng/api';
+import { Component, effect, ElementRef, ViewChild } from '@angular/core';
+import { ColorScheme, LayoutService } from '../../../services';
+import { BreadcrumbComponent } from '../../breadcrumb';
+import { ButtonDirective } from 'primeng/button';
+import { NgIf } from '@angular/common';
 
 
 @Component({
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
-    styleUrls: ['./topbar.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [
+        BreadcrumbComponent,
+        ButtonDirective,
+        NgIf
+    ],
+    styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
 
@@ -44,12 +49,9 @@ export class TopbarComponent {
     }
 
     onThemeChange() {
-        this.colorScheme = this.colorScheme == 'light' ? 'dark' : 'light'
-
-        this.layoutService.config.update(
-            (config) => ({
-                ...config,
-                colorScheme: this.colorScheme,
-            }));
+        this.layoutService.layoutConfig.update((state) => ({
+            ...state,
+            darkTheme: !state.darkTheme
+        }));
     }
 }

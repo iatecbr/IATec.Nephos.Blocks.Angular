@@ -1,12 +1,13 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { LanguageModel, MenuService, NephosLayoutModule, UserAppModel } from '@iatec/nephos-layout';
+import { LanguageModel, MenuService, LanguageComponent,  UserAppModel, UserAppsComponent } from '@iatec/nephos-layout';
 import { HttpAppService, HttpLanguageService, HttpMenuService } from '../../../../services';
 import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-nephos-template-topbar',
     imports: [
-        NephosLayoutModule
+        LanguageComponent,
+        UserAppsComponent
     ],
     templateUrl: './topbar.component.html'
 })

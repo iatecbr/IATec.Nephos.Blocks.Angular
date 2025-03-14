@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { LayoutService } from '../../../services';
+import { Drawer } from 'primeng/drawer';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'nph-layout-profile-sidebar',
-    templateUrl: './profile-sidebar.component.html',
-    standalone: false
+    imports: [
+        Drawer
+    ],
+    templateUrl: './profile-sidebar.component.html'
 })
 export class ProfileSidebarComponent {
 
     constructor(public layoutService: LayoutService) {
     }
 
-    get visible(): boolean {
-        return this.layoutService.state.profileSidebarVisible;
-    }
+    visible = computed(
+        () => this.layoutService.layoutState().profileSidebarVisible,
+    );
 
-    set visible(_val: boolean) {
-        this.layoutService.state.profileSidebarVisible = _val;
+    onDrawerHide() {
+        this.layoutService.layoutState.update((state) => ({
+            ...state,
+            profileSidebarVisible: false,
+        }));
     }
 }
