@@ -1,9 +1,9 @@
 <div class="grid">
     <div class="col-12">
         <div [class]="{'card':pageStyle == 'card'}">
-            <h4>
+            <div class="font-semibold text-xl mb-4">
                 <ng-content select="[title]"/>
-            </h4>
+            </div>
             <ng-content select="[content]"/>
         </div>
     </div>

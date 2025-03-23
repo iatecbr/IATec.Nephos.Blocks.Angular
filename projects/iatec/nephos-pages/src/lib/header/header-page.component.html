@@ -1,8 +1,8 @@
 <div class="grid">
     <div class="col-12">
-        <h4>
+        <div class="font-semibold text-xl mb-4">
             <ng-content select="[title]"/>
-        </h4>
+        </div>
         <div [class]="{'card':headerStyle == 'card'}">
             <ng-content select="[header]"/>
         </div>
