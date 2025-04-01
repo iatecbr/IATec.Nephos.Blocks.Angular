@@ -65,7 +65,8 @@
               "buildTarget": "stage:build:production"
             },
             "development": {
-              "buildTarget": "stage:build:development"
+              "buildTarget": "stage:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
