@@ -2,9 +2,17 @@
   width: 25px
 }
 
-.p-dropdown {
-  .p-dropdown-trigger {
+.p-select {
+  background: transparent !important;
+  border: none !important;
+
+  //TODO not working
+  .p-select-dropdown {
+    background-color: aqua !important;
     width: 0 !important;
-    margin-right: 2px !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
