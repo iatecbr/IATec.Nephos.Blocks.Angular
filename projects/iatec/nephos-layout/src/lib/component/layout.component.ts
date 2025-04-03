@@ -9,7 +9,7 @@ import { BreadcrumbComponent } from '../components/breadcrumb';
 import { ProfileSidebarComponent } from '../components/profile-sidebar';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { Toast } from 'primeng/toast';
-import { AppConfigurator } from '../components/app.configurator';
+import { LayoutConfigurator } from '../components/configurator/layout.configurator';
 
 @Component({
     selector: 'nph-layout',
@@ -23,7 +23,7 @@ import { AppConfigurator } from '../components/app.configurator';
         ProfileSidebarComponent,
         ConfirmPopup,
         Toast,
-        AppConfigurator
+        LayoutConfigurator
     ]
 })
 export class LayoutComponent implements OnDestroy {

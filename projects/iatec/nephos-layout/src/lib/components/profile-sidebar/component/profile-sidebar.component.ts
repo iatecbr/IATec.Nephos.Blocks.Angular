@@ -3,7 +3,6 @@ import { LayoutService } from '../../../services';
 import { Drawer } from 'primeng/drawer';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'nph-layout-profile-sidebar',
     imports: [
         Drawer

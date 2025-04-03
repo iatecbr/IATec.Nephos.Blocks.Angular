@@ -1,10 +1,11 @@
-import { Component, effect } from '@angular/core';
-import { LayoutService, ProfileSidebarBlockTitleComponent} from '@iatec/nephos-layout';
+import { Component, inject } from '@angular/core';
 import {
+    LayoutService,
     ProfileSidebarBlockComponent,
     ProfileSidebarBlockItemComponent,
-    ProfileSidebarBlockSubtitleComponent
-} from '../../../../../../../iatec/nephos-layout/src/lib/components/profile-sidebar';
+    ProfileSidebarBlockSubtitleComponent,
+    ProfileSidebarBlockTitleComponent
+} from '@iatec/nephos-layout';
 
 @Component({
     selector: 'app-nephos-template-profile-sidebar',
@@ -17,16 +18,7 @@ import {
     templateUrl: './profile-sidebar.component.html'
 })
 export class ProfileSidebarComponent {
-    name: string | undefined;
-
-    constructor(
-        private _layoutService: LayoutService
-    ) {
-        effect(() => {
-            const profile = this._layoutService.profile();
-            this.name = profile.name;
-        });
-    }
+    public layoutService = inject(LayoutService);
 
     onCommentClick() {
         console.log('Comment clicked');
