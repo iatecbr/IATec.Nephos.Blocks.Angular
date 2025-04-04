@@ -1,13 +1,9 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="font-semibold text-xl mb-4">
-            <ng-content select="[title]"/>
-        </div>
-        <div [class]="{'card':headerStyle == 'card'}">
-            <ng-content select="[header]"/>
-        </div>
-        <div [class]="{'card':bodyStyle == 'card'}">
-            <ng-content select="[body]"/>
-        </div>
-    </div>
+<div class="font-semibold text-xl mb-4">
+    <ng-container *ngTemplateOutlet="title"></ng-container>
+</div>
+<div [class]="{'card':headerStyle == 'card'}">
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+</div>
+<div [class]="{'card':bodyStyle == 'card'}">
+    <ng-container *ngTemplateOutlet="body"></ng-container>
 </div>

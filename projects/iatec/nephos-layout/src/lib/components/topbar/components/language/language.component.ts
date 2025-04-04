@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LanguageModel } from '../../../../models';
+import { LanguageModel } from '../../../../models/test';
 import { PrimeTemplate } from 'primeng/api';
 import { TopbarItemComponent } from '../topbar-item/topbar-item.component';
 import { FormsModule } from '@angular/forms';

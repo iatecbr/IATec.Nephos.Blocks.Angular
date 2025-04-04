@@ -1,5 +1,13 @@
 <nph-layout>
-    <app-nephos-template-logo logo/>
-    <app-nephos-template-topbar topbar/>
-    <app-nephos-template-profile-sidebar profileSidebar/>
+    <ng-template #logo>
+        <app-nephos-template-logo/>
+    </ng-template>
+
+    <ng-template #topbar>
+        <app-nephos-template-topbar/>
+    </ng-template>
+
+    <ng-template #profileSidebar>
+        <app-nephos-template-profile-sidebar/>
+    </ng-template>
 </nph-layout>

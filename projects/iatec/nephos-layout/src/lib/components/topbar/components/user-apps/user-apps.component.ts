@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserAppModel } from '../../../../models';
+import { UserAppModel } from '../../../../models/test';
 import { Router } from '@angular/router';
 import { TopbarItemComponent } from '../topbar-item/topbar-item.component';
 import { ButtonDirective } from 'primeng/button';

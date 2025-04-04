@@ -1,24 +1,24 @@
+<nph-layout-configurator/>
+
 <p-toast key="default"></p-toast>
 <p-confirmPopup key="default"></p-confirmPopup>
 
 <div class="layout-container"
      [ngClass]="containerClass">
     <nph-layout-sidebar>
-        <ng-content select="[logo]"></ng-content>
+        <ng-container *ngTemplateOutlet="logo"></ng-container>
     </nph-layout-sidebar>
     <div class="layout-content-wrapper">
         <nph-layout-topbar>
-            <ng-content select="[topbar]"></ng-content>
+            <ng-container *ngTemplateOutlet="topbar"></ng-container>
         </nph-layout-topbar>
-        <nph-layout-breadcrumb class="content-breadcrumb"></nph-layout-breadcrumb>
+        <nph-layout-breadcrumb class="content-breadcrumb"/>
         <div class="layout-content">
             <router-outlet></router-outlet>
         </div>
     </div>
     <nph-layout-profile-sidebar>
-        <ng-content select="[profileSidebar]"></ng-content>
+        <ng-container *ngTemplateOutlet="profileSidebar"></ng-container>
     </nph-layout-profile-sidebar>
     <div class="layout-mask animate-fadein"></div>
 </div>
-
-<nph-layout-configurator/>
