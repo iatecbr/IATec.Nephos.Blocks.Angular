@@ -10,6 +10,10 @@
     "tslib": ">=2.0.0"
   },
   "sideEffects": [
-    "lib/lib.styles.scss"
+    "*.scss",
+    "*.css",
+    "*.html",
+    "*.svg",
+    "*.json"
   ]
 }
