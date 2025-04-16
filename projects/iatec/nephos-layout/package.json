@@ -9,5 +9,7 @@
   "dependencies": {
     "tslib": ">=2.0.0"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "lib/lib.styles.scss"
+  ]
 }
