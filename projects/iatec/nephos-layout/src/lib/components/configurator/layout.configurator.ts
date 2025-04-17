@@ -4,7 +4,7 @@ import { $t } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
 import Nora from '@primeng/themes/nora';
-import { LayoutService } from '../services';
+import { LayoutService } from '../../services';
 
 const presets = {
     Aura,
@@ -33,13 +33,11 @@ declare type SurfacesType = {
 };
 
 @Component({
-    selector: 'app-configurator',
-    standalone: true,
+    selector: 'nph-layout-configurator',
     imports: [],
-    template: `
-    `
+    template: ``
 })
-export class AppConfigurator implements OnInit {
+export class LayoutConfigurator implements OnInit {
     layoutService: LayoutService = inject(LayoutService);
 
     platformId = inject(PLATFORM_ID);

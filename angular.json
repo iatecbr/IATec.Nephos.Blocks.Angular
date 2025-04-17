@@ -30,6 +30,7 @@
               "projects/stage/src/assets"
             ],
             "styles": [
+              "dist/iatec/nephos-layout/lib/lib.styles.scss",
               "projects/stage/src/styles.scss"
             ],
             "scripts": []

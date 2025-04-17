@@ -1,15 +1,15 @@
-import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from '../services';
 import { SidebarComponent } from '../components/sidebar';
 import { TopbarComponent } from '../components/topbar';
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { BreadcrumbComponent } from '../components/breadcrumb';
 import { ProfileSidebarComponent } from '../components/profile-sidebar';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { Toast } from 'primeng/toast';
-import { AppConfigurator } from '../components/app.configurator';
+import { LayoutConfigurator } from '../components/configurator/layout.configurator';
 
 @Component({
     selector: 'nph-layout',
@@ -23,7 +23,8 @@ import { AppConfigurator } from '../components/app.configurator';
         ProfileSidebarComponent,
         ConfirmPopup,
         Toast,
-        AppConfigurator
+        LayoutConfigurator,
+        NgTemplateOutlet
     ]
 })
 export class LayoutComponent implements OnDestroy {
@@ -36,6 +37,10 @@ export class LayoutComponent implements OnDestroy {
     @ViewChild(SidebarComponent) appSidebar!: SidebarComponent;
 
     @ViewChild(TopbarComponent) appTopBar!: TopbarComponent;
+
+    @ContentChild('logo') logo!: TemplateRef<unknown>;
+    @ContentChild('topbar') topbar!: TemplateRef<unknown>;
+    @ContentChild('profileSidebar') profileSidebar!: TemplateRef<unknown>;
 
     constructor(
         public layoutService: LayoutService,
