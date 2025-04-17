@@ -1,13 +1,11 @@
 import { Component, computed } from '@angular/core';
 import { LayoutService } from '../../../services';
 import { Drawer } from 'primeng/drawer';
-import { Badge } from 'primeng/badge';
 
 @Component({
     selector: 'nph-layout-profile-sidebar',
     imports: [
-        Drawer,
-        Badge
+        Drawer
     ],
     templateUrl: './profile-sidebar.component.html'
 })
