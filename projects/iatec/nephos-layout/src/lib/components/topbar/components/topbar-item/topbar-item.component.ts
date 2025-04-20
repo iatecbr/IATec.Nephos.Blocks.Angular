@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { NgClass } from '@angular/common';
     imports: [
         NgClass
     ],
-    templateUrl: './topbar-item.component.html'
+    templateUrl: './topbar-item.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class TopbarItemComponent {
     @Input() styleClass: string = '';

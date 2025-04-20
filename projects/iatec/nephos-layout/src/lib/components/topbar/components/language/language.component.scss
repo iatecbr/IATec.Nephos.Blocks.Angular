@@ -2,17 +2,11 @@
   width: 25px
 }
 
-.p-select {
+p-select {
   background: transparent !important;
   border: none !important;
 
-  //TODO not working
   .p-select-dropdown {
-    background-color: aqua !important;
-    width: 0 !important;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    //width: 15px !important;
   }
 }

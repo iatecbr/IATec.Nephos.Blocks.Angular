@@ -1,4 +1,4 @@
-<nph-layout-topbar-item styleClass="topBar-language">
+<nph-layout-topbar-item styleClass="topbar-language">
     <p-select [options]="languages"
               [(ngModel)]="selectedLanguage"
               (ngModelChange)="onChangeSelectedLanguage($event)"
@@ -6,9 +6,9 @@
               *ngIf="languages && selectedLanguage; else languageSkeleton">
         <ng-template pTemplate="selectedItem"
                      let-selectedOption>
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <img src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{selectedLanguage.country.code | uppercase}}.svg"
-                     class="border-circle flag border-1 border-white shadow-2"
+                     class="rounded-full flag border border-white shadow-md"
                      alt="flag"/>
                 <div>
                     {{ selectedOption.code }}-{{ selectedOption.country.code | uppercase }}
@@ -17,9 +17,9 @@
         </ng-template>
         <ng-template let-language
                      pTemplate="item">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <img src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{language.country.code | uppercase}}.svg"
-                     class="border-circle flag border-1 border-white shadow-2"
+                     class="rounded-full flag border border-white shadow-md"
                      alt="flag"/>
                 <div>
                     {{ language.name }}

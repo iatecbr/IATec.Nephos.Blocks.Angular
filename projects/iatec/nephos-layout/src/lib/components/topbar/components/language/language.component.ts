@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { PrimeTemplate } from 'primeng/api';
 import { TopbarItemComponent } from '../topbar-item/topbar-item.component';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,8 @@ import { LanguageModel } from '../../../../models';
         NgIf,
         Select
     ],
-    styleUrl: './language.component.scss'
+    styleUrl: './language.component.scss',
+    encapsulation: ViewEncapsulation.None,
 })
 export class LanguageComponent {
     @Input() languages: LanguageModel[] = [];
