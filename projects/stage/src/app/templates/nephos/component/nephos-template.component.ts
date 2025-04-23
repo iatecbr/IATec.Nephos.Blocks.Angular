@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LayoutComponent, LayoutService, SidebarComponent} from '@iatec/nephos-layout';
+import { LayoutComponent, LayoutService } from '@iatec/nephos-layout';
 import { LogoComponent } from '../components/logo/logo.component';
 import { TopbarComponent } from '../components/topbar/topbar.component';
 import { ProfileSidebarComponent } from '../components/profile-sidebar/profile-sidebar.component';
@@ -11,8 +11,7 @@ import { ProfileSidebarComponent } from '../components/profile-sidebar/profile-s
         LayoutComponent,
         LogoComponent,
         TopbarComponent,
-        ProfileSidebarComponent,
-        SidebarComponent
+        ProfileSidebarComponent
     ],
     templateUrl: './nephos-template.component.html'
 })

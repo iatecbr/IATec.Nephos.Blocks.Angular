@@ -1,15 +1,12 @@
 import { Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { LayoutService } from '../services';
-import { SidebarComponent } from '../components/sidebar';
-import { TopbarComponent } from '../components/topbar';
+import { LayoutService } from '../../services';
+import { ProfileSidebarComponent, SidebarComponent, TopbarComponent } from '../../components';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { BreadcrumbComponent } from '../components/breadcrumb';
-import { ProfileSidebarComponent } from '../components/profile-sidebar';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { Toast } from 'primeng/toast';
-import { LayoutConfigurator } from '../components/configurator/layout.configurator';
+import { LayoutConfigurator } from '../../components/configurator/layout.configurator';
 
 @Component({
     selector: 'nph-layout',
@@ -18,7 +15,6 @@ import { LayoutConfigurator } from '../components/configurator/layout.configurat
         NgClass,
         SidebarComponent,
         TopbarComponent,
-        BreadcrumbComponent,
         RouterOutlet,
         ProfileSidebarComponent,
         ConfirmPopup,
@@ -56,7 +52,7 @@ export class LayoutComponent implements OnDestroy {
                 });
             }
             if ((this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus()) && !this.menuScrollListener) {
-                this.menuScrollListener = this.renderer.listen(this.appSidebar.menuContainer.nativeElement, 'scroll', (event) => {
+                this.menuScrollListener = this.renderer.listen(this.appSidebar.menuContainer.nativeElement, 'scroll', () => {
                     if (this.layoutService.isDesktop()) {
                         this.hideMenu();
                     }

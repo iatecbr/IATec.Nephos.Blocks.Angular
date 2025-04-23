@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, effect, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ColorScheme, LayoutService } from '../../../services';
 import { BreadcrumbComponent } from '../../breadcrumb';
 import { ButtonDirective } from 'primeng/button';
@@ -18,6 +18,7 @@ import { NgIf } from '@angular/common';
 })
 export class TopbarComponent {
 
+    @Input() showMenuButton = true;
     colorScheme = 'light' as ColorScheme;
 
     @ViewChild('menubutton') menuButton!: ElementRef;
