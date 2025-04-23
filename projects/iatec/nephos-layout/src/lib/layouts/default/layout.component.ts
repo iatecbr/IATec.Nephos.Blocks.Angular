@@ -11,6 +11,7 @@ import { LayoutConfigurator } from '../../components/configurator/layout.configu
 @Component({
     selector: 'nph-layout',
     templateUrl: './layout.component.html',
+    styleUrls: ['./layout.component.scss'],
     imports: [
         NgClass,
         SidebarComponent,

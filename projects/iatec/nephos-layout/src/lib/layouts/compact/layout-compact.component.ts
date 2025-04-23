@@ -18,7 +18,8 @@ import { RouterOutlet } from '@angular/router';
         RouterOutlet,
         TopbarComponent
     ],
-    templateUrl: './layout-compact.component.html'
+    templateUrl: './layout-compact.component.html',
+    styleUrls: ['./layout-compact.component.scss'],
 })
 export class LayoutCompactComponent {
     @ContentChild('topbar') topbar!: TemplateRef<unknown>;

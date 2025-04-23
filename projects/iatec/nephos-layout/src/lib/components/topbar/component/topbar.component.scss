@@ -1,25 +1,23 @@
-div.topbar-end {
-  li {
-    margin-left: 8px !important;
-
-    button {
-      padding-left: 0.3rem !important;
-      padding-right: 0.3rem !important;
-    }
+.layout-topbar {
+  .topbar-menu {
+    gap: 0.2rem !important;
   }
+}
 
+div.topbar-end {
   li.topbar-language {
-    margin-right: 1rem !important;
+    margin-right: 15px !important;
   }
 
   li.topbar-profile {
+    margin-bottom: 2px;
     button {
       width: initial !important;
       height: initial !important;
 
       img {
-        width: 2.5rem !important;
-        height: 2.5rem !important;
+        width: 3.5rem !important;
+        height: 3.5rem !important;
         border-radius: 50%;
         border: 1px solid white;
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

@@ -7,6 +7,10 @@ p-select {
   border: none !important;
 
   .p-select-dropdown {
-    //width: 15px !important;
+    width: 5px !important;
+  }
+
+  .p-select-list{
+    min-width: 9rem!important;
   }
 }
