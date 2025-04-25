@@ -1,4 +1,12 @@
-import { Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import {
+    Component,
+    ContentChild,
+    OnDestroy,
+    Renderer2,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from '../../services';
@@ -22,7 +30,8 @@ import { LayoutConfigurator } from '../../components/configurator/layout.configu
         Toast,
         LayoutConfigurator,
         NgTemplateOutlet
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class LayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;
