@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { PrimeTemplate } from 'primeng/api';
-import { TopbarItemComponent } from '../topbar-item/topbar-item.component';
 import { FormsModule } from '@angular/forms';
 import { NgIf, UpperCasePipe } from '@angular/common';
 import { Skeleton } from 'primeng/skeleton';
@@ -12,7 +11,6 @@ import { LanguageModel } from '../../../../models';
     templateUrl: './language.component.html',
     imports: [
         PrimeTemplate,
-        TopbarItemComponent,
         FormsModule,
         UpperCasePipe,
         Skeleton,

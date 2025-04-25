@@ -1,41 +1,41 @@
 [
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-components.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-components.svg",
     "name": "App 1",
     "url": "https://www.example.com/app1"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-community.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-community.svg",
     "name": "App 2",
     "url": "https://www.example.com/app2"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-productivity.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-productivity.svg",
     "name": "App 3",
     "url": "https://www.example.com/app3"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-accessibility.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-accessibility.svg",
     "name": "App 4",
     "url": "https://www.example.com/app4"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-support.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-support.svg",
     "name": "App 5",
     "url": "https://www.example.com/app5"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-mobile.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-mobile.svg",
     "name": "App 6",
     "url": "https://www.example.com/app6"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-theme.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-theme.svg",
     "name": "App 7",
     "url": "https://www.example.com/app7"
   },
   {
-    "icon": "https://apollo.primeng.org/assets/demo/images/landing/icon-ts.svg",
+    "icon": "https://apollo.primeng.org/demo/images/landing/icon-ts.svg",
     "name": "App 8",
     "url": "https://www.example.com/app8"
   }

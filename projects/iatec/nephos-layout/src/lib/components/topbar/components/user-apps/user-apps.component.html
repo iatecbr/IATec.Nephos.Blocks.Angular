@@ -8,7 +8,7 @@
              width="24"
              height="24"
              viewBox="0 0 24 24"
-             fill="-var()">
+             fill="var(--primary-color)">
             <rect x="2"
                   y="2"
                   width="9"
@@ -39,15 +39,15 @@
         </svg>
     </button>
     <p-popover #appsPanel>
-        <div class="grid w-25rem">
+        <div class="grid grid-cols-3 gap-4 w-lg">
             <div *ngFor="let app of apps"
-                 class="col-4 flex justify-content-center p-1 cursor-pointer">
-                <a class="box p-2 w-full surface-card surface-border border-1 border-round"
+                 class="justify-center p-1 cursor-pointer">
+                <a class="flex border-1 border-gray-200 rounded-lg hover:bg-gray-100 px-2 py-7 justify-center"
                    (click)="navigateTo(app)">
                     <img [src]="app.icon"
-                         alt="components icon"
-                         class="block"/>
-                    <span class="text-900 block font-semibold mb-3 text-lg">{{ app.name }}</span>
+                         alt="&#128512;"
+                         class="rounded-2xl mr-2"/>
+                    <span class="text-900 block font-semibold  text-lg">{{ app.name }}</span>
                 </a>
             </div>
         </div>

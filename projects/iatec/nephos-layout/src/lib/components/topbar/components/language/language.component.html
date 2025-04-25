@@ -1,4 +1,4 @@
-<nph-layout-topbar-item styleClass="topbar-language">
+<li class="topbar-language">
     <p-select [options]="languages"
               [(ngModel)]="selectedLanguage"
               (ngModelChange)="onChangeSelectedLanguage($event)"
@@ -32,4 +32,4 @@
         <p-skeleton width="10rem"
                     height="3rem"></p-skeleton>
     </ng-template>
-</nph-layout-topbar-item>
+</li>
