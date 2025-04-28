@@ -132,6 +132,22 @@ export class LayoutService {
         effect(() => {
             this.isSidebarStateChanged() && this.reset();
         });
+
+        effect(() => {
+            this.toggleDarkMode();
+        });
+
+        this.loadDarkModeUserPreference();
+    }
+
+    private loadDarkModeUserPreference(): void {
+        const mode = localStorage.getItem('nph:darkMode');
+        if (mode) {
+            this.layoutConfig.update((prev) => ({
+                ...prev,
+                darkTheme: mode === 'true',
+            }));
+        }
     }
 
     private handleDarkModeTransition(config: layoutConfig): void {
@@ -162,8 +178,10 @@ export class LayoutService {
         const _config = config || this.layoutConfig();
         if (_config.darkTheme) {
             document.documentElement.classList.add('app-dark');
+            localStorage.setItem('nph:darkMode', 'true');
         } else {
             document.documentElement.classList.remove('app-dark');
+            localStorage.setItem('nph:darkMode', 'false');
         }
     }
 
