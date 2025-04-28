@@ -23,7 +23,8 @@ export class NephosTemplateComponent implements OnInit {
         this._layoutService.layoutConfig.update(
             (config) => ({
                 ...config,
-                menuMode: 'slim'
+                primary: 'indigo',
+                menuMode: 'static',
             }));
 
         this._layoutService.profile.set({name: 'Apostle Paul', urlAvatar: './assets/images/avatar/example.png'});
