@@ -1,4 +1,7 @@
 /* Custom layout */
-@use 'tailwind.css';
 @use '../../../dist/iatec/nephos-layout/lib/layout/layout';
 @use "../../../node_modules/primeicons/primeicons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

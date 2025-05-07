@@ -5,11 +5,12 @@ export default {
   darkMode: ['selector', '[class*="app-dark"]'],
   content: [
     './projects/stage/src/**/*.{js,ts,html}',
-    './projects/stage/src/assets/**/*.json',
-    '@iatec/nephos-layoutb/**/*.{js,ts,html}',
-    '@iatec/nephos-layout/**/*.{js,ts,html}',
+    './dist/iatec/nephos-layout/**/*.{js,ts,html}',
+    '/dist/iatec/nephos-page/**/*.{js,ts,html}'
   ],
-  plugins: [PrimeUI],
+  plugins: [
+    PrimeUI
+  ],
   theme: {
     screens: {
       sm: '576px',
