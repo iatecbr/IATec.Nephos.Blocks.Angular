@@ -18,7 +18,6 @@ import { LanguageModel } from '../../../../models';
         Select
     ],
     styleUrl: './language.component.scss',
-    encapsulation: ViewEncapsulation.None,
 })
 export class LanguageComponent {
     @Input() languages: LanguageModel[] = [];
