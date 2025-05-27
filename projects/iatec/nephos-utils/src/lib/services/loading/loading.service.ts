@@ -1,5 +1,7 @@
-import { inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {inject, Injectable} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+
+type DebugType = 'isBusy' | 'isBusyKeys' | 'isLoading' | 'isLoadingText' | 'urlFilter';
 
 @Injectable({
     providedIn: 'root'
@@ -88,5 +90,43 @@ export class LoadingService {
         }
 
         this.toggleLoading();
+    }
+
+    debug(type?: DebugType | DebugType[] | null): void {
+        const logAll = () => {
+            console.log('isBusy:', this.isBusy);
+            console.log('isBusyKeys:', this._isBusyKeys);
+            console.log('isLoading:', this._isLoading);
+            console.log('isLoadingText:', this._isLoadingText);
+            console.log('urlFilter:', this.urlFilter);
+        };
+
+        if (!type || (Array.isArray(type) && type.length === 0)) {
+            logAll();
+        } else if (typeof type === 'string') {
+            this.debug([type]);
+        } else if (Array.isArray(type)) {
+            type.forEach(t => {
+                switch (t) {
+                    case 'isBusy':
+                        console.log('isBusy:', this.isBusy);
+                        break;
+                    case 'isBusyKeys':
+                        console.log('isBusyKeys:', this._isBusyKeys);
+                        break;
+                    case 'isLoading':
+                        console.log('isLoading:', this._isLoading);
+                        break;
+                    case 'isLoadingText':
+                        console.log('isLoadingText:', this._isLoadingText);
+                        break;
+                    case 'urlFilter':
+                        console.log('urlFilter:', this.urlFilter);
+                        break;
+                    default:
+                        console.warn('Unknown type:', t);
+                }
+            });
+        }
     }
 }
