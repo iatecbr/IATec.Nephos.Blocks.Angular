@@ -38,7 +38,7 @@ export const GeneralTranslationKeys = {
         },
         info: {
             connectingToAccount: 'general.message.info.connecting-to-account',
-            closingAccess: 'general.message.info.closingAccess',
+            closingAccess: 'general.message.info.closing-access',
             nothingHereYet: 'general.message.info.nothing-here-yet'
         },
         success: {
