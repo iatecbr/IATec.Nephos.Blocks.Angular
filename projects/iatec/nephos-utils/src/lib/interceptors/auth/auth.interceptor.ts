@@ -2,7 +2,8 @@ import {HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
 import {Auth} from '@angular/fire/auth';
 import {finalize, from, of, switchMap} from 'rxjs';
-import {LoadingService} from "@iatec/nephos-utils";
+import {LoadingService} from "../../services";
+
 
 let cachedToken: string | null = null;
 let tokenExpiry: number | null = null;
