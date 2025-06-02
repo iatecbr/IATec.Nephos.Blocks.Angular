@@ -38,7 +38,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             let currentParams = req.params;
 
 
-            const lang = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('lang') : null;
+            const lang = typeof localStorage !== 'undefined' ? localStorage.getItem('lang') : null;
 
             if (lang) {
                 currentParams = currentParams.set('lang', lang);
