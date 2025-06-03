@@ -35,23 +35,20 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return getToken$.pipe(
         switchMap(token => {
             let currentHeaders = req.headers;
-            let currentParams = req.params;
-
 
             const lang = typeof localStorage !== 'undefined' ? localStorage.getItem('lang') : null;
 
             if (lang) {
-                currentParams = currentParams.set('lang', lang);
+                currentHeaders = currentHeaders.set('Accept-Language', lang);
             }
 
             if (token) {
                 currentHeaders = currentHeaders.set('Authorization', `Bearer ${token}`);
             }
 
-            if (currentHeaders !== req.headers || currentParams !== req.params) {
+            if (currentHeaders !== req.headers) {
                 const modifiedReq = req.clone({
-                    headers: currentHeaders,
-                    params: currentParams,
+                    headers: currentHeaders
                 });
                 return next(modifiedReq);
             }
