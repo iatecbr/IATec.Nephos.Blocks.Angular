@@ -8,6 +8,17 @@ import {LoadingService} from "../../services";
 let cachedToken: string | null = null;
 let tokenExpiry: number | null = null;
 
+function isStaticAsset(url: string): boolean {
+    const staticExtensions = [
+        '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.gif', '.svg',
+        '.woff', '.woff2', '.ttf', '.eot', '.otf', '.ico', '.webmanifest'
+    ];
+
+    const lowerCaseUrl = url.toLowerCase().split('?')[0];
+
+    return staticExtensions.some(ext => lowerCaseUrl.endsWith(ext));
+}
+
 function isTokenValid(): boolean {
     return !!cachedToken && !!tokenExpiry && Date.now() < tokenExpiry;
 }
@@ -42,7 +53,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
                 currentHeaders = currentHeaders.set('Accept-Language', lang);
             }
 
-            if (token) {
+            const shouldAddAuthHeader = token && !isStaticAsset(req.url);
+
+            if (shouldAddAuthHeader) {
                 currentHeaders = currentHeaders.set('Authorization', `Bearer ${token}`);
             }
 
