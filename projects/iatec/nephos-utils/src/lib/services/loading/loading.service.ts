@@ -62,19 +62,20 @@ export class LoadingService {
     }
 
     set isLoading(status: boolean | Array<string> | string | null) {
-
         if (status === null) {
             return;
         } else if (typeof status === 'boolean' && status) {
             this._isLoading.push(1);
         } else if (typeof status === 'boolean') {
             this._isLoading = [];
+            this._isLoadingText = [];
         } else if (typeof status === 'object' && status.length > 1) {
             status.forEach(() => {
                 this._isLoading.push(1);
             });
         } else if (typeof status === 'object') {
             this._isLoading = [];
+            this._isLoadingText = [];
         } else {
             if (!this._isLoadingText.includes(status)) {
                 this._isLoading.push(1);
@@ -83,7 +84,6 @@ export class LoadingService {
 
             let textLoader = this._document.getElementById('text-loader');
 
-            // check if the element exists
             if (textLoader) {
                 textLoader.innerHTML = status;
             }
