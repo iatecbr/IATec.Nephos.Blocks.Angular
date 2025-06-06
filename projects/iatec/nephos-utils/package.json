@@ -1,6 +1,6 @@
 {
   "name": "@iatec/nephos-utils",
-  "version": "1.2.1-rc.4",
+  "version": "1.2.1-rc.5",
   "peerDependencies": {
     "@angular/common": ">=17.0.0",
     "@angular/core": ">=17.0.0",

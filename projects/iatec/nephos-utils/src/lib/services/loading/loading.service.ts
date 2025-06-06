@@ -48,15 +48,11 @@ export class LoadingService {
         if (this._isLoading.length) {
             this._document.body.classList.remove('splash-screen-hidden');
         } else {
-            console.log('splash-screen-hidden', this._isLoading.length);
             this._document.body.classList.add('splash-screen-hidden');
         }
     }
 
     wasLoaded(source: string): void {
-
-        console.log(Date.now(), 'Was loaded', source);
-
         if (this._isLoadingText.includes(source)) {
             this._isLoading.shift();
             this._isLoadingText = this._isLoadingText.filter(x => x != source);
@@ -66,22 +62,20 @@ export class LoadingService {
     }
 
     set isLoading(status: boolean | Array<string> | string | null) {
-
-        console.log(Date.now(), 'Is loading', status);
-
         if (status === null) {
             return;
         } else if (typeof status === 'boolean' && status) {
             this._isLoading.push(1);
         } else if (typeof status === 'boolean') {
             this._isLoading = [];
-            console.log(Date.now(), 'Is loading false ', this._isLoadingText);
+            this._isLoadingText = [];
         } else if (typeof status === 'object' && status.length > 1) {
             status.forEach(() => {
                 this._isLoading.push(1);
             });
         } else if (typeof status === 'object') {
             this._isLoading = [];
+            this._isLoadingText = [];
         } else {
             if (!this._isLoadingText.includes(status)) {
                 this._isLoading.push(1);
@@ -90,7 +84,6 @@ export class LoadingService {
 
             let textLoader = this._document.getElementById('text-loader');
 
-            // check if the element exists
             if (textLoader) {
                 textLoader.innerHTML = status;
             }
