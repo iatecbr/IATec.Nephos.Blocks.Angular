@@ -48,6 +48,7 @@ export class LoadingService {
         if (this._isLoading.length) {
             this._document.body.classList.remove('splash-screen-hidden');
         } else {
+            console.log('splash-screen-hidden', this._isLoading.length);
             this._document.body.classList.add('splash-screen-hidden');
         }
     }
