@@ -75,6 +75,7 @@ export class LoadingService {
             this._isLoading.push(1);
         } else if (typeof status === 'boolean') {
             this._isLoading = [];
+            console.log(Date.now(), 'Is loading false ', this._isLoadingText);
         } else if (typeof status === 'object' && status.length > 1) {
             status.forEach(() => {
                 this._isLoading.push(1);
