@@ -54,6 +54,9 @@ export class LoadingService {
     }
 
     wasLoaded(source: string): void {
+
+        console.log(Date.now(), 'Was loaded', source);
+
         if (this._isLoadingText.includes(source)) {
             this._isLoading.shift();
             this._isLoadingText = this._isLoadingText.filter(x => x != source);
@@ -63,6 +66,8 @@ export class LoadingService {
     }
 
     set isLoading(status: boolean | Array<string> | string | null) {
+
+        console.log(Date.now(), 'Is loading', status);
 
         if (status === null) {
             return;
