@@ -4,7 +4,7 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
 import { Toast } from 'primeng/toast';
 import { BreadcrumbComponent } from '../../components/breadcrumb';
 import { NgTemplateOutlet } from '@angular/common';
-import { TopbarComponent } from '../../components';
+import {ProfileSidebarComponent, TopbarComponent} from '../../components';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -16,11 +16,13 @@ import { RouterOutlet } from '@angular/router';
         BreadcrumbComponent,
         NgTemplateOutlet,
         RouterOutlet,
-        TopbarComponent
+        TopbarComponent,
+        ProfileSidebarComponent
     ],
     templateUrl: './layout-compact.component.html',
     styleUrls: ['./layout-compact.component.scss'],
 })
 export class LayoutCompactComponent {
     @ContentChild('topbar') topbar!: TemplateRef<unknown>;
+    @ContentChild('profileSidebar') profileSidebar!: TemplateRef<unknown>;
 }
