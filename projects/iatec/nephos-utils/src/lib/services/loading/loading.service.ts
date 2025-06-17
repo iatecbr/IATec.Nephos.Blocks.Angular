@@ -21,7 +21,7 @@ export class LoadingService {
     }
 
     set isBusy(status: boolean) {
-        if (typeof status) {
+        if (status) {
             this._isBusy.push(1);
         } else {
             this._isBusy.shift();
