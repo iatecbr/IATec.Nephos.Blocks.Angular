@@ -94,7 +94,7 @@ export class LoadingService {
 
     debug(type?: DebugType | DebugType[] | null): void {
         const logAll = () => {
-            console.log('isBusy:', this.isBusy);
+            console.log('isBusy:', this._isBusy);
             console.log('isBusyKeys:', this._isBusyKeys);
             console.log('isLoading:', this._isLoading);
             console.log('isLoadingText:', this._isLoadingText);
