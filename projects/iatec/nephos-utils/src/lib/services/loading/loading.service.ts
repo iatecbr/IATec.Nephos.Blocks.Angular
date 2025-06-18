@@ -21,7 +21,7 @@ export class LoadingService {
     }
 
     set isBusy(status: boolean) {
-        if (typeof status) {
+        if (status) {
             this._isBusy.push(1);
         } else {
             this._isBusy.shift();
@@ -42,6 +42,10 @@ export class LoadingService {
             this._isBusy.shift();
             this._isBusyKeys = this._isBusyKeys.filter(x => x != key);
         }
+    }
+
+    checkFor(key: string): boolean {
+        return this._isBusyKeys.includes(key);
     }
 
     private toggleLoading(): void {
@@ -94,7 +98,7 @@ export class LoadingService {
 
     debug(type?: DebugType | DebugType[] | null): void {
         const logAll = () => {
-            console.log('isBusy:', this.isBusy);
+            console.log('isBusy:', this._isBusy);
             console.log('isBusyKeys:', this._isBusyKeys);
             console.log('isLoading:', this._isLoading);
             console.log('isLoadingText:', this._isLoadingText);
