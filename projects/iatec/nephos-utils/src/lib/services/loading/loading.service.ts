@@ -44,6 +44,10 @@ export class LoadingService {
         }
     }
 
+    checkFor(key: string): boolean {
+        return this._isBusyKeys.includes(key);
+    }
+
     private toggleLoading(): void {
         if (this._isLoading.length) {
             this._document.body.classList.remove('splash-screen-hidden');
