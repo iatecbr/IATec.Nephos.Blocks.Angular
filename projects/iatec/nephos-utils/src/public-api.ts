@@ -12,3 +12,4 @@ export * from './lib/helpers/forms';
 export * from './lib/helpers/summary';
 export * from './lib/interceptors';
 export * from './lib/directives';
+export * from './lib/pipes';
