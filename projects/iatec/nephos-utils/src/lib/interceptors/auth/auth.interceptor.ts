@@ -29,7 +29,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     const busyKey = `intercept:${req.url}`;
 
-    loadingService.isBusyFor = busyKey;
+    if (!isStaticAsset(req.url))
+        loadingService.isBusyFor = busyKey;
 
     const getToken$ = auth.currentUser
         ? (isTokenValid()
@@ -69,7 +70,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             return next(req);
         }),
         finalize(() => {
-            loadingService.doneFor = busyKey;
+            if (!isStaticAsset(req.url))
+                loadingService.doneFor = busyKey;
         })
     );
 };
