@@ -29,7 +29,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     const busyKey = `intercept:${req.url}`;
 
-    loadingService.isBusyFor = busyKey;
+    loadingService.startingFor = busyKey;
 
     const getToken$ = auth.currentUser
         ? (isTokenValid()

@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 
 type DebugType = 'isBusy' | 'isBusyKeys' | 'isLoading' | 'isLoadingText' | 'urlFilter';
@@ -16,6 +16,8 @@ export class LoadingService {
 
     public urlFilter: Array<string> = [];
 
+    private _busyKeysSignal = signal<Set<string>>(new Set());
+
     get isBusy(): boolean {
         return !!this._isBusy.length;
     }
@@ -28,10 +30,12 @@ export class LoadingService {
         }
     }
 
-    set isBusyFor(key: string) {
+    set startingFor(key: string) {
         if (!this._isBusyKeys.includes(key)) {
             this._isBusy.push(1);
             this._isBusyKeys.push(key);
+
+            this._busyKeysSignal.set(new Set(this._isBusyKeys));
         }
     }
 
@@ -41,7 +45,13 @@ export class LoadingService {
         if (keyExists) {
             this._isBusy.shift();
             this._isBusyKeys = this._isBusyKeys.filter(x => x != key);
+
+            this._busyKeysSignal.set(new Set(this._isBusyKeys));
         }
+    }
+
+    isBusyFor(key: string): Signal<boolean> {
+        return computed(() => this._busyKeysSignal().has(key));
     }
 
     checkFor(key: string): boolean {
