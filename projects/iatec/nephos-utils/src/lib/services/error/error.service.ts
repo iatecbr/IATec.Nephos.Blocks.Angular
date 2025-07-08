@@ -3,7 +3,7 @@ import {ToastMessageOptions} from "primeng/api/toastmessage";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
-import {GeneralTranslationKeys, MessageSeverities, WaringMessages} from "../../constants";
+import {ErrorMessages, GeneralTranslationKeys, MessageSeverities, WaringMessages} from "../../constants";
 import {TranslocoService} from "@jsverse/transloco";
 
 @Injectable({
@@ -83,8 +83,8 @@ export class ErrorService {
             }
 
             // Build the toast message for other error statuses
-            let summary = '';
-            let detail = '';
+            let summary: string;
+            let detail: string;
 
             // Correctly initialize severity as a string
             let severity: string;
@@ -96,9 +96,9 @@ export class ErrorService {
                     detail = this.extractErrorMessage(error);
                     break;
                 case 404: // Not Found
-                    severity = MessageSeverities.warn;
-                    summary = this._translateService.translate('Resource Not Found');
-                    detail = this._translateService.translate('The requested resource could not be found on the server.');
+                    severity = MessageSeverities.error;
+                    summary = this._translateService.translate(WaringMessages.notPossibleToProceed);
+                    detail = this._translateService.translate(ErrorMessages.notFound);
                     break;
                 case 500: // Internal Server Error
                 default: // Other 4xx or 5xx errors
@@ -143,20 +143,24 @@ export class ErrorService {
      */
     private extractErrorMessage(error: HttpErrorResponse): string {
         if (error.error) {
-            // E.g., { "message": "Error text" }
+            // Check for error.error.messages (array)
+            if (Array.isArray(error.error.messages) && error.error.messages.length > 0) {
+                return error.error.messages.join('; ');
+            }
+            // Check for error.error.message (string)
             if (typeof error.error.message === 'string') {
                 return error.error.message;
             }
-            // E.g., { "errors": ["First error"] }
+            // Check for error.error.errors (array)
             if (Array.isArray(error.error.errors) && typeof error.error.errors[0] === 'string') {
-                return error.error.errors[0];
+                return error.error.errors.join('; ');
             }
-            // E.g., "The response body itself is an error string"
+            // If error.error itself is a string
             if (typeof error.error === 'string') {
                 return error.error;
             }
         }
-        // Fallback to the default HTTP client status message
+        // Fallback
         return error.message || this._translateService.translate(GeneralTranslationKeys.message.error.contactSupportTeam);
     }
 }

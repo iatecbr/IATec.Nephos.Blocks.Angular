@@ -54,6 +54,10 @@ export class LoadingService {
         return computed(() => this._busyKeysSignal().has(key));
     }
 
+    isBusyForValue(key: string): boolean {
+        return this._busyKeysSignal().has(key);
+    }
+
     checkFor(key: string): boolean {
         return this._isBusyKeys.includes(key);
     }
