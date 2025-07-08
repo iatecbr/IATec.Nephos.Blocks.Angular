@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, Signal, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 
 type DebugType = 'isBusy' | 'isBusyKeys' | 'isLoading' | 'isLoadingText' | 'urlFilter';
@@ -50,8 +50,8 @@ export class LoadingService {
         }
     }
 
-    isBusyFor(key: string): Signal<boolean> {
-        return computed(() => this._busyKeysSignal().has(key));
+    isBusyFor(key: string): boolean {
+        return this._busyKeysSignal().has(key);
     }
 
     checkFor(key: string): boolean {
