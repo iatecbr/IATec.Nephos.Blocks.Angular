@@ -17,8 +17,7 @@ import { LanguageModel } from '../../../../models';
         NgIf,
         Select
     ],
-    styleUrl: './language.component.scss',
-    encapsulation: ViewEncapsulation.None,
+    styleUrl: './language.component.scss'
 })
 export class LanguageComponent {
     @Input() languages: LanguageModel[] = [];
