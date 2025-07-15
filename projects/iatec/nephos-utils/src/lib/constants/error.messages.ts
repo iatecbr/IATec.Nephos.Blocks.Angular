@@ -3,7 +3,7 @@ export const ErrorMessages = {
     networkError: 'general.error.network',
     unauthorized: 'general.error.unauthorized',
     forbidden: 'general.error.forbidden',
-    notFound: 'general.error.notFound',
-    internalServerError: 'general.error.internalServerError',
-    validationError: 'general.error.validationError',
+    notFound: 'general.error.not-found',
+    internalServerError: 'general.error.internal-server-error',
+    validationError: 'general.error.validation-error',
 };
