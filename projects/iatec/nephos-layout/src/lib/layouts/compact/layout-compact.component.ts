@@ -1,19 +1,18 @@
-import { Component, ContentChild, TemplateRef } from '@angular/core';
-import { LayoutConfigurator } from '../../components/configurator/layout.configurator';
-import { ConfirmPopup } from 'primeng/confirmpopup';
-import { Toast } from 'primeng/toast';
-import { BreadcrumbComponent } from '../../components/breadcrumb';
-import { NgTemplateOutlet } from '@angular/common';
+import {Component, ContentChild, TemplateRef} from '@angular/core';
+import {LayoutConfigurator} from '../../components/configurator/layout.configurator';
+import {Toast} from 'primeng/toast';
+import {NgTemplateOutlet} from '@angular/common';
 import {ProfileSidebarComponent, TopbarComponent} from '../../components';
-import { RouterOutlet } from '@angular/router';
+import {RouterOutlet} from '@angular/router';
+import {ConfirmDialog} from "primeng/confirmdialog";
+
 
 @Component({
     selector: 'nph-layout-compact',
     imports: [
         LayoutConfigurator,
-        ConfirmPopup,
         Toast,
-        BreadcrumbComponent,
+        ConfirmDialog,
         NgTemplateOutlet,
         RouterOutlet,
         TopbarComponent,

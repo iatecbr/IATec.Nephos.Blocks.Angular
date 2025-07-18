@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NephosTemplateComponent } from './nephos-template.component';
+import {NephosTemplateComponent} from './nephos-template.component';
 
 describe('NephosTemplateComponent', () => {
     let component: NephosTemplateComponent;

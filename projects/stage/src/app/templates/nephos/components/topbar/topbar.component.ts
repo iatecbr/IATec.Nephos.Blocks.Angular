@@ -1,7 +1,7 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
-import { LanguageModel, MenuService, LanguageComponent,  UserAppModel, UserAppsComponent } from '@iatec/nephos-layout';
-import { HttpAppService, HttpLanguageService, HttpMenuService } from '../../../../services';
-import { forkJoin } from 'rxjs';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {LanguageComponent, LanguageModel, MenuService, UserAppModel, UserAppsComponent} from '@iatec/nephos-layout';
+import {HttpAppService, HttpLanguageService, HttpMenuService} from '../../../../services';
+import {forkJoin} from 'rxjs';
 
 @Component({
     selector: 'app-nephos-template-topbar',

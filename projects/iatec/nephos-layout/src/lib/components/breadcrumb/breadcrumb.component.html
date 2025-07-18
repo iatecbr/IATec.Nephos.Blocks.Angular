@@ -1,9 +1,9 @@
 <nav class="layout-breadcrumb">
     <ol>
-        <ng-template ngFor
+        <ng-template [ngForOf]="breadcrumbs$ | async"
                      let-item
                      let-last="last"
-                     [ngForOf]="breadcrumbs$ | async">
+                     ngFor>
             <li>{{ item.label | transloco }}</li>
             <li *ngIf="!last"
                 class="layout-breadcrumb-chevron"> /

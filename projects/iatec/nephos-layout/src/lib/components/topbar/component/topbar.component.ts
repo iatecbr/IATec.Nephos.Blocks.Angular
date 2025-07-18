@@ -1,8 +1,8 @@
-import { Component, effect, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ColorScheme, LayoutService } from '../../../services';
-import { BreadcrumbComponent } from '../../breadcrumb';
-import { ButtonDirective } from 'primeng/button';
-import { NgIf } from '@angular/common';
+import {Component, effect, ElementRef, Input, ViewChild} from '@angular/core';
+import {ColorScheme, LayoutService} from '../../../services';
+import {BreadcrumbComponent} from '../../breadcrumb';
+import {ButtonDirective} from 'primeng/button';
+import {NgIf} from '@angular/common';
 
 
 @Component({
@@ -13,8 +13,7 @@ import { NgIf } from '@angular/common';
         ButtonDirective,
         NgIf
     ],
-    styleUrls: ['./topbar.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
 

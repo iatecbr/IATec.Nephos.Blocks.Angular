@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { NephosTemplateComponent } from './templates/nephos/component/nephos-template.component';
+import {Routes} from '@angular/router';
+import {DashboardComponent} from './modules/dashboard/dashboard.component';
+import {NephosTemplateComponent} from './templates/nephos/component/nephos-template.component';
 
 export const routes: Routes = [
     {

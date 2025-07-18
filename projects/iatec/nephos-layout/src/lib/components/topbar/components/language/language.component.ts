@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { PrimeTemplate } from 'primeng/api';
-import { FormsModule } from '@angular/forms';
-import { NgIf, UpperCasePipe } from '@angular/common';
-import { Skeleton } from 'primeng/skeleton';
-import { Select } from 'primeng/select';
-import { LanguageModel } from '../../../../models';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {PrimeTemplate} from 'primeng/api';
+import {FormsModule} from '@angular/forms';
+import {NgIf, UpperCasePipe} from '@angular/common';
+import {Skeleton} from 'primeng/skeleton';
+import {Select} from 'primeng/select';
+import {LanguageModel} from '../../../../models';
 
 @Component({
     selector: 'nph-layout-topbar-language',

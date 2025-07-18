@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { HttpMenuService } from './http-menu.service';
+import {HttpMenuService} from './http-menu.service';
 
 describe('MenuService', () => {
     let service: HttpMenuService;

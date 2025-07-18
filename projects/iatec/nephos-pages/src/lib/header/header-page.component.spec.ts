@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HeaderPageComponent } from './header-page.component';
+import {HeaderPageComponent} from './header-page.component';
 
 describe('HeaderPageComponent', () => {
     let component: HeaderPageComponent;

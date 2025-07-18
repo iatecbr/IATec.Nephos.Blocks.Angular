@@ -1,10 +1,10 @@
 <div class="layout-topbar">
     <div class="topbar-start">
         <button #menubutton
-                type="button"
-                class="topbar-menubutton p-link p-trigger"
                 (click)="onMenuButtonClick()"
-                *ngIf="showMenuButton">
+                *ngIf="showMenuButton"
+                class="topbar-menubutton p-link p-trigger"
+                type="button">
             <i class="pi pi-bars"></i>
         </button>
 
@@ -15,15 +15,15 @@
         <ul class="topbar-menu">
             <ng-content></ng-content>
             <li>
-                <button pButton
-                        type="button"
-                        size="small"
+                <button (click)="onThemeChange()"
                         class="p-button-text p-button-secondary flex-shrink-0"
-                        (click)="onThemeChange()">
-                    <svg width="24"
+                        pButton
+                        size="small"
+                        type="button">
+                    <svg fill="none"
                          height="24"
                          viewBox="0 0 24 24"
-                         fill="none"
+                         width="24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M19.0647 5.43757C19.3421 5.43757 19.567 5.21271 19.567 4.93534C19.567 4.65796 19.3421 4.43311 19.0647 4.43311C18.7874 4.43311 18.5625 4.65796 18.5625 4.93534C18.5625 5.21271 18.7874 5.43757 19.0647 5.43757Z"
@@ -41,9 +41,9 @@
                 </button>
             </li>
             <li class="topbar-profile">
-                <button type="button"
+                <button (click)="onProfileButtonClick()"
                         class="p-link"
-                        (click)="onProfileButtonClick()">
+                        type="button">
                     <img *ngIf="urlAvatar; else lettersTemplate"
                          [src]="urlAvatar"
                          alt="Profile"/>

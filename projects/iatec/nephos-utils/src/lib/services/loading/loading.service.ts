@@ -1,4 +1,4 @@
-import {inject, Injectable, signal, DOCUMENT} from '@angular/core';
+import {DOCUMENT, inject, Injectable, signal} from '@angular/core';
 
 
 type DebugType = 'isBusy' | 'isBusyKeys' | 'isLoading' | 'isLoadingText' | 'urlFilter';
@@ -8,15 +8,13 @@ type DebugType = 'isBusy' | 'isBusyKeys' | 'isLoading' | 'isLoadingText' | 'urlF
 })
 export class LoadingService {
 
-    private _document = inject(DOCUMENT);
-    private _isBusy: Array<number> = [];
-    private _isBusyKeys: Array<string> = [];
-    private _isLoading: Array<number> = [];
-    private _isLoadingText: Array<string> = [];
-
     public urlFilter: Array<string> = [];
-
+    private _document = inject(DOCUMENT);
+    private _isBusyKeys: Array<string> = [];
+    private _isLoadingText: Array<string> = [];
     private _busyKeysSignal = signal<Set<string>>(new Set());
+
+    private _isBusy: Array<number> = [];
 
     get isBusy(): boolean {
         return !!this._isBusy.length;
@@ -28,6 +26,39 @@ export class LoadingService {
         } else {
             this._isBusy.shift();
         }
+    }
+
+    private _isLoading: Array<number> = [];
+
+    set isLoading(status: boolean | Array<string> | string | null) {
+        if (status === null) {
+            return;
+        } else if (typeof status === 'boolean' && status) {
+            this._isLoading.push(1);
+        } else if (typeof status === 'boolean') {
+            this._isLoading = [];
+            this._isLoadingText = [];
+        } else if (typeof status === 'object' && status.length > 1) {
+            status.forEach(() => {
+                this._isLoading.push(1);
+            });
+        } else if (typeof status === 'object') {
+            this._isLoading = [];
+            this._isLoadingText = [];
+        } else {
+            if (!this._isLoadingText.includes(status)) {
+                this._isLoading.push(1);
+                this._isLoadingText.push(status);
+            }
+
+            let textLoader = this._document.getElementById('text-loader');
+
+            if (textLoader) {
+                textLoader.innerHTML = status;
+            }
+        }
+
+        this.toggleLoading();
     }
 
     set startingFor(key: string) {
@@ -58,49 +89,10 @@ export class LoadingService {
         return this._isBusyKeys.includes(key);
     }
 
-    private toggleLoading(): void {
-        if (this._isLoading.length) {
-            this._document.body.classList.remove('splash-screen-hidden');
-        } else {
-            this._document.body.classList.add('splash-screen-hidden');
-        }
-    }
-
     wasLoaded(source: string): void {
         if (this._isLoadingText.includes(source)) {
             this._isLoading.shift();
             this._isLoadingText = this._isLoadingText.filter(x => x != source);
-        }
-
-        this.toggleLoading();
-    }
-
-    set isLoading(status: boolean | Array<string> | string | null) {
-        if (status === null) {
-            return;
-        } else if (typeof status === 'boolean' && status) {
-            this._isLoading.push(1);
-        } else if (typeof status === 'boolean') {
-            this._isLoading = [];
-            this._isLoadingText = [];
-        } else if (typeof status === 'object' && status.length > 1) {
-            status.forEach(() => {
-                this._isLoading.push(1);
-            });
-        } else if (typeof status === 'object') {
-            this._isLoading = [];
-            this._isLoadingText = [];
-        } else {
-            if (!this._isLoadingText.includes(status)) {
-                this._isLoading.push(1);
-                this._isLoadingText.push(status);
-            }
-
-            let textLoader = this._document.getElementById('text-loader');
-
-            if (textLoader) {
-                textLoader.innerHTML = status;
-            }
         }
 
         this.toggleLoading();
@@ -141,6 +133,14 @@ export class LoadingService {
                         console.warn('Unknown type:', t);
                 }
             });
+        }
+    }
+
+    private toggleLoading(): void {
+        if (this._isLoading.length) {
+            this._document.body.classList.remove('splash-screen-hidden');
+        } else {
+            this._document.body.classList.add('splash-screen-hidden');
         }
     }
 }

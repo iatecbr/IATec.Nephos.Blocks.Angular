@@ -1,10 +1,10 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, computed, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { $t } from '@primeng/themes';
+import {isPlatformBrowser} from '@angular/common';
+import {Component, computed, inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {$t} from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
 import Nora from '@primeng/themes/nora';
-import { LayoutService } from '../../services';
+import {LayoutService} from '../../services';
 
 const presets = {
     Aura,
@@ -41,13 +41,6 @@ export class LayoutConfigurator implements OnInit {
     layoutService: LayoutService = inject(LayoutService);
 
     platformId = inject(PLATFORM_ID);
-
-    ngOnInit() {
-        if (isPlatformBrowser(this.platformId)) {
-            this.onPresetChange(this.layoutService.layoutConfig().preset);
-        }
-    }
-
     surfaces: SurfacesType[] = [
         {
             name: 'slate',
@@ -186,13 +179,10 @@ export class LayoutConfigurator implements OnInit {
             }
         }
     ];
-
     selectedPrimaryColor = computed(() => {
         return this.layoutService.layoutConfig().primary;
     });
-
     selectedSurfaceColor = computed(() => this.layoutService.layoutConfig().surface);
-
     primaryColors = computed<SurfacesType[]>(() => {
         const presetPalette = presets[this.layoutService.layoutConfig().preset as KeyOfType<typeof presets>].primitive;
         const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
@@ -207,6 +197,12 @@ export class LayoutConfigurator implements OnInit {
 
         return palettes;
     });
+
+    ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.onPresetChange(this.layoutService.layoutConfig().preset);
+        }
+    }
 
     getPresetExt() {
 

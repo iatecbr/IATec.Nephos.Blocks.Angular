@@ -1,7 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutService } from '../../services';
-import { MenuComponent } from '../menu';
-import { RouterLink } from '@angular/router';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {LayoutService} from '../../services';
+import {MenuComponent} from '../menu';
+import {RouterLink} from '@angular/router';
 
 @Component({
     selector: 'nph-layout-sidebar',

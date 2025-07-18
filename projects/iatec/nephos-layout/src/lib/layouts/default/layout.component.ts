@@ -1,20 +1,12 @@
-import {
-    Component,
-    ContentChild,
-    OnDestroy,
-    Renderer2,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
-import { LayoutService } from '../../services';
-import { ProfileSidebarComponent, SidebarComponent, TopbarComponent } from '../../components';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ConfirmPopup } from 'primeng/confirmpopup';
-import { Toast } from 'primeng/toast';
-import { LayoutConfigurator } from '../../components/configurator/layout.configurator';
+import {Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {filter, Subscription} from 'rxjs';
+import {LayoutService} from '../../services';
+import {ProfileSidebarComponent, SidebarComponent, TopbarComponent} from '../../components';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
+import {Toast} from 'primeng/toast';
+import {LayoutConfigurator} from '../../components/configurator/layout.configurator';
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
     selector: 'nph-layout',
@@ -26,8 +18,8 @@ import { LayoutConfigurator } from '../../components/configurator/layout.configu
         TopbarComponent,
         RouterOutlet,
         ProfileSidebarComponent,
-        ConfirmPopup,
         Toast,
+        ConfirmDialog,
         LayoutConfigurator,
         NgTemplateOutlet
     ],
@@ -76,6 +68,34 @@ export class LayoutComponent implements OnDestroy {
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
             this.hideMenu();
         });
+    }
+
+    get containerClass() {
+        const layoutConfig = this.layoutService.layoutConfig();
+        const layoutState = this.layoutService.layoutState();
+
+        return {
+            'layout-light': !layoutConfig.darkTheme,
+            'layout-dark': layoutConfig.darkTheme,
+            'layout-colorscheme-menu': layoutConfig.menuTheme === 'colorScheme',
+            'layout-primarycolor-menu':
+                layoutConfig.menuTheme === 'primaryColor',
+            'layout-transparent-menu': layoutConfig.menuTheme === 'transparent',
+            'layout-overlay': layoutConfig.menuMode === 'overlay',
+            'layout-static': layoutConfig.menuMode === 'static',
+            'layout-slim': layoutConfig.menuMode === 'slim',
+            'layout-slim-plus': layoutConfig.menuMode === 'slim-plus',
+            'layout-horizontal': layoutConfig.menuMode === 'horizontal',
+            'layout-reveal': layoutConfig.menuMode === 'reveal',
+            'layout-drawer': layoutConfig.menuMode === 'drawer',
+            'layout-static-inactive':
+                layoutState.staticMenuDesktopInactive &&
+                layoutConfig.menuMode === 'static',
+            'layout-overlay-active': layoutState.overlayMenuActive,
+            'layout-mobile-active': layoutState.staticMenuMobileActive,
+            'layout-sidebar-active': layoutState.sidebarActive,
+            'layout-sidebar-anchored': layoutState.anchored,
+        };
     }
 
     isOutsideClicked(event: any) {
@@ -128,34 +148,6 @@ export class LayoutComponent implements OnDestroy {
                 ' ',
             );
         }
-    }
-
-    get containerClass() {
-        const layoutConfig = this.layoutService.layoutConfig();
-        const layoutState = this.layoutService.layoutState();
-
-        return {
-            'layout-light': !layoutConfig.darkTheme,
-            'layout-dark': layoutConfig.darkTheme,
-            'layout-colorscheme-menu': layoutConfig.menuTheme === 'colorScheme',
-            'layout-primarycolor-menu':
-                layoutConfig.menuTheme === 'primaryColor',
-            'layout-transparent-menu': layoutConfig.menuTheme === 'transparent',
-            'layout-overlay': layoutConfig.menuMode === 'overlay',
-            'layout-static': layoutConfig.menuMode === 'static',
-            'layout-slim': layoutConfig.menuMode === 'slim',
-            'layout-slim-plus': layoutConfig.menuMode === 'slim-plus',
-            'layout-horizontal': layoutConfig.menuMode === 'horizontal',
-            'layout-reveal': layoutConfig.menuMode === 'reveal',
-            'layout-drawer': layoutConfig.menuMode === 'drawer',
-            'layout-static-inactive':
-                layoutState.staticMenuDesktopInactive &&
-                layoutConfig.menuMode === 'static',
-            'layout-overlay-active': layoutState.overlayMenuActive,
-            'layout-mobile-active': layoutState.staticMenuMobileActive,
-            'layout-sidebar-active': layoutState.sidebarActive,
-            'layout-sidebar-anchored': layoutState.anchored,
-        };
     }
 
     ngOnDestroy() {

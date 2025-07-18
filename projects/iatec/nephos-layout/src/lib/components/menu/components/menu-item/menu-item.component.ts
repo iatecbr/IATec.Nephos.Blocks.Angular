@@ -9,16 +9,16 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { LayoutService } from '../../../../services';
-import { DomHandler } from 'primeng/dom';
-import { TranslocoPipe } from '@jsverse/transloco';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { Tooltip } from 'primeng/tooltip';
-import { Ripple } from 'primeng/ripple';
+import {NavigationEnd, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
+import {Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';
+import {LayoutService} from '../../../../services';
+import {DomHandler} from 'primeng/dom';
+import {TranslocoPipe} from '@jsverse/transloco';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {Tooltip} from 'primeng/tooltip';
+import {Ripple} from 'primeng/ripple';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -74,35 +74,13 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
     @Input() parentKey!: string;
 
     @ViewChild('submenu') submenu!: ElementRef;
-
-    @HostBinding('class.active-menuitem')
-    get activeClass() {
-        return this.active;
-    }
-
     active = false;
-
     menuSourceSubscription: Subscription;
-
     menuResetSubscription: Subscription;
-
     key: string = '';
-
-    get submenuAnimation() {
-        if (this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
-            return this.active ? 'visible' : 'hidden';
-        } else return this.root ? 'expanded' : this.active ? 'expanded' : 'collapsed';
-    }
-
     isSlim = computed(() => this.layoutService.isSlim());
-
     isSlimPlus = computed(() => this.layoutService.isSlimPlus());
-
     isHorizontal = computed(() => this.layoutService.isHorizontal());
-
-    get isDesktop() {
-        return this.layoutService.isDesktop();
-    }
 
     constructor(
         public layoutService: LayoutService,
@@ -133,6 +111,21 @@ export class MenuItemComponent implements OnInit, AfterViewChecked, OnDestroy {
                 }
             }
         });
+    }
+
+    @HostBinding('class.active-menuitem')
+    get activeClass() {
+        return this.active;
+    }
+
+    get submenuAnimation() {
+        if (this.layoutService.isDesktop() && (this.layoutService.isHorizontal() || this.layoutService.isSlim() || this.layoutService.isSlimPlus())) {
+            return this.active ? 'visible' : 'hidden';
+        } else return this.root ? 'expanded' : this.active ? 'expanded' : 'collapsed';
+    }
+
+    get isDesktop() {
+        return this.layoutService.isDesktop();
     }
 
     ngOnInit() {

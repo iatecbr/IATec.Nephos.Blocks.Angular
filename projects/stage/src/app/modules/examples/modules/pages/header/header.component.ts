@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { HeaderPageComponent } from '@iatec/nephos-pages';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'app-header',

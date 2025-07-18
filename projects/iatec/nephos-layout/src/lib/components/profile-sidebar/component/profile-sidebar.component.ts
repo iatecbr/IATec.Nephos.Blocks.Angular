@@ -1,6 +1,6 @@
-import { Component, computed } from '@angular/core';
-import { LayoutService } from '../../../services';
-import { Drawer } from 'primeng/drawer';
+import {Component, computed} from '@angular/core';
+import {LayoutService} from '../../../services';
+import {Drawer} from 'primeng/drawer';
 
 @Component({
     selector: 'nph-layout-profile-sidebar',
@@ -11,12 +11,12 @@ import { Drawer } from 'primeng/drawer';
 })
 export class ProfileSidebarComponent {
 
-    constructor(public layoutService: LayoutService) {
-    }
-
     visible = computed(
         () => this.layoutService.layoutState().profileSidebarVisible,
     );
+
+    constructor(public layoutService: LayoutService) {
+    }
 
     onDrawerHide() {
         this.layoutService.layoutState.update((state) => ({

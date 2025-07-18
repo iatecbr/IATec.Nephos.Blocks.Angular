@@ -4,30 +4,35 @@
         {{ item.label | transloco }}
     </div>
     <a
-        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
-        [attr.href]="item.url"
         (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
-        [ngClass]="item.class"
+        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
+        [attr.href]="item.url"
         [attr.target]="item.target"
-        tabindex="0"
-        pRipple
+        [ngClass]="item.class"
         [pTooltip]="item.label | transloco"
         [tooltipDisabled]="!(isSlim() && root && !active)"
+        pRipple
+        tabindex="0"
     >
         <i [ngClass]="item.icon"
            class="layout-menuitem-icon"></i>
         <span class="layout-menuitem-text">{{ item.label | transloco }}</span>
-        <i class="pi pi-fw pi-angle-down layout-submenu-toggler"
-           *ngIf="item.items"></i>
+        <i *ngIf="item.items"
+           class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
     </a>
     <a
-        *ngIf="item.routerLink && !item.items && item.visible !== false"
         (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
+        *ngIf="item.routerLink && !item.items && item.visible !== false"
+        [attr.target]="item.target"
+        [fragment]="item.fragment"
         [ngClass]="item.class"
-        [routerLink]="item.routerLink"
-        routerLinkActive="active-route"
+        [pTooltip]="item.label | transloco"
+        [preserveFragment]="item.preserveFragment"
+        [queryParamsHandling]="item.queryParamsHandling"
+        [queryParams]="item.queryParams"
+        [replaceUrl]="item.replaceUrl"
         [routerLinkActiveOptions]="
                     item.routerLinkActiveOptions || {
                         paths: 'exact',
@@ -36,39 +41,34 @@
                         fragment: 'ignored'
                     }
                 "
-        [fragment]="item.fragment"
-        [queryParamsHandling]="item.queryParamsHandling"
-        [preserveFragment]="item.preserveFragment"
+        [routerLink]="item.routerLink"
         [skipLocationChange]="item.skipLocationChange"
-        [replaceUrl]="item.replaceUrl"
         [state]="item.state"
-        [queryParams]="item.queryParams"
-        [attr.target]="item.target"
-        tabindex="0"
-        pRipple
-        [pTooltip]="item.label | transloco"
         [tooltipDisabled]="!(isSlim() && root)"
+        pRipple
+        routerLinkActive="active-route"
+        tabindex="0"
     >
         <i [ngClass]="item.icon"
            class="layout-menuitem-icon"></i>
         <span class="layout-menuitem-text">{{ item.label| transloco }}</span>
-        <i class="pi pi-fw pi-angle-down layout-submenu-toggler"
-           *ngIf="item.items"></i>
+        <i *ngIf="item.items"
+           class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
     </a>
 
     <ul #submenu
+        (@children.done)="onSubmenuAnimated($event)"
         *ngIf="item.items && item.visible !== false"
-        [@children]="submenuAnimation"
-        (@children.done)="onSubmenuAnimated($event)">
-        <ng-template ngFor
+        [@children]="submenuAnimation">
+        <ng-template [ngForOf]="item.items"
                      let-child
                      let-i="index"
-                     [ngForOf]="item.items">
-            <li nph-layout-menu-item
-                [item]="child"
+                     ngFor>
+            <li [class]="child['badgeClass']"
                 [index]="i"
+                [item]="child"
                 [parentKey]="key"
-                [class]="child['badgeClass']"></li>
+                nph-layout-menu-item></li>
         </ng-template>
     </ul>
 </ng-container>

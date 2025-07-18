@@ -1,4 +1,4 @@
-import { PagedResultModel } from './paged.result.model';
+import {PagedResultModel} from './paged.result.model';
 
 export class PageModel<H, I> {
     filter: H = {} as H;

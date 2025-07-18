@@ -1,4 +1,4 @@
-import { FormGroupChanges } from './index';
+import {FormGroupChanges} from './index';
 import {
     ErrorMessages,
     GeneralTranslationKeys,
@@ -7,11 +7,11 @@ import {
     SuccessMessages,
     WaringMessages
 } from '../../constants';
-import { inject } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { TranslocoService } from '@jsverse/transloco';
-import { Observable } from 'rxjs';
-import { LoadingService } from '../../services';
+import {inject} from '@angular/core';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {TranslocoService} from '@jsverse/transloco';
+import {Observable} from 'rxjs';
+import {LoadingService} from '../../services';
 
 // noinspection JSUnusedGlobalSymbols
 export abstract class FormSidebarHelper extends FormGroupChanges {

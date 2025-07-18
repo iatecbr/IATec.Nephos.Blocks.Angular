@@ -1,10 +1,10 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { inject } from '@angular/core';
-import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { Router } from '@angular/router';
-import { IDBPDatabase, openDB } from 'idb';
-import { FormSettingsModel } from './form-settings.model';
-import { FormModeType } from './form-mode.type';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {inject} from '@angular/core';
+import {debounceTime, Subject, takeUntil} from 'rxjs';
+import {Router} from '@angular/router';
+import {IDBPDatabase, openDB} from 'idb';
+import {FormSettingsModel} from './form-settings.model';
+import {FormModeType} from './form-mode.type';
 
 
 export abstract class FormGroupChanges {
@@ -22,15 +22,6 @@ export abstract class FormGroupChanges {
     private _formKey: string | undefined;
     private _formVersion: string | undefined;
     private _dbVersion: number = 1;
-
-    private async _initDB(): Promise<void> {
-        this._db = await openDB('IATecServicesDB', this._dbVersion, {
-            upgrade(db) {
-                db.createObjectStore('formsCache', {keyPath: 'key'});
-                db.createObjectStore('formsHistory', {keyPath: 'key'});
-            }
-        });
-    }
 
     private get _getCurrentRouteWithoutQueryString(): string {
         return this.router.url.split('?')[0];
@@ -69,6 +60,37 @@ export abstract class FormGroupChanges {
             await this._loadFormCache();
             await this._initWatchForm();
         }
+    }
+
+    protected async clearFormCache(): Promise<void> {
+        if (this._db && this._formKey) {
+            const txCacheDelete = this._db.transaction('formsCache', 'readwrite');
+            await txCacheDelete.objectStore('formsCache').delete(this._formKey);
+            await txCacheDelete.done;
+
+            const txHistoryDelete = this._db.transaction('formsHistory', 'readwrite');
+            await txHistoryDelete.objectStore('formsHistory').delete(this._formKey);
+            await txHistoryDelete.done
+
+            this.enableFormReset = false;
+        }
+    }
+
+    // noinspection JSUnusedGlobalSymbols
+    protected stopWatchForm(): void {
+        this._workChanges().then(() => {
+            this.formSubject$.next();
+            this.formSubject$.complete();
+        });
+    }
+
+    private async _initDB(): Promise<void> {
+        this._db = await openDB('IATecServicesDB', this._dbVersion, {
+            upgrade(db) {
+                db.createObjectStore('formsCache', {keyPath: 'key'});
+                db.createObjectStore('formsHistory', {keyPath: 'key'});
+            }
+        });
     }
 
     private async _workChanges(): Promise<void> {
@@ -114,27 +136,5 @@ export abstract class FormGroupChanges {
                 this.form.markAsDirty();
             }
         }
-    }
-
-    protected async clearFormCache(): Promise<void> {
-        if (this._db && this._formKey) {
-            const txCacheDelete = this._db.transaction('formsCache', 'readwrite');
-            await txCacheDelete.objectStore('formsCache').delete(this._formKey);
-            await txCacheDelete.done;
-
-            const txHistoryDelete = this._db.transaction('formsHistory', 'readwrite');
-            await txHistoryDelete.objectStore('formsHistory').delete(this._formKey);
-            await txHistoryDelete.done
-
-            this.enableFormReset = false;
-        }
-    }
-
-    // noinspection JSUnusedGlobalSymbols
-    protected stopWatchForm(): void {
-        this._workChanges().then(() => {
-            this.formSubject$.next();
-            this.formSubject$.complete();
-        });
     }
 }

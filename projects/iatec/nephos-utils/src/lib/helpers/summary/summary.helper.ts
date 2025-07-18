@@ -1,9 +1,9 @@
-import { Subject } from 'rxjs';
-import { inject } from '@angular/core';
-import { TranslocoService } from '@jsverse/transloco';
-import { MessageService } from 'primeng/api';
-import { PageModel } from '../../models';
-import { ErrorMessages, MessageKeys, MessageSeverities } from '../../constants';
+import {Subject} from 'rxjs';
+import {inject} from '@angular/core';
+import {TranslocoService} from '@jsverse/transloco';
+import {MessageService} from 'primeng/api';
+import {PageModel} from '../../models';
+import {ErrorMessages, MessageKeys, MessageSeverities} from '../../constants';
 
 export abstract class SummaryHelper<F, M> {
 

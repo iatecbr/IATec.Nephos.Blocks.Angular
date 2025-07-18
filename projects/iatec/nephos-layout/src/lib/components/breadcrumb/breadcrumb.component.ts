@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
-import { TranslocoPipe } from '@jsverse/transloco';
+import {Component} from '@angular/core';
+import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {filter} from 'rxjs/operators';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {TranslocoPipe} from '@jsverse/transloco';
 
 interface Breadcrumb {
     label: string;

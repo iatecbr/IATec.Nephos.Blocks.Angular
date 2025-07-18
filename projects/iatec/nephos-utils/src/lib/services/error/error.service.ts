@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {ToastMessageOptions} from "primeng/api/toastmessage";
-import {MessageService} from "primeng/api";
+import {MessageService, ToastMessageOptions} from "primeng/api";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorMessages, GeneralTranslationKeys, MessageSeverities, WaringMessages} from "../../constants";
