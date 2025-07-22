@@ -18,7 +18,8 @@ export const GeneralTranslationKeys = {
         or: 'general.conjunction.or'
     },
     interjection: {
-        ops: 'general.interjection.ops'
+        ops: 'general.interjection.ops',
+        welcome: 'general.interjection.welcome'
     },
     message: {
         default: {
