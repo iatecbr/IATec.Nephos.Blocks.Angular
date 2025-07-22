@@ -91,5 +91,6 @@ export const GeneralTranslationKeys = {
     verb: {
         continue: 'general.verb.continue',
         showing: 'general.verb.showing'
-    }
+    },
+    welcome: 'general.welcome'
 }
