@@ -19,6 +19,8 @@ export const GeneralTranslationKeys = {
     },
     interjection: {
         ops: 'general.interjection.ops',
+        profile: 'general.interjection.profile',
+        signOut: 'general.interjection.sign-out',
         welcome: 'general.interjection.welcome'
     },
     message: {
