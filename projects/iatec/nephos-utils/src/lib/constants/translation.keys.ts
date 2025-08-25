@@ -86,7 +86,6 @@ export const GeneralTranslationKeys = {
             flow: 'general.substantive.plural.flow'
         },
         singular: {
-            confirmPassword: 'general.substantive.singular.confirm-password',
             flow: 'general.substantive.singular.flow',
             password: 'general.substantive.singular.password',
             status: 'general.substantive.singular.status'
