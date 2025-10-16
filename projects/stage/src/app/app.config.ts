@@ -5,7 +5,7 @@ import {provideHttpClient, withFetch} from '@angular/common/http';
 import {provideTransloco} from '@jsverse/transloco';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {providePrimeNG} from 'primeng/config';
-import Lara from '@primeng/themes/lara';
+import Aura from '@primeng/themes/lara';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
         }),
         providePrimeNG({
             theme: {
-                preset: Lara,
+                preset: Aura,
                 options: {
                     darkModeSelector: '.app-dark'
                 }
