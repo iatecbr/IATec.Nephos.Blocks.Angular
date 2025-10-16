@@ -9,7 +9,7 @@ trigger:
       - main
   paths:
     include:
-      - projects/iatec/nephos-layout/*
+      - projects/iatec/nephos-layout/**
 
 pr: none
 

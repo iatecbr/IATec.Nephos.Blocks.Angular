@@ -1,9 +1,9 @@
 import {isPlatformBrowser} from '@angular/common';
 import {Component, computed, inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {$t} from '@primeng/themes';
-import Aura from '@primeng/themes/aura';
-import Lara from '@primeng/themes/lara';
-import Nora from '@primeng/themes/nora';
+import {$t} from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
+import Lara from '@primeuix/themes/lara';
+import Nora from '@primeuix/themes/nora';
 import {LayoutService} from '../../services';
 
 const presets = {
