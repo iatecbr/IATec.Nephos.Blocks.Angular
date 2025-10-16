@@ -2,9 +2,9 @@
   "name": "@iatec/nephos-layout",
   "version": "6.0.0",
   "peerDependencies": {
-    "@angular/common": ">=19.0.0",
-    "@angular/core": ">=19.0.0",
-    "@jsverse/transloco": ">=7.0.0"
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0",
+    "@jsverse/transloco": ">=8.0.0"
   },
   "dependencies": {
     "tslib": ">=2.0.0"
