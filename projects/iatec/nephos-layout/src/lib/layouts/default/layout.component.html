@@ -1,6 +1,5 @@
-<nph-layout-configurator/>
 <p-toast key="default"></p-toast>
-<p-confirmdialog key="default"></p-confirmdialog>
+<p-confirm-dialog key="default"></p-confirm-dialog>
 
 <div [ngClass]="containerClass"
      class="layout-container">
@@ -21,5 +20,6 @@
     <nph-layout-profile-sidebar>
         <ng-container *ngTemplateOutlet="profileSidebar"></ng-container>
     </nph-layout-profile-sidebar>
+    <nph-layout-configurator/>
     <div class="layout-mask animate-fadein"></div>
 </div>
