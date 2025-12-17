@@ -1,10 +1,10 @@
 {
   "name": "@iatec/nephos-utils",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": ">=20.0.0",
-    "@angular/core": ">=20.0.0",
-    "primeng": ">=20.0.0"
+    "@angular/common": ">=21.0.0",
+    "@angular/core": ">=21.0.0",
+    "primeng": ">=21.0.0"
   },
   "dependencies": {
     "tslib": ">=2.0.0"

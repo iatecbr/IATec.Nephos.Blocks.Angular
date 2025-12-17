@@ -16,7 +16,7 @@ import {filter} from 'rxjs/operators';
 import {LayoutService} from '../../../../services';
 import {DomHandler} from 'primeng/dom';
 import {TranslocoPipe} from '@jsverse/transloco';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {Tooltip} from 'primeng/tooltip';
 import {Ripple} from 'primeng/ripple';
 
@@ -25,15 +25,13 @@ import {Ripple} from 'primeng/ripple';
     selector: '[nph-layout-menu-item]',
     templateUrl: `menu-item.component.html`,
     imports: [
-        TranslocoPipe,
-        NgClass,
-        Tooltip,
-        RouterLinkActive,
-        RouterLink,
-        NgForOf,
-        Ripple,
-        NgIf
-    ],
+    TranslocoPipe,
+    NgClass,
+    Tooltip,
+    RouterLinkActive,
+    RouterLink,
+    Ripple
+],
     animations: [
         trigger('children', [
             state(

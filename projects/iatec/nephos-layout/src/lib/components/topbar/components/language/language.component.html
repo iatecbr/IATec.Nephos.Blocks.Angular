@@ -1,37 +1,37 @@
 <li class="topbar-language">
+  @if (languages && selectedLanguage) {
     <p-select (ngModelChange)="onChangeSelectedLanguage($event)"
-              *ngIf="languages && selectedLanguage; else languageSkeleton"
-              [(ngModel)]="selectedLanguage"
-              [options]="languages"
-              placeholder="Select a Country">
-        <ng-template let-selectedOption
-                     pTemplate="selectedItem">
-            <div class="flex items-center gap-2">
-                <img
-                    alt="flag"
-                    class="rounded-full flag border border-white shadow-md"
-                    src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{selectedLanguage.country.code | uppercase}}.svg"/>
-                <div>
-                    {{ selectedOption.code }}-{{ selectedOption.country.code | uppercase }}
-                </div>
-            </div>
-        </ng-template>
-        <ng-template let-language
-                     pTemplate="item">
-            <div class="flex items-center gap-2">
-                <img
-                    alt="flag"
-                    class="rounded-full flag border border-white shadow-md"
-                    src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{language.country.code | uppercase}}.svg"/>
-                <div>
-                    {{ language.name }}
-                </div>
-            </div>
-        </ng-template>
+      [(ngModel)]="selectedLanguage"
+      [options]="languages"
+      placeholder="Select a Country">
+      <ng-template let-selectedOption
+        pTemplate="selectedItem">
+        <div class="flex items-center gap-2">
+          <img
+            alt="flag"
+            class="rounded-full flag border border-white shadow-md"
+            src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{selectedLanguage.country.code | uppercase}}.svg"/>
+          <div>
+            {{ selectedOption.code }}-{{ selectedOption.country.code | uppercase }}
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-language
+        pTemplate="item">
+        <div class="flex items-center gap-2">
+          <img
+            alt="flag"
+            class="rounded-full flag border border-white shadow-md"
+            src="https://purecatamphetamine.github.io/country-flag-icons/1x1/{{language.country.code | uppercase}}.svg"/>
+          <div>
+            {{ language.name }}
+          </div>
+        </div>
+      </ng-template>
     </p-select>
+  } @else {
+    <p-skeleton height="3rem"
+    width="10rem"></p-skeleton>
+  }
 
-    <ng-template #languageSkeleton>
-        <p-skeleton height="3rem"
-                    width="10rem"></p-skeleton>
-    </ng-template>
 </li>

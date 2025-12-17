@@ -1,55 +1,57 @@
 <nph-layout-topbar-item>
-    <button (click)="appsPanel.toggle($event)"
-            class="p-button-text p-button-secondary flex-shrink-0"
-            pButton
-            size="small"
-            type="button">
-        <svg fill="var(--primary-color)"
-             height="24"
-             viewBox="0 0 24 24"
-             width="24"
-             xmlns="http://www.w3.org/2000/svg">
-            <rect fill="var(--primary-color)"
-                  height="9"
-                  rx="2"
-                  width="9"
-                  x="2"
-                  y="2"/>
-            <rect fill="var(--primary-color)"
-                  height="9"
-                  opacity="0.3"
-                  rx="2"
-                  width="9"
-                  x="13"
-                  y="2"/>
-            <rect fill="var(--primary-color)"
-                  height="9"
-                  opacity="0.3"
-                  rx="2"
-                  width="9"
-                  x="13"
-                  y="13"/>
-            <rect fill="var(--primary-color)"
-                  height="9"
-                  opacity="0.3"
-                  rx="2"
-                  width="9"
-                  x="2"
-                  y="13"/>
-        </svg>
-    </button>
-    <p-popover #appsPanel>
-        <div class="grid grid-cols-3 gap-4 w-lg">
-            <div *ngFor="let app of apps"
-                 class="justify-center p-1 cursor-pointer">
-                <a (click)="navigateTo(app)"
-                   class="flex border-1 border-gray-200 rounded-lg hover:bg-gray-100 px-2 py-7 justify-center">
-                    <img [src]="app.icon"
-                         alt="&#128512;"
-                         class="rounded-2xl mr-2"/>
-                    <span class="text-900 block font-semibold  text-lg">{{ app.name }}</span>
-                </a>
-            </div>
+  <button (click)="appsPanel.toggle($event)"
+    class="p-button-text p-button-secondary flex-shrink-0"
+    pButton
+    size="small"
+    type="button">
+    <svg fill="var(--primary-color)"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg">
+      <rect fill="var(--primary-color)"
+        height="9"
+        rx="2"
+        width="9"
+        x="2"
+        y="2"/>
+      <rect fill="var(--primary-color)"
+        height="9"
+        opacity="0.3"
+        rx="2"
+        width="9"
+        x="13"
+        y="2"/>
+      <rect fill="var(--primary-color)"
+        height="9"
+        opacity="0.3"
+        rx="2"
+        width="9"
+        x="13"
+        y="13"/>
+      <rect fill="var(--primary-color)"
+        height="9"
+        opacity="0.3"
+        rx="2"
+        width="9"
+        x="2"
+        y="13"/>
+    </svg>
+  </button>
+  <p-popover #appsPanel>
+    <div class="grid grid-cols-3 gap-4 w-lg">
+      @for (app of apps; track app) {
+        <div
+          class="justify-center p-1 cursor-pointer">
+          <a (click)="navigateTo(app)"
+            class="flex border-1 border-gray-200 rounded-lg hover:bg-gray-100 px-2 py-7 justify-center">
+            <img [src]="app.icon"
+              alt="&#128512;"
+              class="rounded-2xl mr-2"/>
+            <span class="text-900 block font-semibold  text-lg">{{ app.name }}</span>
+          </a>
         </div>
-    </p-popover>
+      }
+    </div>
+  </p-popover>
 </nph-layout-topbar-item>

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {TranslocoPipe} from '@jsverse/transloco';
 
 interface Breadcrumb {
@@ -13,11 +13,9 @@ interface Breadcrumb {
 @Component({
     selector: 'nph-layout-breadcrumb',
     imports: [
-        NgForOf,
-        AsyncPipe,
-        TranslocoPipe,
-        NgIf
-    ],
+    AsyncPipe,
+    TranslocoPipe
+],
     templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
