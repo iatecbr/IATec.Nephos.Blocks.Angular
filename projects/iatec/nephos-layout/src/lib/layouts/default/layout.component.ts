@@ -22,8 +22,7 @@ import {ConfirmDialog} from "primeng/confirmdialog";
         ConfirmDialog,
         LayoutConfigurator,
         NgTemplateOutlet
-    ],
-    encapsulation: ViewEncapsulation.None
+    ]
 })
 export class LayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;
