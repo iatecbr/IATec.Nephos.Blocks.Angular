@@ -2,17 +2,16 @@ import {Component, effect, ElementRef, Input, ViewChild} from '@angular/core';
 import {ColorScheme, LayoutService} from '../../../services';
 import {BreadcrumbComponent} from '../../breadcrumb';
 import {ButtonDirective} from 'primeng/button';
-import {NgIf} from '@angular/common';
+
 
 
 @Component({
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
     imports: [
-        BreadcrumbComponent,
-        ButtonDirective,
-        NgIf
-    ],
+    BreadcrumbComponent,
+    ButtonDirective
+],
     styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {

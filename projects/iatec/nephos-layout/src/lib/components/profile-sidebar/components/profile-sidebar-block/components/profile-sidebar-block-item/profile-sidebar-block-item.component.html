@@ -1,14 +1,16 @@
 <li>
-    <a class="cursor-pointer flex mb-4 p-4 items-center border border-surface-200 dark:border-surface-700 rounded-sm hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors duration-150">
-        <span>
-            <i [ngClass]="icon"
-               class="text-xl text-primary"></i>
-        </span>
-        <div class="ml-4">
-            <ng-content></ng-content>
-        </div>
-        <p-badge *ngIf="badge"
-                 [value]="badge"
-                 class="ml-auto"></p-badge>
-    </a>
+  <a class="cursor-pointer flex mb-4 p-4 items-center border border-surface-200 dark:border-surface-700 rounded-sm hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors duration-150">
+    <span>
+      <i [ngClass]="icon"
+      class="text-xl text-primary"></i>
+    </span>
+    <div class="ml-4">
+      <ng-content></ng-content>
+    </div>
+    @if (badge) {
+      <p-badge
+        [value]="badge"
+      class="ml-auto"></p-badge>
+    }
+  </a>
 </li>
