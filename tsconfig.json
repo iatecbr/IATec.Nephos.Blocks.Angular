@@ -1,19 +1,20 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "include": [
+    "stories/**/*.ts",
+    ".storybook/**/*.ts"
+  ],
   "compilerOptions": {
     "paths": {
       "@iatec/nephos-layout": [
-        "./dist/iatec/nephos-layout/*",
-        "./dist/iatec/nephos-layout"
+        "./projects/iatec/nephos-layout/src/public-api.ts"
       ],
       "@iatec/nephos-pages": [
-        "./dist/iatec/nephos-pages/*",
-        "./dist/iatec/nephos-pages"
+        "./projects/iatec/nephos-pages/src/public-api.ts"
       ],
       "@iatec/nephos-utils": [
-        "./dist/iatec/nephos-utils/*",
-        "./dist/iatec/nephos-utils"
+        "./projects/iatec/nephos-utils/src/public-api.ts"
       ]
     },
     "outDir": "./dist/out-tsc",
