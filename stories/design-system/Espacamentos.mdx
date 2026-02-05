@@ -1,0 +1,508 @@
+import { Meta } from '@storybook/blocks';
+import tokens from './design-tokens.tokens.json';
+
+<Meta title="Design System/Espaçamentos" />
+
+<style>{`
+  .spacing-demo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.75rem 0;
+    padding: 1rem;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+  }
+  .spacing-label {
+    min-width: 100px;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  .spacing-bar {
+    height: 32px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .spacing-value {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: auto;
+  }
+  .example-box {
+    background: white;
+    border: 2px dashed #3b82f6;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+  }
+  .grid-example {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  .grid-item {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+`}</style>
+
+# Sistema de Espaçamentos
+
+O sistema de espaçamentos define os valores padronizados para criar layouts consistentes e harmoniosos, baseado no **PrimeNG Aura Design System**.
+
+## 📐 Escala de Espaçamento Base
+
+O sistema utiliza uma escala progressiva que garante consistência visual e facilita o desenvolvimento.
+
+<div>
+  <div className="spacing-demo">
+    <span className="spacing-label">0</span>
+    <div className="spacing-bar" style={{ width: '0px' }} />
+    <span className="spacing-value">0px / 0rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">0.5</span>
+    <div className="spacing-bar" style={{ width: '2px' }} />
+    <span className="spacing-value">2px / 0.125rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">1</span>
+    <div className="spacing-bar" style={{ width: '4px' }} />
+    <span className="spacing-value">4px / 0.25rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">1.5</span>
+    <div className="spacing-bar" style={{ width: '6px' }} />
+    <span className="spacing-value">6px / 0.375rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">2</span>
+    <div className="spacing-bar" style={{ width: '8px' }} />
+    <span className="spacing-value">8px / 0.5rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">2.5</span>
+    <div className="spacing-bar" style={{ width: '10px' }} />
+    <span className="spacing-value">10px / 0.625rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">3</span>
+    <div className="spacing-bar" style={{ width: '12px' }} />
+    <span className="spacing-value">12px / 0.75rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">3.5</span>
+    <div className="spacing-bar" style={{ width: '14px' }} />
+    <span className="spacing-value">14px / 0.875rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">4</span>
+    <div className="spacing-bar" style={{ width: '16px' }} />
+    <span className="spacing-value">16px / 1rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">5</span>
+    <div className="spacing-bar" style={{ width: '20px' }} />
+    <span className="spacing-value">20px / 1.25rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">6</span>
+    <div className="spacing-bar" style={{ width: '24px' }} />
+    <span className="spacing-value">24px / 1.5rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">7</span>
+    <div className="spacing-bar" style={{ width: '28px' }} />
+    <span className="spacing-value">28px / 1.75rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">8</span>
+    <div className="spacing-bar" style={{ width: '32px' }} />
+    <span className="spacing-value">32px / 2rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">10</span>
+    <div className="spacing-bar" style={{ width: '40px' }} />
+    <span className="spacing-value">40px / 2.5rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">12</span>
+    <div className="spacing-bar" style={{ width: '48px' }} />
+    <span className="spacing-value">48px / 3rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">16</span>
+    <div className="spacing-bar" style={{ width: '64px' }} />
+    <span className="spacing-value">64px / 4rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">20</span>
+    <div className="spacing-bar" style={{ width: '80px' }} />
+    <span className="spacing-value">80px / 5rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">24</span>
+    <div className="spacing-bar" style={{ width: '96px' }} />
+    <span className="spacing-value">96px / 6rem</span>
+  </div>
+
+  <div className="spacing-demo">
+    <span className="spacing-label">32</span>
+    <div className="spacing-bar" style={{ width: '128px' }} />
+    <span className="spacing-value">128px / 8rem</span>
+  </div>
+</div>
+
+## 📊 Tabela de Referência
+
+| Nome | Valor (px) | Valor (rem) | Uso Recomendado |
+|------|-----------|-------------|-----------------|
+| `0` | 0 | 0 | Sem espaçamento |
+| `0.5` | 2 | 0.125 | Espaçamento mínimo, bordas |
+| `1` | 4 | 0.25 | Espaçamento muito pequeno |
+| `2` | 8 | 0.5 | Espaçamento pequeno entre elementos |
+| `3` | 12 | 0.75 | Padding pequeno |
+| `4` | 16 | 1 | **Padrão** - Padding/margin base |
+| `5` | 20 | 1.25 | Padding médio |
+| `6` | 24 | 1.5 | Gap entre cards/componentes |
+| `8` | 32 | 2 | Padding grande, seções |
+| `10` | 40 | 2.5 | Espaçamento entre seções |
+| `12` | 48 | 3 | Seções maiores |
+| `16` | 64 | 4 | Separação de grupos |
+| `20` | 80 | 5 | Espaçamento muito grande |
+| `24` | 96 | 6 | Margens de página |
+| `32` | 128 | 8 | Hero sections, headers |
+
+
+## 🎯 Exemplos de Aplicação
+
+### Padding (Espaçamento Interno)
+
+<div style={{ marginTop: '1.5rem' }}>
+  <div className="example-box" style={{ padding: '4px' }}>
+    Padding: 4px (spacing-1)
+  </div>
+  <br /><br />
+  <div className="example-box" style={{ padding: '8px' }}>
+    Padding: 8px (spacing-2)
+  </div>
+  <br /><br />
+  <div className="example-box" style={{ padding: '16px' }}>
+    Padding: 16px (spacing-4) - Padrão
+  </div>
+  <br /><br />
+  <div className="example-box" style={{ padding: '24px' }}>
+    Padding: 24px (spacing-6)
+  </div>
+  <br /><br />
+  <div className="example-box" style={{ padding: '32px' }}>
+    Padding: 32px (spacing-8)
+  </div>
+</div>
+
+### Margin (Espaçamento Externo)
+
+<div style={{ marginTop: '1.5rem', background: '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
+  <div className="example-box" style={{ padding: '12px', marginBottom: '8px', width: '200px' }}>
+    margin-bottom: 8px
+  </div>
+  <div className="example-box" style={{ padding: '12px', marginBottom: '16px', width: '200px' }}>
+    margin-bottom: 16px
+  </div>
+  <div className="example-box" style={{ padding: '12px', marginBottom: '24px', width: '200px' }}>
+    margin-bottom: 24px
+  </div>
+  <div className="example-box" style={{ padding: '12px', width: '200px' }}>
+    margin-bottom: 0
+  </div>
+</div>
+
+### Gap (Espaçamento em Flexbox/Grid)
+
+<div style={{ marginTop: '1.5rem' }}>
+  <p><strong>Gap: 8px</strong></p>
+  <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 1</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 2</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 3</div>
+  </div>
+
+  <p><strong>Gap: 16px (Recomendado)</strong></p>
+  <div style={{ display: 'flex', gap: '16px', marginBottom: '1rem' }}>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 1</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 2</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 3</div>
+  </div>
+
+  <p><strong>Gap: 24px</strong></p>
+  <div style={{ display: 'flex', gap: '24px' }}>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 1</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 2</div>
+    <div className="example-box" style={{ padding: '16px', flex: 1 }}>Item 3</div>
+  </div>
+</div>
+
+### Grid com Gap
+
+<div className="grid-example" style={{ gap: '16px' }}>
+  <div className="grid-item">Grid Item 1</div>
+  <div className="grid-item">Grid Item 2</div>
+  <div className="grid-item">Grid Item 3</div>
+  <div className="grid-item">Grid Item 4</div>
+  <div className="grid-item">Grid Item 5</div>
+  <div className="grid-item">Grid Item 6</div>
+</div>
+
+## 💻 Uso em Código
+
+### CSS/SCSS
+
+```css
+/* Usando valores diretos */
+.card {
+  padding: 1rem; /* 16px - spacing-4 */
+  margin-bottom: 1.5rem; /* 24px - spacing-6 */
+}
+
+.container {
+  display: flex;
+  gap: 1rem; /* 16px - spacing-4 */
+}
+
+/* Variáveis CSS recomendadas */
+:root {
+  --spacing-0: 0;
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-20: 5rem; /* 80px */
+  --spacing-24: 6rem; /* 96px */
+  --spacing-32: 8rem; /* 128px */
+}
+
+.component {
+  padding: var(--spacing-4);
+  margin: var(--spacing-6) 0;
+}
+```
+
+### Angular Component
+
+```typescript
+@Component({
+  selector: 'app-card',
+  template: `
+    <div class="card" [ngStyle]="cardStyles">
+      <h3 [ngStyle]="titleStyles">{{ title }}</h3>
+      <p>{{ content }}</p>
+    </div>
+  `,
+  styles: [`
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  `]
+})
+export class CardComponent {
+  cardStyles = {
+    padding: '1rem', // spacing-4
+    marginBottom: '1.5rem' // spacing-6
+  };
+  
+  titleStyles = {
+    marginBottom: '0.5rem' // spacing-2
+  };
+}
+```
+
+### Tailwind CSS (Compatível)
+
+```html
+<!-- Mapeamento para Tailwind -->
+<div class="p-4">        <!-- padding: 16px / spacing-4 -->
+<div class="m-6">        <!-- margin: 24px / spacing-6 -->
+<div class="gap-4">      <!-- gap: 16px / spacing-4 -->
+<div class="space-y-6">  <!-- margin-bottom: 24px / spacing-6 -->
+```
+
+## 📏 Princípios de Uso
+
+### 1. Consistência
+Use sempre os valores da escala ao invés de valores arbitrários. Isso garante harmonia visual.
+
+**❌ Evite:**
+```css
+.card {
+  padding: 15px; /* Valor arbitrário */
+  margin: 23px; /* Fora da escala */
+}
+```
+
+**✅ Prefira:**
+```css
+.card {
+  padding: 1rem; /* 16px - spacing-4 */
+  margin: 1.5rem; /* 24px - spacing-6 */
+}
+```
+
+### 2. Hierarquia
+Espaçamentos maiores criam mais separação e hierarquia visual.
+
+- **Espaçamentos pequenos (1-2)**: Elementos muito relacionados
+- **Espaçamentos médios (4-6)**: Componentes relacionados
+- **Espaçamentos grandes (8-12)**: Seções diferentes
+- **Espaçamentos extra grandes (16-32)**: Separações principais
+
+### 3. Proporção Vertical
+Geralmente, espaçamentos verticais devem ser maiores que horizontais para melhor legibilidade.
+
+```css
+.section {
+  padding: 3rem 1.5rem; /* Vertical maior que horizontal */
+}
+```
+
+### 4. Responsividade
+Ajuste espaçamentos em diferentes breakpoints:
+
+```css
+.section {
+  padding: 1rem; /* Mobile: spacing-4 */
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 2rem; /* Tablet: spacing-8 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 3rem; /* Desktop: spacing-12 */
+  }
+}
+```
+
+## 🧮 Layout Grid
+
+O sistema também define uma grade de layout:
+
+- **Colunas**: 12
+- **Gutter**: 16px (spacing-4) mobile, 24px (spacing-6) desktop
+- **Container máximo**: 1200px
+- **Breakpoints**: 
+  - Mobile: < 768px
+  - Tablet: 768px - 1023px
+  - Desktop: ≥ 1024px
+
+### Grid Container
+
+```css
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem; /* Mobile */
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 1.5rem; /* Tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem; /* Desktop */
+  }
+}
+```
+
+## 🎨 Padrões Comuns
+
+### Card Spacing
+```css
+.card {
+  padding: 1.5rem; /* spacing-6 */
+  margin-bottom: 1.5rem; /* spacing-6 */
+  gap: 1rem; /* spacing-4 para conteúdo interno */
+}
+```
+
+### Form Spacing
+```css
+.form-group {
+  margin-bottom: 1rem; /* spacing-4 */
+}
+
+.form-group label {
+  margin-bottom: 0.5rem; /* spacing-2 */
+}
+```
+
+### Section Spacing
+```css
+.section {
+  padding: 3rem 0; /* spacing-12 vertical */
+  margin-bottom: 4rem; /* spacing-16 */
+}
+```
+
+## 📂 Localização
+
+Valores de espaçamento estão em:
+- **Base do PrimeNG**: Sistema de escala rem/px padrão
+- **Variáveis SCSS**: `projects/iatec/nephos-layout/lib/layout/variables/_common.scss`
+- **Sass Variables**: `projects/iatec/nephos-layout/lib/layout/_sass_variables.scss`
+
+## 🔗 Referências
+
+- [PrimeNG Aura Spacing System](https://primeng.org/theming)
+- [Tokens Completos](/?path=/docs/design-system-tokens-figma--docs)
+
+---
+
+**Base**: Sistema de espaçamento baseado no Aura Design System (PrimeNG) com escala progressiva de 4px.
+

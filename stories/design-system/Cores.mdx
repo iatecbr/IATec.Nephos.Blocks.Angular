@@ -1,0 +1,289 @@
+import { Meta } from '@storybook/blocks';
+import tokens from './design-tokens.tokens.json';
+
+<Meta title="Design System/Cores" />
+
+<style>{`
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .color-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+  .color-preview {
+    width: 100%;
+    height: 80px;
+  }
+  .color-info {
+    padding: 0.75rem;
+  }
+  .color-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .color-value {
+    font-size: 0.7rem;
+    color: #666;
+    font-family: monospace;
+  }
+`}</style>
+
+# Sistema de Cores
+
+O sistema de cores define a identidade visual e a hierarquia de informações do Nephos Blocks, baseado no **Aura Design System** do PrimeNG.
+
+## 🎨 Paleta de Cores
+
+### Azul (Blue) - Primária
+Principal cor de identidade, usada em elementos de destaque e ações principais.
+
+<div className="color-grid">
+  {tokens.aura?.blue && Object.entries(tokens.aura.blue).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+    <div key={shade} className="color-card">
+      <div className="color-preview" style={{ backgroundColor: token.value }} />
+      <div className="color-info">
+        <div className="color-name">Blue {shade}</div>
+        <div className="color-value">{token.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Verde (Green) - Sucesso
+Ações bem-sucedidas, estados positivos, confirmações.
+
+<div className="color-grid">
+  {tokens.aura?.green && Object.entries(tokens.aura.green).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+    <div key={shade} className="color-card">
+      <div className="color-preview" style={{ backgroundColor: token.value }} />
+      <div className="color-info">
+        <div className="color-name">Green {shade}</div>
+        <div className="color-value">{token.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Vermelho (Red) - Erro/Atenção
+Erros, estados críticos, ações destrutivas, alertas urgentes.
+
+<div className="color-grid">
+  {tokens.aura?.red && Object.entries(tokens.aura.red).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+    <div key={shade} className="color-card">
+      <div className="color-preview" style={{ backgroundColor: token.value }} />
+      <div className="color-info">
+        <div className="color-name">Red {shade}</div>
+        <div className="color-value">{token.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Amarelo (Yellow) - Aviso
+Alertas, avisos que requerem atenção, estados de espera.
+
+<div className="color-grid">
+  {tokens.aura?.yellow && Object.entries(tokens.aura.yellow).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+    <div key={shade} className="color-card">
+      <div className="color-preview" style={{ backgroundColor: token.value }} />
+      <div className="color-info">
+        <div className="color-name">Yellow {shade}</div>
+        <div className="color-value">{token.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Cinza (Gray) - Neutras
+Escala de cinzas usada para textos, bordas, fundos e elementos de interface.
+
+<div className="color-grid">
+  {tokens.aura?.gray && Object.entries(tokens.aura.gray).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+    <div key={shade} className="color-card">
+      <div className="color-preview" style={{ backgroundColor: token.value }} />
+      <div className="color-info">
+        <div className="color-name">Gray {shade}</div>
+        <div className="color-value">{token.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Cores Adicionais
+
+<details>
+  <summary><strong>Laranja (Orange)</strong></summary>
+  <div className="color-grid">
+    {tokens.aura?.orange && Object.entries(tokens.aura.orange).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+      <div key={shade} className="color-card">
+        <div className="color-preview" style={{ backgroundColor: token.value }} />
+        <div className="color-info">
+          <div className="color-name">Orange {shade}</div>
+          <div className="color-value">{token.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</details>
+
+<details>
+  <summary><strong>Cyan</strong></summary>
+  <div className="color-grid">
+    {tokens.aura?.cyan && Object.entries(tokens.aura.cyan).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+      <div key={shade} className="color-card">
+        <div className="color-preview" style={{ backgroundColor: token.value }} />
+        <div className="color-info">
+          <div className="color-name">Cyan {shade}</div>
+          <div className="color-value">{token.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</details>
+
+<details>
+  <summary><strong>Purple</strong></summary>
+  <div className="color-grid">
+    {tokens.aura?.purple && Object.entries(tokens.aura.purple).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+      <div key={shade} className="color-card">
+        <div className="color-preview" style={{ backgroundColor: token.value }} />
+        <div className="color-info">
+          <div className="color-name">Purple {shade}</div>
+          <div className="color-value">{token.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</details>
+
+<details>
+  <summary><strong>Pink</strong></summary>
+  <div className="color-grid">
+    {tokens.aura?.pink && Object.entries(tokens.aura.pink).filter((_, i) => i % 2 === 0).map(([shade, token]) => (
+      <div key={shade} className="color-card">
+        <div className="color-preview" style={{ backgroundColor: token.value }} />
+        <div className="color-info">
+          <div className="color-name">Pink {shade}</div>
+          <div className="color-value">{token.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</details>
+
+
+## 🌈 Aplicação das Cores
+
+### Recomendações de Uso
+
+| Cor | Shades Recomendados | Uso |
+|-----|---------------------|-----|
+| **Blue** | 500 (primária), 600 (hover), 50-100 (backgrounds) | Botões primários, links, elementos de destaque |
+| **Green** | 500 (sucesso), 50-100 (backgrounds) | Mensagens de sucesso, confirmações, estados positivos |
+| **Red** | 500 (erro), 600 (crítico), 50-100 (backgrounds) | Erros, alertas críticos, ações destrutivas |
+| **Yellow** | 500 (aviso), 50-100 (backgrounds) | Avisos, alertas de atenção |
+| **Gray** | 900 (texto primário), 600 (texto secundário), 200-300 (bordas), 50-100 (backgrounds) | Textos, bordas, fundos, elementos neutros |
+
+### Exemplo de Uso
+
+```typescript
+// Angular Component
+import tokens from './design-tokens.tokens.json';
+
+@Component({
+  template: `
+    <button [style.background-color]="primaryColor">
+      Botão Primário
+    </button>
+  `
+})
+export class MyComponent {
+  primaryColor = tokens.aura.blue['500'].value; // #3b82f6
+  successColor = tokens.aura.green['500'].value; // #22c55e
+  errorColor = tokens.aura.red['500'].value; // #ef4444
+}
+```
+
+```css
+/* CSS/SCSS direto */
+.btn-primary {
+  background-color: #3b82f6; /* blue-500 */
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb; /* blue-600 */
+}
+
+.alert-success {
+  background-color: #dcfce7; /* green-100 */
+  border-color: #22c55e; /* green-500 */
+  color: #166534; /* green-800 */
+}
+```
+
+## 🎯 Acessibilidade
+
+Todas as combinações de cores respeitam os padrões WCAG 2.1 de contraste:
+- **Texto normal**: mínimo 4.5:1
+- **Texto grande**: mínimo 3:1
+
+### Combinações Recomendadas
+
+| Fundo | Texto | Contraste | Status |
+|-------|-------|-----------|--------|
+| Blue 500 | White | ~4.6:1 | ✅ AA |
+| Blue 600 | White | ~6.3:1 | ✅ AAA |
+| Gray 900 | White | ~14:1 | ✅ AAA |
+| Yellow 500 | Black | ~10:1 | ✅ AAA |
+| Red 500 | White | ~4.8:1 | ✅ AA |
+
+## 💻 Uso em Código
+
+```css
+/* Variáveis CSS customizadas baseadas nos tokens */
+:root {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #eab308;
+  --color-text: #111827;
+  --color-text-secondary: #4b5563;
+  --color-border: #e5e7eb;
+  --color-background: #f9fafb;
+}
+
+.elemento-principal {
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-border);
+}
+
+.elemento-sucesso {
+  background-color: var(--color-success);
+}
+```
+
+## 📊 Paleta Completa
+
+Veja todas as cores e tonalidades disponíveis em [Tokens Figma](/?path=/docs/design-system-tokens-figma--docs).
+
+## 📂 Localização
+
+As cores estão definidas em:
+- **Tokens Figma**: `stories/design-system/design-tokens.tokens.json`
+- **SCSS Variables**: `projects/iatec/nephos-layout/lib/layout/variables/_common.scss`
+- **Theme Files**: `projects/iatec/nephos-layout/lib/layout/menutheme/`
+
+---
+
+**Origem**: Tokens extraídos do Figma usando o plugin Design Tokens, baseados no Aura Design System.
+

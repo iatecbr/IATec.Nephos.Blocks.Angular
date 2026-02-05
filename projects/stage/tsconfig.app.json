@@ -6,9 +6,13 @@
     "types": []
   },
   "files": [
-    "src/main.ts"
+    "src/main.ts",
+    "../../.storybook/main.ts",
+    "../../.storybook/preview.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "../../.storybook/**/*.ts",
+    "../../stories/**/*.ts"
   ]
 }

@@ -1,0 +1,506 @@
+import { Meta } from '@storybook/blocks';
+import tokens from './design-tokens.tokens.json';
+
+<Meta title="Design System/Tipografia" />
+
+<style>{`
+  .typo-sample {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .typo-label {
+    font-size: 0.75rem;
+    color: #666;
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .typo-specs {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 0.5rem;
+    font-family: monospace;
+  }
+  .typo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+  .typo-table th,
+  .typo-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .typo-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+  }
+  .typo-table code {
+    background: #f0f0f0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8em;
+  }
+`}</style>
+
+# Tipografia
+
+A tipografia é fundamental para a hierarquia visual e legibilidade do sistema, utilizando **Noto Sans** como fonte base.
+
+## 🔤 Família de Fontes
+
+### Noto Sans
+Fonte principal do sistema, desenvolvida pelo Google, com excelente legibilidade e suporte multilíngue.
+
+**Pesos disponíveis**: 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+
+## 📏 Escala Tipográfica
+
+### Títulos Principais
+
+<div className="typo-sample">
+  <div className="typo-label">title-60</div>
+  <div style={{ 
+    fontFamily: tokens.font['title-60'].value.fontFamily,
+    fontSize: `${tokens.font['title-60'].value.fontSize}px`,
+    fontWeight: tokens.font['title-60'].value.fontWeight,
+    lineHeight: `${tokens.font['title-60'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox
+  </div>
+  <div className="typo-specs">
+    {tokens.font['title-60'].value.fontSize}px • 
+    Weight {tokens.font['title-60'].value.fontWeight} • 
+    Line Height {tokens.font['title-60'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">title-48</div>
+  <div style={{ 
+    fontFamily: tokens.font['title-48'].value.fontFamily,
+    fontSize: `${tokens.font['title-48'].value.fontSize}px`,
+    fontWeight: tokens.font['title-48'].value.fontWeight,
+    lineHeight: `${tokens.font['title-48'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over
+  </div>
+  <div className="typo-specs">
+    {tokens.font['title-48'].value.fontSize}px • 
+    Weight {tokens.font['title-48'].value.fontWeight} • 
+    Line Height {tokens.font['title-48'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">title-34</div>
+  <div style={{ 
+    fontFamily: tokens.font['title-34'].value.fontFamily,
+    fontSize: `${tokens.font['title-34'].value.fontSize}px`,
+    fontWeight: tokens.font['title-34'].value.fontWeight,
+    lineHeight: `${tokens.font['title-34'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog
+  </div>
+  <div className="typo-specs">
+    {tokens.font['title-34'].value.fontSize}px • 
+    Weight {tokens.font['title-34'].value.fontWeight} • 
+    Line Height {tokens.font['title-34'].value.lineHeight}px
+  </div>
+</div>
+
+### Títulos Secundários
+
+<div className="typo-sample">
+  <div className="typo-label">title-sm-24</div>
+  <div style={{ 
+    fontFamily: tokens.font['title-sm-24'].value.fontFamily,
+    fontSize: `${tokens.font['title-sm-24'].value.fontSize}px`,
+    fontWeight: tokens.font['title-sm-24'].value.fontWeight,
+    lineHeight: `${tokens.font['title-sm-24'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog
+  </div>
+  <div className="typo-specs">
+    {tokens.font['title-sm-24'].value.fontSize}px • 
+    Weight {tokens.font['title-sm-24'].value.fontWeight} • 
+    Line Height {tokens.font['title-sm-24'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">title-20</div>
+  <div style={{ 
+    fontFamily: tokens.font['title-20'].value.fontFamily,
+    fontSize: `${tokens.font['title-20'].value.fontSize}px`,
+    fontWeight: tokens.font['title-20'].value.fontWeight,
+    lineHeight: `${tokens.font['title-20'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog
+  </div>
+  <div className="typo-specs">
+    {tokens.font['title-20'].value.fontSize}px • 
+    Weight {tokens.font['title-20'].value.fontWeight} • 
+    Line Height {tokens.font['title-20'].value.lineHeight}px
+  </div>
+</div>
+
+### Corpo de Texto
+
+<div className="typo-sample">
+  <div className="typo-label">body-rg-16 (Body Large)</div>
+  <div style={{ 
+    fontFamily: tokens.font['body-rg-16'].value.fontFamily,
+    fontSize: `${tokens.font['body-rg-16'].value.fontSize}px`,
+    fontWeight: tokens.font['body-rg-16'].value.fontWeight,
+    lineHeight: `${tokens.font['body-rg-16'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+  <div className="typo-specs">
+    {tokens.font['body-rg-16'].value.fontSize}px • 
+    Weight {tokens.font['body-rg-16'].value.fontWeight} • 
+    Line Height {tokens.font['body-rg-16'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">body-rg-14 (Body Regular)</div>
+  <div style={{ 
+    fontFamily: tokens.font['body-rg-14'].value.fontFamily,
+    fontSize: `${tokens.font['body-rg-14'].value.fontSize}px`,
+    fontWeight: tokens.font['body-rg-14'].value.fontWeight,
+    lineHeight: `${tokens.font['body-rg-14'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+  </div>
+  <div className="typo-specs">
+    {tokens.font['body-rg-14'].value.fontSize}px • 
+    Weight {tokens.font['body-rg-14'].value.fontWeight} • 
+    Line Height {tokens.font['body-rg-14'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">caption-rg-12 (Caption)</div>
+  <div style={{ 
+    fontFamily: tokens.font['caption-rg-12'].value.fontFamily,
+    fontSize: `${tokens.font['caption-rg-12'].value.fontSize}px`,
+    fontWeight: tokens.font['caption-rg-12'].value.fontWeight,
+    lineHeight: `${tokens.font['caption-rg-12'].value.lineHeight}px`
+  }}>
+    The Quick Brown Fox Jumps Over The Lazy Dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+  </div>
+  <div className="typo-specs">
+    {tokens.font['caption-rg-12'].value.fontSize}px • 
+    Weight {tokens.font['caption-rg-12'].value.fontWeight} • 
+    Line Height {tokens.font['caption-rg-12'].value.lineHeight}px
+  </div>
+</div>
+
+<div className="typo-sample">
+  <div className="typo-label">overline-rg-10 (Overline)</div>
+  <div style={{ 
+    fontFamily: tokens.font['overline-rg-10'].value.fontFamily,
+    fontSize: `${tokens.font['overline-rg-10'].value.fontSize}px`,
+    fontWeight: tokens.font['overline-rg-10'].value.fontWeight,
+    lineHeight: `${tokens.font['overline-rg-10'].value.lineHeight}px`
+  }}>
+    THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+  </div>
+  <div className="typo-specs">
+    {tokens.font['overline-rg-10'].value.fontSize}px • 
+    Weight {tokens.font['overline-rg-10'].value.fontWeight} • 
+    Line Height {tokens.font['overline-rg-10'].value.lineHeight}px
+  </div>
+</div>
+
+
+## 📊 Tabela de Referência Completa
+
+<table className="typo-table">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Tamanho</th>
+      <th>Peso</th>
+      <th>Line Height</th>
+      <th>Uso Recomendado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title-60</code></td>
+      <td>60px</td>
+      <td>700 (Bold)</td>
+      <td>72px</td>
+      <td>Hero titles, landing pages</td>
+    </tr>
+    <tr>
+      <td><code>title-48</code></td>
+      <td>48px</td>
+      <td>700 (Bold)</td>
+      <td>57.6px</td>
+      <td>H1, títulos de página principal</td>
+    </tr>
+    <tr>
+      <td><code>title-34</code></td>
+      <td>34px</td>
+      <td>600 (Semibold)</td>
+      <td>40.8px</td>
+      <td>H2, títulos de seção</td>
+    </tr>
+    <tr>
+      <td><code>title-sm-24</code></td>
+      <td>24px</td>
+      <td>600 (Semibold)</td>
+      <td>36px</td>
+      <td>H3, subtítulos</td>
+    </tr>
+    <tr>
+      <td><code>body-md-24</code></td>
+      <td>24px</td>
+      <td>500 (Medium)</td>
+      <td>36px</td>
+      <td>H3, lead text</td>
+    </tr>
+    <tr>
+      <td><code>title-20</code></td>
+      <td>20px</td>
+      <td>500 (Medium)</td>
+      <td>30px</td>
+      <td>H4, títulos de card</td>
+    </tr>
+    <tr>
+      <td><code>body-rg-16</code></td>
+      <td>16px</td>
+      <td>400 (Regular)</td>
+      <td>24px</td>
+      <td>Body large, texto de destaque</td>
+    </tr>
+    <tr>
+      <td><code>body-md-16</code></td>
+      <td>16px</td>
+      <td>500 (Medium)</td>
+      <td>24px</td>
+      <td>Body large medium, labels</td>
+    </tr>
+    <tr>
+      <td><code>card-sm-16</code></td>
+      <td>16px</td>
+      <td>600 (Semibold)</td>
+      <td>24px</td>
+      <td>Títulos de card menores</td>
+    </tr>
+    <tr>
+      <td><code>body-rg-14</code></td>
+      <td>14px</td>
+      <td>400 (Regular)</td>
+      <td>21px</td>
+      <td>Texto padrão, parágrafos</td>
+    </tr>
+    <tr>
+      <td><code>body-md-14</code></td>
+      <td>14px</td>
+      <td>500 (Medium)</td>
+      <td>21px</td>
+      <td>Texto padrão medium, botões</td>
+    </tr>
+    <tr>
+      <td><code>card-sm-14</code></td>
+      <td>14px</td>
+      <td>600 (Semibold)</td>
+      <td>21px</td>
+      <td>Labels importantes, badges</td>
+    </tr>
+    <tr>
+      <td><code>caption-rg-12</code></td>
+      <td>12px</td>
+      <td>400 (Regular)</td>
+      <td>20.4px</td>
+      <td>Caption, helper text</td>
+    </tr>
+    <tr>
+      <td><code>caption-md-12</code></td>
+      <td>12px</td>
+      <td>500 (Medium)</td>
+      <td>20.4px</td>
+      <td>Caption medium, metadados</td>
+    </tr>
+    <tr>
+      <td><code>caption-sm-12</code></td>
+      <td>12px</td>
+      <td>600 (Semibold)</td>
+      <td>20.4px</td>
+      <td>Caption semibold, labels pequenos</td>
+    </tr>
+    <tr>
+      <td><code>overline-rg-10</code></td>
+      <td>10.5px</td>
+      <td>400 (Regular)</td>
+      <td>17.85px</td>
+      <td>Overline, tags, categorias</td>
+    </tr>
+    <tr>
+      <td><code>overline-md-10</code></td>
+      <td>10.5px</td>
+      <td>500 (Medium)</td>
+      <td>17.85px</td>
+      <td>Overline medium, chips</td>
+    </tr>
+  </tbody>
+</table>
+
+## 🎨 Aplicação em Código
+
+### Angular Component
+
+```typescript
+import tokens from './design-tokens.tokens.json';
+
+@Component({
+  selector: 'app-title',
+  template: `
+    <h1 [ngStyle]="titleStyle">{{ title }}</h1>
+    <p [ngStyle]="bodyStyle">{{ content }}</p>
+  `
+})
+export class TitleComponent {
+  title = 'Meu Título';
+  content = 'Conteúdo do parágrafo';
+  
+  titleStyle = {
+    fontFamily: tokens.font['title-34'].value.fontFamily,
+    fontSize: `${tokens.font['title-34'].value.fontSize}px`,
+    fontWeight: tokens.font['title-34'].value.fontWeight,
+    lineHeight: `${tokens.font['title-34'].value.lineHeight}px`
+  };
+  
+  bodyStyle = {
+    fontFamily: tokens.font['body-rg-14'].value.fontFamily,
+    fontSize: `${tokens.font['body-rg-14'].value.fontSize}px`,
+    fontWeight: tokens.font['body-rg-14'].value.fontWeight,
+    lineHeight: `${tokens.font['body-rg-14'].value.lineHeight}px`
+  };
+}
+```
+
+### CSS/SCSS
+
+```css
+/* Variáveis CSS baseadas nos tokens */
+:root {
+  --font-family: 'Noto Sans', sans-serif;
+  
+  /* Títulos */
+  --font-title-60: 700 60px/72px var(--font-family);
+  --font-title-48: 700 48px/57.6px var(--font-family);
+  --font-title-34: 600 34px/40.8px var(--font-family);
+  --font-title-24: 600 24px/36px var(--font-family);
+  --font-title-20: 500 20px/30px var(--font-family);
+  
+  /* Body */
+  --font-body-lg: 400 16px/24px var(--font-family);
+  --font-body-md: 400 14px/21px var(--font-family);
+  --font-caption: 400 12px/20.4px var(--font-family);
+  --font-overline: 400 10.5px/17.85px var(--font-family);
+}
+
+h1 {
+  font: var(--font-title-48);
+}
+
+h2 {
+  font: var(--font-title-34);
+}
+
+h3 {
+  font: var(--font-title-24);
+}
+
+p {
+  font: var(--font-body-md);
+}
+
+.caption {
+  font: var(--font-caption);
+}
+```
+
+### SCSS Mixins
+
+```scss
+@mixin title-60 {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 72px;
+}
+
+@mixin body-regular {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+// Uso
+.page-title {
+  @include title-60;
+}
+
+.content {
+  @include body-regular;
+}
+```
+
+## 📐 Princípios de Uso
+
+### Hierarquia
+Use tamanhos maiores para informações mais importantes, criando uma hierarquia visual clara.
+
+### Consistência
+Sempre use os tokens definidos ao invés de valores arbitrários.
+
+### Legibilidade
+- Line height adequado para conforto de leitura
+- Contraste suficiente entre texto e fundo
+- Largura máxima de linha recomendada: 60-75 caracteres
+
+### Responsividade
+```css
+/* Exemplo de ajuste responsivo */
+h1 {
+  font-size: 34px; /* title-34 para mobile */
+  line-height: 40.8px;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 48px; /* title-48 para desktop */
+    line-height: 57.6px;
+  }
+}
+```
+
+## 📂 Localização
+
+Os tokens de tipografia estão definidos em:
+- **Tokens Figma**: `stories/design-system/design-tokens.tokens.json`
+- **SCSS Fonts**: `projects/iatec/nephos-layout/lib/layout/_fonts.scss`
+- **Font Files**: `projects/iatec/nephos-layout/lib/layout/fonts/`
+
+## 🔗 Referências
+
+- [Google Fonts - Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans)
+- [Todos os Tokens](/?path=/docs/design-system-tokens-figma--docs)
+
+---
+
+**Origem**: Tokens extraídos do Figma usando o plugin Design Tokens.
+

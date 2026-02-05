@@ -1,0 +1,330 @@
+import { Meta } from '@storybook/blocks';
+import tokens from './design-tokens.tokens.json';
+
+<Meta title="Design System/Tokens" />
+
+<style>{`
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .token-card {
+    padding: 1rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    background: var(--surface-card);
+  }
+  .token-preview {
+    width: 100%;
+    height: 60px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--surface-border);
+  }
+  .token-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: monospace;
+    margin: 0.25rem 0;
+  }
+  .token-value {
+    font-size: 0.7rem;
+    color: var(--text-color-secondary);
+    font-family: monospace;
+  }
+  .typography-sample {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+  }
+  .shadow-demo {
+    display: inline-block;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    margin: 1rem;
+  }
+`}</style>
+
+# Design Tokens
+
+Design tokens são as unidades atômicas do sistema de design. São valores nomeados que definem propriedades visuais reutilizáveis em todo o sistema.
+
+## 🎯 O que são Design Tokens?
+
+Design tokens representam decisões de design fundamentais, como cores, espaçamentos, tipografia e outros valores que precisam ser consistentes em toda a aplicação.
+
+---
+
+## 📊 Tokens Extraídos do Figma
+
+✨ **Veja os tokens completos exportados do Figma**: [Tokens Figma →](/?path=/docs/design-system-tokens-figma--docs)
+
+Documentação completa com:
+- **{Object.keys(tokens.font || {}).length}** tokens de tipografia
+- **{Object.keys(tokens.effect || {}).length}** tokens de efeitos e sombras
+- **{Object.keys(tokens.aura || {}).length}** categorias de componentes Aura
+- Paletas de cores (Blue, Green, Red, Yellow, Orange, Gray, etc)
+- Exemplos visuais interativos
+
+---
+
+## � Extração de Tokens do Figma
+
+### Método 1: Usando Plugins do Figma
+
+#### **Design Tokens** (Recomendado)
+1. Abra seu arquivo no Figma
+2. Vá em **Plugins → Design Tokens**
+3. Selecione os tokens (cores, tipografia, espaçamentos)
+4. Exporte como JSON
+
+#### **Figma Tokens (Tokens Studio)**
+1. Instale o plugin **Tokens Studio for Figma**
+2. Configure os tokens no painel
+3. Sincronize com GitHub ou exporte JSON
+4. Transforme com **Style Dictionary**
+
+### Método 2: API do Figma
+
+```javascript
+// 1. Obtenha o token de acesso: Figma → Settings → Personal Access Tokens
+const FIGMA_TOKEN = 'seu-token-aqui';
+const FILE_KEY = 'key-do-arquivo';
+
+// 2. Extraia estilos
+const response = await fetch(
+  `https://api.figma.com/v1/files/${FILE_KEY}/styles`,
+  { headers: { 'X-Figma-Token': FIGMA_TOKEN } }
+);
+
+// 3. Extraia variáveis (cores, números, etc)
+const variables = await fetch(
+  `https://api.figma.com/v1/files/${FILE_KEY}/variables/local`,
+  { headers: { 'X-Figma-Token': FIGMA_TOKEN } }
+);
+```
+
+### Método 3: Style Dictionary
+
+Após extrair tokens, use **Style Dictionary** para transformá-los:
+
+```bash
+npm install -D style-dictionary
+```
+
+```javascript
+// style-dictionary.config.js
+module.exports = {
+  source: ['tokens/**/*.json'],
+  platforms: {
+    scss: {
+      transformGroup: 'scss',
+      buildPath: 'projects/iatec/nephos-layout/lib/layout/variables/',
+      files: [{
+        destination: '_tokens.scss',
+        format: 'scss/variables'
+      }]
+    },
+    css: {
+      transformGroup: 'css',
+      buildPath: 'dist/css/',
+      files: [{
+        destination: 'tokens.css',
+        format: 'css/variables'
+      }]
+    }
+  }
+};
+```
+
+## 📦 Tokens Atuais do Nephos
+
+### Tokens de Cor
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+  {[
+    { name: '--primary-color', desc: 'Cor primária do tema' },
+    { name: '--primary-color-text', desc: 'Texto sobre cor primária' },
+    { name: '--text-color', desc: 'Cor de texto principal' },
+    { name: '--text-color-secondary', desc: 'Cor de texto secundário' },
+    { name: '--surface-border', desc: 'Cor de bordas' },
+    { name: '--surface-card', desc: 'Fundo de cards' },
+    { name: '--surface-hover', desc: 'Fundo no hover' },
+    { name: '--surface-overlay', desc: 'Fundo de overlays/popovers' },
+  ].map(token => (
+    <div key={token.name} style={{
+      padding: '1rem',
+      border: '1px solid var(--surface-border)',
+      borderRadius: 'var(--border-radius)',
+      backgroundColor: 'var(--surface-card)'
+    }}>
+      <div style={{
+        width: '100%',
+        height: '60px',
+        backgroundColor: `var(${token.name})`,
+        borderRadius: '4px',
+        marginBottom: '0.5rem',
+        border: '1px solid var(--surface-border)'
+      }} />
+      <code style={{ fontSize: '0.875rem', fontWeight: 600 }}>{token.name}</code>
+      <p style={{ fontSize: '0.75rem', margin: '0.25rem 0 0', color: 'var(--text-color-secondary)' }}>
+        {token.desc}
+      </p>
+    </div>
+  ))}
+</div>
+
+### Tokens de Espaçamento
+
+Baseados no sistema PrimeNG. Adicione seus próprios tokens customizados conforme necessário.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
+  {[
+    { size: '0.25rem', label: 'xs' },
+    { size: '0.5rem', label: 'sm' },
+    { size: '1rem', label: 'md' },
+    { size: '1.5rem', label: 'lg' },
+    { size: '2rem', label: 'xl' },
+    { size: '3rem', label: '2xl' },
+  ].map(spacing => (
+    <div key={spacing.label} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <code style={{ minWidth: '80px' }}>{spacing.label}</code>
+      <div style={{
+        width: spacing.size,
+        height: '24px',
+        backgroundColor: 'var(--primary-color)',
+        borderRadius: '2px'
+      }} />
+      <span style={{ fontSize: '0.875rem', color: 'var(--text-color-secondary)' }}>
+        {spacing.size}
+      </span>
+    </div>
+  ))}
+</div>
+
+### Tokens de Raio de Borda
+
+<div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+  <div style={{ textAlign: 'center' }}>
+    <div style={{
+      width: '80px',
+      height: '80px',
+      backgroundColor: 'var(--primary-color)',
+      borderRadius: 'var(--border-radius)',
+      marginBottom: '0.5rem'
+    }} />
+    <code>--border-radius</code>
+  </div>
+</div>
+
+### Tokens de Transição
+
+<div style={{ marginBottom: '2rem' }}>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <code style={{ minWidth: '300px' }}>--transition-duration</code>
+      <span style={{ fontSize: '0.875rem' }}>Duração padrão das transições</span>
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <code style={{ minWidth: '300px' }}>--layout-section-transition-duration</code>
+      <span style={{ fontSize: '0.875rem' }}>0.2s - Transição de seções do layout</span>
+    </div>
+  </div>
+</div>
+
+## 🔧 Como Utilizar
+
+Os tokens estão disponíveis através de variáveis CSS e podem ser consumidos diretamente nos componentes:
+
+```css
+.meu-componente {
+  color: var(--primary-color);
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-duration);
+}
+
+.meu-componente:hover {
+  background-color: var(--surface-hover);
+}
+```
+
+```typescript
+// Em componentes Angular
+@Component({
+  selector: 'app-exemplo',
+  template: `
+    <div class="card">
+      <p class="text">Conteúdo</p>
+    </div>
+  `,
+  styles: [`
+    .card {
+      background: var(--surface-card);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+    }
+    
+    .text {
+      color: var(--text-color);
+    }
+  `]
+})
+export class ExemploComponent {}
+```
+
+## 📋 Implementação Atual
+
+Os tokens são definidos nos arquivos SCSS do sistema:
+
+- **Tokens Base**: `projects/iatec/nephos-layout/lib/layout/variables/_common.scss`
+- **Tema Claro**: `projects/iatec/nephos-layout/lib/layout/variables/_light.scss`
+- **Tema Escuro**: `projects/iatec/nephos-layout/lib/layout/variables/_dark.scss`
+- **Tokens Globais**: Disponíveis para todas as bibliotecas
+
+### Estrutura de Tokens
+
+```scss
+:root {
+  // Cores
+  --primary-color: var(--p-primary-color);
+  --primary-color-text: var(--p-primary-contrast-color);
+  --text-color: var(--p-text-color);
+  --text-color-secondary: var(--p-text-muted-color);
+  
+  // Superfícies
+  --surface-border: var(--p-content-border-color);
+  --surface-card: var(--p-content-background);
+  --surface-hover: var(--p-content-hover-background);
+  --surface-overlay: var(--p-overlay-popover-background);
+  
+  // Utilidades
+  --border-radius: var(--p-content-border-radius);
+  --transition-duration: var(--p-transition-duration);
+  --focus-ring-shadow: var(--p-focus-ring-shadow);
+  --maskbg: var(--p-mask-background);
+}
+```
+
+## 📝 Workflow Recomendado
+
+1. **Design no Figma** → Defina variáveis e estilos
+2. **Extrair Tokens** → Use plugin ou API
+3. **Transformar** → Style Dictionary para gerar SCSS/CSS
+4. **Integrar** → Adicione aos arquivos de variáveis
+5. **Documentar** → Atualize este arquivo com exemplos visuais
+6. **Testar** → Verifique em componentes e temas
+
+## 🎨 Próximos Passos
+
+- [ ] Definir tokens de tipografia (font-family, font-size, line-height, font-weight)
+- [ ] Adicionar tokens de sombra (box-shadow, elevation)
+- [ ] Criar tokens de breakpoints responsivos
+- [ ] Documentar tokens de ícones e tamanhos
+- [ ] Adicionar tokens de animação (duration, easing)
+- [ ] Integrar com Figma via API ou plugin
