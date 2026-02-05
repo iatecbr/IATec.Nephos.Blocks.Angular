@@ -32,6 +32,6 @@ steps:
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: 'dist/storybook'
+      PathtoPublish: 'dist/storybook/stage'
       ArtifactName: 'files'
       publishLocation: 'Container'      
