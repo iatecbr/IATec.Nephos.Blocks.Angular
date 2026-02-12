@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes Nephos/Introdução" />
+
+# Componentes PrimeNG
+
+O Nephos Blocks utiliza o **PrimeNG** como base para componentes de interface. Esta seção documenta as customizações e temas aplicados aos componentes do PrimeNG.
+
+## 📚 Sobre o PrimeNG
+
+PrimeNG é uma biblioteca rica de componentes UI para Angular, oferecendo mais de 80 componentes prontos para uso.
+
+🔗 **[Documentação Oficial do PrimeNG](https://primeng.org/)**
+
+## 🎨 Customizações Nephos
+
+O Nephos Blocks aplica customizações específicas aos componentes PrimeNG para:
+
+1. **Adequação ao Design System**: Cores, tipografia e espaçamentos alinhados aos tokens do Nephos
+2. **Temas Personalizados**: Variações visuais específicas para diferentes contextos
+3. **Comportamentos Específicos**: Funcionalidades adicionais para atender necessidades internas
+
+## 🧩 Componentes Customizados
+
+Nesta seção, você encontrará:
+
+### Referências Rápidas
+Links diretos para a documentação oficial de cada componente do PrimeNG utilizado.
+
+### Customizações Internas
+Detalhes sobre modificações aplicadas pela equipe:
+- Estilos SCSS específicos
+- Configurações padrão
+- Extensões de funcionalidade
+
+### Temas
+Variações de tema disponíveis:
+- Tema claro/escuro
+- Cores primárias customizadas
+- Estilos de menu
+
+## 📦 Estrutura de Arquivos
+
+As customizações estão organizadas em:
+
+```
+projects/iatec/nephos-layout/lib/layout/
+├── _overrides.scss          # Sobrescritas de estilos PrimeNG
+├── menutheme/              # Temas de menu
+│   ├── _colorscheme.scss
+│   ├── _primarycolor.scss
+│   └── _transparent.scss
+└── variables/              # Variáveis personalizadas
+    └── _common.scss
+```
+
+## 🎯 Como Usar
+
+### 1. Consultar Documentação PrimeNG
+Sempre comece pela [documentação oficial do PrimeNG](https://primeng.org/) para entender o componente base.
+
+### 2. Verificar Customizações
+Nesta seção do Storybook, verifique se existem customizações específicas do Nephos para o componente.
+
+### 3. Aplicar em Seu Projeto
+Importe e use o componente conforme a documentação do PrimeNG, as customizações já estarão aplicadas automaticamente.
+
+## 📋 Lista de Componentes
+
+Os componentes PrimeNG mais utilizados no Nephos incluem:
+
+### Formulários
+- Input Text
+- Dropdown
+- MultiSelect
+- Calendar
+- Checkbox
+- RadioButton
+
+### Dados
+- Table
+- DataView
+- Tree
+- TreeTable
+
+### Botões e Menus
+- Button
+- Menu
+- MenuBar
+- TieredMenu
+
+### Overlay
+- Dialog
+- Toast
+- ConfirmDialog
+- Sidebar
+
+### Navegação
+- TabView
+- Accordion
+- Breadcrumb
+
+## ⚠️ Importante
+
+**Não re-documentamos todo o PrimeNG aqui**. Esta seção serve para:
+1. Referenciar os componentes oficiais
+2. Documentar **apenas** as customizações internas do Nephos
+3. Facilitar o acesso à documentação oficial
+
+Para detalhes completos de cada componente, sempre consulte a [documentação oficial do PrimeNG](https://primeng.org/).
+
+---
+
+**Nota**: A lista de customizações específicas deve ser validada com a Indiane para garantir que todas as modificações importantes estejam documentadas.

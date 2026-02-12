@@ -1,0 +1,160 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Blocos/Introdução" />
+
+# Blocos Nephos
+
+Componentes customizados e blocos de interface completos desenvolvidos internamente pela equipe Nephos.
+
+## 🧱 O que são Blocos?
+
+Blocos são componentes de alto nível que combinam múltiplos elementos para formar funcionalidades completas. Diferente dos componentes básicos do PrimeNG, os blocos são:
+
+- **Específicos do Nephos**: Desenvolvidos internamente para necessidades específicas
+- **Compostos**: Combinam múltiplos componentes PrimeNG e customizados
+- **Completos**: Incluem lógica, estilo e comportamento integrados
+- **Documentados**: Cada bloco tem documentação completa de uso
+
+## 📋 Padrão de Documentação
+
+Cada bloco nesta seção é documentado com:
+
+### ✅ Aparência Real
+Visualização exata de como o componente funciona, com interatividade completa.
+
+### 📝 Exemplo de Uso
+Código completo e funcional demonstrando como usar o bloco.
+
+### 📦 Importação
+Instruções de como importar e configurar o bloco no seu projeto.
+
+### 🎛️ API
+Documentação completa de:
+- **Inputs**: Propriedades de entrada
+- **Outputs**: Eventos emitidos
+- **Métodos**: Métodos públicos disponíveis
+- **Slots**: Áreas de conteúdo customizável
+
+### 🎨 Variações
+Diferentes configurações e estilos disponíveis.
+
+### ♿ Acessibilidade
+Recursos de acessibilidade implementados.
+
+## 📚 Referência de Qualidade
+
+Este padrão de documentação é inspirado no [Canvas Kit da Workday](https://workday.github.io/canvas-kit/):
+- [Canvas Kit Docs](https://workday.github.io/canvas-kit)
+- [Exemplo: Button Component](https://workday.github.io/canvas-kit/?path=/story/components-buttons--delete)
+
+## 🗂️ Categorias de Blocos
+
+Os blocos estão organizados em categorias funcionais:
+
+### Layout
+- Estruturas de página
+- Containers
+- Grid systems
+
+### Navegação
+- Menus avançados
+- Breadcrumbs customizados
+- Paginação
+
+### Formulários
+- Formulários complexos
+- Validação avançada
+- Inputs compostos
+
+### Dados
+- Tabelas avançadas
+- Dashboards
+- Gráficos
+
+### Feedback
+- Notificações
+- Confirmações
+- Loading states
+
+## 🚀 Como Usar um Bloco
+
+### 1. Encontre o Bloco
+Navegue pelas categorias para encontrar o bloco desejado.
+
+### 2. Veja o Exemplo
+Interaja com o exemplo ao vivo para entender o comportamento.
+
+### 3. Copie o Código
+Use os exemplos de código fornecidos como base.
+
+### 4. Configure
+Ajuste as propriedades conforme sua necessidade.
+
+### 5. Teste
+Valide o funcionamento no seu contexto.
+
+## 📦 Estrutura dos Blocos
+
+Os blocos estão organizados nas bibliotecas:
+
+```
+projects/iatec/
+├── nephos-layout/    # Blocos de layout e estrutura
+├── nephos-pages/     # Páginas e templates completos
+└── nephos-utils/     # Utilitários e helpers
+```
+
+## 🔧 Importação Geral
+
+Para usar os blocos, importe as bibliotecas necessárias:
+
+```typescript
+// Layout components
+import { NephosLayoutModule } from '@iatec/nephos-layout';
+
+// Page templates
+import { NephosPagesModule } from '@iatec/nephos-pages';
+
+// Utilities
+import { NephosUtilsModule } from '@iatec/nephos-utils';
+
+@NgModule({
+  imports: [
+    NephosLayoutModule,
+    NephosPagesModule,
+    NephosUtilsModule
+  ]
+})
+export class AppModule { }
+```
+
+## 💡 Dicas
+
+### Customização
+Todos os blocos suportam customização via:
+- Inputs para configuração
+- Classes CSS para estilo
+- Templates para conteúdo
+
+### Performance
+Os blocos são otimizados para:
+- Lazy loading
+- Change detection OnPush
+- Minimal re-renders
+
+### Acessibilidade
+Todos os blocos seguem:
+- WCAG 2.1 AA
+- Navegação por teclado
+- Screen reader support
+
+## 📞 Suporte
+
+Para dúvidas ou problemas:
+1. Consulte a documentação completa do bloco
+2. Veja os exemplos de código
+3. Contate a equipe de desenvolvimento
+
+---
+
+**Próximos passos**: Explore os blocos disponíveis nas categorias ao lado para ver a documentação completa de cada um.

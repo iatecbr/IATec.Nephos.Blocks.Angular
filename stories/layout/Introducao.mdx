@@ -1,0 +1,158 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/Introdução" />
+
+# Nephos Layout
+
+O **Nephos Layout** é um bloco completo de layout e estrutura de página para aplicações Angular, fornecendo componentes prontos para construção de interfaces administrativas e corporativas.
+
+## 📦 Instalação
+
+```bash
+npm install @iatec/nephos-layout
+```
+
+## 🎯 Características
+
+- ✅ Múltiplos modos de layout (Static, Overlay, Slim, Horizontal, etc.)
+- ✅ Sidebar responsivo com navegação
+- ✅ Topbar customizável
+- ✅ Profile Sidebar para perfil de usuário
+- ✅ Suporte a temas claro e escuro
+- ✅ Configurador de layout integrado
+- ✅ Totalmente compatível com PrimeNG
+- ✅ Responsivo e mobile-first
+
+## 📋 Componentes Disponíveis
+
+### Layouts
+
+- **LayoutComponent** (`nph-layout`): Layout completo com sidebar
+- **LayoutCompactComponent** (`nph-layout-compact`): Layout compacto sem sidebar
+
+### Componentes
+
+- **SidebarComponent**: Sidebar de navegação lateral
+- **TopbarComponent**: Barra superior de navegação
+- **ProfileSidebarComponent**: Sidebar para perfil do usuário
+- **MenuComponent**: Menu de navegação
+- **BreadcrumbComponent**: Navegação breadcrumb
+- **LayoutConfigurator**: Configurador visual do layout
+
+## 🚀 Uso Básico
+
+### 1. Importar o Módulo
+
+```typescript
+import { LayoutComponent } from '@iatec/nephos-layout';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [LayoutComponent],
+  template: `<nph-layout />`
+})
+export class AppComponent {}
+```
+
+### 2. Importar os Estilos
+
+No seu arquivo `styles.scss`:
+
+```scss
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+```
+
+### 3. Exemplo Completo
+
+```typescript
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { LayoutComponent } from '@iatec/nephos-layout';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, LayoutComponent],
+  template: `
+    <nph-layout>
+      <ng-template #logo>
+        <img src="assets/logo.svg" alt="Logo" />
+      </ng-template>
+      
+      <ng-template #topbar>
+        <!-- Conteúdo customizado do topbar -->
+      </ng-template>
+      
+      <ng-template #profileSidebar>
+        <!-- Conteúdo do perfil -->
+      </ng-template>
+    </nph-layout>
+  `
+})
+export class AppComponent {}
+```
+
+## 🎨 Modos de Layout
+
+O Nephos Layout suporta diferentes modos:
+
+| Modo | Descrição |
+|------|-----------|
+| **static** | Sidebar fixo sempre visível (desktop) |
+| **overlay** | Sidebar sobrepõe o conteúdo |
+| **slim** | Sidebar compacto com expansão no hover |
+| **slim-plus** | Sidebar compacto com ícones e labels |
+| **horizontal** | Menu horizontal no topo |
+| **reveal** | Sidebar oculto que revela no hover |
+| **drawer** | Sidebar como gaveta lateral |
+
+## 🎨 Temas
+
+O layout suporta múltiplos temas de menu:
+
+- **colorScheme**: Usa o esquema de cores do tema
+- **primaryColor**: Usa a cor primária
+- **transparent**: Menu transparente
+
+## 📱 Responsividade
+
+O layout é totalmente responsivo e se adapta automaticamente para:
+
+- **Desktop** (> 992px): Layout completo
+- **Tablet** (768px - 992px): Layout adaptado
+- **Mobile** (< 768px): Menu colapsável
+
+## 🔧 Serviços
+
+### LayoutService
+
+Serviço principal para controle do layout:
+
+```typescript
+import { LayoutService } from '@iatec/nephos-layout';
+
+constructor(private layoutService: LayoutService) {
+  // Alterar modo do menu
+  this.layoutService.updateLayoutConfig({ menuMode: 'slim' });
+  
+  // Alternar tema
+  this.layoutService.updateLayoutConfig({ darkTheme: true });
+  
+  // Toggle sidebar
+  this.layoutService.toggleSidebar();
+}
+```
+
+## 📚 Próximos Passos
+
+- [Layout Completo](/docs/blocos-nephos-layout-layout-completo--docs)
+- [Layout Compacto](/docs/blocos-nephos-layout-layout-compacto--docs)
+- [Sidebar](/docs/blocos-nephos-layout-sidebar--docs)
+- [Configuração](/docs/blocos-nephos-layout-configuracao--docs)
+
+## 🔗 Links Úteis
+
+- [PrimeNG Documentation](https://primeng.org)
+- [Angular Documentation](https://angular.dev)
+- [Design System](/docs/design-system-tokens--docs)

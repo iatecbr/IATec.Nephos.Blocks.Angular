@@ -1,0 +1,145 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Blocos/Nephos Pages/Introdução" />
+
+# Nephos Pages
+
+O **Nephos Pages** é um conjunto de componentes prontos para criar páginas comuns em aplicações web, oferecendo estruturas reutilizáveis e customizáveis.
+
+## 📦 Componentes Disponíveis
+
+### EmptyPageComponent
+
+Componente para criar páginas simples com título e conteúdo. Perfeito para:
+- ✅ Páginas de login e autenticação
+- ✅ Páginas de erro (404, 500, 403, etc)
+- ✅ Páginas de sucesso e confirmação
+- ✅ Landing pages simples
+- ✅ Páginas de manutenção
+
+**Recursos:**
+- Template para título e conteúdo
+- Estilo opcional com card (`pageStyle: 'card' | 'none'`)
+- Totalmente customizável
+
+[Ver exemplos de EmptyPageComponent →](?path=/docs/blocos-nephos-pages-empty-page--docs)
+
+---
+
+### HeaderPageComponent
+
+Componente para criar páginas com título, cabeçalho e corpo separados. Ideal para:
+- 📊 Dashboards
+- 📝 Formulários com seções
+- 📋 Páginas de listagem com filtros
+- ⚙️ Páginas de configurações
+
+**Recursos:**
+- Templates para título, header e body
+- Estilos independentes para header e body (`headerStyle` e `bodyStyle`)
+- Layout flexível para múltiplas seções
+
+[Ver exemplos de HeaderPageComponent →](?path=/docs/blocos-nephos-pages-header-page--docs)
+
+---
+
+## 🚀 Instalação
+
+```bash
+npm install @iatec/nephos-pages
+```
+
+## 💡 Uso Básico
+
+### EmptyPageComponent
+
+```typescript
+import { EmptyPageComponent } from '@iatec/nephos-pages';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [EmptyPageComponent],
+  template: `
+    <nph-pages-empty [pageStyle]="'card'">
+      <ng-template #title>
+        <h2>Login</h2>
+      </ng-template>
+      <ng-template #content>
+        <form>
+          <!-- Seu formulário aqui -->
+        </form>
+      </ng-template>
+    </nph-pages-empty>
+  `
+})
+export class LoginComponent {}
+```
+
+### HeaderPageComponent
+
+```typescript
+import { HeaderPageComponent } from '@iatec/nephos-pages';
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [HeaderPageComponent],
+  template: `
+    <nph-pages-header [headerStyle]="'card'" [bodyStyle]="'card'">
+      <ng-template #title>
+        <h2>Dashboard</h2>
+      </ng-template>
+      <ng-template #header>
+        <!-- Filtros, ações, etc -->
+      </ng-template>
+      <ng-template #body>
+        <!-- Conteúdo principal -->
+      </ng-template>
+    </nph-pages-header>
+  `
+})
+export class DashboardComponent {}
+```
+
+## 📚 Exemplos Disponíveis
+
+Explore os exemplos práticos na barra lateral:
+
+### EmptyPageComponent
+- **Default**: Exemplo básico com card
+- **Sem Card**: Layout sem estilo de card
+- **Página Login**: Formulário de login completo
+- **Página Sucesso**: Confirmação de operação
+- **Manutenção em Progresso**: Página de manutenção
+
+### HeaderPageComponent
+- **Default**: Dashboard com métricas
+- **Listagem com Filtros**: Tabela com filtros no header
+- **Formulário com Seções**: Formulário multi-seção
+- **Sem Cards**: Layout limpo sem cards
+
+### Páginas de Erro
+- **Erro 404**: Página não encontrada
+- **Erro 500**: Erro interno do servidor
+- **Erro 403**: Acesso negado
+- **Sem Conexão**: Erro de conexão
+
+## 🎨 Customização
+
+Ambos os componentes são altamente customizáveis:
+- Use `pageStyle`, `headerStyle` e `bodyStyle` para controlar o estilo de card
+- Personalize completamente o conteúdo com templates
+- Integra perfeitamente com o Nephos Layout
+
+## 📖 Documentação Completa
+
+Para mais detalhes, consulte a documentação de cada componente:
+- [EmptyPageComponent](?path=/docs/blocos-nephos-pages-empty-page--docs)
+- [HeaderPageComponent](?path=/docs/blocos-nephos-pages-header-page--docs)
+- [Páginas de Erro](?path=/docs/blocos-nephos-pages-páginas-de-erro--docs)
+
+## 🔗 Links Úteis
+
+- [Nephos Layout](/docs/blocos-nephos-layout-introducao--docs)
+- [Design System](/docs/design-system-tokens--docs)

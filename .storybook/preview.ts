@@ -1,5 +1,4 @@
 import type { Preview } from '@storybook/angular';
-import { setCompodocJson } from '@storybook/addon-docs/angular';
 
 const preview: Preview = {
   parameters: {
@@ -11,13 +10,32 @@ const preview: Preview = {
     },
     options: {
       storySort: {
+        method: 'alphabetical',
         order: [
           'Introdução',
           'Design System',
-          ['Tokens', 'Tipografia', 'Cores', 'Espaçamentos', 'Guidelines'],
+          [
+            'Introdução',
+            'Tokens',
+            'Tipografia',
+            'Cores',
+            'Espaçamentos',
+            'Guidelines'
+          ],
+            'Layout',
+            'Blocos',
+            'Componentes Nephos',
+            [
+                'Introdução',
+                'Temas e Customizações'
+            ],
           'Componentes PrimeNG',
-          'Blocos',
+          [
+            'Introdução',
+            'Temas e Customizações'
+          ],
         ],
+        locales: 'pt-BR',
       },
     },
   },

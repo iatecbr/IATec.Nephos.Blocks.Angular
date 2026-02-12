@@ -1,0 +1,202 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes Nephos/Temas e Customizações" />
+
+# Temas e Customizações
+
+Detalhamento das customizações aplicadas aos componentes PrimeNG no Nephos Blocks.
+
+## 🎨 Sistema de Temas
+
+O Nephos utiliza o novo sistema de temas do PrimeNG baseado em `@primeuix/themes`.
+
+### Configuração Base
+
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          // Customizações Nephos
+          darkModeSelector: '.dark-mode',
+        }
+      }
+    })
+  ]
+};
+```
+
+## 🌈 Customizações de Cores
+
+### Cores Primárias
+As cores primárias do tema são sobrescritas para alinhar com a identidade visual do Nephos.
+
+**Localização**: `projects/iatec/nephos-layout/lib/layout/menutheme/_primarycolor.scss`
+
+### Esquema de Cores
+Variações de cores para diferentes estados e contextos.
+
+**Localização**: `projects/iatec/nephos-layout/lib/layout/menutheme/_colorscheme.scss`
+
+## 🎭 Variações de Menu
+
+### Menu Vertical
+Estilo padrão de menu lateral com navegação hierárquica.
+
+**Arquivo**: `_sidebar_vertical.scss`
+
+### Menu Horizontal
+Menu superior com navegação horizontal.
+
+**Arquivo**: `_sidebar_horizontal.scss`
+
+### Menu Slim
+Versão compacta do menu com ícones.
+
+**Arquivo**: `_sidebar_slim.scss`
+
+### Menu Slim Plus
+Versão slim com expansão ao hover.
+
+**Arquivo**: `_sidebar_slim_plus.scss`
+
+### Menu Drawer
+Menu que abre como gaveta lateral.
+
+**Arquivo**: `_sidebar_drawer.scss`
+
+### Menu Reveal
+Menu com efeito de revelação.
+
+**Arquivo**: `_sidebar_reveal.scss`
+
+### Menu Transparente
+Menu com fundo transparente.
+
+**Arquivo**: `menutheme/_transparent.scss`
+
+## 🔧 Sobrescritas de Componentes
+
+Algumas sobrescritas globais são aplicadas para garantir consistência:
+
+**Localização**: `projects/iatec/nephos-layout/lib/layout/_overrides.scss`
+
+### Componentes Afetados
+- Ajustes de espaçamento
+- Cores de borda e fundo
+- Tamanhos de fonte
+- Estados de hover e focus
+
+## 📱 Responsividade
+
+Customizações específicas para diferentes breakpoints:
+
+**Localização**: `projects/iatec/nephos-layout/lib/layout/_responsive.scss`
+
+### Breakpoints
+```scss
+// Mobile
+@media (max-width: 767px) { }
+
+// Tablet
+@media (min-width: 768px) and (max-width: 1023px) { }
+
+// Desktop
+@media (min-width: 1024px) { }
+```
+
+## 🎯 Topbar
+
+Customizações da barra superior:
+
+**Localização**: `_topbar.scss`
+
+Inclui:
+- Logo
+- Navegação
+- Ações do usuário
+- Notificações
+
+## 👤 Profile
+
+Componente de perfil de usuário:
+
+**Localização**: `_profile.scss`
+
+## 🍞 Breadcrumb
+
+Trilha de navegação customizada:
+
+**Localização**: `_breadcrumb.scss`
+
+## 📄 Content
+
+Área de conteúdo principal:
+
+**Localização**: `_content.scss`
+
+## 🛠️ Utilitários
+
+Classes utilitárias para uso geral:
+
+**Localização**: `_utils.scss`
+
+## 📦 Como Aplicar Customizações
+
+### 1. Importação Automática
+
+As customizações são aplicadas automaticamente ao importar o módulo de layout:
+
+```typescript
+import { NephosLayoutModule } from '@iatec/nephos-layout';
+
+@NgModule({
+  imports: [NephosLayoutModule]
+})
+export class AppModule { }
+```
+
+### 2. SCSS Global
+
+Importe os estilos no arquivo global de estilos:
+
+```scss
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+```
+
+### 3. Variáveis Personalizadas
+
+Você pode sobrescrever variáveis específicas:
+
+```scss
+// Antes da importação do layout
+$primary-color: #your-color;
+
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+```
+
+## 🔍 Inspeção de Estilos
+
+Para entender as customizações aplicadas:
+
+1. Abra o DevTools do navegador
+2. Inspecione o componente
+3. Verifique as classes CSS aplicadas
+4. Localize o arquivo fonte nos imports
+
+## 📚 Documentação de Referência
+
+Para cada componente específico:
+1. Consulte a [documentação do PrimeNG](https://primeng.org/)
+2. Verifique os arquivos de customização mencionados acima
+3. Teste as variações no ambiente stage
+
+---
+
+**Nota**: Esta documentação deve ser validada e expandida com a Indiane para garantir que todas as customizações críticas estejam documentadas e explicadas adequadamente.

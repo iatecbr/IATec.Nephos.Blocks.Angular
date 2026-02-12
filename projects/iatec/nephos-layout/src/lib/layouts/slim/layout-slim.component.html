@@ -1,0 +1,127 @@
+    <div class="layout-container">
+      <!-- Sidebar Compacto -->
+      <aside class="layout-sidebar">
+        <div class="sidebar-content">
+          <!-- Header: Logo + Avatar -->
+          <div class="sidebar-header-group">
+            <div class="app-logo">
+              <img src="assets/images/icon-nephos.png" alt="Logo" />
+            </div>
+            <div class="user-avatar">
+              <img src="assets/images/avatar/example.png" alt="User" />
+            </div>
+          </div>
+          
+          <!-- Menu -->
+          <div class="sidebar-menu-group">
+            <!-- Separador -->
+            <div class="menu-separator">
+              <div class="divider"></div>
+            </div>
+            
+            <!-- Itens do Menu -->
+            <ul class="layout-menu">
+              <li class="layout-menuitem">
+                <a class="active-menuitem">
+                  <i class="pi pi-th-large layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-user layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-chart-bar layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-cog layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-inbox layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-calendar layout-menuitem-icon"></i>
+                </a>
+              </li>
+              <li class="layout-menuitem">
+                <a>
+                  <i class="pi pi-folder layout-menuitem-icon"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Botão de Ação -->
+          <button class="sidebar-action-button">
+            <i class="pi pi-plus"></i>
+          </button>
+        </div>
+      </aside>
+      
+      <!-- Botão de Toggle -->
+      <button class="sidebar-toggle-button">
+        <i class="pi pi-chevron-right"></i>
+      </button>
+      
+      <!-- Conteúdo Principal -->
+      <div class="layout-main-container">
+        <div class="layout-main">
+          <!-- Header/Topbar -->
+          <header class="layout-topbar">
+            <div class="topbar-content">
+              <!-- Breadcrumb -->
+              <div class="breadcrumb-section">
+                <i class="pi pi-home" style="color: #94A3B8; margin-right: 7px;"></i>
+                <span style="color: #64748B; font-size: 14px;">Dashboard</span>
+              </div>
+              
+              <!-- Actions -->
+              <div class="topbar-actions">
+                <!-- Notificações -->
+                <button class="notification-button">
+                  <i class="pi pi-bell"></i>
+                </button>
+                
+                <!-- Seletor de Idioma -->
+                <div class="language-selector">
+                  <div class="flag-avatar">
+                    <img src="https://assets-services.sdasystems.org/images/flags/1x1/br.svg" alt="PT-BR" style="width: 100%; height: 100%; object-fit: cover; border-radius: 21px;" />
+                  </div>
+                  <div class="language-label">
+                    <span>Pt-Bra</span>
+                    <i class="pi pi-chevron-down"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+          
+          <!-- Conteúdo -->
+          <div class="layout-content">
+            <!-- Cards em linha -->
+            <div class="content-cards-row">
+              <div class="card"></div>
+              <div class="card"></div>
+              <div class="card"></div>
+              <div class="card"></div>
+            </div>
+            
+            <!-- Área principal -->
+            <div class="content-main-row">
+              <div class="card-large">
+                <router-outlet></router-outlet>
+              </div>
+              <div class="card-sidebar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
