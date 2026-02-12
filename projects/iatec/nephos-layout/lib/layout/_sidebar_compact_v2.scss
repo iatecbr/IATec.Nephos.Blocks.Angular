@@ -1,0 +1,416 @@
+// Sidebar Compacto V2 - Design baseado no Figma
+// Largura: 90px, estilo moderno com backdrop blur
+
+.layout-container {
+    .layout-sidebar {
+        position: fixed;
+        width: 90px;
+        min-height: 750px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 32px 28px 42px;
+        gap: 10px;
+        
+        background: #D8E6FD;
+        border: 0.5px solid #B1CDFB;
+        box-shadow: 0px 0px 20px -32px #D8E6FD;
+        backdrop-filter: blur(80px);
+        border-radius: 18px;
+        
+        // Posicionamento com margens
+        left: 24px;
+        top: 24px;
+        height: calc(100vh - 48px);
+        
+        .sidebar-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            gap: 29px;
+            width: 43px;
+            height: 100%;
+        }
+        
+        // Logo e Avatar no topo
+        .sidebar-header-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            gap: 24px;
+            width: 43px;
+            
+            .app-logo {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                width: 54px;
+                
+                img {
+                    width: 42.9px;
+                }
+            }
+            
+            .user-avatar {
+                width: 43px;
+                height: 42px;
+                
+                img, .p-avatar {
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 20px;
+                }
+            }
+        }
+        
+        // Menu principal
+        .sidebar-menu-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 12px;
+            width: 43px;
+            flex: 1;
+            
+            .menu-separator {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 8px;
+                width: 43px;
+                height: 1px;
+                
+                .divider {
+                    width: 27px;
+                    height: 1px;
+                    border: 1px solid #E2E8F0;
+                }
+            }
+            
+            .layout-menu {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0;
+                gap: 8px;
+                width: 43px;
+                
+                .layout-menuitem {
+                    width: 43px;
+                    
+                    a {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px;
+                        gap: 10px;
+                        width: 43px;
+                        height: 43px;
+                        border-radius: 12px;
+                        transition: background-color 0.2s;
+                        
+                        &:hover {
+                            background: rgba(59, 130, 246, 0.1);
+                        }
+                        
+                        &.active-menuitem {
+                            background: rgba(59, 130, 246, 0.15);
+                        }
+                        
+                        .layout-menuitem-icon {
+                            width: 28px;
+                            height: 28px;
+                            color: #64748B;
+                            margin: 0;
+                        }
+                        
+                        .layout-menuitem-text {
+                            display: none;
+                        }
+                        
+                        .layout-submenu-toggler {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Botão de ação (FAB - Floating Action Button)
+        .sidebar-action-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 8.75px 12.25px;
+            margin: 0 auto;
+            width: 36px;
+            height: 36px;
+            background: #3B82F6;
+            border: 1px solid #3B82F6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            
+            &:hover {
+                background: #2563EB;
+            }
+            
+            i {
+                width: 18px;
+                height: 18px;
+                color: #FFFFFF;
+            }
+        }
+    }
+    
+    // Botão de expansão (Arrow)
+    .sidebar-toggle-button {
+        position: absolute;
+        width: 24px;
+        height: 22px;
+        left: 100px;
+        top: 63px;
+        background: #EAF2FF;
+        border: 0.5px solid #D8E6FD;
+        backdrop-filter: blur(90px);
+        border-radius: 24px;
+        transform: rotate(-90deg);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        transition: all 0.3s;
+        
+        &:hover {
+            background: #D8E6FD;
+        }
+        
+        i {
+            width: 18px;
+            height: 18px;
+            color: #475569;
+        }
+    }
+    
+    // Layout principal ajustado
+    .layout-main-container {
+        margin-left: calc(90px + 48px); // 90px sidebar + 24px margin left + 24px gap
+        padding: 24px 24px 0 0;
+        
+        .layout-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 24px;
+            
+            // Header
+            .layout-topbar {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0;
+                gap: 16px;
+                width: 100%;
+                
+                .topbar-content {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 0;
+                    gap: 24px;
+                    width: 100%;
+                    
+                    .breadcrumb-section {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 14px 14px 14px 0;
+                        gap: 7px;
+                        border-radius: 6px;
+                        
+                        .p-breadcrumb {
+                            background: transparent;
+                            border: none;
+                            padding: 0;
+                            
+                            .p-breadcrumb-home {
+                                i {
+                                    width: 14px;
+                                    height: 14px;
+                                    color: #94A3B8;
+                                }
+                            }
+                            
+                            .p-menuitem-text {
+                                font-family: 'Noto Sans';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 150%;
+                                color: #64748B;
+                            }
+                        }
+                    }
+                    
+                    .topbar-actions {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+                        align-items: center;
+                        padding: 0;
+                        gap: 16px;
+                        
+                        .notification-button {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 8.75px 12.25px;
+                            width: 42px;
+                            height: 39px;
+                            border-radius: 6px;
+                            background: transparent;
+                            border: none;
+                            cursor: pointer;
+                            transition: background-color 0.2s;
+                            
+                            &:hover {
+                                background: rgba(100, 116, 139, 0.05);
+                            }
+                            
+                            i {
+                                width: 21px;
+                                height: 24px;
+                                color: #64748B;
+                            }
+                        }
+                        
+                        .language-selector {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            padding: 0;
+                            gap: 8px;
+                            
+                            .flag-avatar {
+                                width: 32px;
+                                height: 32px;
+                                border: 1px solid #F8FAFC;
+                                filter: drop-shadow(0px 0px 4px #B4B6BA);
+                                border-radius: 21px;
+                            }
+                            
+                            .language-label {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                padding: 0;
+                                gap: 2px;
+                                
+                                span {
+                                    font-family: 'Noto Sans';
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    font-size: 14px;
+                                    line-height: 150%;
+                                    color: #334155;
+                                }
+                                
+                                i {
+                                    width: 24px;
+                                    height: 24px;
+                                    color: #475569;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Área de conteúdo
+            .layout-content {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0;
+                gap: 24px;
+                width: 100%;
+                
+                // Cards de destaque (4 cards em linha)
+                .content-cards-row {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 0;
+                    gap: 24px;
+                    width: 100%;
+                    
+                    .card {
+                        flex: 1;
+                        height: 145px;
+                        background: #FFFFFF;
+                        border: 2px dashed #E2E8F0;
+                        border-radius: 18px;
+                    }
+                }
+                
+                // Área principal (2 colunas)
+                .content-main-row {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    padding: 0;
+                    gap: 24px;
+                    width: 100%;
+                    flex: 1;
+                    
+                    .card-large {
+                        flex: 1;
+                        height: 668px;
+                        background: #FFFFFF;
+                        border: 2px dashed #E2E8F0;
+                        border-radius: 18px;
+                    }
+                    
+                    .card-sidebar {
+                        width: 400px;
+                        height: 668px;
+                        background: #FFFFFF;
+                        border: 2px dashed #E2E8F0;
+                        border-radius: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsividade
+@media screen and (max-width: 991px) {
+    .layout-wrapper-compact-v2 {
+        .layout-sidebar {
+            transform: translateX(-100%);
+            
+            &.active {
+                transform: translateX(0);
+            }
+        }
+        
+        .layout-main-container {
+            margin-left: 0;
+            padding: 24px;
+        }
+    }
+}
