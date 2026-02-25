@@ -9,8 +9,7 @@ import {ButtonDirective} from 'primeng/button';
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
     imports: [
-    BreadcrumbComponent,
-    ButtonDirective
+    BreadcrumbComponent
 ],
     styleUrls: ['./topbar.component.scss']
 })

@@ -27,7 +27,11 @@ a {
 }
 
 .layout-container {
+    display: flex;
+    flex-direction: row;
     min-height: 100vh;
+    padding: 24px 0 24px 24px;
+    gap: 24px;
 }
 
 img {

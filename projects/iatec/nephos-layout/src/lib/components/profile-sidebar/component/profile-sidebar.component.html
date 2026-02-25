@@ -1,8 +1,10 @@
-<p-drawer
-    (onHide)="onDrawerHide()"
-    [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-    [visible]="visible()"
-    position="right"
-    styleClass="layout-profile-sidebar w-full sm:w-25rem">
-    <ng-content/>
-</p-drawer>
+@if (visible()) {
+    <p-drawer
+        (onHide)="onDrawerHide()"
+        [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
+        [visible]="visible()"
+        position="right"
+        styleClass="layout-profile-sidebar w-full sm:w-25rem">
+        <ng-content/>
+    </p-drawer>
+}

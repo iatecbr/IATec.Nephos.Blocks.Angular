@@ -7,9 +7,8 @@ import {Popover} from 'primeng/popover';
 import {UserAppModel} from '../../../../models';
 
 @Component({
-    selector: 'nph-layout-topbar-user-apps',
+    selector: 'nph-layout-sidebar-user-apps',
     imports: [
-    TopbarItemComponent,
     ButtonDirective,
     Popover
 ],

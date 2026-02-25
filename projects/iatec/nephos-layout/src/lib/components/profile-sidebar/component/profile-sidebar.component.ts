@@ -1,4 +1,4 @@
-import {Component, computed} from '@angular/core';
+import {Component, computed, HostBinding} from '@angular/core';
 import {LayoutService} from '../../../services';
 import {Drawer} from 'primeng/drawer';
 
@@ -14,6 +14,11 @@ export class ProfileSidebarComponent {
     visible = computed(
         () => this.layoutService.layoutState().profileSidebarVisible,
     );
+
+    @HostBinding('style.display')
+    get displayStyle() {
+        return this.visible() ? 'block' : 'none';
+    }
 
     constructor(public layoutService: LayoutService) {
     }

@@ -1,153 +1,168 @@
 .layout-sidebar {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    width: 18rem;
-    background: var(--menu-bg);
-    border-right: var(--sidebar-border);
-    box-shadow: var(--sidebar-shadow);
+  width: 90px;
+  min-height: 750px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 28px 42px;
+  gap: 10px;
+  flex-shrink: 0; // Impede que o sidebar encolha
+
+  background: #D8E6FD;
+  border: 0.5px solid #B1CDFB;
+  box-shadow: 0px 0px 20px -32px #D8E6FD;
+  backdrop-filter: blur(80px);
+  border-radius: 18px;
+
+  // Altura ajustada para o flexbox container
+  height: calc(100vh - 48px); // Compensa o padding de 24px top e bottom do container
+
+  .sidebar-content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    gap: 24px;
+    width: 43px;
+    height: 100%;
+  }
 
+  // Logo e Avatar no topo
+  .sidebar-header-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 24px;
+    width: 43px;
 
-    .sidebar-header {
-        padding: 2.5rem 0 2rem 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .app-logo {
-            .app-logo-normal {
-                display: inline;
-                width:124px;
-                height:22px;
-            }
-    
-            .app-logo-small {
-                display: none;
-            }
-        }
+    .app-logo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      width: 54px;
+
+      img {
+        width: 42.9px;
+      }
     }
-   
 
-    .layout-menu-container {
-        overflow: auto;
-        flex: 1;
-        padding-bottom: 2rem;
+    .user-avatar {
+      width: 43px;
+      height: 42px;
+
+      img, .p-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  // Menu principal
+  .sidebar-menu-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+    width: 43px;
+    flex: 1;
+
+    .menu-separator {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 8px;
+      width: 43px;
+      height: 1px;
+
+      .divider {
+        width: 27px;
+        height: 1px;
+        border: 1px solid #E2E8F0;
+      }
     }
 
     .layout-menu {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      gap: 8px;
+      width: 43px;
 
-        .layout-root-menuitem {
-            > .layout-menuitem-root-text {
-                font-size: .857rem;
-                text-transform: uppercase;
-                font-weight: 700;
-                color: var(--root-menuitem-text-color);
-                padding: 1rem 2rem;
-            }
-    
-            > a {
-                display: none;
-            }
-        }
+      .layout-menuitem {
+        width: 43px;
 
         a {
-            user-select: none;
-            
-            &.active-menuitem {
-                > .layout-submenu-toggler {
-                    transform: rotate(-180deg);
-                }
-            }
-        }
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          padding: 10px;
+          gap: 10px;
+          width: 43px;
+          height: 43px;
+          border-radius: 12px;
+          transition: background-color 0.2s;
 
-        li.active-menuitem {
-            > a {
-                .layout-submenu-toggler {
-                    transform: rotate(-180deg);
-                }
-            }
-        }
+          &:hover {
+            background: rgba(59, 130, 246, 0.1);
+          }
 
-        ul {
+          &.active-menuitem {
+            background: rgba(59, 130, 246, 0.15);
+          }
+
+          .layout-menuitem-icon {
+            width: 28px;
+            height: 28px;
+            color: #64748B;
             margin: 0;
-            padding: 0;
-            list-style-type: none;
-    
-            a {
-                display: flex;
-                align-items: center;
-                position: relative;
-                outline: 0 none;
-                color: var(--menuitem-text-color);
-                cursor: pointer;
-                padding: .75rem 2rem;
-                transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
+          }
 
-                .layout-menuitem-icon {
-                    margin-right: .5rem;
-                    color: var(--menuitem-icon-color);
-                }
-    
-                .layout-submenu-toggler {
-                    font-size: 75%;
-                    margin-left: auto;
-                    transition: transform var(--transition-duration);
-                }
-    
-                &.active-route {
-                    font-weight: 700;
-                }
+          .layout-menuitem-text {
+            display: none;
+          }
 
-                &:hover {
-                    background-color: var(--menuitem-hover-bg-color);
-                }
-            }
-    
-            ul {
-                overflow: hidden;
-                border-radius: var(--border-radius);
-    
-                li {
-                    a {
-                        padding-left: 2.5rem;
-                    }
-    
-                    li {
-                        a {
-                            padding-left: 3rem;
-                        }
-    
-                        li {
-                            a {
-                                padding-left: 3.5rem;
-                            }
-    
-                            li {
-                                a {
-                                    padding-left: 4rem;
-                                }
-    
-                                li {
-                                    a {
-                                        padding-left: 5.5rem;
-                                    }
-    
-                                    li {
-                                        a {
-                                            padding-left: 5rem;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          .layout-submenu-toggler {
+            display: none;
+          }
         }
+      }
     }
+  }
+
+  // Botão de ação (FAB - Floating Action Button)
+  .sidebar-action-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8.75px 12.25px;
+    margin: 0 auto;
+    width: 36px;
+    height: 36px;
+    background: #3B82F6;
+    border: 1px solid #3B82F6;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: #2563EB;
+    }
+
+    i {
+      width: 18px;
+      height: 18px;
+      color: #FFFFFF;
+    }
+  }
 }
+

@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import { AsyncPipe } from '@angular/common';
-import {TranslocoPipe} from '@jsverse/transloco';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
 
 interface Breadcrumb {
     label: string;
@@ -13,24 +13,35 @@ interface Breadcrumb {
 @Component({
     selector: 'nph-layout-breadcrumb',
     imports: [
-    AsyncPipe,
-    TranslocoPipe
+    BreadcrumbModule
 ],
     templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
+
+    items: MenuItem[] = [];
+    home: MenuItem | undefined;
 
     private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
 
     readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
     constructor(private router: Router) {
+        // Set the home item
+        this.home = { icon: 'pi pi-home', routerLink: '/' };
+
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(event => {
             const root = this.router.routerState.snapshot.root;
             const breadcrumbs: Breadcrumb[] = [];
             this.addBreadcrumb(root, [], breadcrumbs);
 
             this._breadcrumbs$.next(breadcrumbs);
+
+            // Convert breadcrumbs to PrimeNG MenuItem format
+            this.items = breadcrumbs.map(breadcrumb => ({
+                label: breadcrumb.label,
+                routerLink: breadcrumb.url
+            }));
         });
     }
 

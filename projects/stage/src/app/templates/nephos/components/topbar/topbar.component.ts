@@ -6,8 +6,7 @@ import {forkJoin} from 'rxjs';
 @Component({
     selector: 'app-nephos-template-topbar',
     imports: [
-        LanguageComponent,
-        UserAppsComponent
+        LanguageComponent
     ],
     templateUrl: './topbar.component.html'
 })
