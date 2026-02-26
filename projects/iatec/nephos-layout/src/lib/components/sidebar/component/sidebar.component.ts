@@ -1,11 +1,12 @@
-import { Component, effect, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, effect, ElementRef, ViewChild, OnInit, signal, inject, DestroyRef } from '@angular/core';
 import {LayoutService} from '../../../services';
 import {MenuComponent} from '../../menu';
 import {RouterLink} from '@angular/router';
 import { UserAppsComponent } from "../../topbar";
 import { HttpAppService } from "../../../../../../../stage/src/app/services";
 import { UserAppModel } from "../../../models";
-import { forkJoin } from "rxjs";
+import { forkJoin, fromEvent } from "rxjs";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'nph-layout-sidebar',
@@ -22,8 +23,13 @@ export class SidebarComponent implements OnInit{
     @ViewChild('menuContainer') menuContainer!: ElementRef;
 
     urlAvatar: string | undefined;
+    name: string | undefined;
     letters: string | undefined;
     apps: UserAppModel[] = [];
+
+    isDesktopView = signal(globalThis.innerWidth > 991);
+
+    private destroyRef = inject(DestroyRef);
 
     constructor(
         public layoutService: LayoutService,
@@ -38,8 +44,16 @@ export class SidebarComponent implements OnInit{
                 const firstName = names[0].charAt(0);
                 const lastName = names[names.length - 1].charAt(0);
                 this.letters = `${firstName} ${lastName}`;
+                this.name = profile.name;
             }
         });
+
+        // Listen to window resize events
+        fromEvent(globalThis, 'resize')
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => {
+                this.isDesktopView.set(globalThis.innerWidth > 991);
+            });
     }
 
     ngOnInit(): void {

@@ -3,7 +3,7 @@ button > i {
 }
 
 .layout-sidebar {
-  width: 90px;
+  width: 90px; // Largura fixa
   min-height: 750px;
   display: flex;
   flex-direction: row;
@@ -12,6 +12,10 @@ button > i {
   padding: 32px 28px 42px;
   gap: 10px;
   flex-shrink: 0; // Impede que o sidebar encolha
+
+  // Animação com transform (melhor performance)
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform; // Otimização de performance
 
   background: #D8E6FD;
   border: 0.5px solid #B1CDFB;
@@ -53,6 +57,32 @@ button > i {
       img {
         width: 42.9px;
       }
+    }
+
+    .user-avatar-container{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      gap: 16px;
+      height: auto;
+
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .user-avatar-profile{
+      display: flex;
+      flex-direction: column;
+      align-items: self-start;
+      padding: 0;
+      gap: 1px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      text-align: center;
     }
 
     .user-avatar {

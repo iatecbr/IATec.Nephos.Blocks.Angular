@@ -8,6 +8,7 @@
                class="app-logo">
                 <ng-content></ng-content>
             </a>
+            <div class="user-avatar-container">
 
             <a [routerLink]="['/']" (click)="onProfileButtonClick()"
                class="user-avatar">
@@ -19,6 +20,21 @@
                     <div>{{ letters }}</div>
                 }
             </a>
+
+                @if (isDesktopView()) {
+                    <div class="user-avatar-profile">
+                        <p>
+                            Product Designer
+                        </p>
+
+                        <p>
+                            <b>{{ name }}</b>
+                        </p>
+                    </div>
+                }
+
+
+            </div>
         </div>
 
         <!-- Menu -->

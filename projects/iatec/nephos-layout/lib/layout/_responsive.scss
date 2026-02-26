@@ -1,10 +1,19 @@
 @use './_sass_variables' as *;
 
 @media screen and (min-width: $breakpoint) {
+
+  app-nephos-template-icon{
+    display: none;
+  }
+
     .layout-container {
         &.layout-static {
+
+
+
             .layout-sidebar {
-                transition: transform var(--layout-section-transition-duration);
+                width: 256px;
+                transition: width var(--layout-section-transition-duration) ease-in-out;
             }
 
             .layout-content-wrapper {
@@ -51,6 +60,10 @@
         overflow: hidden;
     }
 
+  app-nephos-template-logo{
+      display: none;
+  }
+
     .layout-container {
         .layout-content-wrapper {
             margin-left: 0;
@@ -58,8 +71,8 @@
 
         .layout-sidebar {
             z-index: 999;
-            transform: translateX(-100%);
-            transition: transform var(--layout-section-transition-duration);
+            width: 90px;
+            transition: width var(--layout-section-transition-duration) ease-in-out;
             box-shadow: none;
         }
 
@@ -85,13 +98,7 @@
             background-color: var(--maskbg);
         }
 
-        .topbar-breadcrumb {
-            display: none;
-        }
 
-        .content-breadcrumb {
-            display: block;
-        }
     }
 }
 
