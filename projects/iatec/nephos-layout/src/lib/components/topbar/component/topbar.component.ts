@@ -2,6 +2,7 @@ import {Component, effect, ElementRef, Input, ViewChild} from '@angular/core';
 import {ColorScheme, LayoutService} from '../../../services';
 import {BreadcrumbComponent} from '../../breadcrumb';
 import {ButtonDirective} from 'primeng/button';
+import { NotificationComponent } from "../components/notification/notification.component";
 
 
 
@@ -9,8 +10,9 @@ import {ButtonDirective} from 'primeng/button';
     selector: 'nph-layout-topbar',
     templateUrl: './topbar.component.html',
     imports: [
-    BreadcrumbComponent
-],
+        BreadcrumbComponent,
+        NotificationComponent
+    ],
     styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {

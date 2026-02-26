@@ -1,7 +1,8 @@
 /* PrimeIcons */
-@import 'primeicons/primeicons.css';
+@use 'primeicons/primeicons.css';
 
 /* Custom layout */
-@import './tailwind.css';
+@use './tailwind.css';
+
 /* Layout styles - carregando direto da source */
-@import "../../iatec/nephos-layout/lib/layout/layout.scss";
+@use "../../iatec/nephos-layout/lib/layout/layout.scss";

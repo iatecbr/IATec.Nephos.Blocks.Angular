@@ -1,0 +1,24 @@
+
+  <button (click)="appsPanel.toggle($event)"
+    class="sidebar-action-button"
+    pButton
+    size="small"
+    type="button">
+    <i class="pi pi-plus"></i>
+  </button>
+  <p-popover #appsPanel>
+    <div class="grid grid-cols-3 gap-4 w-lg">
+      @for (app of apps; track app) {
+        <div
+          class="justify-center p-1 cursor-pointer">
+          <a (click)="navigateTo(app)"
+            class="flex border-1 border-gray-200 rounded-lg hover:bg-gray-100 px-2 py-7 justify-center">
+            <img [src]="app.icon"
+              alt="&#128512;"
+              class="rounded-2xl mr-2"/>
+            <span class="text-900 block font-semibold  text-lg">{{ app.name }}</span>
+          </a>
+        </div>
+      }
+    </div>
+  </p-popover>

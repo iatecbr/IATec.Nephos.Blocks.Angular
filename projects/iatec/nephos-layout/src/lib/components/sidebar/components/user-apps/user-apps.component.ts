@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
-import {TopbarItemComponent} from '../topbar-item/topbar-item.component';
 import {ButtonDirective} from 'primeng/button';
 
 import {Popover} from 'primeng/popover';

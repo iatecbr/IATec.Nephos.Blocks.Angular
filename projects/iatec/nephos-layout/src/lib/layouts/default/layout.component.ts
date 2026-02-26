@@ -1,11 +1,10 @@
-import {Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ContentChild, OnDestroy, Renderer2, TemplateRef, ViewChild} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter, Subscription} from 'rxjs';
 import {LayoutService} from '../../services';
 import {ProfileSidebarComponent, SidebarComponent, TopbarComponent} from '../../components';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {Toast} from 'primeng/toast';
-import {LayoutConfigurator} from '../../components/configurator/layout.configurator';
 import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
@@ -20,7 +19,6 @@ import {ConfirmDialog} from "primeng/confirmdialog";
         ProfileSidebarComponent,
         Toast,
         ConfirmDialog,
-        LayoutConfigurator,
         NgTemplateOutlet
     ]
 })

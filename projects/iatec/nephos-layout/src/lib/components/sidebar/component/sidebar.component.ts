@@ -1,10 +1,10 @@
 import { Component, effect, ElementRef, ViewChild, OnInit } from '@angular/core';
-import {LayoutService} from '../../services';
-import {MenuComponent} from '../menu';
+import {LayoutService} from '../../../services';
+import {MenuComponent} from '../../menu';
 import {RouterLink} from '@angular/router';
-import { UserAppsComponent } from "../topbar";
-import { HttpAppService } from "../../../../../../stage/src/app/services";
-import { UserAppModel } from "../../models";
+import { UserAppsComponent } from "../../topbar";
+import { HttpAppService } from "../../../../../../../stage/src/app/services";
+import { UserAppModel } from "../../../models";
 import { forkJoin } from "rxjs";
 
 @Component({
