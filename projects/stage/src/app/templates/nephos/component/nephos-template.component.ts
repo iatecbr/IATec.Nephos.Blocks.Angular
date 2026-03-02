@@ -1,8 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import {LayoutComponent, LayoutService} from '@iatec/nephos-layout';
 import {LogoComponent} from '../components/logo/logo.component';
 import {TopbarComponent} from '../components/topbar/topbar.component';
 import {ProfileSidebarComponent} from '../components/profile-sidebar/profile-sidebar.component';
+import { IconComponent } from "../components/icon/icon.component";
 
 
 @Component({
@@ -11,12 +12,15 @@ import {ProfileSidebarComponent} from '../components/profile-sidebar/profile-sid
         LayoutComponent,
         LogoComponent,
         TopbarComponent,
-        ProfileSidebarComponent
+        ProfileSidebarComponent,
+        IconComponent
     ],
     templateUrl: './nephos-template.component.html'
 })
 export class NephosTemplateComponent implements OnInit {
     private _layoutService = inject(LayoutService);
+
+    @ViewChild(LogoComponent) logoComponent!: LogoComponent;
 
     ngOnInit(): void {
 

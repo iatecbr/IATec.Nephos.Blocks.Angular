@@ -8,9 +8,6 @@
 
     .layout-container {
         &.layout-static {
-
-
-
             .layout-sidebar {
                 width: 256px;
                 transition: width var(--layout-section-transition-duration) ease-in-out;
@@ -23,12 +20,42 @@
 
         &.layout-static-inactive {
             .layout-sidebar {
-                transform: translateX(-100%);
+              width: 90px;
+              transition: width var(--layout-section-transition-duration) ease-in-out;
             }
 
             .layout-content-wrapper {
                 margin-left: 0;
             }
+          app-nephos-template-logo{
+            display: none;
+          }
+
+          app-nephos-template-icon{
+            display: flex;
+          }
+
+          nph-layout-sidebar-solution-logo{
+            display: none;
+          }
+          .user-avatar-profile{
+            display: none;
+          }
+
+          .btn-application{
+            display: none;
+          }
+
+          .sidebar-menubutton {
+            left: 87% !important;
+            transition: transform 0.5s ease-in-out;
+            transform: rotate(180deg);
+          }
+
+          .sidebar-action-button{
+            width: 36px;
+            transition: width var(--layout-section-transition-duration) ease-in-out;
+          }
         }
 
         &.layout-overlay {
@@ -64,6 +91,16 @@
       display: none;
   }
 
+  .sidebar-menubutton {
+    left: 87% !important;
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(180deg);
+  }
+
+  nph-layout-sidebar-solution-logo{
+    display: none;
+  }
+
     .layout-container {
         .layout-content-wrapper {
             margin-left: 0;
@@ -74,6 +111,11 @@
             width: 90px;
             transition: width var(--layout-section-transition-duration) ease-in-out;
             box-shadow: none;
+
+          .sidebar-action-button{
+            width: 36px;
+            transition: width var(--layout-section-transition-duration) ease-in-out;
+          }
         }
 
         &.layout-mobile-active {

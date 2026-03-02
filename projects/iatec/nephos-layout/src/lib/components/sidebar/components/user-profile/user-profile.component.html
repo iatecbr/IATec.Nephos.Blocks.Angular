@@ -1,0 +1,24 @@
+<div class="sidebar-user-profile">
+    <a [routerLink]="['/']" (click)="onProfileButtonClick()"
+       class="user-avatar">
+        @if (urlAvatar) {
+            <img
+                    [src]="urlAvatar"
+                    alt="Profile"/>
+        } @else {
+            <div>{{ letters }}</div>
+        }
+    </a>
+
+    @if (isDesktopView()) {
+        <div class="user-avatar-profile">
+            <p>
+                Product Designer
+            </p>
+
+            <p>
+                <b>{{ name }}</b>
+            </p>
+        </div>
+    }
+</div>

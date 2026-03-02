@@ -1,59 +1,33 @@
-import { Component, effect, ElementRef, ViewChild, OnInit, signal, inject, DestroyRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {LayoutService} from '../../../services';
 import {MenuComponent} from '../../menu';
 import {RouterLink} from '@angular/router';
 import { UserAppsComponent } from "../../topbar";
 import { HttpAppService } from "../../../../../../../stage/src/app/services";
 import { UserAppModel } from "../../../models";
-import { forkJoin, fromEvent } from "rxjs";
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { forkJoin } from "rxjs";
+import { SolutionLogoComponent } from "../components/solution-logo/solution-logo.component";
+import { UserProfileComponent } from "../components/user-profile/user-profile.component";
 
 @Component({
     selector: 'nph-layout-sidebar',
     imports: [
         MenuComponent,
         RouterLink,
-        UserAppsComponent
+        UserAppsComponent,
+        SolutionLogoComponent,
+        UserProfileComponent
     ],
     templateUrl: './sidebar.component.html'
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent implements OnInit {
     timeout: any = null;
-
-    @ViewChild('menuContainer') menuContainer!: ElementRef;
-
-    urlAvatar: string | undefined;
-    name: string | undefined;
-    letters: string | undefined;
     apps: UserAppModel[] = [];
 
-    isDesktopView = signal(globalThis.innerWidth > 991);
-
-    private destroyRef = inject(DestroyRef);
-
+    @ViewChild('menuContainer') menuContainer!: ElementRef;
     constructor(
-        public layoutService: LayoutService,
-        private _appsService: HttpAppService,
-        public el: ElementRef) {
-        effect(() => {
-            const profile = this.layoutService.profile();
-            this.urlAvatar = profile.urlAvatar;
+        public layoutService: LayoutService, private _appsService: HttpAppService){
 
-            if (profile.name) {
-                const names = profile.name.split(' ');
-                const firstName = names[0].charAt(0);
-                const lastName = names[names.length - 1].charAt(0);
-                this.letters = `${firstName} ${lastName}`;
-                this.name = profile.name;
-            }
-        });
-
-        // Listen to window resize events
-        fromEvent(globalThis, 'resize')
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => {
-                this.isDesktopView.set(globalThis.innerWidth > 991);
-            });
     }
 
     ngOnInit(): void {
@@ -68,11 +42,10 @@ export class SidebarComponent implements OnInit{
             this.apps = apps;
         });
     }
-
-
-    onProfileButtonClick() {
-        this.layoutService.showProfileSidebar();
+    onMenuButtonClick() {
+        this.layoutService.onMenuToggle();
     }
+
 
     onMouseEnter() {
         if (!this.layoutService.layoutState().anchored) {

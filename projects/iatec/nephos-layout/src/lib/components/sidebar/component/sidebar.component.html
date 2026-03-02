@@ -8,34 +8,17 @@
                class="app-logo">
                 <ng-content></ng-content>
             </a>
-            <div class="user-avatar-container">
 
-            <a [routerLink]="['/']" (click)="onProfileButtonClick()"
-               class="user-avatar">
-                @if (urlAvatar) {
-                    <img
-                            [src]="urlAvatar"
-                            alt="Profile"/>
-                } @else {
-                    <div>{{ letters }}</div>
-                }
-            </a>
+            <button #menubutton
+                    (click)="onMenuButtonClick()"
+                    class="sidebar-menubutton p-link p-trigger"
+                    type="button">
+                <i class="pi pi-chevron-left"></i>
+            </button>
 
-                @if (isDesktopView()) {
-                    <div class="user-avatar-profile">
-                        <p>
-                            Product Designer
-                        </p>
-
-                        <p>
-                            <b>{{ name }}</b>
-                        </p>
-                    </div>
-                }
-
-
-            </div>
         </div>
+
+        <nph-layout-sidebar-user-profile/>
 
         <!-- Menu -->
         <div #menuContainer
@@ -43,6 +26,9 @@
             <nph-layout-menu></nph-layout-menu>
         </div>
 
+
+
+<nph-layout-sidebar-solution-logo/>
         <!-- Botão de Ação -->
         <nph-layout-sidebar-user-apps [apps]="apps"/>
     </div>

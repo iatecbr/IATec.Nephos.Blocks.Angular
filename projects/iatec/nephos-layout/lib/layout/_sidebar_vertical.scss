@@ -2,8 +2,30 @@ button > i {
   align-content: center;
 }
 
+.sidebar-menubutton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 0.5px solid #D8E6FD;
+  background-color: #EAF2FF;
+  color: #475569;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 95%;
+  top: 80px;
+}
+
+.sidebar-menubutton:hover {
+  background-color: var(--primary-color);
+}
+
+
 .layout-sidebar {
-  width: 90px; // Largura fixa
+  width: 90px;
   min-height: 750px;
   display: flex;
   flex-direction: row;
@@ -11,20 +33,18 @@ button > i {
   align-items: flex-start;
   padding: 32px 28px 42px;
   gap: 10px;
-  flex-shrink: 0; // Impede que o sidebar encolha
+  flex-shrink: 0;
 
-  // Animação com transform (melhor performance)
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform; // Otimização de performance
+  will-change: transform;
 
   background: #D8E6FD;
   border: 0.5px solid #B1CDFB;
-  box-shadow: 0px 0px 20px -32px #D8E6FD;
+  box-shadow: 0 0 20px -32px #D8E6FD;
   backdrop-filter: blur(80px);
   border-radius: 18px;
 
-  // Altura ajustada para o flexbox container
-  height: calc(100vh - 48px); // Compensa o padding de 24px top e bottom do container
+  height: calc(100vh - 48px);
 
   .sidebar-content {
     display: flex;
@@ -37,7 +57,6 @@ button > i {
     height: 100%;
   }
 
-  // Logo e Avatar no topo
   .sidebar-header-group {
     display: flex;
     flex-direction: column;
@@ -45,59 +64,58 @@ button > i {
     padding: 0;
     gap: 24px;
     width: 43px;
+  }
 
-    .app-logo {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      width: 54px;
+  .app-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 54px;
 
-      img {
-        width: 42.9px;
-      }
-    }
-
-    .user-avatar-container{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      gap: 16px;
-      height: auto;
-
-      flex: none;
-      order: 1;
-      flex-grow: 0;
-    }
-
-    .user-avatar-profile{
-      display: flex;
-      flex-direction: column;
-      align-items: self-start;
-      padding: 0;
-      gap: 1px;
-      flex: none;
-      order: 1;
-      flex-grow: 0;
-      text-align: center;
-    }
-
-    .user-avatar {
-      width: 43px;
-      height: 42px;
-
-      img, .p-avatar {
-        width: 42px;
-        height: 42px;
-        border-radius: 20px;
-      }
+    img {
+      width: 42.9px;
     }
   }
 
-  // Menu principal
+  .sidebar-user-profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 16px;
+    height: auto;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+
+  .user-avatar-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    padding: 0;
+    gap: 1px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    text-align: center;
+  }
+
+  .user-avatar {
+    width: 43px;
+    height: 42px;
+
+    img, .p-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 20px;
+    }
+  }
+
   .sidebar-menu-group {
     display: flex;
     flex-direction: column;
@@ -172,7 +190,6 @@ button > i {
     }
   }
 
-  // Botão de ação (FAB - Floating Action Button)
   .sidebar-action-button {
     display: flex;
     flex-direction: row;
@@ -180,7 +197,7 @@ button > i {
     align-items: center;
     padding: 8.75px 12.25px;
     margin: 0 auto;
-    width: 36px;
+    width: 212px;
     height: 36px;
     background: #3B82F6;
     border: 1px solid #3B82F6;
