@@ -79,7 +79,7 @@ button > i {
     }
   }
 
-  .sidebar-user-profile{
+  .sidebar-user-profile {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -93,7 +93,7 @@ button > i {
     flex-grow: 0;
   }
 
-  .user-avatar-profile{
+  .user-avatar-profile {
     display: flex;
     flex-direction: column;
     align-items: self-start;
@@ -119,10 +119,10 @@ button > i {
   .sidebar-menu-group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 0;
     gap: 12px;
-    width: 43px;
+    width: max-content;
     flex: 1;
 
     .menu-separator {
@@ -143,51 +143,65 @@ button > i {
     .layout-menu {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       padding: 0;
       gap: 8px;
+      width: max-content;
+    }
+
+    .p-ripple {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      padding: 7px 10.5px;
+      gap: 7px;
+    }
+
+
+    .layout-menuitem-text {
+      width: 134px;
+    }
+
+
+    .layout-menuitem {
       width: 43px;
 
-      .layout-menuitem {
+      a {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
         width: 43px;
+        height: 43px;
+        border-radius: 12px;
+        transition: background-color 0.2s;
 
-        a {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          padding: 10px;
-          gap: 10px;
-          width: 43px;
-          height: 43px;
-          border-radius: 12px;
-          transition: background-color 0.2s;
+        &:hover {
+          background: rgba(59, 130, 246, 0.1);
+        }
 
-          &:hover {
-            background: rgba(59, 130, 246, 0.1);
-          }
+        &.active-menuitem {
+          background: rgba(59, 130, 246, 0.15);
+        }
 
-          &.active-menuitem {
-            background: rgba(59, 130, 246, 0.15);
-          }
 
-          .layout-menuitem-icon {
-            width: 28px;
-            height: 28px;
-            color: #64748B;
-            margin: 0;
-          }
-
-          .layout-menuitem-text {
-            display: none;
-          }
-
-          .layout-submenu-toggler {
-            display: none;
-          }
+        .layout-submenu-toggler {
+          display: none;
         }
       }
     }
+  }
+
+  .layout-menuitem-icon {
+    width: 28px;
+    height: 28px;
+    color: #64748B;
+    margin: 0;
+    font-size: 24px;
+    align-content: center;
   }
 
   .sidebar-action-button {

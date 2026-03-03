@@ -38,6 +38,16 @@
           nph-layout-sidebar-solution-logo{
             display: none;
           }
+
+
+          .layout-menuitem-text{
+            display: none;
+          }
+
+          .layout-submenu-toggler{
+            display: none;
+          }
+
           .user-avatar-profile{
             display: none;
           }
@@ -86,6 +96,14 @@
     .blocked-scroll {
         overflow: hidden;
     }
+
+  .layout-menuitem-text{
+    display: none;
+  }
+
+  .layout-submenu-toggler{
+    display: none;
+  }
 
   app-nephos-template-logo{
       display: none;

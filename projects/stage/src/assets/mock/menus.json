@@ -1,14 +1,10 @@
 [
   {
-    "label": "Dashboards",
-    "icon": "pi pi-home",
+    "label": "Dashboard",
+    "icon": "pi pi-th-large",
     "routerLink": [
       "/"
-    ]
-  },
-  {
-    "label": "Examples",
-    "icon": "pi pi-palette",
+    ],
     "items": [
       {
         "label": "Empty Page",

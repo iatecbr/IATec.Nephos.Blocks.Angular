@@ -1,10 +1,4 @@
 <ng-container>
-  @if (root && item.visible !== false) {
-    <div
-      class="layout-menuitem-root-text">
-      {{ item.label | transloco }}
-    </div>
-  }
   @if ((!item.routerLink || item.items) && item.visible !== false) {
     <a
       (click)="itemClick($event)"
