@@ -156,8 +156,12 @@ button > i {
       align-items: center;
       padding: 7px 10.5px;
       gap: 7px;
-    }
 
+      &:hover {
+        background: #F1F5F9;
+        border-radius: var(--border-radius-xl, 12px);
+      }
+    }
 
     .layout-menuitem-text {
       width: 134px;
