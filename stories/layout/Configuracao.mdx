@@ -1,0 +1,380 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/Configuração" />
+
+# Configuração do Nephos Layout
+
+Guia completo de configuração e personalização do Nephos Layout.
+
+## 🔧 LayoutService
+
+O `LayoutService` é o serviço principal para controlar e configurar o layout.
+
+### Injetando o Serviço
+
+```typescript
+import { LayoutService } from '@iatec/nephos-layout';
+
+constructor(private layoutService: LayoutService) {}
+```
+
+## ⚙️ Configurações Disponíveis
+
+### Layout Config (layoutConfig)
+
+Interface `LayoutConfig`:
+
+```typescript
+interface LayoutConfig {
+  ripple: boolean;              // Efeito ripple nos componentes
+  inputStyle: 'outlined' | 'filled';  // Estilo dos inputs
+  menuMode: MenuMode;           // Modo do menu
+  menuTheme: MenuTheme;         // Tema do menu
+  colorScheme: ColorScheme;     // Esquema de cores
+  theme: string;                // Nome do tema
+  scale: number;                // Escala da interface (12-16)
+}
+```
+
+### Modos de Menu (MenuMode)
+
+```typescript
+type MenuMode = 
+  | 'static'      // Fixo sempre visível
+  | 'overlay'     // Sobrepõe o conteúdo
+  | 'slim'        // Compacto com expansão
+  | 'slim-plus'   // Compacto com ícones e labels
+  | 'horizontal'  // Menu horizontal no topo
+  | 'reveal'      // Oculto que revela no hover
+  | 'drawer';     // Gaveta lateral
+```
+
+### Temas de Menu (MenuTheme)
+
+```typescript
+type MenuTheme = 
+  | 'colorScheme'   // Usa o esquema de cores
+  | 'primaryColor'  // Usa a cor primária
+  | 'transparent';  // Menu transparente
+```
+
+### Esquema de Cores (ColorScheme)
+
+```typescript
+type ColorScheme = 
+  | 'light'  // Tema claro
+  | 'dark'   // Tema escuro
+  | 'dim';   // Tema intermediário
+```
+
+## 📝 Exemplos de Uso
+
+### Alterar Modo do Menu
+
+```typescript
+// Modo Static
+this.layoutService.updateLayoutConfig({ 
+  menuMode: 'static' 
+});
+
+// Modo Overlay
+this.layoutService.updateLayoutConfig({ 
+  menuMode: 'overlay' 
+});
+
+// Modo Slim
+this.layoutService.updateLayoutConfig({ 
+  menuMode: 'slim' 
+});
+```
+
+### Alternar Tema
+
+```typescript
+// Ativar tema escuro
+this.layoutService.updateLayoutConfig({ 
+  colorScheme: 'dark' 
+});
+
+// Voltar para tema claro
+this.layoutService.updateLayoutConfig({ 
+  colorScheme: 'light' 
+});
+```
+
+### Alterar Tema do Menu
+
+```typescript
+// Menu com cor primária
+this.layoutService.updateLayoutConfig({ 
+  menuTheme: 'primaryColor' 
+});
+
+// Menu com esquema de cores
+this.layoutService.updateLayoutConfig({ 
+  menuTheme: 'colorScheme' 
+});
+
+// Menu transparente
+this.layoutService.updateLayoutConfig({ 
+  menuTheme: 'transparent' 
+});
+```
+
+### Alterar Escala da Interface
+
+```typescript
+// Aumentar tamanho da interface
+this.layoutService.updateLayoutConfig({ 
+  scale: 14 
+});
+
+// Tamanho padrão
+this.layoutService.updateLayoutConfig({ 
+  scale: 12 
+});
+```
+
+### Configuração Completa
+
+```typescript
+this.layoutService.updateLayoutConfig({
+  ripple: true,
+  inputStyle: 'outlined',
+  menuMode: 'static',
+  menuTheme: 'colorScheme',
+  colorScheme: 'light',
+  theme: 'indigo',
+  scale: 12
+});
+```
+
+## 🎛️ Layout State
+
+O `layoutState` controla o estado dinâmico do layout:
+
+```typescript
+interface LayoutState {
+  staticMenuDesktopInactive: boolean;  // Menu desktop inativo
+  overlayMenuActive: boolean;          // Menu overlay ativo
+  profileSidebarVisible: boolean;      // Sidebar de perfil visível
+  configSidebarVisible: boolean;       // Sidebar de config visível
+  staticMenuMobileActive: boolean;     // Menu mobile ativo
+  menuHoverActive: boolean;            // Hover do menu ativo
+  sidebarActive: boolean;              // Sidebar ativo
+  anchored: boolean;                   // Sidebar ancorado
+}
+```
+
+### Manipulando o State
+
+```typescript
+// Toggle do sidebar
+this.layoutService.toggleSidebar();
+
+// Mostrar profile sidebar
+this.layoutService.showProfileSidebar();
+
+// Esconder profile sidebar
+this.layoutService.hideProfileSidebar();
+
+// Toggle configurador
+this.layoutService.showConfigSidebar();
+```
+
+### Observables
+
+```typescript
+// Observar mudanças de configuração
+this.layoutService.config$.subscribe(config => {
+  console.log('Nova configuração:', config);
+});
+
+// Observar estado do layout
+this.layoutService.state$.subscribe(state => {
+  console.log('Novo estado:', state);
+});
+
+// Observar abertura do overlay
+this.layoutService.overlayOpen$.subscribe(() => {
+  console.log('Menu overlay aberto');
+});
+```
+
+## 🎯 Métodos Úteis
+
+### Verificar Modo do Layout
+
+```typescript
+// Verificar se é overlay
+if (this.layoutService.isOverlay()) {
+  console.log('Modo overlay');
+}
+
+// Verificar se é desktop
+if (this.layoutService.isDesktop()) {
+  console.log('Modo desktop');
+}
+
+// Verificar se é mobile
+if (this.layoutService.isMobile()) {
+  console.log('Modo mobile');
+}
+
+// Verificar se é horizontal
+if (this.layoutService.isHorizontal()) {
+  console.log('Menu horizontal');
+}
+
+// Verificar se é slim
+if (this.layoutService.isSlim()) {
+  console.log('Menu slim');
+}
+```
+
+## 🎨 Personalização de Estilos
+
+### Variáveis CSS
+
+O layout usa variáveis CSS que podem ser customizadas:
+
+```scss
+:root {
+  // Sidebar
+  --sidebar-width: 250px;
+  --sidebar-collapsed-width: 60px;
+  
+  // Topbar
+  --topbar-height: 60px;
+  
+  // Cores
+  --primary-color: #6366f1;
+  --surface-ground: #f8f9fa;
+  --surface-card: #ffffff;
+  --text-color: #495057;
+  --text-color-secondary: #6c757d;
+}
+```
+
+### Customização no Angular
+
+```scss
+// styles.scss
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+
+// Sobrescrever variáveis
+:root {
+  --primary-color: #10b981;
+  --sidebar-width: 280px;
+  --topbar-height: 70px;
+}
+```
+
+## 📦 Configuração Inicial
+
+### No AppComponent
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { LayoutService } from '@iatec/nephos-layout';
+
+@Component({
+  selector: 'app-root',
+  template: '<nph-layout></nph-layout>'
+})
+export class AppComponent implements OnInit {
+  
+  constructor(private layoutService: LayoutService) {}
+  
+  ngOnInit() {
+    // Configuração inicial do layout
+    this.layoutService.updateLayoutConfig({
+      ripple: true,
+      inputStyle: 'outlined',
+      menuMode: 'static',
+      menuTheme: 'colorScheme',
+      colorScheme: 'light',
+      theme: 'indigo',
+      scale: 12
+    });
+    
+    // Carregar preferências do usuário do localStorage
+    const savedConfig = localStorage.getItem('layout-config');
+    if (savedConfig) {
+      this.layoutService.updateLayoutConfig(JSON.parse(savedConfig));
+    }
+    
+    // Salvar mudanças no localStorage
+    this.layoutService.config$.subscribe(config => {
+      localStorage.setItem('layout-config', JSON.stringify(config));
+    });
+  }
+}
+```
+
+## 🔌 Integração com Roteamento
+
+```typescript
+import { Routes } from '@angular/router';
+import { LayoutComponent } from '@iatec/nephos-layout';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component') },
+      { path: 'users', loadComponent: () => import('./users/users.component') },
+      // ... outras rotas
+    ]
+  },
+  {
+    path: 'auth',
+    component: LayoutCompactComponent, // Layout sem sidebar
+    children: [
+      { path: 'login', loadComponent: () => import('./auth/login.component') },
+      { path: 'register', loadComponent: () => import('./auth/register.component') }
+    ]
+  }
+];
+```
+
+## 📱 Responsividade
+
+O layout se adapta automaticamente aos breakpoints:
+
+```typescript
+// Breakpoints definidos no LayoutService
+private breakpoints = {
+  mobile: 576,
+  tablet: 768,
+  desktop: 992,
+  large: 1200
+};
+```
+
+### Detectar Tamanho da Tela
+
+```typescript
+// Observar mudanças de tamanho
+this.layoutService.state$.subscribe(state => {
+  if (this.layoutService.isMobile()) {
+    console.log('Modo mobile');
+  } else if (this.layoutService.isDesktop()) {
+    console.log('Modo desktop');
+  }
+});
+```
+
+## 🚀 Dicas de Performance
+
+1. **Lazy Loading**: Use lazy loading para módulos de rotas
+2. **OnPush Strategy**: Use ChangeDetectionStrategy.OnPush em componentes
+3. **Unsubscribe**: Sempre faça unsubscribe de observables
+4. **Virtual Scroll**: Use virtual scrolling para listas grandes no menu
+
+## 🔗 Recursos Relacionados
+
+- [Layout Default](/docs/layout-default--docs)
+- [Design System](/docs/design-system-tokens--docs)

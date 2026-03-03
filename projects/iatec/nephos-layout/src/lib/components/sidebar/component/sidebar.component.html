@@ -9,27 +9,22 @@
                 <ng-content></ng-content>
             </a>
 
-            <button #menubutton
+            <button
                     (click)="onMenuButtonClick()"
                     class="sidebar-menubutton p-link p-trigger"
                     type="button">
                 <i class="pi pi-chevron-left"></i>
             </button>
-
         </div>
 
         <nph-layout-sidebar-user-profile/>
 
-        <!-- Menu -->
         <div #menuContainer
              class="sidebar-menu-group">
             <nph-layout-menu></nph-layout-menu>
         </div>
 
-
-
-<nph-layout-sidebar-solution-logo/>
-        <!-- Botão de Ação -->
+        <nph-layout-sidebar-solution-logo/>
         <nph-layout-sidebar-user-apps [apps]="apps"/>
     </div>
 </aside>

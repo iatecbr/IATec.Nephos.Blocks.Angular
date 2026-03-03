@@ -1,0 +1,457 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/Guia de Estilos" />
+
+# Guia de Estilos e Temas
+
+Guia completo para personalização visual do Nephos Layout.
+
+## 🎨 Estrutura de Estilos
+
+O Nephos Layout utiliza SCSS e está organizado da seguinte forma:
+
+```
+projects/iatec/nephos-layout/lib/layout/
+├── layout.scss              # Arquivo principal
+├── _config.scss             # Configurações globais
+├── _fonts.scss              # Tipografia
+├── _sass_variables.scss     # Variáveis SASS
+├── _overrides.scss          # Sobrescritas de componentes
+├── _responsive.scss         # Media queries
+├── _utils.scss              # Classes utilitárias
+├── _main.scss               # Layout principal
+├── _topbar.scss             # Estilos do topbar
+├── _sidebar_*.scss          # Estilos dos diferentes modos de sidebar
+├── _breadcrumb.scss         # Estilos do breadcrumb
+├── _profile.scss            # Estilos do profile sidebar
+├── _content.scss            # Área de conteúdo
+├── variables/               # Tokens de design
+│   ├── _common.scss         # Variáveis comuns
+│   ├── _light.scss          # Tema claro
+│   └── _dark.scss           # Tema escuro
+└── menutheme/               # Temas de menu
+    ├── _colorscheme.scss    # Tema colorScheme
+    └── _primarycolor.scss   # Tema primaryColor
+```
+
+## 📦 Importando os Estilos
+
+### Importação Completa
+
+```scss
+// styles.scss ou style principal
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+```
+
+### Importação Modular
+
+```scss
+// Apenas variáveis
+@import '@iatec/nephos-layout/lib/layout/variables/common';
+
+// Apenas fontes
+@import '@iatec/nephos-layout/lib/layout/fonts';
+
+// Apenas utilitários
+@import '@iatec/nephos-layout/lib/layout/utils';
+```
+
+## 🎨 Variáveis de Design Tokens
+
+### Cores Principais
+
+```scss
+// variables/_common.scss
+$primary-color: #6366f1;
+$primary-50: #eef2ff;
+$primary-100: #e0e7ff;
+$primary-200: #c7d2fe;
+// ... até primary-900
+
+// Cores de superfície
+$surface-ground: #f8f9fa;
+$surface-section: #ffffff;
+$surface-card: #ffffff;
+$surface-overlay: #ffffff;
+$surface-border: #dee2e6;
+$surface-hover: #e9ecef;
+```
+
+### Cores Semânticas
+
+```scss
+// Success
+$green-50: #f0fdf4;
+$green-500: #22c55e;
+$green-600: #16a34a;
+
+// Info
+$blue-50: #eff6ff;
+$blue-500: #3b82f6;
+$blue-600: #2563eb;
+
+// Warning
+$orange-50: #fff7ed;
+$orange-500: #f97316;
+$orange-600: #ea580c;
+
+// Danger
+$red-50: #fef2f2;
+$red-500: #ef4444;
+$red-600: #dc2626;
+```
+
+### Tipografia
+
+```scss
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+```
+
+### Espaçamentos
+
+```scss
+$spacing-1: 0.25rem;  // 4px
+$spacing-2: 0.5rem;   // 8px
+$spacing-3: 0.75rem;  // 12px
+$spacing-4: 1rem;     // 16px
+$spacing-5: 1.25rem;  // 20px
+$spacing-6: 1.5rem;   // 24px
+$spacing-8: 2rem;     // 32px
+```
+
+### Bordas e Sombras
+
+```scss
+$border-radius: 6px;
+$border-radius-sm: 4px;
+$border-radius-lg: 12px;
+
+$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+```
+
+## 🎨 Temas
+
+### Tema Claro (Light)
+
+```scss
+// variables/_light.scss
+:root {
+  --surface-ground: #f8f9fa;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --text-color: #495057;
+  --text-color-secondary: #6c757d;
+  --surface-border: #dee2e6;
+}
+```
+
+### Tema Escuro (Dark)
+
+```scss
+// variables/_dark.scss
+:root[data-theme='dark'] {
+  --surface-ground: #1e1e1e;
+  --surface-section: #252525;
+  --surface-card: #2a2a2a;
+  --text-color: #e5e7eb;
+  --text-color-secondary: #9ca3af;
+  --surface-border: #3f3f46;
+}
+```
+
+## 🎨 Temas de Menu
+
+### Color Scheme Theme
+
+O menu usa as cores do tema atual:
+
+```scss
+// menutheme/_colorscheme.scss
+.layout-colorscheme-menu {
+  .layout-sidebar {
+    background: var(--surface-card);
+    border-right: 1px solid var(--surface-border);
+  }
+  
+  .menu-item {
+    color: var(--text-color);
+    
+    &:hover {
+      background: var(--surface-hover);
+    }
+  }
+}
+```
+
+### Primary Color Theme
+
+O menu usa a cor primária:
+
+```scss
+// menutheme/_primarycolor.scss
+.layout-primarycolor-menu {
+  .layout-sidebar {
+    background: var(--primary-color);
+  }
+  
+  .menu-item {
+    color: rgba(255, 255, 255, 0.87);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    &.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+```
+
+## 🎯 Customizações Comuns
+
+### Alterar Cor Primária
+
+```scss
+// styles.scss
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+
+:root {
+  --primary-color: #10b981;  // Green
+  --primary-50: #ecfdf5;
+  --primary-100: #d1fae5;
+  --primary-200: #a7f3d0;
+  --primary-500: #10b981;
+  --primary-600: #059669;
+  --primary-700: #047857;
+}
+```
+
+### Customizar Sidebar
+
+```scss
+// Largura do sidebar
+:root {
+  --sidebar-width: 280px;  // Padrão: 250px
+}
+
+// Cor de fundo custom
+.layout-sidebar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+// Menu item custom
+.menu-item {
+  border-radius: 8px;
+  margin: 0.25rem 0.5rem;
+  
+  &:hover {
+    transform: translateX(4px);
+    transition: all 0.2s ease;
+  }
+}
+```
+
+### Customizar Topbar
+
+```scss
+:root {
+  --topbar-height: 70px;  // Padrão: 60px
+}
+
+.layout-topbar {
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  
+  // Topbar fixo no topo
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+```
+
+### Customizar Breadcrumb
+
+```scss
+.layout-breadcrumb {
+  background: var(--surface-card);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+  
+  .breadcrumb-item {
+    color: var(--text-color-secondary);
+    
+    &.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  }
+}
+```
+
+### Customizar Profile Sidebar
+
+```scss
+.layout-profile-sidebar {
+  width: 320px;  // Padrão: 280px
+  background: var(--surface-overlay);
+  
+  .profile-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-700) 100%);
+    padding: 2rem;
+    color: white;
+  }
+}
+```
+
+## 📱 Responsividade
+
+### Breakpoints Customizados
+
+```scss
+// Sobrescrever breakpoints padrão
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+$breakpoint-large: 1200px;
+
+// Media queries custom
+@media (max-width: #{$breakpoint-tablet}) {
+  .layout-sidebar {
+    transform: translateX(-100%);
+    
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+```
+
+## 🎨 Classes Utilitárias
+
+### Espaçamento
+
+```scss
+// Padding
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-4 { padding: 1rem; }
+// ...
+
+// Margin
+.m-0 { margin: 0; }
+.m-1 { margin: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+// ...
+```
+
+### Cores de Texto
+
+```scss
+.text-primary { color: var(--primary-color); }
+.text-secondary { color: var(--text-color-secondary); }
+.text-success { color: var(--green-500); }
+.text-warning { color: var(--orange-500); }
+.text-danger { color: var(--red-500); }
+```
+
+### Backgrounds
+
+```scss
+.bg-primary { background: var(--primary-color); }
+.bg-surface { background: var(--surface-card); }
+.bg-hover { background: var(--surface-hover); }
+```
+
+## 🎯 Exemplo Completo de Customização
+
+```scss
+// custom-theme.scss
+
+// 1. Importar variáveis primeiro
+@import '@iatec/nephos-layout/lib/layout/variables/common';
+
+// 2. Sobrescrever variáveis
+:root {
+  // Cores primárias
+  --primary-color: #8b5cf6;
+  --primary-50: #faf5ff;
+  --primary-500: #8b5cf6;
+  --primary-600: #7c3aed;
+  
+  // Layout
+  --sidebar-width: 280px;
+  --topbar-height: 70px;
+  
+  // Espaçamentos
+  --content-padding: 2rem;
+  
+  // Bordas
+  --border-radius: 8px;
+}
+
+// 3. Importar o layout completo
+@import '@iatec/nephos-layout/lib/layout/layout.scss';
+
+// 4. Customizações específicas
+.layout-sidebar {
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+  
+  .menu-item {
+    border-radius: var(--border-radius);
+    margin: 0.25rem 0.75rem;
+    font-weight: 500;
+    
+    &:hover {
+      background: var(--primary-50);
+      color: var(--primary-color);
+    }
+    
+    &.active {
+      background: var(--primary-color);
+      color: white;
+    }
+  }
+}
+
+.layout-topbar {
+  border-bottom: 1px solid var(--surface-border);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.layout-main-container {
+  padding: var(--content-padding);
+}
+```
+
+## 🔍 Inspecionando Variáveis CSS
+
+Você pode inspecionar todas as variáveis CSS disponíveis no DevTools:
+
+```javascript
+// No console do navegador
+const styles = getComputedStyle(document.documentElement);
+console.log(styles.getPropertyValue('--primary-color'));
+console.log(styles.getPropertyValue('--sidebar-width'));
+```
+
+## 📚 Recursos Adicionais
+
+- [Design Tokens](/docs/design-system-tokens--docs)
+- [Cores do Sistema](/docs/design-system-cores--docs)
+- [Tipografia](/docs/design-system-tipografia--docs)
+- [Espaçamentos](/docs/design-system-espacamentos--docs)

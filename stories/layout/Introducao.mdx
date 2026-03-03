@@ -4,7 +4,7 @@ import { Meta } from '@storybook/blocks';
 
 # Nephos Layout
 
-O **Nephos Layout** é um bloco completo de layout e estrutura de página para aplicações Angular, fornecendo componentes prontos para construção de interfaces administrativas e corporativas.
+O **Nephos Layout** é um bloco completo de layout e estrutura de página, fornecendo componentes prontos para construção de interfaces administrativas.
 
 ## 📦 Instalação
 
@@ -14,7 +14,6 @@ npm install @iatec/nephos-layout
 
 ## 🎯 Características
 
-- ✅ Múltiplos modos de layout (Static, Overlay, Slim, Horizontal, etc.)
 - ✅ Sidebar responsivo com navegação
 - ✅ Topbar customizável
 - ✅ Profile Sidebar para perfil de usuário
@@ -28,7 +27,6 @@ npm install @iatec/nephos-layout
 ### Layouts
 
 - **LayoutComponent** (`nph-layout`): Layout completo com sidebar
-- **LayoutCompactComponent** (`nph-layout-compact`): Layout compacto sem sidebar
 
 ### Componentes
 
@@ -93,20 +91,6 @@ import { LayoutComponent } from '@iatec/nephos-layout';
 export class AppComponent {}
 ```
 
-## 🎨 Modos de Layout
-
-O Nephos Layout suporta diferentes modos:
-
-| Modo | Descrição |
-|------|-----------|
-| **static** | Sidebar fixo sempre visível (desktop) |
-| **overlay** | Sidebar sobrepõe o conteúdo |
-| **slim** | Sidebar compacto com expansão no hover |
-| **slim-plus** | Sidebar compacto com ícones e labels |
-| **horizontal** | Menu horizontal no topo |
-| **reveal** | Sidebar oculto que revela no hover |
-| **drawer** | Sidebar como gaveta lateral |
-
 ## 🎨 Temas
 
 O layout suporta múltiplos temas de menu:
@@ -146,8 +130,7 @@ constructor(private layoutService: LayoutService) {
 
 ## 📚 Próximos Passos
 
-- [Layout Completo](/docs/blocos-nephos-layout-layout-completo--docs)
-- [Layout Compacto](/docs/blocos-nephos-layout-layout-compacto--docs)
+- [Layout Completo](/docs/blocos-nephos-layout-completo--docs)
 - [Sidebar](/docs/blocos-nephos-layout-sidebar--docs)
 - [Configuração](/docs/blocos-nephos-layout-configuracao--docs)
 

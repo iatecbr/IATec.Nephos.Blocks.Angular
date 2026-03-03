@@ -2,113 +2,159 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Componentes Nephos/Introdução" />
 
-# Componentes PrimeNG
+# Blocos Nephos
 
-O Nephos Blocks utiliza o **PrimeNG** como base para componentes de interface. Esta seção documenta as customizações e temas aplicados aos componentes do PrimeNG.
+Componentes customizados e blocos de interface completos desenvolvidos internamente pela equipe Nephos.
 
-## 📚 Sobre o PrimeNG
+## 🧱 O que são Blocos?
 
-PrimeNG é uma biblioteca rica de componentes UI para Angular, oferecendo mais de 80 componentes prontos para uso.
+Blocos são componentes de alto nível que combinam múltiplos elementos para formar funcionalidades completas. Diferente dos componentes básicos do PrimeNG, os blocos são:
 
-🔗 **[Documentação Oficial do PrimeNG](https://primeng.org/)**
+- **Específicos do Nephos**: Desenvolvidos internamente para necessidades específicas
+- **Compostos**: Combinam múltiplos componentes PrimeNG e customizados
+- **Completos**: Incluem lógica, estilo e comportamento integrados
+- **Documentados**: Cada bloco tem documentação completa de uso
 
-## 🎨 Customizações Nephos
+## 📋 Padrão de Documentação
 
-O Nephos Blocks aplica customizações específicas aos componentes PrimeNG para:
+Cada bloco nesta seção é documentado com:
 
-1. **Adequação ao Design System**: Cores, tipografia e espaçamentos alinhados aos tokens do Nephos
-2. **Temas Personalizados**: Variações visuais específicas para diferentes contextos
-3. **Comportamentos Específicos**: Funcionalidades adicionais para atender necessidades internas
+### ✅ Aparência Real
+Visualização exata de como o componente funciona, com interatividade completa.
 
-## 🧩 Componentes Customizados
+### 📝 Exemplo de Uso
+Código completo e funcional demonstrando como usar o bloco.
 
-Nesta seção, você encontrará:
+### 📦 Importação
+Instruções de como importar e configurar o bloco no seu projeto.
 
-### Referências Rápidas
-Links diretos para a documentação oficial de cada componente do PrimeNG utilizado.
+### 🎛️ API
+Documentação completa de:
+- **Inputs**: Propriedades de entrada
+- **Outputs**: Eventos emitidos
+- **Métodos**: Métodos públicos disponíveis
+- **Slots**: Áreas de conteúdo customizável
 
-### Customizações Internas
-Detalhes sobre modificações aplicadas pela equipe:
-- Estilos SCSS específicos
-- Configurações padrão
-- Extensões de funcionalidade
+### 🎨 Variações
+Diferentes configurações e estilos disponíveis.
 
-### Temas
-Variações de tema disponíveis:
-- Tema claro/escuro
-- Cores primárias customizadas
-- Estilos de menu
+### ♿ Acessibilidade
+Recursos de acessibilidade implementados.
 
-## 📦 Estrutura de Arquivos
+## 📚 Referência de Qualidade
 
-As customizações estão organizadas em:
+Este padrão de documentação é inspirado no [Canvas Kit da Workday](https://workday.github.io/canvas-kit/):
+- [Canvas Kit Docs](https://workday.github.io/canvas-kit)
+- [Exemplo: Button Component](https://workday.github.io/canvas-kit/?path=/story/components-buttons--delete)
 
-```
-projects/iatec/nephos-layout/lib/layout/
-├── _overrides.scss          # Sobrescritas de estilos PrimeNG
-├── menutheme/              # Temas de menu
-│   ├── _colorscheme.scss
-│   ├── _primarycolor.scss
-│   └── _transparent.scss
-└── variables/              # Variáveis personalizadas
-    └── _common.scss
-```
+## 🗂️ Categorias de Blocos
 
-## 🎯 Como Usar
+Os blocos estão organizados em categorias funcionais:
 
-### 1. Consultar Documentação PrimeNG
-Sempre comece pela [documentação oficial do PrimeNG](https://primeng.org/) para entender o componente base.
-
-### 2. Verificar Customizações
-Nesta seção do Storybook, verifique se existem customizações específicas do Nephos para o componente.
-
-### 3. Aplicar em Seu Projeto
-Importe e use o componente conforme a documentação do PrimeNG, as customizações já estarão aplicadas automaticamente.
-
-## 📋 Lista de Componentes
-
-Os componentes PrimeNG mais utilizados no Nephos incluem:
-
-### Formulários
-- Input Text
-- Dropdown
-- MultiSelect
-- Calendar
-- Checkbox
-- RadioButton
-
-### Dados
-- Table
-- DataView
-- Tree
-- TreeTable
-
-### Botões e Menus
-- Button
-- Menu
-- MenuBar
-- TieredMenu
-
-### Overlay
-- Dialog
-- Toast
-- ConfirmDialog
-- Sidebar
+### Layout
+- Estruturas de página
+- Containers
+- Grid systems
 
 ### Navegação
-- TabView
-- Accordion
-- Breadcrumb
+- Menus avançados
+- Breadcrumbs customizados
+- Paginação
 
-## ⚠️ Importante
+### Formulários
+- Formulários complexos
+- Validação avançada
+- Inputs compostos
 
-**Não re-documentamos todo o PrimeNG aqui**. Esta seção serve para:
-1. Referenciar os componentes oficiais
-2. Documentar **apenas** as customizações internas do Nephos
-3. Facilitar o acesso à documentação oficial
+### Dados
+- Tabelas avançadas
+- Dashboards
+- Gráficos
 
-Para detalhes completos de cada componente, sempre consulte a [documentação oficial do PrimeNG](https://primeng.org/).
+### Feedback
+- Notificações
+- Confirmações
+- Loading states
+
+## 🚀 Como Usar um Bloco
+
+### 1. Encontre o Bloco
+Navegue pelas categorias para encontrar o bloco desejado.
+
+### 2. Veja o Exemplo
+Interaja com o exemplo ao vivo para entender o comportamento.
+
+### 3. Copie o Código
+Use os exemplos de código fornecidos como base.
+
+### 4. Configure
+Ajuste as propriedades conforme sua necessidade.
+
+### 5. Teste
+Valide o funcionamento no seu contexto.
+
+## 📦 Estrutura dos Blocos
+
+Os blocos estão organizados nas bibliotecas:
+
+```
+projects/iatec/
+├── nephos-layout/    # Blocos de layout e estrutura
+├── nephos-pages/     # Páginas e templates completos
+└── nephos-utils/     # Utilitários e helpers
+```
+
+## 🔧 Importação Geral
+
+Para usar os blocos, importe as bibliotecas necessárias:
+
+```typescript
+// Layout components
+import { NephosLayoutModule } from '@iatec/nephos-layout';
+
+// Page templates
+import { NephosPagesModule } from '@iatec/nephos-pages';
+
+// Utilities
+import { NephosUtilsModule } from '@iatec/nephos-utils';
+
+@NgModule({
+  imports: [
+    NephosLayoutModule,
+    NephosPagesModule,
+    NephosUtilsModule
+  ]
+})
+export class AppModule { }
+```
+
+## 💡 Dicas
+
+### Customização
+Todos os blocos suportam customização via:
+- Inputs para configuração
+- Classes CSS para estilo
+- Templates para conteúdo
+
+### Performance
+Os blocos são otimizados para:
+- Lazy loading
+- Change detection OnPush
+- Minimal re-renders
+
+### Acessibilidade
+Todos os blocos seguem:
+- WCAG 2.1 AA
+- Navegação por teclado
+- Screen reader support
+
+## 📞 Suporte
+
+Para dúvidas ou problemas:
+1. Consulte a documentação completa do bloco
+2. Veja os exemplos de código
+3. Contate a equipe de desenvolvimento
 
 ---
 
-**Nota**: A lista de customizações específicas deve ser validada com a Indiane para garantir que todas as modificações importantes estejam documentadas.
+**Próximos passos**: Explore os blocos disponíveis nas categorias ao lado para ver a documentação completa de cada um.
