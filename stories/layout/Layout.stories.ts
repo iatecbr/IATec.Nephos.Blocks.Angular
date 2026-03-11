@@ -1,21 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig } from '@storybook/angular';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { provideRouter } from '@angular/router';
 import { LayoutService, LayoutComponent } from '@iatec/nephos-layout';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { NephosTemplateComponent } from "../../projects/stage/src/app/templates/nephos/component/nephos-template.component";
 
 const meta: Meta<LayoutComponent> = {
   title: 'Layout/Default',
   component: LayoutComponent,
   tags: ['autodocs'],
   decorators: [
+    moduleMetadata({
+      imports: [NephosTemplateComponent],
+    }),
     applicationConfig({
       providers: [
-        provideAnimations(),
         provideRouter([
           { path: '', component: LayoutComponent },
-          { path: '**', component: LayoutComponent }
         ]),
         LayoutService,
         MessageService,
@@ -28,27 +29,61 @@ const meta: Meta<LayoutComponent> = {
     docs: {
       description: {
         component: `
+# Layout Component
 
-O componente \`LayoutComponent\` fornece uma estrutura completa de layout com sidebar, topbar e área de conteúdo.
+O \`LayoutComponent\` é o componente principal do sistema Nephos que fornece uma estrutura completa e responsiva de layout para aplicações empresariais, com sidebar vertical, topbar, área de conteúdo e múltiplas opções de customização.
 
-## Recursos
+---
 
-- Sidebar responsivo com múltiplos modos
-- Topbar customizável
-- Profile sidebar
-- Breadcrumb integrado
-- Configurador de layout
-- Suporte a temas
+## 📋 Recursos Principais
 
-## Uso
+### 🎨 Interface Responsiva
+- **Sidebar vertical** com múltiplos modos de exibição
+- **Topbar** customizável com breadcrumb integrado
+- **Profile sidebar** para informações do usuário
+- **Layout container** com gap de 24px entre elementos
+- **Suporte completo a mobile** e desktop
+
+### ⚙️ Modos de Layout
+- **Static**: Sidebar fixo sempre visível (padrão)
+- **Static Inactive**: Sidebar recolhido (90px de largura)
+- **Overlay**: Sidebar sobrepõe o conteúdo
+- **Slim**: Sidebar compacto que expande ao hover
+- **Slim Plus**: Versão otimizada do slim
+- **Horizontal**: Menu horizontal no topo
+
+### 🎨 Customização de Temas
+- **Light Mode / Dark Mode**
+- **Menu Theme**: Opções de cores para o menu
+- **Primary Color**: Sistema de cores customizável
+- **Configurador visual** integrado
+
+### 📱 Responsividade
+- **Desktop**: Sidebar com largura de 256px (expandido) ou 90px (recolhido)
+- **Mobile**: Sidebar em modo overlay com width de 90px
+- **Breakpoint**: 991px (configurável via \`_sass_variables.scss\`)
+
+---
+
+## 🚀 Instalação e Configuração
+
+### 1. Instalar o Pacote
+
+\`\`\`bash
+npm install @iatec/nephos-layout
+\`\`\`
+
+### 2. Importar no Módulo/Component
 
 \`\`\`typescript
 import { LayoutComponent } from '@iatec/nephos-layout';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [LayoutComponent],
+  providers: [provideAnimations()],
   template: \`
     <nph-layout>
       <ng-template #logo>
@@ -60,13 +95,260 @@ import { LayoutComponent } from '@iatec/nephos-layout';
 export class AppComponent {}
 \`\`\`
 
-## Content Projection
+### 3. Configurar Providers (necessário)
 
-O componente aceita três templates via \`@ContentChild\`:
+\`\`\`typescript
+import { LayoutService } from '@iatec/nephos-layout';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
-- **logo**: Template para o logo no sidebar
-- **topbar**: Template customizado para o topbar
-- **profileSidebar**: Template para o conteúdo do profile sidebar
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(),
+    provideRouter(routes),
+    LayoutService,
+    MessageService,
+    ConfirmationService
+  ]
+});
+\`\`\`
+
+---
+
+## 📝 Uso Básico
+
+### Layout padrão
+
+\`\`\`typescript
+<nph-layout>
+  <ng-template #logo>
+    <img src="assets/logo.svg" alt="Logo" />
+  </ng-template>
+</nph-layout>
+\`\`\`
+
+### Layout com Menu Customizado
+
+\`\`\`typescript
+import { LayoutService } from '@iatec/nephos-layout';
+
+export class AppComponent {
+  constructor(private layoutService: LayoutService) {
+    this.layoutService.config.update((config) => ({
+      ...config,
+      menuMode: 'static',
+      colorScheme: 'light',
+      menuTheme: 'colorScheme'
+    }));
+  }
+}
+\`\`\`
+
+---
+
+## 🎯 Content Projection (Templates)
+
+O componente aceita **três templates** via \`@ContentChild\` para customização:
+
+### 1. **#logo** - Logo da Aplicação
+Template para o logo exibido no topo do sidebar.
+
+\`\`\`html
+<ng-template #logo>
+  <img src="assets/logo.svg" alt="Logo" />
+</ng-template>
+\`\`\`
+
+**Quando usar**: Sempre que precisar de um logo customizado.
+
+### 2. **#topbar** - Topbar Customizado
+Template para substituir ou complementar o topbar padrão.
+
+\`\`\`html
+<ng-template #topbar>
+  <div class="custom-topbar">
+    <button (click)="onNotifications()">
+      <i class="pi pi-bell"></i>
+    </button>
+  </div>
+</ng-template>
+\`\`\`
+
+**Quando usar**: Para adicionar botões, notificações ou elementos customizados no topbar.
+
+### 3. **#profileSidebar** - Profile Sidebar
+Template para o conteúdo do sidebar de perfil do usuário.
+
+\`\`\`html
+<ng-template #profileSidebar>
+  <div class="profile-content">
+    <h3>{{ user.name }}</h3>
+    <p>{{ user.email }}</p>
+    <button (click)="logout()">Sair</button>
+  </div>
+</ng-template>
+\`\`\`
+
+**Quando usar**: Para exibir informações do usuário, configurações ou ações de perfil.
+
+---
+
+## 🎨 Configurações Disponíveis
+
+### LayoutService Config
+
+\`\`\`typescript
+interface LayoutConfig {
+  ripple: boolean;              // Efeito ripple nos botões
+  inputStyle: 'outlined' | 'filled';
+  menuMode: 'static' | 'overlay' | 'slim' | 'slim-plus' | 'horizontal';
+  colorScheme: 'light' | 'dark';
+  theme: string;                // Nome do tema
+  scale: number;                // Escala da interface (12-16)
+  menuTheme: 'colorScheme' | 'primaryColor' | 'transparent';
+}
+\`\`\`
+
+### Exemplo de Uso
+
+\`\`\`typescript
+this.layoutService.config.update((config) => ({
+  ...config,
+  menuMode: 'static',
+  colorScheme: 'light',
+  menuTheme: 'colorScheme',
+  scale: 14
+}));
+\`\`\`
+
+---
+
+## 🎨 Design Tokens
+
+O layout utiliza design tokens SCSS para customização:
+
+### Cores
+- \`$sidebar-bg\`: #D8E6FD
+- \`$sidebar-border\`: #B1CDFB
+- \`$primary-blue\`: #3B82F6
+- \`$icon-color\`: #64748B
+
+### Espaçamentos
+- \`$gap-xs\`: 8px
+- \`$gap-sm\`: 12px
+- \`$gap-md\`: 16px
+- \`$gap-lg\`: 24px
+
+### Dimensões
+- \`$sidebar-width\`: 90px (recolhido) / 256px (expandido)
+- \`$sidebar-item-size\`: 43px
+- \`$breakpoint\`: 991px
+
+---
+
+## 📱 Comportamento Responsivo
+
+### Desktop (≥ 991px)
+- Sidebar com largura de **256px** (modo static)
+- Botão de toggle para recolher/expandir
+- Layout com gap de **24px** entre sidebar e content
+
+### Tablet/Mobile (< 991px)
+- Sidebar em modo **overlay** com width de 90px
+- Menu toggle no topbar
+- Elementos secundários ocultos automaticamente
+- Breadcrumb "Todas as Aplicações" oculto
+
+---
+
+## 🔧 Personalização Avançada
+
+### Customizar Cores do Sidebar
+
+Edite o arquivo \`_sidebar_vertical.scss\`:
+
+\`\`\`scss
+$sidebar-bg: #1E293B;              // Dark mode
+$sidebar-border: #334155;
+$primary-blue: #0EA5E9;            // Custom blue
+\`\`\`
+
+### Customizar Breakpoints
+
+Edite o arquivo \`_sass_variables.scss\`:
+
+\`\`\`scss
+$breakpoint: 1200px;  // Novo breakpoint
+\`\`\`
+
+---
+
+## 📚 Exemplos de Uso
+
+### Exemplo 1: Layout com Dark Mode
+
+\`\`\`typescript
+this.layoutService.config.update((config) => ({
+  ...config,
+  colorScheme: 'dark',
+  menuTheme: 'colorScheme'
+}));
+\`\`\`
+
+### Exemplo 2: Layout com Sidebar Overlay
+
+\`\`\`typescript
+this.layoutService.config.update((config) => ({
+  ...config,
+  menuMode: 'overlay'
+}));
+\`\`\`
+
+### Exemplo 3: Layout Totalmente Customizado
+
+\`\`\`html
+<nph-layout>
+  <ng-template #logo>
+    <div class="custom-logo">
+      <img src="assets/brand.svg" />
+    </div>
+  </ng-template>
+  
+  <ng-template #topbar>
+    <app-custom-topbar />
+  </ng-template>
+  
+  <ng-template #profileSidebar>
+    <app-user-profile />
+  </ng-template>
+</nph-layout>
+\`\`\`
+
+---
+
+## ⚠️ Troubleshooting
+
+### Sidebar não aparece
+- Verifique se \`LayoutService\` está nos providers
+- Confirme que \`provideAnimations()\` está configurado
+
+### Tema não muda
+- Use \`LayoutService.config.update()\` ao invés de mutar diretamente
+- Verifique se os arquivos de tema estão importados
+
+### Responsividade não funciona
+- Verifique o breakpoint em \`_sass_variables.scss\`
+- Confirme que o CSS foi compilado corretamente
+
+---
+
+## 🔗 Links Úteis
+
+- [Documentação do PrimeNG](https://primeng.org/)
+- [Angular Signals](https://angular.io/guide/signals)
+- [Guia de Estilos do Layout](./GuiaEstilos.mdx)
+- [Configuração Avançada](./Configuracao.mdx)
+
+---
         `
       }
     }
@@ -79,200 +361,40 @@ type Story = StoryObj<LayoutComponent>;
 export const Static: Story = {
   render: () => ({
     template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: var(--primary-color); margin: 0;">Nephos</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
+        <app-nephos-template>
+        </app-nephos-template>
     `
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Layout com sidebar fixo (modo static). O sidebar permanece sempre visível no desktop. Use o configurador visual (ícone de engrenagem no topbar) para testar outros modos.'
-      }
-    }
-  }
-};
+        story: `
+### 📌 Layout Static (Fixo)
 
-export const Overlay: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: var(--primary-color); margin: 0;">Nephos</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com sidebar em overlay. Use o configurador (ícone ⚙️) para alterar o modo para "overlay". O sidebar sobrepõe o conteúdo quando aberto.'
-      }
-    }
-  }
-};
+O modo **Static** é o layout padrão do Nephos, ideal para aplicações desktop com navegação frequente.
 
-export const Slim: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: var(--primary-color); margin: 0;">N</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com sidebar compacto (slim). Use o configurador para alterar para modo "slim". O menu expande ao passar o mouse.'
-      }
-    }
-  }
-};
+**Características:**
+- ✅ Sidebar sempre visível em telas desktop (≥ 991px)
+- ✅ Largura de 256px (expandido) ou 90px (recolhido)
+- ✅ Botão de toggle para recolher/expandir
+- ✅ Gap de 24px entre sidebar e conteúdo
+- ✅ Transição suave de 0.3s ao expandir/recolher
 
-export const SlimPlus: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: var(--primary-color); margin: 0;">N</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com sidebar slim-plus. Use o configurador para alterar para modo "slim-plus". Exibe ícones e labels de forma compacta.'
-      }
-    }
-  }
-};
+**Quando usar:**
+- Aplicações desktop-first
+- Dashboards com navegação constante
+- Sistemas administrativos
 
-export const Horizontal: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem;">
-            <h2 style="color: var(--primary-color); margin: 0;">Nephos</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com menu horizontal no topo da página. Use o configurador para alterar para modo "horizontal".'
-      }
-    }
-  }
-};
+**Como configurar:**
+\`\`\`typescript
+this.layoutService.config.update((config) => ({
+  ...config,
+  menuMode: 'static'
+}));
+\`\`\`
 
-export const DarkTheme: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: var(--primary-color); margin: 0;">Nephos</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com tema escuro. Use o configurador (ícone ⚙️) e ative a opção "Dark Mode" para ver o tema escuro em ação.'
-      }
-    }
-  }
-};
-
-export const PrimaryColorMenu: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1rem; text-align: center;">
-            <h2 style="color: white; margin: 0;">Nephos</h2>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Layout com menu usando a cor primária como tema. Use o configurador e altere "Menu Theme" para "Primary Color".'
-      }
-    }
-  }
-};
-
-export const ComCustomizacao: Story = {
-  render: () => ({
-    template: `
-      <nph-layout>
-        <ng-template #logo>
-          <div style="padding: 1.5rem; text-align: center; border-bottom: 1px solid var(--surface-border);">
-            <img src="https://www.primefaces.org/cdn/primeng/images/primeng.svg" 
-                 alt="PrimeNG Logo" 
-                 style="height: 2rem;" />
-          </div>
-        </ng-template>
-        
-        <ng-template #topbar>
-          <div style="display: flex; align-items: center; gap: 1rem; padding: 0 1rem;">
-            <i class="pi pi-bell" style="font-size: 1.25rem; cursor: pointer;"></i>
-            <i class="pi pi-cog" style="font-size: 1.25rem; cursor: pointer;"></i>
-            <i class="pi pi-user" style="font-size: 1.25rem; cursor: pointer;"></i>
-          </div>
-        </ng-template>
-        
-        <ng-template #profileSidebar>
-          <div style="padding: 2rem;">
-            <div style="text-align: center; margin-bottom: 2rem;">
-              <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
-                <i class="pi pi-user"></i>
-              </div>
-              <h3 style="margin: 0 0 0.5rem 0;">John Doe</h3>
-              <p style="color: var(--text-color-secondary); margin: 0;">john.doe@example.com</p>
-            </div>
-            
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-              <button style="padding: 0.75rem; border: 1px solid var(--surface-border); background: transparent; border-radius: 6px; cursor: pointer; text-align: left;">
-                <i class="pi pi-user" style="margin-right: 0.5rem;"></i> Meu Perfil
-              </button>
-              <button style="padding: 0.75rem; border: 1px solid var(--surface-border); background: transparent; border-radius: 6px; cursor: pointer; text-align: left;">
-                <i class="pi pi-cog" style="margin-right: 0.5rem;"></i> Configurações
-              </button>
-              <button style="padding: 0.75rem; border: 1px solid var(--surface-border); background: transparent; border-radius: 6px; cursor: pointer; text-align: left;">
-                <i class="pi pi-sign-out" style="margin-right: 0.5rem;"></i> Sair
-              </button>
-            </div>
-          </div>
-        </ng-template>
-      </nph-layout>
-    `
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Exemplo completo de layout com customizações no logo, topbar e profile sidebar usando templates. Clique no ícone de usuário no topbar para ver o profile sidebar customizado.'
+**Dica:** Use o configurador visual (⚙️ no topbar) para testar outros modos.
+        `
       }
     }
   }
