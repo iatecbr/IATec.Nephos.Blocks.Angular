@@ -29,7 +29,7 @@ steps:
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'run build'
+      customCommand: 'run build -- --project stage'
 
   - task: PublishBuildArtifacts@1
     inputs:
