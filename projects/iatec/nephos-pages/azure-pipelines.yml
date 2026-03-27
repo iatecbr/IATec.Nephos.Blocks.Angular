@@ -2,11 +2,33 @@ trigger:
   branches:
     include:
       - main
+      - Release/*
+      - Hotfix/*
   paths:
     include:
-      - projects/iatec/nephos-pages/**
-      -
-pr: none
+      - ojects/iatec/nephos-pages/**
+      - gular.json
+      - ckage.json
+      - ckage-lock.json
+      - config.json
+      - config.*.json
+      - .npmrc.pipeline
+
+pr:
+  branches:
+    include:
+      - main
+      - Release/*
+      - Hotfix/*
+  paths:
+    include:
+      - ojects/iatec/nephos-pages/**
+      - gular.json
+      - ckage.json
+      - ckage-lock.json
+      - config.json
+      - config.*.json
+      - .npmrc.pipeline
 
 parameters:
   - name: RUN_SONAR
