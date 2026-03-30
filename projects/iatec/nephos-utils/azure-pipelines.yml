@@ -236,13 +236,13 @@ stages:
               rm -f install.sh
             displayName: 'Install Copilot CLI e Berean'
           - script: |
-              COLLECTION_URI="$AZURE_COLLECTION_URI"
-              if echo "$COLLECTION_URI" | grep -q "visualstudio.com"; then
-                ORG_NAME=$(echo "$COLLECTION_URI" | sed -E 's|https://([^.]+)\\.visualstudio\\.com/?|\\1|')
-              else
-                ORG_NAME=$(echo "$COLLECTION_URI" | sed -E 's|https://dev\\.azure\\.com/([^/]+)/?|\\1|')
+              COLLECTION_URI="${AZURE_COLLECTION_URI%/}/"
+              REPO_NAME="${AZURE_REPO_NAME##*/}"
+              if [ -z "$AZURE_PR_ID" ] || [ -z "$AZURE_TEAM_PROJECT" ] || [ -z "$REPO_NAME" ] || [ -z "$AZURE_COLLECTION_URI" ]; then
+                echo "Missing Azure DevOps PR metadata"
+                exit 1
               fi
-              PR_URL="https://dev.azure.com/${ORG_NAME}/$AZURE_TEAM_PROJECT/_git/$AZURE_REPO_NAME/pullrequest/$AZURE_PR_ID"
+              PR_URL="${COLLECTION_URI}${AZURE_TEAM_PROJECT}/_git/${REPO_NAME}/pullrequest/${AZURE_PR_ID}"
               echo "PR URL: $PR_URL"
               berean review "$PR_URL" \
                 --post-comment \
