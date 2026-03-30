@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {EmptyPageComponent} from '@iatec/nephos-pages';
 
 import {EmptyComponent} from './empty.component';
 
@@ -8,7 +9,8 @@ describe('DefaultComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [EmptyComponent]
+            declarations: [EmptyComponent],
+            imports: [EmptyPageComponent]
         })
             .compileComponents();
 

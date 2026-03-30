@@ -29,10 +29,10 @@ steps:
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'run build -- --project stage'
+      customCommand: 'run build'
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: 'dist/storybook/stage'
+      PathtoPublish: 'dist/stage'
       ArtifactName: 'files'
       publishLocation: 'Container'
