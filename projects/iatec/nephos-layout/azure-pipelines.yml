@@ -234,13 +234,11 @@ stages:
               rm -f install.sh
             displayName: 'Install Copilot CLI e Berean'
           - script: |
-              COLLECTION_URI="${AZURE_COLLECTION_URI%/}/"
-              REPO_NAME="${AZURE_REPO_NAME##*/}"
-              if [ -z "$AZURE_PR_ID" ] || [ -z "$AZURE_TEAM_PROJECT" ] || [ -z "$REPO_NAME" ] || [ -z "$AZURE_COLLECTION_URI" ]; then
-                echo "Missing Azure DevOps PR metadata"
+              if [ -z "$GITHUB_PR_NUMBER" ] || [ -z "$GITHUB_REPO_NAME" ]; then
+                echo "Missing GitHub PR metadata"
                 exit 1
               fi
-              PR_URL="${COLLECTION_URI}${AZURE_TEAM_PROJECT}/_git/${REPO_NAME}/pullrequest/${AZURE_PR_ID}"
+              PR_URL="https://github.com/${GITHUB_REPO_NAME}/pull/${GITHUB_PR_NUMBER}"
               echo "PR URL: $PR_URL"
               berean review "$PR_URL" \
                 --post-comment \
@@ -250,10 +248,8 @@ stages:
                 --skip-folders .opencode,.moses
             displayName: 'AI Code Review'
             env:
-              AZURE_COLLECTION_URI: $(System.CollectionUri)
-              AZURE_TEAM_PROJECT: $(System.TeamProject)
-              AZURE_REPO_NAME: $(Build.Repository.Name)
-              AZURE_PR_ID: $(System.PullRequest.PullRequestId)
+              GITHUB_REPO_NAME: $(Build.Repository.Name)
+              GITHUB_PR_NUMBER: $(System.PullRequest.PullRequestNumber)
               BUILD_SOURCES: $(Build.SourcesDirectory)
               GITHUB_TOKEN: $(GITHUB_TOKEN)
               AZURE_DEVOPS_PAT: $(AZURE_DEVOPS_PAT)
