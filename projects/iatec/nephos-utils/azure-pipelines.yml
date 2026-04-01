@@ -57,7 +57,7 @@ stages:
           - task: Cache@2
             displayName: 'Cache node_modules'
             inputs:
-              key: 'npm | "$(Agent.OS)" | package.json'
+              key: 'npm | "$(Agent.OS)" | package.json | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
               path: '$(Build.SourcesDirectory)/node_modules'
@@ -66,7 +66,7 @@ stages:
           - task: Cache@2
             displayName: 'Cache Angular build'
             inputs:
-              key: 'angular-cache | "$(Agent.OS)" | package.json'
+              key: 'angular-cache | "$(Agent.OS)" | package.json | package-lock.json'
               restoreKeys: |
                 angular-cache | "$(Agent.OS)"
               path: '$(Build.SourcesDirectory)/.angular/cache'
@@ -92,7 +92,8 @@ stages:
             displayName: 'Install dependencies'
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
             inputs:
-              command: 'install'
+              command: 'custom'
+              customCommand: 'ci'
               workingDir: '$(Build.SourcesDirectory)'
             env:
               NPM_CONFIG_USERCONFIG: '$(Build.SourcesDirectory)/.npmrc'
@@ -174,7 +175,8 @@ stages:
             displayName: 'Install dependencies'
             condition: ne(variables.NPM_DEPS_READY, 'true')
             inputs:
-              command: 'install'
+              command: 'custom'
+              customCommand: 'ci'
               workingDir: '$(Build.SourcesDirectory)'
             env:
               NPM_CONFIG_USERCONFIG: '$(Build.SourcesDirectory)/.npmrc'

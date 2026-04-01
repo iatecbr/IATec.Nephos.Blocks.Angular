@@ -22,7 +22,7 @@ steps:
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'install --legacy-peer-deps'
+      customCommand: 'ci --legacy-peer-deps'
 
   - task: Npm@1
     displayName: Test (coverage)
