@@ -199,6 +199,7 @@ stages:
               AZURE_DEVOPS_PAT: $(AZURE_DEVOPS_PAT)
               BEREAN_MODEL: claude-sonnet-4.6
               BEREAN_LANGUAGE: Português do Brasil
+              BEREAN_VERBOSE: 1
   - stage: SonarQube
     displayName: 'SonarQube'
     dependsOn:
