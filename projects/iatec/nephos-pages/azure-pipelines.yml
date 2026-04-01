@@ -75,8 +75,7 @@ stages:
           - task: Npm@1
             displayName: 'Install dependencies'
             inputs:
-              command: 'custom'
-              customCommand: 'ci'
+              command: 'install'
               workingDir: '$(Build.SourcesDirectory)'
             env:
               NPM_CONFIG_USERCONFIG: '$(Build.SourcesDirectory)/.npmrc'
