@@ -30,6 +30,7 @@
               "projects/stage/src/assets"
             ],
             "styles": [
+              "projects/stage/src/assets/layout/styles/layout/preloading.css",
               "projects/stage/src/styles.scss"
             ],
             "scripts": []
@@ -39,7 +40,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1300kb",
                   "maximumError": "10mb"
                 },
                 {
