@@ -198,6 +198,7 @@ stages:
               GITHUB_PR_NUMBER: $(System.PullRequest.PullRequestNumber)
               BUILD_SOURCES: $(Build.SourcesDirectory)
               GITHUB_TOKEN: $(GITHUB_TOKEN)
+              COPILOT_GITHUB_TOKEN: $(COPILOT_GITHUB_TOKEN)
               AZURE_DEVOPS_PAT: $(AZURE_DEVOPS_PAT)
               BEREAN_MODEL: claude-sonnet-4.6
               BEREAN_LANGUAGE: Português do Brasil
