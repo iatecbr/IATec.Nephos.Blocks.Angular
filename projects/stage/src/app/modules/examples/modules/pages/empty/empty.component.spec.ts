@@ -9,8 +9,7 @@ describe('DefaultComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [EmptyComponent],
-            imports: [EmptyPageComponent]
+            imports: [EmptyComponent, EmptyPageComponent]
         })
             .compileComponents();
 
