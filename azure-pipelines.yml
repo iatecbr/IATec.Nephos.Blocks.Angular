@@ -18,12 +18,17 @@ steps:
       versionSpec: '22.x'
 
 
-  - task: Npm@1
+  - task: Bash@3
     displayName: Install
     inputs:
-      command: 'custom'
-      workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'ci --legacy-peer-deps'
+      targetType: 'inline'
+      script: |
+        if [ -f "$(Build.SourcesDirectory)/package-lock.json" ]; then
+          npm ci --legacy-peer-deps
+        else
+          npm install --legacy-peer-deps
+        fi
+      workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: Npm@1
     displayName: Test (coverage)
