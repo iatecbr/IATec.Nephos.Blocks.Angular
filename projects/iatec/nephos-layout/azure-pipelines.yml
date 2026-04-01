@@ -57,7 +57,7 @@ stages:
           - task: Cache@2
             displayName: 'Cache node_modules'
             inputs:
-              key: 'npm | "$(Agent.OS)" | package.json | package-lock.json'
+              key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json | $(Build.SourcesDirectory)/package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
               path: '$(Build.SourcesDirectory)/node_modules'
@@ -66,7 +66,7 @@ stages:
           - task: Cache@2
             displayName: 'Cache Angular build'
             inputs:
-              key: 'angular-cache | "$(Agent.OS)" | package.json | package-lock.json'
+              key: 'angular-cache | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json | $(Build.SourcesDirectory)/package-lock.json'
               restoreKeys: |
                 angular-cache | "$(Agent.OS)"
               path: '$(Build.SourcesDirectory)/.angular/cache'
