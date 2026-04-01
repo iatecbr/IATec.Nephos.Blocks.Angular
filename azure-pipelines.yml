@@ -17,18 +17,9 @@ steps:
     inputs:
       versionSpec: '22.x'
 
-  - task: Cache@2
-    displayName: 'Cache node_modules'
-    inputs:
-      key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json | $(Build.SourcesDirectory)/package-lock.json'
-      restoreKeys: |
-        npm | "$(Agent.OS)"
-      path: '$(Build.SourcesDirectory)/node_modules'
-      cacheHitVar: 'NPM_CACHE_RESTORED'
 
   - task: Npm@1
     displayName: Install
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'

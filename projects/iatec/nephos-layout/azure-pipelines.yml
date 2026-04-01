@@ -54,22 +54,6 @@ stages:
             inputs:
               versionSpec: '$(nodeVersion)'
 
-          - task: Cache@2
-            displayName: 'Cache node_modules'
-            inputs:
-              key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json | $(Build.SourcesDirectory)/package-lock.json'
-              restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: '$(Build.SourcesDirectory)/node_modules'
-              cacheHitVar: 'NPM_CACHE_RESTORED'
-
-          - task: Cache@2
-            displayName: 'Cache Angular build'
-            inputs:
-              key: 'angular-cache | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json | $(Build.SourcesDirectory)/package-lock.json'
-              restoreKeys: |
-                angular-cache | "$(Agent.OS)"
-              path: '$(Build.SourcesDirectory)/.angular/cache'
 
           - task: Bash@3
             displayName: 'Prepare .npmrc file'
@@ -90,7 +74,6 @@ stages:
 
           - task: Npm@1
             displayName: 'Install dependencies'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'true')
             inputs:
               command: 'custom'
               customCommand: 'ci'
@@ -137,48 +120,6 @@ stages:
               artifact: '$(nodeModulesArtifactName)'
               path: '$(Build.SourcesDirectory)/node_modules'
 
-          - task: Bash@3
-            displayName: 'Check node_modules availability'
-            inputs:
-              targetType: 'inline'
-              script: |
-                if [ -d "$(Build.SourcesDirectory)/node_modules" ]; then
-                  echo "##vso[task.setvariable variable=NPM_DEPS_READY]true"
-                  echo "node_modules source: artifact"
-                else
-                  echo "##vso[task.setvariable variable=NPM_DEPS_READY]false"
-                  echo "node_modules source: npm install"
-                fi
-              workingDirectory: '$(Build.SourcesDirectory)'
-
-          - task: Bash@3
-            displayName: 'Prepare .npmrc file'
-            condition: ne(variables.NPM_DEPS_READY, 'true')
-            inputs:
-              targetType: 'inline'
-              script: 'cp .npmrc.pipeline .npmrc'
-
-          - task: replacetokens@6
-            displayName: 'Replace .npmrc tokens'
-            condition: ne(variables.NPM_DEPS_READY, 'true')
-            inputs:
-              targetFiles: '.npmrc'
-              encoding: 'auto'
-              writeBOM: true
-              actionOnMissing: 'warn'
-              keepToken: false
-              tokenPrefix: '#{'
-              tokenSuffix: '}#'
-
-          - task: Npm@1
-            displayName: 'Install dependencies'
-            condition: ne(variables.NPM_DEPS_READY, 'true')
-            inputs:
-              command: 'custom'
-              customCommand: 'ci'
-              workingDir: '$(Build.SourcesDirectory)'
-            env:
-              NPM_CONFIG_USERCONFIG: '$(Build.SourcesDirectory)/.npmrc'
 
           - task: Bash@3
             displayName: 'Restore executable permissions'
