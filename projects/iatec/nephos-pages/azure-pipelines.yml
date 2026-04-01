@@ -245,7 +245,6 @@ stages:
               echo "PR URL: $PR_URL"
               berean review "$PR_URL" \
                 --post-comment \
-                --inline \
                 --skip-if-reviewed \
                 --rules "$BUILD_SOURCES/patterns,https://tabernacle-dev.sdasystems.org/webhook/doc?query={{query}}" \
                 --skip-folders .opencode,.moses
