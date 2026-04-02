@@ -30,7 +30,6 @@
               "projects/stage/src/assets"
             ],
             "styles": [
-              "projects/stage/src/assets/layout/styles/layout/preloading.css",
               "projects/stage/src/styles.scss"
             ],
             "scripts": []
