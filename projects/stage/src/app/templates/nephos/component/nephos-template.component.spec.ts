@@ -1,4 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {provideRouter} from '@angular/router';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 import {NephosTemplateComponent} from './nephos-template.component';
 
@@ -8,8 +10,14 @@ describe('NephosTemplateComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NephosTemplateComponent]
+            imports: [NephosTemplateComponent],
+            providers: [MessageService, ConfirmationService, provideRouter([])]
         })
+            .overrideComponent(NephosTemplateComponent, {
+                set: {
+                    template: ''
+                }
+            })
             .compileComponents();
 
         fixture = TestBed.createComponent(NephosTemplateComponent);

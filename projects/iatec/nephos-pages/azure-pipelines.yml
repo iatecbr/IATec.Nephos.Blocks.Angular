@@ -1,73 +1,298 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   branches:
     include:
       - main
-  paths:
+      - Release/*
+      - Hotfix/*
+
+pr:
+  branches:
     include:
-      - projects/iatec/nephos-pages/**
+      - main
+      - Release/*
+      - Hotfix/*
 
-pr: none
-
-pool:
-  name: IATec-Builds-Agents-Linux
+parameters:
+  - name: RUN_SONAR
+    displayName: 'Run SonarQube?'
+    type: boolean
+    default: true
+  - name: RUN_TEST
+    displayName: 'Run Tests?'
+    type: boolean
+    default: false
 
 variables:
   - group: nuget-credentials
+  - group: moses-credentials
+  - name: nodeVersion
+    value: '20.x'
+  - name: buildArtifactName
+    value: 'build'
+  - name: coverageArtifactName
+    value: 'coverage'
+  - name: nodeModulesArtifactName
+    value: 'node_modules'
+  - name: buildOutputPath
+    value: 'dist/iatec/nephos-pages'
+  - name: coveragePath
+    value: '$(Build.SourcesDirectory)/coverage'
+  - name: coverageReportDirectory
+    value: '$(coveragePath)/iatec/nephos-pages'
 
-steps:
-  - task: NodeTool@0
-    displayName: 'Update Node.js'
-    inputs:
-      versionSpec: '20.x'
+stages:
+  - stage: Build
+    displayName: 'Build Stage'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build Job'
+        pool:
+          name: IATec-Builds-Agents-Linux
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(nodeVersion)'
 
-  - task: CmdLine@2
-    displayName: 'Rename .npmrc.pipeline To .npmrc'
-    inputs:
-      script: 'mv .npmrc.pipeline .npmrc'
 
-  - task: replacetokens@6
-    displayName: 'Replace variables in .npmrc'
-    inputs:
-      targetFiles: '**/.npmrc'
-      encoding: 'auto'
-      writeBOM: true
-      actionOnMissing: 'warn'
-      keepToken: false
-      tokenPrefix: '#{'
-      tokenSuffix: '}#'
+          - task: Bash@3
+            displayName: 'Prepare .npmrc file'
+            inputs:
+              targetType: 'inline'
+              script: 'cp .npmrc.pipeline .npmrc'
 
-  - task: Npm@1
-    displayName: 'Install'
-    inputs:
-      command: 'install'
-      workingDir: '$(Build.SourcesDirectory)'
+          - task: replacetokens@6
+            displayName: 'Replace variables in .npmrc'
+            inputs:
+              targetFiles: '.npmrc'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              tokenPrefix: '#{'
+              tokenSuffix: '}#'
 
-  - task: Npm@1
-    displayName: 'Build - @iatec/nephos-pages'
-    inputs:
-      command: 'custom'
-      customCommand: 'run ng build @iatec/nephos-pages'
-      workingDir: '$(Build.SourcesDirectory)'
+          - task: Npm@1
+            displayName: 'Install dependencies'
+            inputs:
+              command: 'install'
+              workingDir: '$(Build.SourcesDirectory)'
+            env:
+              NPM_CONFIG_USERCONFIG: '$(Build.SourcesDirectory)/.npmrc'
 
-  - task: npmAuthenticate@0
-    displayName: Authenticate
-    inputs:
-      workingFile: .npmrc
+          - task: Npm@1
+            displayName: 'Build - @iatec/nephos-pages'
+            inputs:
+              command: 'custom'
+              customCommand: 'run ng build @iatec/nephos-pages'
+              workingDir: '$(Build.SourcesDirectory)'
 
-  - task: Npm@1
-    displayName: Publish
-    inputs:
-      command: publish
-      publishRegistry: useFeed
-      publishFeed: IATec.Community
-      workingDir: '$(Build.SourcesDirectory)/dist/iatec/nephos-pages'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish build artifact'
+            inputs:
+              targetPath: '$(buildOutputPath)'
+              artifact: '$(buildArtifactName)'
 
-  - task: CmdLine@2
-    displayName: 'Remove .npmrc'
-    inputs:
-      script: 'rm -r .npmrc'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish node_modules'
+            inputs:
+              targetPath: 'node_modules'
+              artifact: '$(nodeModulesArtifactName)'
+  - stage: Test
+    displayName: 'Test Stage'
+    dependsOn: Build
+    condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Reason'], 'PullRequest'), ${{ eq(parameters.RUN_TEST, true) }})
+    jobs:
+      - job: TestJob
+        displayName: 'Test Job'
+        pool:
+          name: IATec-Builds-Agents-Linux
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(nodeVersion)'
+
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download node_modules artifact'
+            inputs:
+              artifact: '$(nodeModulesArtifactName)'
+              path: '$(Build.SourcesDirectory)/node_modules'
+
+
+          - task: Bash@3
+            displayName: 'Restore executable permissions'
+            inputs:
+              targetType: 'inline'
+              script: |
+                chmod +x "$(Build.SourcesDirectory)/node_modules/@esbuild/linux-x64/bin/esbuild"
+              workingDirectory: '$(Build.SourcesDirectory)'
+
+          - task: Npm@1
+            displayName: 'Run tests'
+            inputs:
+              command: 'custom'
+              customCommand: 'run test -- --watch=false --browsers=ChromeHeadlessCI --code-coverage --project=@iatec/nephos-pages'
+
+          - task: PublishTestResults@2
+            displayName: 'Publish test results'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFiles: '$(Build.SourcesDirectory)/**/TESTS-*.xml'
+
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish code coverage results'
+            condition: succeededOrFailed()
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: '$(coveragePath)/**/*cobertura-coverage.xml'
+              reportDirectory: '$(coverageReportDirectory)'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish coverage artifact'
+            condition: succeededOrFailed()
+            inputs:
+              targetPath: '$(coveragePath)'
+              artifact: '$(coverageArtifactName)'
+  - stage: CodeReview
+    displayName: 'Code Review Stage'
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    jobs:
+      - job: CodeReviewJob
+        displayName: 'Code Review'
+        pool:
+          name: IATec-Sistemas
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '24.x'
+          - script: |
+              set -euo pipefail
+              BEREAN_DIR="$(Agent.TempDirectory)/berean-$(Build.BuildId)-$(System.JobId)"
+              rm -rf "$BEREAN_DIR"
+              git clone https://github.com/iatecbr/IATec.AI.WorkFlow.Review.Berean.git "$BEREAN_DIR"
+              cd "$BEREAN_DIR"
+              npm install
+              npm run build
+              chmod +x "$BEREAN_DIR/dist/index.js"
+            displayName: 'Install Copilot CLI e Berean'
+          - script: |
+              set -euo pipefail
+              if [ -z "$GITHUB_PR_NUMBER" ] || [ -z "$GITHUB_REPO_NAME" ]; then
+                echo "Missing GitHub PR metadata"
+                exit 1
+              fi
+              BEREAN_DIR="$(Agent.TempDirectory)/berean-$(Build.BuildId)-$(System.JobId)"
+              PR_URL="https://github.com/${GITHUB_REPO_NAME}/pull/${GITHUB_PR_NUMBER}"
+              echo "PR URL: $PR_URL"
+              node "$BEREAN_DIR/dist/index.js" review "$PR_URL" \
+                --post-comment \
+                --skip-if-reviewed \
+                --inline \
+                --rules "$BUILD_SOURCES/patterns,https://tabernacle-dev.sdasystems.org/webhook/doc?query={{query}}" \
+                --skip-folders .opencode,.moses
+            displayName: 'AI Code Review'
+            env:
+              GITHUB_REPO_NAME: $(Build.Repository.Name)
+              GITHUB_PR_NUMBER: $(System.PullRequest.PullRequestNumber)
+              BUILD_SOURCES: $(Build.SourcesDirectory)
+              GITHUB_TOKEN: $(GITHUB_TOKEN)
+              COPILOT_GITHUB_TOKEN: $(COPILOT_GITHUB_TOKEN)
+              AZURE_DEVOPS_PAT: $(AZURE_DEVOPS_PAT)
+              BEREAN_MODEL: claude-sonnet-4.6
+              BEREAN_LANGUAGE: Português do Brasil
+  - stage: SonarQube
+    displayName: 'SonarQube'
+    dependsOn:
+      - Build
+      - Test
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(${{ parameters.RUN_SONAR }}, true))
+    jobs:
+      - job: SonarJob
+        displayName: 'SonarQube'
+        pool:
+          name: IATec-Builds-Agents-Linux
+          demands: java
+        steps:
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download coverage'
+            inputs:
+              artifact: '$(coverageArtifactName)'
+              path: '$(coveragePath)'
+
+          - task: SonarQubePrepare@7
+            displayName: 'Prepare SonarQube analysis'
+            inputs:
+              SonarQube: 'IATec.Core.Logs Connection'
+              scannerMode: 'CLI'
+              configMode: 'manual'
+              cliProjectKey: 'IATec.Nephos.Pages'
+              cliProjectName: 'IATec.Nephos.Pages'
+              cliSources: '.'
+              extraProperties: |
+                sonar.projectBaseDir=$(System.DefaultWorkingDirectory)/
+                sonar.javascript.lcov.reportPaths=$(coveragePath)/lcov.info
+
+          - task: SonarQubeAnalyze@7
+            displayName: 'Run code analysis'
+
+          - task: SonarQubePublish@7
+            displayName: 'Publish quality gate result'
+            inputs:
+              pollingTimeoutSec: '300'
+  - stage: Publish
+    displayName: 'Publish Stage'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: PublishJob
+        displayName: 'Publish Job'
+        pool:
+          name: IATec-Builds-Agents-Linux
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '$(nodeVersion)'
+
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download build artifact'
+            inputs:
+              artifact: '$(buildArtifactName)'
+              path: '$(Build.SourcesDirectory)/dist'
+
+          - task: Bash@3
+            displayName: 'Prepare .npmrc file'
+            inputs:
+              targetType: 'inline'
+              script: 'cp .npmrc.pipeline .npmrc'
+
+          - task: replacetokens@6
+            displayName: 'Replace variables in .npmrc'
+            inputs:
+              targetFiles: '.npmrc'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              tokenPrefix: '#{'
+              tokenSuffix: '}#'
+
+          - task: npmAuthenticate@0
+            displayName: 'Authenticate'
+            inputs:
+              workingFile: .npmrc
+
+          - task: Npm@1
+            displayName: 'Publish'
+            inputs:
+              command: publish
+              publishRegistry: useFeed
+              publishFeed: IATec.Community
+              workingDir: '$(Build.SourcesDirectory)/$(buildOutputPath)'
+
+          - task: CmdLine@2
+            displayName: 'Remove .npmrc'
+            inputs:
+              script: 'rm -r .npmrc'

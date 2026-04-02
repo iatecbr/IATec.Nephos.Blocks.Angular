@@ -36,6 +36,8 @@ package-lock.json
 .sass-cache/
 /connect.lock
 /coverage
+/TESTS-*.xml
+/test-results
 /libpeerconnection.log
 testem.log
 /typings

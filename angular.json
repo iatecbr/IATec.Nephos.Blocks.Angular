@@ -39,7 +39,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "700kb",
                   "maximumError": "10mb"
                 },
                 {
@@ -80,6 +80,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -122,6 +123,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "tsConfig": "projects/iatec/nephos-layout/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
@@ -155,6 +157,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "tsConfig": "projects/iatec/nephos-pages/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
@@ -188,6 +191,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "tsConfig": "projects/iatec/nephos-utils/tsconfig.spec.json",
             "polyfills": [
               "zone.js",

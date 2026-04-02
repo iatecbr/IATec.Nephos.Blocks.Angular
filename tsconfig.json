@@ -4,16 +4,22 @@
   "compilerOptions": {
     "paths": {
       "@iatec/nephos-layout": [
-        "./dist/iatec/nephos-layout/*",
-        "./dist/iatec/nephos-layout"
+        "./projects/iatec/nephos-layout/src/public-api.ts"
+      ],
+      "@iatec/nephos-layout/*": [
+        "./projects/iatec/nephos-layout/src/*"
       ],
       "@iatec/nephos-pages": [
-        "./dist/iatec/nephos-pages/*",
-        "./dist/iatec/nephos-pages"
+        "./projects/iatec/nephos-pages/src/public-api.ts"
+      ],
+      "@iatec/nephos-pages/*": [
+        "./projects/iatec/nephos-pages/src/*"
       ],
       "@iatec/nephos-utils": [
-        "./dist/iatec/nephos-utils/*",
-        "./dist/iatec/nephos-utils"
+        "./projects/iatec/nephos-utils/src/public-api.ts"
+      ],
+      "@iatec/nephos-utils/*": [
+        "./projects/iatec/nephos-utils/src/*"
       ]
     },
     "outDir": "./dist/out-tsc",
