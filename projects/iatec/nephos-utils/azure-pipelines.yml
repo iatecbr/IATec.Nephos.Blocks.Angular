@@ -170,24 +170,25 @@ stages:
             inputs:
               versionSpec: '24.x'
           - script: |
-              rm -f install.sh
-              curl -fsSL \
-                -H "Cache-Control: no-cache, no-store, must-revalidate" \
-                -H "Pragma: no-cache" \
-                -H "Expires: 0" \
-                -o install.sh \
-                https://raw.githubusercontent.com/iatecbr/IATec.AI.WorkFlow.Review.Berean/main/install.sh
-              bash install.sh
-              rm -f install.sh
+              set -euo pipefail
+              BEREAN_DIR="$(Agent.TempDirectory)/berean-$(Build.BuildId)-$(System.JobId)"
+              rm -rf "$BEREAN_DIR"
+              git clone https://github.com/iatecbr/IATec.AI.WorkFlow.Review.Berean.git "$BEREAN_DIR"
+              cd "$BEREAN_DIR"
+              npm install
+              npm run build
+              chmod +x "$BEREAN_DIR/dist/index.js"
             displayName: 'Install Copilot CLI e Berean'
           - script: |
+              set -euo pipefail
               if [ -z "$GITHUB_PR_NUMBER" ] || [ -z "$GITHUB_REPO_NAME" ]; then
                 echo "Missing GitHub PR metadata"
                 exit 1
               fi
+              BEREAN_DIR="$(Agent.TempDirectory)/berean-$(Build.BuildId)-$(System.JobId)"
               PR_URL="https://github.com/${GITHUB_REPO_NAME}/pull/${GITHUB_PR_NUMBER}"
               echo "PR URL: $PR_URL"
-              berean review "$PR_URL" \
+              node "$BEREAN_DIR/dist/index.js" review "$PR_URL" \
                 --post-comment \
                 --skip-if-reviewed \
                 --inline \
