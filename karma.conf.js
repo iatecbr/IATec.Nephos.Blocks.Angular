@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = function (config) {
-    const isCI = Boolean(process.env.CI);
+    const isCI = Boolean(process.env.CI || process.env.TF_BUILD);
     const junitReportFile = process.env.JUNIT_REPORT_FILE || 'TESTS-results.xml';
     config.set({
         basePath: '',
@@ -30,7 +30,7 @@ module.exports = function (config) {
             ]
         },
         junitReporter: {
-            outputDir: __dirname,
+            outputDir: path.join(__dirname, 'test-results'),
             outputFile: junitReportFile,
             useBrowserName: false
         },
@@ -44,8 +44,8 @@ module.exports = function (config) {
         browserDisconnectTolerance: 1,
         browserNoActivityTimeout: 60000,
         captureTimeout: 120000,
-        reporters: isCI ? ['progress', 'junit'] : ['progress', 'kjhtml', 'junit'],
+        reporters: isCI ? ['progress', 'coverage', 'junit'] : ['progress', 'kjhtml', 'coverage'],
         browsers: [isCI ? 'ChromeHeadlessCI' : 'Chrome'],
-        restartOnFileChange: true
+        restartOnFileChange: !isCI
     });
 };
