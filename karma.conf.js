@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = function (config) {
+    const isCI = Boolean(process.env.CI);
     const junitReportFile = process.env.JUNIT_REPORT_FILE || 'TESTS-results.xml';
     config.set({
         basePath: '',
@@ -43,8 +44,8 @@ module.exports = function (config) {
         browserDisconnectTolerance: 1,
         browserNoActivityTimeout: 60000,
         captureTimeout: 120000,
-        reporters: ['progress', 'kjhtml', 'junit'],
-        browsers: [process.env.CI ? 'ChromeHeadlessCI' : 'Chrome'],
+        reporters: isCI ? ['progress', 'junit'] : ['progress', 'kjhtml', 'junit'],
+        browsers: [isCI ? 'ChromeHeadlessCI' : 'Chrome'],
         restartOnFileChange: true
     });
 };
