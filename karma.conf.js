@@ -33,12 +33,18 @@ module.exports = function (config) {
             outputFile: junitReportFile,
             useBrowserName: false
         },
+        customLaunchers: {
+            ChromeHeadlessCI: {
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
+            }
+        },
         browserDisconnectTimeout: 10000,
         browserDisconnectTolerance: 1,
         browserNoActivityTimeout: 60000,
         captureTimeout: 120000,
         reporters: ['progress', 'kjhtml', 'junit'],
-        browsers: ['Chrome'],
+        browsers: [process.env.CI ? 'ChromeHeadlessCI' : 'Chrome'],
         restartOnFileChange: true
     });
 };

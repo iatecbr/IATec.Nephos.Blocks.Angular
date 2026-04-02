@@ -133,7 +133,7 @@ stages:
             displayName: 'Run tests'
             inputs:
               command: 'custom'
-              customCommand: 'run test -- --watch=false --browsers=ChromeHeadless --code-coverage --project=@iatec/nephos-utils'
+              customCommand: 'run test -- --watch=false --browsers=ChromeHeadlessCI --code-coverage --project=@iatec/nephos-utils'
 
           - task: PublishTestResults@2
             displayName: 'Publish test results'

@@ -35,7 +35,7 @@ steps:
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'run test -- --watch=false --code-coverage --browsers=ChromeHeadless'
+      customCommand: 'run test -- --watch=false --code-coverage --browsers=ChromeHeadlessCI'
 
   - task: PublishTestResults@2
     displayName: 'Publish test results'
