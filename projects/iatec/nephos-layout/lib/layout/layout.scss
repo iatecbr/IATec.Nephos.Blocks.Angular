@@ -1,15 +1,10 @@
-@use './_sass_variables' as *;
+@use './_sass_variables';
 @use './variables/_common';
 @use './variables/_light';
 @use './variables/_dark';
 @use './_fonts';
 @use './_main';
-@use './_sidebar_vertical';
-@use './_sidebar_slim';
-@use './_sidebar_slim_plus';
-@use './_sidebar_horizontal';
-@use './_sidebar_reveal';
-@use './_sidebar_drawer';
+@use './sidebar/_sidebar';
 @use './menutheme/_menutheme';
 @use './_responsive';
 @use './_topbar';
@@ -18,4 +13,3 @@
 @use './_config';
 @use './_content';
 @use './_utils';
-@use './_overrides';

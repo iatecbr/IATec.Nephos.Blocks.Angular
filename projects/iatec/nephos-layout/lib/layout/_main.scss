@@ -5,7 +5,7 @@
 html {
     height: 100%;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 body {
@@ -16,20 +16,10 @@ body {
     background: var(--surface-ground);
     color: var(--text-color);
     font-family: 'Poppins', sans-serif;
-    font-feature-settings: "cv02","cv03","cv04","cv11";
-    font-variation-settings: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 a {
     text-decoration: none;
-}
-
-.layout-container {
-    min-height: 100vh;
-}
-
-img {
-    max-width: none !important;
 }
