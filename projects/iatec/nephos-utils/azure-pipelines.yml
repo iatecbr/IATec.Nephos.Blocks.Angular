@@ -209,7 +209,7 @@ stages:
     dependsOn:
       - Build
       - Test
-    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(${{ parameters.RUN_SONAR }}, true))
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], variables['Build.Repository.DefaultBranch']), eq(${{ parameters.RUN_SONAR }}, true))
     jobs:
       - job: SonarJob
         displayName: 'SonarQube'
@@ -234,7 +234,7 @@ stages:
               cliSources: '.'
               extraProperties: |
                 sonar.projectBaseDir=$(System.DefaultWorkingDirectory)/
-                sonar.javascript.lcov.reportPaths=$(coveragePath)/lcov.info
+                sonar.javascript.lcov.reportPaths=$(coveragePath)/iatec/nephos-utils/lcov.info
 
           - task: SonarQubeAnalyze@7
             displayName: 'Run code analysis'
@@ -246,7 +246,7 @@ stages:
   - stage: Publish
     displayName: 'Publish Stage'
     dependsOn: Build
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], variables['Build.Repository.DefaultBranch']))
     jobs:
       - job: PublishJob
         displayName: 'Publish Job'
@@ -262,7 +262,7 @@ stages:
             displayName: 'Download build artifact'
             inputs:
               artifact: '$(buildArtifactName)'
-              path: '$(Build.SourcesDirectory)/dist'
+              path: '$(Build.SourcesDirectory)/$(buildOutputPath)'
 
           - task: Bash@3
             displayName: 'Prepare .npmrc file'
