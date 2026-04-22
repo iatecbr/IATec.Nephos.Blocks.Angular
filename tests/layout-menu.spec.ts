@@ -67,6 +67,6 @@ test.describe('Menu Layout', () => {
         await emptyPageLink.click();
         
         // Check URL changed
-        await expect(page).toHaveURL(/.*/examples/pages/empty/);
+        await expect(page).toHaveURL(/.*\/examples\/pages\/empty\/?/);
     });
 });
