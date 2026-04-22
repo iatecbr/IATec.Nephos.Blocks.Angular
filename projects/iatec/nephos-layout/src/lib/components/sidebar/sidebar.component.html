@@ -1,4 +1,5 @@
-<div (mouseenter)="onMouseEnter()"
+<div #sidebarRef
+     (mouseenter)="onMouseEnter()"
      (mouseleave)="onMouseLeave()"
      class="layout-sidebar">
     <div class="sidebar-header">
@@ -6,12 +7,13 @@
            class="app-logo">
             <ng-content></ng-content>
         </a>
-        <button (click)="anchor()"
-                class="layout-sidebar-anchor p-link z-2"
+        <button (click)="onAnchorToggle()"
+                class="layout-sidebar-anchor p-link z-2 hover:cursor-pointer"
                 type="button"></button>
     </div>
 
     <div #menuContainer
+         (scroll)="onMenuScroll()"
          class="layout-menu-container">
         <nph-layout-menu></nph-layout-menu>
     </div>

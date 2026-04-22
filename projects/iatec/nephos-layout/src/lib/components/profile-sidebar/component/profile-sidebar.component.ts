@@ -12,7 +12,7 @@ import {Drawer} from 'primeng/drawer';
 export class ProfileSidebarComponent {
 
     visible = computed(
-        () => this.layoutService.layoutState().profileSidebarVisible,
+        () => !!this.layoutService.layoutState().profileSidebarVisible,
     );
 
     constructor(public layoutService: LayoutService) {

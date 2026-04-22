@@ -41,11 +41,11 @@ export class TopbarComponent {
     }
 
     onMenuButtonClick() {
-        this.layoutService.onMenuToggle();
+        this.layoutService.toggleMenu();
     }
 
     onProfileButtonClick() {
-        this.layoutService.showProfileSidebar();
+        this.layoutService.toggleProfileSidebar();
     }
 
     onThemeChange() {
