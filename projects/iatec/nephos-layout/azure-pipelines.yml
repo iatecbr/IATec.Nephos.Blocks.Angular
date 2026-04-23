@@ -279,6 +279,15 @@ stages:
               tokenPrefix: '#{'
               tokenSuffix: '}#'
 
+          - task: Bash@3
+            displayName: 'Debug .npmrc content'
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo "----- BEGIN .npmrc -----"
+                cat .npmrc
+                echo "----- END .npmrc -----"
+
           - task: npmAuthenticate@0
             displayName: 'Authenticate'
             inputs:
