@@ -4,6 +4,9 @@ trigger:
       - main
       - Release/*
       - Hotfix/*
+  paths:
+    include:
+      - projects/iatec/nephos-utils/**
 
 pr:
   branches:
@@ -11,6 +14,9 @@ pr:
       - main
       - Release/*
       - Hotfix/*
+  paths:
+    include:
+      - projects/iatec/nephos-utils/**
 
 parameters:
   - name: RUN_SONAR
