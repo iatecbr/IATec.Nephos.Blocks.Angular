@@ -266,6 +266,12 @@ stages:
               artifact: "$(buildArtifactName)"
               path: "$(Build.SourcesDirectory)/$(buildOutputPath)"
 
+          - task: Bash@3
+            displayName: "Prepare .npmrc file"
+            inputs:
+              targetType: "inline"
+              script: "cp .npmrc.pipeline .npmrc"
+
           - task: replacetokens@6
             displayName: "Replace variables in .npmrc"
             inputs:
@@ -276,15 +282,6 @@ stages:
               keepToken: false
               tokenPrefix: "#{"
               tokenSuffix: "}#"
-
-          - task: Bash@3
-            displayName: "Debug .npmrc content"
-            inputs:
-              targetType: "inline"
-              script: |
-                echo "----- BEGIN .npmrc -----"
-                cat .npmrc
-                echo "----- END .npmrc -----"
 
           - task: npmAuthenticate@0
             displayName: "Authenticate"
