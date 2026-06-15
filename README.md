@@ -21,8 +21,8 @@ Para começar a utilizar o Nephos em seu projeto Angular, siga os passos abaixo:
 Certifique-se de ter o Node.js e npm instalados em sua máquina. Você pode baixar a versão mais recente do Node.js em [nodejs.org](https://nodejs.org/).
 
 
-2. **Configure as credências npm:**
-Na raiz do usuário, edite o arquivo `.npmrc` e adicione as credenciais do IATec subistituindo os valores entre `#{}`:
+2. **Configure as credenciais npm:**
+   Na raiz do usuário, edite o arquivo `.npmrc` e adicione as credenciais do IATec substituindo os valores entre `#{}`:
 ```.npmrc
 registry=https://registry.npmjs.org/
 @iatec:registry=#{NPM_iatec_host_community}#
