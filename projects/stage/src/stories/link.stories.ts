@@ -6,6 +6,8 @@ import { ButtonModule } from 'primeng/button';
 
 import { LinkComponent, TextComponent } from '@iatec/nephos-ui';
 
+import { ROTAS_DE_PROVA } from './rotas-de-prova';
+
 /**
  * Ficha: `design-system/componentes/link.meta.ts` (`origin: nephos-own`).
  *
@@ -22,7 +24,7 @@ const meta: Meta<LinkComponent> = {
   component: LinkComponent,
   decorators: [
     moduleMetadata({ imports: [LinkComponent, TextComponent, ButtonModule] }),
-    applicationConfig({ providers: [provideRouter([])] }),
+    applicationConfig({ providers: [provideRouter(ROTAS_DE_PROVA)] }),
   ],
 };
 
