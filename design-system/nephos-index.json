@@ -41,6 +41,59 @@
       "output": "html-semantic",
       "iconSet": "font-awesome-7-pro"
     },
+    "setup": {
+      "note": "Como INSTALAR e CONFIGURAR o Nephos num projeto. Leia esta seção antes de gerar a primeira tela de um projeto que ainda não tem o Design System montado — sem ela o componente certo renderiza sem tema, sem fonte e sem ícone. Num projeto que já está montado, pule.",
+      "packages": [
+        {
+          "name": "@iatec/nephos-ui",
+          "papel": "primitivos + a camada de token (escala tipográfica, espaço). É a base: os outros dependem dele."
+        },
+        {
+          "name": "@iatec/nephos-blocks",
+          "papel": "os blocos — composições prontas (busca com filtros, tabela gerenciável, confirmação destrutiva…)."
+        },
+        {
+          "name": "@iatec/nephos-pages",
+          "papel": "páginas pré-configuradas."
+        },
+        {
+          "name": "@iatec/nephos-layout",
+          "papel": "os layouts — a moldura da tela. Traz também as fontes e o `layout.scss`."
+        },
+        {
+          "name": "primeng",
+          "papel": "a base de componentes. Nunca reescrever um componente dele."
+        },
+        {
+          "name": "@primeuix/themes",
+          "papel": "o mecanismo de tema (preset Aura)."
+        }
+      ],
+      "registry": "Os pacotes `@iatec/*` são publicados no feed privado IATec.Community, não no npm público. O projeto precisa de um `.npmrc` apontando o escopo `@iatec` para esse feed antes do `npm install`.",
+      "styles": {
+        "arquivo": "styles.scss",
+        "ordem": [
+          "@use '@iatec/nephos-layout/lib/layout/layout.scss';",
+          "@use '@iatec/nephos-ui/lib/nephos-ui.scss';",
+          "@use '@iatec/nephos-blocks/lib/nephos-blocks.scss';"
+        ],
+        "regra": "A ORDEM importa: o `nephos-ui.scss` declara os tokens `--nph-*` em `:root`, e o `nephos-blocks.scss` só os gasta. Invertido, os blocos ficam sem medida."
+      },
+      "theme": {
+        "regra": "O tema é o que faz a cor da marca existir. Sem ele os componentes do PrimeNG renderizam sem nenhuma variável `--p-*`.",
+        "provider": "providePrimeNG({ theme: { preset: nephosPreset(<marca>), options: { darkModeSelector: '.app-dark' } } })",
+        "origemDoPreset": "`nephosPreset` vem de `design-system/nephos.preset.ts` do repositório do Design System. ⚠️ ELE AINDA NÃO É DISTRIBUÍDO NUM PACOTE — hoje é preciso copiar `nephos.preset.ts` + `nephos.palettes.ts` para o projeto. Enquanto isso não muda, confirmar com o time de DS antes de montar um projeto novo.",
+        "marca": "A vertical NUNCA é escolha do usuário: vem do ambiente (domínio, tenant, sessão). Não gerar seletor de marca.",
+        "modo": "Claro/escuro é a exceção — pode ser controle de produto. O seletor é a classe `.app-dark` na raiz; o componente `theme-toggle` já a aplica."
+      },
+      "brand": {
+        "provider": "provideNephosBrand({ name, logoFull, logoSymbol })",
+        "regra": "É por aqui que o logo e o nome da vertical chegam ao `nph-ui-logo`. Sem este provider, nenhum componente sabe qual marca mostrar — e escrever o nome de uma marca num template é proibido."
+      },
+      "fonts": "Noto Sans vem embutida no `@iatec/nephos-layout` (`lib/layout/_fonts.scss`), carregada junto com o `layout.scss`. Não instalar pacote de fonte à parte.",
+      "icons": "Font Awesome não vem nos pacotes: o projeto carrega o CSS da edição licenciada (Pro). Sem ele os ícones não renderizam. A sintaxe é `fa-solid fa-<nome>`.",
+      "rootFontSize": "O `layout.scss` declara `html { font-size: 14px }`. É intencional e a escala tipográfica do Nephos já é entregue em px por causa disso. Não sobrescrever."
+    },
     "multibrand": {
       "mechanism": "theme-switch",
       "themes": [

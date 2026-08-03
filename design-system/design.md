@@ -183,6 +183,50 @@ Replicar **no topo** do `CLAUDE.md` e do `agents.md` do repositório. Sem isso, 
 
 ---
 
+## Instalação e configuração
+
+Ler **antes de gerar a primeira tela de um projeto que ainda não tem o Nephos montado**. Num projeto já montado, pular. O componente certo, num projeto sem esta configuração, renderiza sem tema, sem fonte e sem ícone.
+
+**Os pacotes** — publicados no feed privado **IATec.Community**, não no npm público. O projeto precisa de um `.npmrc` apontando o escopo `@iatec` para o feed antes do `npm install`.
+
+| Pacote | Papel |
+|---|---|
+| `@iatec/nephos-ui` | primitivos + a camada de token. É a base; os outros dependem dele |
+| `@iatec/nephos-blocks` | os blocos — composições prontas |
+| `@iatec/nephos-pages` | páginas pré-configuradas |
+| `@iatec/nephos-layout` | os layouts, e também as fontes |
+| `primeng` · `@primeuix/themes` | a base de componentes e o mecanismo de tema |
+
+**Estilo** — no `styles.scss`, **nesta ordem**:
+
+```scss
+@use '@iatec/nephos-layout/lib/layout/layout.scss';
+@use '@iatec/nephos-ui/lib/nephos-ui.scss';
+@use '@iatec/nephos-blocks/lib/nephos-blocks.scss';
+```
+
+A ordem importa: o `nephos-ui.scss` declara os tokens `--nph-*` em `:root` e o `nephos-blocks.scss` só os gasta. Invertido, os blocos ficam sem medida.
+
+**Tema** — é o que faz a cor da marca existir; sem ele os componentes do PrimeNG saem sem nenhuma variável `--p-*`:
+
+```ts
+providePrimeNG({
+  theme: { preset: nephosPreset(marcaAtiva), options: { darkModeSelector: '.app-dark' } }
+})
+```
+
+⚠️ O `nephosPreset` ainda **não é distribuído num pacote** — hoje ele vive em `nephos.preset.ts` + `nephos.palettes.ts` no repositório do Design System, e precisa ser copiado. Confirmar com o time de DS ao montar um projeto novo.
+
+**Marca** — `provideNephosBrand({ name, logoFull, logoSymbol })`. É por aqui que o logo e o nome da vertical chegam. A vertical vem do ambiente (domínio, tenant, sessão), **nunca** de um seletor para o usuário. Claro/escuro é a exceção: é a classe `.app-dark` na raiz, e o `theme-toggle` já a aplica.
+
+**Fonte** — Noto Sans vem embutida no `@iatec/nephos-layout`, carregada junto com o `layout.scss`. Não instalar pacote de fonte à parte.
+
+**Ícones** — o Font Awesome **não** vem nos pacotes: o projeto carrega o CSS da edição licenciada. Sem ele, nenhum ícone renderiza.
+
+**Root** — o `layout.scss` declara `html { font-size: 14px }`. É intencional (ver Tipografia). Não sobrescrever.
+
+---
+
 ## Multimarca — como funciona
 
 O Nephos veste sete verticais da organização. O mecanismo é uma **troca de tema**: um conjunto de apontamentos que muda de uma vez.

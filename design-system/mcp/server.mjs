@@ -103,11 +103,13 @@ server.tool(
   'Regras de FUNDAÇÃO do sistema (o essencial do design.md): modelo de cor ' +
     '(papel+passo), escala tipográfica, set de ícones (Font Awesome 7), ' +
     'multimarca, geometria herdada, e a CHECAGEM DE FIDELIDADE que deve rodar ' +
-    'ANTES de gerar HTML. Consulte no início de qualquer geração.',
+    'ANTES de gerar HTML. Consulte no início de qualquer geração. Para MONTAR ' +
+    'um projeto do zero (pacotes, styles.scss, tema, marca, fonte, ícones), ' +
+    'peça a seção `setup`.',
   {
     section: z
       .enum([
-        'stack', 'multibrand', 'colorModel', 'typography', 'icons',
+        'stack', 'setup', 'multibrand', 'colorModel', 'typography', 'icons',
         'geometry', 'fidelityChecklist', 'globalRules',
       ])
       .optional()

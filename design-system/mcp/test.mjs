@@ -57,6 +57,23 @@ console.log(`Índice: ${idx.counts.total} fichas (v${idx.version})\n`);
   assert.ok(icons.set.toLowerCase().includes('font awesome'));
   ok('nephos_foundations typography/icons → Noto Sans + FA7 solid');
 }
+// 6b) Setup: o agente que chega de FORA não clona o repositório — ele lê
+//     daqui como instalar e configurar. Se esta seção sumir, ele acha o
+//     componente certo e monta um projeto onde ele não renderiza.
+{
+  const s = foundations(idx, 'setup');
+  assert.ok(Array.isArray(s.packages) && s.packages.length >= 4, 'setup.packages');
+  assert.ok(s.packages.some((p) => p.name === '@iatec/nephos-blocks'), 'setup cita o nephos-blocks');
+  // a ordem do styles.scss é o erro mais fácil de cometer
+  const ordem = s.styles.ordem.join(' ');
+  assert.ok(
+    ordem.indexOf('nephos-ui') < ordem.indexOf('nephos-blocks'),
+    'nephos-ui.scss vem ANTES do nephos-blocks.scss',
+  );
+  assert.ok(s.theme.provider.includes('darkModeSelector'), 'setup.theme traz o provider');
+  assert.ok(s.brand.provider.includes('provideNephosBrand'), 'setup.brand traz o provider');
+  ok('nephos_foundations setup → pacotes, ordem do styles, tema e marca');
+}
 // 7) Integridade: todo componente tem os 10 blocos
 {
   const blocos = ['identity','purpose','api','relationships','tokens','antiPatterns','examples','a11y','aiHints','references'];
