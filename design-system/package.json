@@ -1,0 +1,16 @@
+{
+  "name": "nephos-ds",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Design System Nephos (fonte para o Moses): fichas .meta.ts, fundações e o build do catálogo nephos-index.json.",
+  "scripts": {
+    "build:index": "node build/generate-index.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
