@@ -1,5 +1,8 @@
 import { Component, DestroyRef, effect, ElementRef, inject, signal } from '@angular/core';
-import { LayoutService } from "@iatec/nephos-layout";
+// Caminho relativo, NÃO o alias `@iatec/nephos-layout`: um arquivo da
+// biblioteca importando o pacote dela mesma é literalmente a "circular
+// dependency on itself" que impedia o `ng-packagr` de empacotá-la.
+import { LayoutService } from "../../../../services";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { fromEvent } from "rxjs";
 import { RouterLink } from "@angular/router";
