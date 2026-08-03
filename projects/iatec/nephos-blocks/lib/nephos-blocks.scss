@@ -1,0 +1,252 @@
+/* ─────────────────────────────────────────────────────────────
+ * Nephos Blocks · camada de estilo dos blocos (`origin: nephos-own`)
+ * ─────────────────────────────────────────────────────────────
+ * Como carregar — DUAS linhas, e a ordem importa:
+ *
+ *   @use '@iatec/nephos-ui/lib/nephos-ui.scss';
+ *   @use '@iatec/nephos-blocks/lib/nephos-blocks.scss';
+ *
+ * ⚠️ Este arquivo NÃO é autossuficiente, de propósito. Ele consome os
+ * tokens `--nph-*` (escala tipográfica e espaço) que o `nephos-ui.scss`
+ * declara em `:root`. Sozinho, ele não tem de onde tirar medida nenhuma
+ * — e essa dependência é a mesma que existe no código: bloco importa
+ * átomo.
+ *
+ * Aqui só mora ARRANJO: o que fica ao lado do quê e quanto espaço há
+ * entre eles. Nenhuma cor nova, nenhum tamanho de fonte novo, nenhuma
+ * altura nem raio — isso tudo vem do PrimeNG ou da camada de token. Um
+ * bloco que precisasse de cor própria seria sinal de que ele está
+ * inventando identidade, e identidade é do tema.
+ * ───────────────────────────────────────────────────────────── */
+
+
+/* ── Empty State ────────────────────────────────────────────────── */
+.nph-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--nph-space-md);
+  padding: var(--nph-space-lg);
+  text-align: center;
+}
+
+/* A ficha declara `ilustracao: surface/300`. Aqui vai o papel semântico
+   de "texto de apoio" em vez do passo cru, e a razão é medida, não de
+   gosto: `surface/300` é o MESMO tom nos dois modos (a rampa slate não
+   inverte), então no escuro a ilustração viraria o elemento mais claro
+   da tela — o oposto do anti-padrão da própria ficha ("um ícone sóbrio,
+   a cor de ênfase só no botão"). `--p-text-muted-color` é herdado do
+   PrimeNG e acompanha o modo. Registrado para decisão de token. */
+.nph-empty-state__icon {
+  font-size: var(--nph-font-size-title-lg);
+  color: var(--p-text-muted-color);
+  line-height: 1;
+}
+
+/* ── Confirmação destrutiva ─────────────────────────────────────── */
+/* ✅ VALOR CONFIRMADO (Indiane, 03/08/2026). O `design.md` não tem token
+   de largura de diálogo, e o p-dialog nasce do tamanho do conteúdo — o
+   que deixaria a janela larguíssima quando a consequência é uma frase
+   longa. 28rem é a largura em que a pergunta e a consequência cabem em
+   ~2 linhas. Fica AQUI, na camada de token, e não solto num componente,
+   justamente por ser um número sem fonte no `design.md`.
+
+   Medido: na prática isto é um PISO. O `.p-dialog` é item de um flex
+   container e itens flex não encolhem abaixo do `min-content`, então um
+   título longo alarga a janela além das 28rem. É o comportamento
+   desejado — o título nunca é cortado. */
+.nph-confirm {
+  width: 28rem;
+  max-width: 100%;
+}
+
+.nph-confirm__trava {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-sm);
+  margin-top: var(--nph-space-md);
+}
+
+/* ── Campo de formulário (rótulo + controle + apoio) ────────────── */
+.nph-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-sm);
+}
+
+/* ── Login ──────────────────────────────────────────────────────── */
+.nph-login {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-md);
+}
+
+.nph-login__lembrar {
+  display: flex;
+  align-items: center;
+  gap: var(--nph-space-sm);
+}
+
+/* ── Busca com filtros ──────────────────────────────────────────── */
+.nph-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--nph-space-md);
+}
+
+/* A busca cresce; os filtros ficam do tamanho que precisam. */
+.nph-filters__busca {
+  flex: 1 1 16rem;
+}
+
+.nph-filters__ativos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--nph-space-sm);
+  margin: var(--nph-space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A ficha declara `chipAtivo: primary/50 + primary/color` — o realce
+   suave da marca, para o filtro aplicado se destacar do resto da barra.
+   O `p-chip` nasce neutro (surface), então o realce entra pelo papel
+   semântico do PrimeNG (`highlight`), que é exatamente esse par e
+   acompanha o modo. Nenhum passo cru, nenhum hex. */
+.nph-filters__ativos .p-chip {
+  background: var(--p-highlight-background);
+  color: var(--p-highlight-color);
+}
+
+/* O `p-chip` dá o visual; o remover é `<button>` porque precisa dizer
+   QUAL filtro sai — o do PrimeNG tem um rótulo genérico para todos. */
+.nph-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--nph-space-sm);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nph-chip-remove:focus-visible {
+  outline: var(--p-focus-ring-width) var(--p-focus-ring-style) var(--p-focus-ring-color);
+  outline-offset: var(--p-focus-ring-offset);
+}
+
+/* ── Tabela de dados ────────────────────────────────────────────── */
+.nph-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-md);
+}
+
+.nph-data-table__massa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--nph-space-md);
+  padding: var(--nph-space-sm) var(--nph-space-md);
+  border-radius: var(--p-content-border-radius);
+  background: var(--p-highlight-background);
+  color: var(--p-highlight-color);
+}
+
+/* A ficha declara `linhaSelecionada: primary/50`. O `p-table` só aplica a
+   classe de selecionada com `pSelectableRow`, que faz o clique em qualquer
+   lugar da linha marcar — outra interação, e não a que a ficha descreve.
+   Daí o realce ser nosso, no mesmo papel semântico da barra de massa. */
+.nph-data-table__linha--selecionada > td {
+  background: var(--p-highlight-background);
+  color: var(--p-highlight-color);
+}
+
+/* Coluna de seleção: a largura do próprio checkbox, não um px no olho. */
+.nph-data-table__selecao {
+  width: var(--p-button-icon-only-width);
+}
+
+.nph-data-table__acoes {
+  white-space: nowrap;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.nph-header {
+  display: flex;
+  align-items: center;
+  gap: var(--nph-space-md);
+  padding: var(--nph-space-sm) var(--nph-space-lg);
+  border-bottom: 1px solid var(--p-content-border-color);
+  background: var(--p-content-background);
+}
+
+/* A navegação ocupa a sobra; a busca tem um teto para não engolir a barra. */
+.nph-header__nav {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.nph-header__busca {
+  flex: 0 1 18rem;
+  min-width: 0;
+}
+
+.nph-header__acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--nph-space-sm);
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────── */
+/* Sem largura declarada de propósito: quem a define é o contêiner (o
+   app-shell), como manda a regra de espaçamento do `design.md`. */
+.nph-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-sm);
+  padding: var(--nph-space-md);
+}
+
+.nph-sidebar__recolher {
+  align-self: flex-end;
+}
+
+.nph-sidebar__trilha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nph-space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Alvo de toque = a mesma medida do botão só-ícone do PrimeNG. */
+.nph-sidebar__atalho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--p-button-icon-only-width);
+  min-height: var(--p-button-icon-only-width);
+  border: 0;
+  border-radius: var(--p-content-border-radius);
+  background: transparent;
+  color: var(--p-text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nph-sidebar__atalho:hover {
+  background: var(--p-content-hover-background);
+}
+
+.nph-sidebar__atalho:focus-visible {
+  outline: var(--p-focus-ring-width) var(--p-focus-ring-style) var(--p-focus-ring-color);
+  outline-offset: var(--p-focus-ring-offset);
+}
+

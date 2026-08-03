@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 
-import { SidebarComponent } from '@iatec/nephos-ui';
+import { SidebarComponent } from '@iatec/nephos-blocks';
 
 import { ROTAS_DE_PROVA } from './rotas-de-prova';
 
@@ -32,7 +32,7 @@ import { ROTAS_DE_PROVA } from './rotas-de-prova';
  * `aria-expanded`** — quem ouve a tela não sabe se a seção está aberta.
  */
 const meta: Meta<SidebarComponent> = {
-  title: 'Nephos UI/Blocos/Sidebar',
+  title: 'Nephos Blocks/Sidebar',
   component: SidebarComponent,
   decorators: [
     moduleMetadata({ imports: [SidebarComponent, ButtonModule] }),
@@ -69,7 +69,7 @@ export const Expandida: Story = {
     props: { secoes: SECOES },
     template: `
       <div style="width:18rem; border-right:1px solid var(--p-content-border-color);">
-        <nph-ui-sidebar [items]="secoes"></nph-ui-sidebar>
+        <nph-blocks-sidebar [items]="secoes"></nph-blocks-sidebar>
       </div>
     `,
   }),
@@ -85,7 +85,7 @@ export const Recolhida: Story = {
     props: { secoes: SECOES },
     template: `
       <div style="border-right:1px solid var(--p-content-border-color); width:max-content;">
-        <nph-ui-sidebar [items]="secoes" [collapsed]="true"></nph-ui-sidebar>
+        <nph-blocks-sidebar [items]="secoes" [collapsed]="true"></nph-blocks-sidebar>
       </div>
     `,
   }),
@@ -107,10 +107,10 @@ export const GavetaMobile: Story = {
                   [outlined]="true"
                   (onClick)="aberta = true"></p-button>
 
-        <nph-ui-sidebar
+        <nph-blocks-sidebar
           [items]="secoes"
           [mobile]="true"
-          [(drawerVisible)]="aberta"></nph-ui-sidebar>
+          [(drawerVisible)]="aberta"></nph-blocks-sidebar>
       </div>
     `,
   }),
@@ -123,7 +123,7 @@ export const SemRecolher: Story = {
     props: { secoes: SECOES },
     template: `
       <div style="width:18rem; border-right:1px solid var(--p-content-border-color);">
-        <nph-ui-sidebar [items]="secoes" [collapsible]="false"></nph-ui-sidebar>
+        <nph-blocks-sidebar [items]="secoes" [collapsible]="false"></nph-blocks-sidebar>
       </div>
     `,
   }),

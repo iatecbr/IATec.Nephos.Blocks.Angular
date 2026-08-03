@@ -3,9 +3,7 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 
-import {HelperTextComponent} from '../helper-text/helper-text.component';
-import {LabelComponent} from '../label/label.component';
-import {TextComponent} from '../text/text.component';
+import {HelperTextComponent, LabelComponent, TextComponent} from '@iatec/nephos-ui';
 
 /**
  * Ficha: `design-system/componentes/destructive-confirm.block.meta.ts`
@@ -33,7 +31,7 @@ import {TextComponent} from '../text/text.component';
  * anunciada junto com a abertura, não só quando alguém a alcança.
  */
 @Component({
-    selector: 'nph-ui-destructive-confirm',
+    selector: 'nph-blocks-destructive-confirm',
     imports: [
         ButtonModule,
         DialogModule,

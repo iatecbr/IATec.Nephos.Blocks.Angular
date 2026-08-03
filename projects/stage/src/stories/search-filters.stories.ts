@@ -6,7 +6,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 
-import { EmptyStateComponent, LabelComponent, SearchFiltersComponent } from '@iatec/nephos-ui';
+import { LabelComponent } from '@iatec/nephos-ui';
+import { EmptyStateComponent, SearchFiltersComponent } from '@iatec/nephos-blocks';
 
 /**
  * Ficha: `design-system/componentes/search-filters.block.meta.ts`
@@ -24,7 +25,7 @@ import { EmptyStateComponent, LabelComponent, SearchFiltersComponent } from '@ia
  *   acompanha, sem nenhum nome de marca no template.
  */
 const meta: Meta<SearchFiltersComponent> = {
-  title: 'Nephos UI/Blocos/Busca com filtros',
+  title: 'Nephos Blocks/Busca com filtros',
   component: SearchFiltersComponent,
   decorators: [
     moduleMetadata({
@@ -80,7 +81,7 @@ export const Padrao: Story = {
     },
     template: `
       <div style="max-width:56rem;">
-        <nph-ui-search-filters
+        <nph-blocks-search-filters
           searchLabel="Buscar escola"
           searchPlaceholder="Buscar escola…"
           resultNoun="escolas"
@@ -102,7 +103,7 @@ export const Padrao: Story = {
                          optionLabel="label"
                          placeholder="Status"
                          inputId="filtro-status"></p-multiSelect>
-        </nph-ui-search-filters>
+        </nph-blocks-search-filters>
 
         <p class="nph-caption nph-text-muted" aria-live="polite">
           {{ removido ? 'Removido: ' + removido : 'Nenhum chip removido ainda.' }}
@@ -122,7 +123,7 @@ export const SemFiltro: Story = {
     props: { regioes: REGIOES, regiao: null },
     template: `
       <div style="max-width:56rem;">
-        <nph-ui-search-filters
+        <nph-blocks-search-filters
           searchLabel="Buscar escola"
           searchPlaceholder="Buscar escola…"
           resultNoun="escolas"
@@ -134,7 +135,7 @@ export const SemFiltro: Story = {
                     optionLabel="label"
                     placeholder="Região"
                     inputId="filtro-regiao-vazio"></p-select>
-        </nph-ui-search-filters>
+        </nph-blocks-search-filters>
       </div>
     `,
   }),
@@ -152,7 +153,7 @@ export const FiltroDePoucasOpcoes: Story = {
     props: { turnos: [] as string[] },
     template: `
       <div style="max-width:56rem;">
-        <nph-ui-search-filters
+        <nph-blocks-search-filters
           searchLabel="Buscar turma"
           searchPlaceholder="Buscar turma…"
           resultNoun="turmas"
@@ -173,7 +174,7 @@ export const FiltroDePoucasOpcoes: Story = {
               <nph-ui-label for="turno-noite">Noite</nph-ui-label>
             </div>
           </fieldset>
-        </nph-ui-search-filters>
+        </nph-blocks-search-filters>
       </div>
     `,
   }),
@@ -192,22 +193,22 @@ export const SemResultado: Story = {
     },
     template: `
       <div style="max-width:56rem;">
-        <nph-ui-search-filters
+        <nph-blocks-search-filters
           searchLabel="Buscar escola"
           searchPlaceholder="Buscar escola…"
           resultNoun="escolas"
           [resultCount]="0"
           [activeFilters]="filtros"
           (clearAll)="filtros = []">
-        </nph-ui-search-filters>
+        </nph-blocks-search-filters>
 
-        <nph-ui-empty-state
+        <nph-blocks-empty-state
           variant="sem-resultado"
           title="Nenhuma escola encontrada"
           description="Nenhuma escola combina com os filtros aplicados. Tente remover um deles."
           [headingLevel]="3"
           [showAction]="false">
-        </nph-ui-empty-state>
+        </nph-blocks-empty-state>
       </div>
     `,
   }),

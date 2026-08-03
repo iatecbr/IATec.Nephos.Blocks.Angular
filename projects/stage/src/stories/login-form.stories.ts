@@ -2,12 +2,8 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { provideRouter } from '@angular/router';
 
-import {
-  LinkComponent,
-  LoginFormComponent,
-  LogoComponent,
-  provideNephosBrand,
-} from '@iatec/nephos-ui';
+import { LinkComponent, LogoComponent, provideNephosBrand } from '@iatec/nephos-ui';
+import { LoginFormComponent } from '@iatec/nephos-blocks';
 
 import { ROTAS_DE_PROVA } from './rotas-de-prova';
 
@@ -27,7 +23,7 @@ import { ROTAS_DE_PROVA } from './rotas-de-prova';
  *   não existe" — isso conta a quem pergunta quais contas existem.
  */
 const meta: Meta<LoginFormComponent> = {
-  title: 'Nephos UI/Blocos/Login',
+  title: 'Nephos Blocks/Login',
   component: LoginFormComponent,
   decorators: [
     moduleMetadata({ imports: [LoginFormComponent, LinkComponent, LogoComponent] }),
@@ -55,12 +51,12 @@ export const Padrao: Story = {
     props: { enviado: '' },
     template: `
       <div style="max-width:24rem;">
-        <nph-ui-login-form (submit)="enviado = $event.email">
+        <nph-blocks-login-form (submit)="enviado = $event.email">
           <nph-ui-logo nphBrand variant="full" style="height:2rem;"></nph-ui-logo>
           <nph-ui-link nphLinks href="/recuperar-senha" variant="muted">
             Esqueci minha senha
           </nph-ui-link>
-        </nph-ui-login-form>
+        </nph-blocks-login-form>
 
         <p class="nph-caption nph-text-muted" aria-live="polite">
           {{ enviado ? 'Enviado para: ' + enviado : 'Nada enviado ainda.' }}
@@ -79,11 +75,11 @@ export const ComErro: Story = {
   render: () => ({
     template: `
       <div style="max-width:24rem;">
-        <nph-ui-login-form errorMessage="E-mail ou senha inválidos.">
+        <nph-blocks-login-form errorMessage="E-mail ou senha inválidos.">
           <nph-ui-link nphLinks href="/recuperar-senha" variant="muted">
             Esqueci minha senha
           </nph-ui-link>
-        </nph-ui-login-form>
+        </nph-blocks-login-form>
       </div>
     `,
   }),
@@ -94,7 +90,7 @@ export const Carregando: Story = {
   render: () => ({
     template: `
       <div style="max-width:24rem;">
-        <nph-ui-login-form [loading]="true"></nph-ui-login-form>
+        <nph-blocks-login-form [loading]="true"></nph-blocks-login-form>
       </div>
     `,
   }),
@@ -109,7 +105,7 @@ export const SemLembrarMe: Story = {
   render: () => ({
     template: `
       <div style="max-width:24rem;">
-        <nph-ui-login-form [showRemember]="false"></nph-ui-login-form>
+        <nph-blocks-login-form [showRemember]="false"></nph-blocks-login-form>
       </div>
     `,
   }),

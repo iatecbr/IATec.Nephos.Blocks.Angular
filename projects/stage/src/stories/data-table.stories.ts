@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 
-import { DataTableComponent } from '@iatec/nephos-ui';
+import { DataTableComponent } from '@iatec/nephos-blocks';
 
 /**
  * Ficha: `design-system/componentes/data-table.block.meta.ts`
@@ -24,7 +24,7 @@ import { DataTableComponent } from '@iatec/nephos-ui';
  *   um "Editar" repetido vinte vezes.
  */
 const meta: Meta<DataTableComponent> = {
-  title: 'Nephos UI/Blocos/Tabela de dados',
+  title: 'Nephos Blocks/Tabela de dados',
   component: DataTableComponent,
   decorators: [moduleMetadata({ imports: [DataTableComponent] })],
 };
@@ -68,7 +68,7 @@ export const Padrao: Story = {
     },
     template: `
       <div style="max-width:60rem;">
-        <nph-ui-data-table
+        <nph-blocks-data-table
           caption="Bolsas por escola — Associação Bahia"
           [columns]="colunas"
           [rows]="linhas"
@@ -79,7 +79,7 @@ export const Padrao: Story = {
           (rowAction)="ultimaAcao = $event.acao.label + ' → ' + $event.linha.escola"
           (bulkAction)="ultimaAcao = $event.acao.label + ' em ' + $event.selecionados.length + ' linhas'"
           (sort)="ultimaAcao = 'Ordenar por ' + $event.campo + ' (' + $event.direcao + ')'">
-        </nph-ui-data-table>
+        </nph-blocks-data-table>
 
         <p class="nph-caption nph-text-muted" aria-live="polite">
           {{ ultimaAcao || 'Nenhuma ação ainda.' }}
@@ -98,13 +98,13 @@ export const Carregando: Story = {
     props: { colunas: COLUNAS, acoesLinha: ACOES_LINHA },
     template: `
       <div style="max-width:60rem;">
-        <nph-ui-data-table
+        <nph-blocks-data-table
           caption="Bolsas por escola — Associação Bahia"
           [columns]="colunas"
           [rows]="[]"
           [rowActions]="acoesLinha"
           [loading]="true">
-        </nph-ui-data-table>
+        </nph-blocks-data-table>
       </div>
     `,
   }),
@@ -120,7 +120,7 @@ export const Vazia: Story = {
     props: { colunas: COLUNAS, acoesLinha: ACOES_LINHA },
     template: `
       <div style="max-width:60rem;">
-        <nph-ui-data-table
+        <nph-blocks-data-table
           caption="Bolsas por escola — Associação Bahia"
           [columns]="colunas"
           [rows]="[]"
@@ -128,7 +128,7 @@ export const Vazia: Story = {
           [total]="0"
           emptyTitle="Nenhuma escola encontrada"
           emptyDescription="Nenhuma escola combina com os filtros aplicados.">
-        </nph-ui-data-table>
+        </nph-blocks-data-table>
       </div>
     `,
   }),
@@ -145,13 +145,13 @@ export const SomenteLeitura: Story = {
     props: { colunas: COLUNAS, linhas: LINHAS },
     template: `
       <div style="max-width:60rem;">
-        <nph-ui-data-table
+        <nph-blocks-data-table
           caption="Bolsas por escola — Associação Bahia"
           [columns]="colunas"
           [rows]="linhas"
           [selectable]="false"
           [total]="4">
-        </nph-ui-data-table>
+        </nph-blocks-data-table>
       </div>
     `,
   }),

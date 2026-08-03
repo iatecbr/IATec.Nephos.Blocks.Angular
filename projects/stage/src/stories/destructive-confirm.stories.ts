@@ -3,7 +3,7 @@ import { moduleMetadata } from '@storybook/angular';
 
 import { ButtonModule } from 'primeng/button';
 
-import { DestructiveConfirmComponent } from '@iatec/nephos-ui';
+import { DestructiveConfirmComponent } from '@iatec/nephos-blocks';
 
 /**
  * Ficha: `design-system/componentes/destructive-confirm.block.meta.ts`
@@ -20,7 +20,7 @@ import { DestructiveConfirmComponent } from '@iatec/nephos-ui';
  * - **Esc** fecha e o foco volta ao botão que abriu.
  */
 const meta: Meta<DestructiveConfirmComponent> = {
-  title: 'Nephos UI/Blocos/Confirmação destrutiva',
+  title: 'Nephos Blocks/Confirmação destrutiva',
   component: DestructiveConfirmComponent,
   decorators: [
     moduleMetadata({ imports: [DestructiveConfirmComponent, ButtonModule] }),
@@ -48,14 +48,14 @@ export const Padrao: Story = {
                   [outlined]="true"
                   (onClick)="aberto = true"></p-button>
 
-        <nph-ui-destructive-confirm
+        <nph-blocks-destructive-confirm
           [(visible)]="aberto"
           title="Excluir a fatura #1032?"
           consequence="A fatura sai do sistema e não pode ser recuperada."
           confirmLabel="Excluir"
           (confirm)="resultado = 'confirmado'"
           (cancel)="resultado = 'cancelado'">
-        </nph-ui-destructive-confirm>
+        </nph-blocks-destructive-confirm>
 
         <span class="nph-caption nph-text-muted" aria-live="polite">
           {{ resultado ? 'Última resposta: ' + resultado : 'Nenhuma resposta ainda.' }}
@@ -81,14 +81,14 @@ export const ComTravaDeDigitacao: Story = {
                   [outlined]="true"
                   (onClick)="aberto = true"></p-button>
 
-        <nph-ui-destructive-confirm
+        <nph-blocks-destructive-confirm
           [(visible)]="aberto"
           title="Excluir a conta Colégio Adventista de Salvador?"
           consequence="Todos os dados vinculados saem junto. Esta ação não pode ser desfeita."
           confirmLabel="Excluir conta"
           [requireTyping]="true"
           itemName="Colégio Adventista de Salvador">
-        </nph-ui-destructive-confirm>
+        </nph-blocks-destructive-confirm>
       </div>
     `,
   }),

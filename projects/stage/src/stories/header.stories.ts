@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { provideRouter } from '@angular/router';
 
-import { HeaderComponent, provideNephosBrand } from '@iatec/nephos-ui';
+import { provideNephosBrand } from '@iatec/nephos-ui';
+import { HeaderComponent } from '@iatec/nephos-blocks';
 
 import { ROTAS_DE_PROVA } from './rotas-de-prova';
 
@@ -28,7 +29,7 @@ import { ROTAS_DE_PROVA } from './rotas-de-prova';
  * ele sai só como cor.
  */
 const meta: Meta<HeaderComponent> = {
-  title: 'Nephos UI/Blocos/Header',
+  title: 'Nephos Blocks/Header',
   component: HeaderComponent,
   parameters: { layout: 'fullscreen' },
   decorators: [
@@ -78,14 +79,14 @@ export const Padrao: Story = {
       termo: '',
     },
     template: `
-      <nph-ui-header
+      <nph-blocks-header
         [navItems]="nav"
         [accountItems]="conta"
         [user]="usuario"
         [notificationsCount]="3"
         searchLabel="Buscar no sistema"
         (search)="termo = $event">
-      </nph-ui-header>
+      </nph-blocks-header>
 
       <p class="nph-caption nph-text-muted" style="padding:1rem;" aria-live="polite">
         {{ termo ? 'Buscou por: ' + termo : 'Nada buscado ainda.' }}
@@ -103,12 +104,12 @@ export const SemNotificacao: Story = {
   render: () => ({
     props: { nav: NAV, conta: CONTA, usuario: { nome: 'Indiane Pita' } },
     template: `
-      <nph-ui-header
+      <nph-blocks-header
         [navItems]="nav"
         [accountItems]="conta"
         [user]="usuario"
         [notificationsCount]="0">
-      </nph-ui-header>
+      </nph-blocks-header>
     `,
   }),
 };
@@ -119,13 +120,13 @@ export const SemBusca: Story = {
   render: () => ({
     props: { nav: NAV, conta: CONTA, usuario: { nome: 'Indiane Pita' } },
     template: `
-      <nph-ui-header
+      <nph-blocks-header
         [navItems]="nav"
         [accountItems]="conta"
         [user]="usuario"
         [showSearch]="false"
         [notificationsCount]="12">
-      </nph-ui-header>
+      </nph-blocks-header>
     `,
   }),
 };

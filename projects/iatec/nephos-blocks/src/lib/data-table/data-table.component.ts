@@ -84,7 +84,7 @@ export interface NephosPageEvent {
  * ninguém viu.
  */
 @Component({
-    selector: 'nph-ui-data-table',
+    selector: 'nph-blocks-data-table',
     imports: [
         ButtonModule,
         PaginatorModule,

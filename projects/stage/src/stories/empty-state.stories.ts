@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { SkeletonModule } from 'primeng/skeleton';
 
-import { EmptyStateComponent } from '@iatec/nephos-ui';
+import { EmptyStateComponent } from '@iatec/nephos-blocks';
 
 /**
  * Ficha: `design-system/componentes/empty-state.block.meta.ts`
@@ -24,7 +24,7 @@ import { EmptyStateComponent } from '@iatec/nephos-ui';
  *   precisa ajustar o filtro, e o contrário é uma `invalidCombination`.
  */
 const meta: Meta<EmptyStateComponent> = {
-  title: 'Nephos UI/Blocos/Empty State',
+  title: 'Nephos Blocks/Empty State',
   component: EmptyStateComponent,
   decorators: [
     moduleMetadata({
@@ -45,12 +45,12 @@ export const PrimeiroUso: Story = {
   render: () => ({
     template: `
       <div style="max-width:32rem;">
-        <nph-ui-empty-state
+        <nph-blocks-empty-state
           variant="primeiro-uso"
           title="Nenhum relatório ainda"
           description="Crie o primeiro para ver os dados aqui."
           actionLabel="Criar relatório">
-        </nph-ui-empty-state>
+        </nph-blocks-empty-state>
       </div>
     `,
   }),
@@ -66,12 +66,12 @@ export const SemResultado: Story = {
   render: () => ({
     template: `
       <div style="max-width:32rem;">
-        <nph-ui-empty-state
+        <nph-blocks-empty-state
           variant="sem-resultado"
           title="Nenhuma escola encontrada"
           description="Tente outro termo ou limpe os filtros aplicados."
           [showAction]="false">
-        </nph-ui-empty-state>
+        </nph-blocks-empty-state>
       </div>
     `,
   }),
@@ -85,12 +85,12 @@ export const Bloqueado: Story = {
   render: () => ({
     template: `
       <div style="max-width:32rem;">
-        <nph-ui-empty-state
+        <nph-blocks-empty-state
           variant="bloqueado"
           title="Conecte uma conta para começar"
           description="Os lançamentos aparecem aqui depois que uma conta for conectada."
           actionLabel="Conectar conta">
-        </nph-ui-empty-state>
+        </nph-blocks-empty-state>
       </div>
     `,
   }),
@@ -116,12 +116,12 @@ export const VazioNaoEhCarregando: Story = {
 
         <div>
           <p class="nph-caption nph-text-muted">sem dados → empty-state</p>
-          <nph-ui-empty-state
+          <nph-blocks-empty-state
             variant="primeiro-uso"
             title="Nenhum relatório ainda"
             description="Crie o primeiro para ver os dados aqui."
             actionLabel="Criar relatório">
-          </nph-ui-empty-state>
+          </nph-blocks-empty-state>
         </div>
 
         <div>

@@ -6,7 +6,7 @@ import {DrawerModule} from 'primeng/drawer';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {TooltipModule} from 'primeng/tooltip';
 
-import {IconComponent} from '../icon/icon.component';
+import {IconComponent} from '@iatec/nephos-ui';
 
 let sequencia = 0;
 
@@ -45,7 +45,7 @@ let sequencia = 0;
  * PrimeNG.
  */
 @Component({
-    selector: 'nph-ui-sidebar',
+    selector: 'nph-blocks-sidebar',
     imports: [
         NgTemplateOutlet,
         RouterLink,

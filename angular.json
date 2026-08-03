@@ -126,6 +126,39 @@
         }
       }
     },
+    "@iatec/nephos-blocks": {
+      "projectType": "library",
+      "root": "projects/iatec/nephos-blocks",
+      "sourceRoot": "projects/iatec/nephos-blocks/src",
+      "prefix": "nph-blocks",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/iatec/nephos-blocks/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/iatec/nephos-blocks/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/iatec/nephos-blocks/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/iatec/nephos-blocks/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
     "@iatec/nephos-layout": {
       "projectType": "library",
       "root": "projects/iatec/nephos-layout",

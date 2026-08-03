@@ -1,10 +1,7 @@
 import {ChangeDetectionStrategy, Component, computed, input, output} from '@angular/core';
 import {ButtonModule} from 'primeng/button';
 
-import {HeadingComponent} from '../heading/heading.component';
-import {IconComponent} from '../icon/icon.component';
-import {TextComponent} from '../text/text.component';
-import {NephosHeadingLevel} from '../nephos-ui.tokens';
+import {HeadingComponent, IconComponent, NephosHeadingLevel, TextComponent} from '@iatec/nephos-ui';
 
 /**
  * `primeiro-uso` convida a criar · `sem-resultado` sugere ajustar o filtro ·
@@ -36,7 +33,7 @@ const ICONE_POR_VARIANTE: Record<NephosEmptyStateVariant, string> = {
  * bloco: um vazio dentro de uma seção não pode virar o `<h1>` da tela.
  */
 @Component({
-    selector: 'nph-ui-empty-state',
+    selector: 'nph-blocks-empty-state',
     imports: [
         ButtonModule,
         HeadingComponent,

@@ -9,10 +9,7 @@ import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
 import {OverlayBadgeModule} from 'primeng/overlaybadge';
 
-import {IconComponent} from '../icon/icon.component';
-import {LabelComponent} from '../label/label.component';
-import {LogoComponent} from '../logo/logo.component';
-import {NephosColorMode, ThemeToggleComponent} from '../theme-toggle/theme-toggle.component';
+import {IconComponent, LabelComponent, LogoComponent, NephosColorMode, ThemeToggleComponent} from '@iatec/nephos-ui';
 
 /** Quem está logado. Só o que a barra precisa para se identificar. */
 export interface NephosHeaderUser {
@@ -54,7 +51,7 @@ let sequencia = 0;
  * próprio PrimeNG. Duplicá-los criaria um segundo caminho, pior.
  */
 @Component({
-    selector: 'nph-ui-header',
+    selector: 'nph-blocks-header',
     imports: [
         NgTemplateOutlet,
         AvatarModule,

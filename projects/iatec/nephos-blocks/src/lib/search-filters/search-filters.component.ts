@@ -5,8 +5,7 @@ import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
 import {InputTextModule} from 'primeng/inputtext';
 
-import {IconComponent} from '../icon/icon.component';
-import {LabelComponent} from '../label/label.component';
+import {IconComponent, LabelComponent} from '@iatec/nephos-ui';
 
 /** Um filtro aplicado, do jeito que ele aparece no chip: `campo: valor`. */
 export interface NephosActiveFilter {
@@ -50,7 +49,7 @@ let sequencia = 0;
  * O bloco cuida da busca, da remoção e do limpar tudo.
  */
 @Component({
-    selector: 'nph-ui-search-filters',
+    selector: 'nph-blocks-search-filters',
     imports: [
         ButtonModule,
         ChipModule,

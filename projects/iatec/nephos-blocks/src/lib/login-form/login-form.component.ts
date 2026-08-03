@@ -6,9 +6,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MessageModule} from 'primeng/message';
 import {PasswordModule} from 'primeng/password';
 
-import {HeadingComponent} from '../heading/heading.component';
-import {LabelComponent} from '../label/label.component';
-import {NephosHeadingLevel} from '../nephos-ui.tokens';
+import {HeadingComponent, LabelComponent, NephosHeadingLevel} from '@iatec/nephos-ui';
 
 /** O que o bloco entrega para quem vai autenticar. */
 export interface NephosLoginCredentials {
@@ -46,7 +44,7 @@ let sequencia = 0;
  * entrada, e dado de perfil pertence a outra tela.
  */
 @Component({
-    selector: 'nph-ui-login-form',
+    selector: 'nph-blocks-login-form',
     imports: [
         FormsModule,
         ButtonModule,

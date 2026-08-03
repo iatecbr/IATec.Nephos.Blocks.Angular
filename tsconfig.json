@@ -7,6 +7,9 @@
   ],
   "compilerOptions": {
     "paths": {
+      "@iatec/nephos-blocks": [
+        "./projects/iatec/nephos-blocks/src/public-api.ts"
+      ],
       "@iatec/nephos-layout": [
         "./projects/iatec/nephos-layout/src/public-api.ts"
       ],
