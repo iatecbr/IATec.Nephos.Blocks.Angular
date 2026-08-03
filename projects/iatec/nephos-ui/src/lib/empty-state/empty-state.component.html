@@ -1,0 +1,19 @@
+<!-- `role="status"` porque o vazio é INFORMAÇÃO: quem ouve a tela precisa
+     saber que a busca terminou e não trouxe nada, não ficar no silêncio. -->
+<div class="nph-empty-state" role="status">
+    <nph-ui-icon class="nph-empty-state__icon" [name]="iconName()"></nph-ui-icon>
+
+    <nph-ui-heading [level]="headingLevel()" size="title-sm">{{title()}}</nph-ui-heading>
+
+    @if (description(); as texto) {
+        <nph-ui-text variant="muted">{{texto}}</nph-ui-text>
+    }
+
+    <!-- Projeção para quando a ação não é um botão simples (um link para a
+         documentação, um par de botões). Fica no lugar da ação padrão. -->
+    <ng-content></ng-content>
+
+    @if (acaoVisivel()) {
+        <p-button [label]="actionLabel()!" (onClick)="action.emit()"></p-button>
+    }
+</div>

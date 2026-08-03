@@ -1,0 +1,72 @@
+<!-- O miolo é o MESMO nos três estados (expandida, trilha, gaveta): o que
+     muda é a moldura. Projetar três vezes daria três navegações no DOM. -->
+<ng-template #miolo>
+    <nav class="nph-sidebar" [attr.id]="idNav" aria-label="Seções">
+
+        @if (collapsible() && !emGaveta()) {
+            <button type="button"
+                    class="nph-icon-button nph-sidebar__recolher"
+                    [attr.aria-label]="rotuloRecolher()"
+                    [attr.aria-expanded]="!collapsed()"
+                    [attr.aria-controls]="idNav"
+                    (click)="alternarRecolhida()">
+                <nph-ui-icon [name]="iconeRecolher()"></nph-ui-icon>
+            </button>
+        }
+
+        @if (emTrilha()) {
+            <!-- Trilha de ícones: o rótulo original vira nome acessível E
+                 tooltip. Ícone sozinho é ambíguo para quem vê e mudo para
+                 quem ouve. -->
+            <ul class="nph-sidebar__trilha">
+                @for (item of items(); track item.label) {
+                    <li>
+                        @if (ehGrupo(item)) {
+                            <!-- Grupo não tem onde abrir na trilha: o botão
+                                 expande a lateral em vez de fingir navegar. -->
+                            <button type="button"
+                                    class="nph-sidebar__atalho"
+                                    [attr.aria-label]="item.label + ', expandir menu lateral'"
+                                    [pTooltip]="item.label"
+                                    tooltipPosition="right"
+                                    (click)="expandir()">
+                                <i [class]="item.icon" aria-hidden="true"></i>
+                            </button>
+                        } @else {
+                            <a class="nph-sidebar__atalho"
+                               [routerLink]="item.routerLink"
+                               [attr.aria-label]="item.label"
+                               [pTooltip]="item.label"
+                               tooltipPosition="right">
+                                <i [class]="item.icon" aria-hidden="true"></i>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        } @else {
+            <!-- Accordion: cabeçalho de seção como `<button aria-expanded>`
+                 + `aria-controls`, tudo do próprio p-panelMenu. -->
+            <p-panelMenu [model]="items()" [multiple]="true"></p-panelMenu>
+        }
+
+        <!-- Slot `footer`: atalhos fixos (configurações, ajuda). -->
+        <ng-content select="[nphFooter]"></ng-content>
+    </nav>
+</ng-template>
+
+@if (emGaveta()) {
+    <!-- Só no mobile a navegação vira modal: aí ela é temporária e Esc
+         devolve o foco a quem abriu. No desktop isso prenderia o foco
+         numa navegação que deveria ser persistente. -->
+    <p-drawer [(visible)]="drawerVisible"
+              position="left"
+              header="Seções"
+              [modal]="true"
+              [dismissible]="true"
+              [closeOnEscape]="true">
+        <ng-container *ngTemplateOutlet="miolo"></ng-container>
+    </p-drawer>
+} @else {
+    <ng-container *ngTemplateOutlet="miolo"></ng-container>
+}

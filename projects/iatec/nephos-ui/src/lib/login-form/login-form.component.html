@@ -1,0 +1,64 @@
+<!-- `<form>` com aria-label: é o landmark que o leitor de tela usa para
+     achar a região de acesso, e o que faz o gerenciador de senhas
+     reconhecer o par usuário/senha. -->
+<form class="nph-login" aria-label="Entrar" (ngSubmit)="enviar()">
+
+    <!-- Slot `brand`: o logo da vertical ativa. O bloco não sabe qual é. -->
+    <ng-content select="[nphBrand]"></ng-content>
+
+    <nph-ui-heading [level]="headingLevel()">{{title()}}</nph-ui-heading>
+
+    <!-- Erro GERAL. O `p-message` já nasce com role="alert" + aria-live. -->
+    @if (errorMessage(); as erro) {
+        <p-message severity="error" [text]="erro"></p-message>
+    }
+
+    <div class="nph-field">
+        <nph-ui-label [for]="idEmail">E-mail</nph-ui-label>
+        <input pInputText
+               type="email"
+               [id]="idEmail"
+               name="email"
+               autocomplete="username"
+               required
+               [fluid]="true"
+               [disabled]="loading()"
+               [ngModel]="email()"
+               (ngModelChange)="email.set($event)" />
+    </div>
+
+    <div class="nph-field">
+        <nph-ui-label [for]="idSenha">Senha</nph-ui-label>
+        <!-- `feedback` desligado: medidor de força é para CRIAR senha. -->
+        <p-password [inputId]="idSenha"
+                    name="senha"
+                    autocomplete="current-password"
+                    [toggleMask]="true"
+                    [feedback]="false"
+                    [fluid]="true"
+                    [disabled]="loading()"
+                    [ngModel]="senha()"
+                    (ngModelChange)="senha.set($event)"></p-password>
+    </div>
+
+    @if (showRemember()) {
+        <div class="nph-login__lembrar">
+            <p-checkbox [binary]="true"
+                        [inputId]="idLembrar"
+                        name="lembrar"
+                        [disabled]="loading()"
+                        [ngModel]="lembrar()"
+                        (ngModelChange)="lembrar.set($event)"></p-checkbox>
+            <nph-ui-label [for]="idLembrar">Lembrar-me</nph-ui-label>
+        </div>
+    }
+
+    <!-- Uma única ação primária: a expectativa da tela é entrar. -->
+    <p-button type="submit"
+              label="Entrar"
+              [loading]="loading()"
+              [fluid]="true"></p-button>
+
+    <!-- Slot `links`: "Esqueci minha senha" e afins, em baixa ênfase. -->
+    <ng-content select="[nphLinks]"></ng-content>
+</form>

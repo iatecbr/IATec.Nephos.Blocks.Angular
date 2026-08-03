@@ -1,0 +1,130 @@
+<div class="nph-data-table">
+
+    <!-- Barra de ações em massa: só existe quando há seleção, e a contagem
+         é anunciada porque ela muda sem que o foco saia da linha. -->
+    @if (selectable() && qtdSelecionada() > 0 && bulkActions().length > 0) {
+        <div class="nph-data-table__massa" role="region" aria-label="Ações em massa">
+            <span class="nph-body-sm" aria-live="polite">{{rotuloSelecao()}}</span>
+
+            @for (acao of bulkActions(); track acao.id) {
+                <p-button type="button"
+                          [label]="acao.label"
+                          [severity]="acao.severity ?? 'secondary'"
+                          [text]="true"
+                          (onClick)="bulkAction.emit({acao, selecionados: selection()})"></p-button>
+            }
+        </div>
+    }
+
+    <!-- `lazy`: ordenar e paginar são do contexto. A tabela mostra a página
+         que recebeu; ela não reordena um pedaço achando que é o todo.
+         O `pt` põe o nome acessível no `<table>`, que o PrimeNG não expõe. -->
+    <p-table [value]="linhasExibidas()"
+             [lazy]="true"
+             [dataKey]="dataKey()"
+             [selection]="selection()"
+             [pt]="ptTabela()"
+             (selectionChange)="aoSelecionar($any($event))"
+             (onSort)="aoOrdenar($event)">
+
+        <ng-template #header>
+            <tr>
+                @if (selectable()) {
+                    <th scope="col" class="nph-data-table__selecao">
+                        <!-- O rótulo diz PÁGINA: marcar o resultado inteiro
+                             sem avisar faz a ação em massa cair no invisível. -->
+                        <p-tableHeaderCheckbox
+                            ariaLabel="Selecionar todas as linhas desta página"></p-tableHeaderCheckbox>
+                    </th>
+                }
+
+                @for (coluna of columns(); track coluna.field) {
+                    @if (coluna.sortable) {
+                        <!-- `pSortableColumn` já entrega tabindex, Enter/Espaço
+                             e `aria-sort` no próprio `<th>`. -->
+                        <th scope="col" [pSortableColumn]="coluna.field">
+                            {{coluna.header}}
+                            <p-sortIcon [field]="coluna.field"></p-sortIcon>
+                        </th>
+                    } @else {
+                        <th scope="col">{{coluna.header}}</th>
+                    }
+                }
+
+                @if (rowActions().length > 0) {
+                    <th scope="col">Ações</th>
+                }
+            </tr>
+        </ng-template>
+
+        <ng-template #body let-linha>
+            <tr [class.nph-data-table__linha--selecionada]="estaSelecionada(linha)">
+                @if (selectable()) {
+                    <td>
+                        @if (!loading()) {
+                            <p-tableCheckbox [value]="linha"
+                                             [ariaLabel]="rotuloDaLinha('Selecionar', linha)"></p-tableCheckbox>
+                        }
+                    </td>
+                }
+
+                @for (coluna of columns(); track coluna.field) {
+                    <td>
+                        @if (loading()) {
+                            <!-- Sem altura declarada: o padrão do p-skeleton já é
+                                 a altura de uma linha de texto. -->
+                            <p-skeleton></p-skeleton>
+                        } @else if (coluna.kind === 'status') {
+                            <!-- A Tag carrega a PALAVRA; a cor por papel reforça. -->
+                            <p-tag [value]="$any(valorCelula(linha, coluna))"
+                                   [severity]="severidade(linha, coluna)"></p-tag>
+                        } @else {
+                            {{valorCelula(linha, coluna)}}
+                        }
+                    </td>
+                }
+
+                @if (rowActions().length > 0) {
+                    <td class="nph-data-table__acoes">
+                        @if (!loading()) {
+                            @for (acao of rowActions(); track acao.id) {
+                                <!-- O nome inclui a linha: vinte lixeiras iguais
+                                     são vinte botões idênticos para quem ouve. -->
+                                <p-button type="button"
+                                          [text]="true"
+                                          [icon]="'fa-solid fa-' + acao.icon"
+                                          [severity]="acao.severity ?? 'secondary'"
+                                          [ariaLabel]="rotuloDaLinha(acao.label, linha)"
+                                          (onClick)="rowAction.emit({acao, linha})"></p-button>
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        </ng-template>
+
+        <!-- Vazio ≠ carregando ≠ erro. Aqui só entra o vazio, e ele explica. -->
+        <ng-template #emptymessage>
+            <tr>
+                <td [attr.colspan]="totalColunas()">
+                    <nph-ui-empty-state variant="sem-resultado"
+                                        [title]="emptyTitle()"
+                                        [description]="emptyDescription()"
+                                        [headingLevel]="3"
+                                        [showAction]="false"></nph-ui-empty-state>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    @if (paginacaoVisivel()) {
+        <!-- O paginator do PrimeNG não traz landmark; o `<nav>` rotulado é
+             o que permite pular direto para a paginação. -->
+        <nav aria-label="Paginação">
+            <p-paginator [rows]="pageSize()"
+                         [totalRecords]="total()"
+                         [first]="first()"
+                         (onPageChange)="aoPaginar($event)"></p-paginator>
+        </nav>
+    }
+</div>

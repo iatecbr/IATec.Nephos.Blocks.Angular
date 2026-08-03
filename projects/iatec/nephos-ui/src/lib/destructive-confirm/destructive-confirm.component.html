@@ -1,0 +1,45 @@
+<!-- `dismissableMask` desligado de propósito: um clique fora acidental não
+     pode valer como resposta a uma pergunta irreversível. Esc e o X ficam,
+     porque os dois são a saída SEGURA (cancelar). -->
+<p-dialog [(visible)]="visible"
+          [header]="title()"
+          role="alertdialog"
+          [modal]="true"
+          [dismissableMask]="false"
+          [closeOnEscape]="true"
+          [draggable]="false"
+          [resizable]="false"
+          styleClass="nph-confirm"
+          (onHide)="aoFechar()">
+
+    <nph-ui-text>{{consequence()}}</nph-ui-text>
+
+    @if (requireTyping() && itemName(); as nome) {
+        <div class="nph-confirm__trava">
+            <nph-ui-label [for]="idCampoTrava">Digite <strong>{{nome}}</strong> para confirmar</nph-ui-label>
+            <input pInputText
+                   type="text"
+                   [id]="idCampoTrava"
+                   autocomplete="off"
+                   [attr.aria-describedby]="idCampoTrava + '-ajuda'"
+                   [value]="digitado()"
+                   (input)="digitado.set($any($event.target).value)" />
+            <nph-ui-helper-text [for]="idCampoTrava">
+                A confirmação só libera com o nome exato.
+            </nph-ui-helper-text>
+        </div>
+    }
+
+    <ng-template #footer>
+        <!-- Cancelar PRIMEIRO no DOM: é ele que o p-dialog foca ao abrir. -->
+        <p-button [label]="cancelLabel()"
+                  severity="secondary"
+                  [text]="true"
+                  (onClick)="aoCancelar()"></p-button>
+
+        <p-button [label]="confirmLabel()"
+                  severity="danger"
+                  [disabled]="!travaLiberada()"
+                  (onClick)="aoConfirmar()"></p-button>
+    </ng-template>
+</p-dialog>

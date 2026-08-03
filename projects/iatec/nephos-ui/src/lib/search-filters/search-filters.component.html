@@ -1,0 +1,65 @@
+<!-- `role="search"` com aria-label: é assim que a região é achada por
+     quem navega por landmarks, e o rótulo diz o que se busca. -->
+<form class="nph-filters" role="search" [attr.aria-label]="searchLabel()" (ngSubmit)="aoEnviar()">
+
+    <div class="nph-filters__busca">
+        <!-- O rótulo some para quem vê (o ícone e o placeholder bastam) e
+             continua para quem ouve. Placeholder NÃO é rótulo. -->
+        <nph-ui-label [for]="idBusca" [visualHidden]="true">{{searchLabel()}}</nph-ui-label>
+
+        <p-iconfield>
+            <p-inputicon>
+                <nph-ui-icon name="magnifying-glass"></nph-ui-icon>
+            </p-inputicon>
+            <input pInputText
+                   type="search"
+                   [id]="idBusca"
+                   name="q"
+                   [placeholder]="searchPlaceholder()"
+                   [fluid]="true"
+                   [value]="term()"
+                   (input)="aoDigitar($any($event.target).value)" />
+        </p-iconfield>
+    </div>
+
+    <!-- Slot `filters`: select (valor único), multiselect (vários valores) ou
+         grupo de checkbox visível (≤5 opções sempre relevantes). -->
+    <ng-content select="[nphFilters]"></ng-content>
+
+    @if (temFiltroAtivo()) {
+        <p-button type="button"
+                  label="Limpar filtros"
+                  severity="secondary"
+                  [text]="true"
+                  (onClick)="clearAll.emit()"></p-button>
+    }
+</form>
+
+@if (showActiveChips() && temFiltroAtivo()) {
+    <!-- Lista de verdade: é um conjunto de itens, e o leitor de tela
+         anuncia quantos filtros estão aplicados. -->
+    <ul class="nph-filters__ativos" aria-label="Filtros ativos">
+        @for (filtro of activeFilters(); track chave(filtro)) {
+            <li>
+                <p-chip>
+                    <span class="nph-caption">{{filtro.campo}}: {{filtro.valor}}</span>
+                    <!-- `<button>` real: `<span>` clicável não recebe foco,
+                         não responde ao teclado e não é anunciado. -->
+                    <button type="button"
+                            class="nph-chip-remove"
+                            [attr.aria-label]="rotuloRemover(filtro)"
+                            (click)="filterRemove.emit(filtro)">
+                        <nph-ui-icon name="xmark"></nph-ui-icon>
+                    </button>
+                </p-chip>
+            </li>
+        }
+    </ul>
+}
+
+@if (resultCount() !== null) {
+    <!-- Região viva: a contagem muda sem que a pessoa mude de foco. -->
+    <p class="nph-caption nph-text-muted" role="status" aria-live="polite">
+        {{resultCount()}} {{resultNoun()}}
+    </p>
+}

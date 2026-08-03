@@ -1,0 +1,75 @@
+<!-- O botão de notificações é o mesmo com e sem contador; só o embrulho
+     muda. Projetar duas vezes daria dois botões diferentes no DOM. -->
+<ng-template #botaoNotificacoes>
+    <button type="button"
+            class="nph-icon-button"
+            [attr.aria-label]="rotuloNotificacoes()"
+            (click)="notifications.emit()">
+        <nph-ui-icon name="bell"></nph-ui-icon>
+    </button>
+</ng-template>
+
+<header class="nph-header" role="banner">
+
+    <!-- Convenção universal: o logo do topo volta ao início. -->
+    <nph-ui-logo class="nph-header__marca" variant="full" href="/"></nph-ui-logo>
+
+    <!-- Rótulo próprio: a sidebar usa "Seções", e dois `<nav>` iguais
+         quebram a navegação por região. -->
+    <nav class="nph-header__nav" aria-label="Navegação principal">
+        <p-menubar [model]="navItems()"></p-menubar>
+    </nav>
+
+    @if (showSearch()) {
+        <div class="nph-header__busca">
+            <nph-ui-label [for]="idBusca" [visualHidden]="true">{{searchLabel()}}</nph-ui-label>
+            <p-iconfield>
+                <p-inputicon>
+                    <nph-ui-icon name="magnifying-glass"></nph-ui-icon>
+                </p-inputicon>
+                <input pInputText
+                       type="search"
+                       [id]="idBusca"
+                       name="q"
+                       [placeholder]="searchPlaceholder()"
+                       [fluid]="true"
+                       (change)="aoBuscar($any($event.target).value)" />
+            </p-iconfield>
+        </div>
+    }
+
+    <div class="nph-header__acoes">
+        <!-- Claro/escuro é o ÚNICO eixo que a pessoa escolhe. Marca, não. -->
+        <nph-ui-theme-toggle (modeChange)="toggleTheme.emit($event)"></nph-ui-theme-toggle>
+
+        @if (temNotificacao()) {
+            <p-overlaybadge [value]="notificationsCount()"
+                            severity="danger"
+                            [pt]="ptBadge">
+                <ng-container *ngTemplateOutlet="botaoNotificacoes"></ng-container>
+            </p-overlaybadge>
+        } @else {
+            <ng-container *ngTemplateOutlet="botaoNotificacoes"></ng-container>
+        }
+
+        <button type="button"
+                class="nph-icon-button"
+                aria-haspopup="menu"
+                [attr.aria-expanded]="menuAberto()"
+                [attr.aria-controls]="idMenuConta"
+                [attr.aria-label]="rotuloConta()"
+                (click)="menuConta.toggle($event)">
+            <!-- A foto/inicial é decorativa: quem nomeia é o botão. -->
+            <p-avatar shape="circle"
+                      [label]="iniciais()"
+                      [image]="user().foto"></p-avatar>
+        </button>
+
+        <p-menu #menuConta
+                [id]="idMenuConta"
+                [model]="accountItems()"
+                [popup]="true"
+                (onShow)="menuAberto.set(true)"
+                (onHide)="menuAberto.set(false)"></p-menu>
+    </div>
+</header>
