@@ -1,0 +1,21 @@
+{
+  "name": "nephos-ds-mcp",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Servidor MCP (bibliotecário) que serve o catálogo do Design System Nephos ao Moses.",
+  "bin": {
+    "nephos-ds-mcp": "./server.mjs"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
