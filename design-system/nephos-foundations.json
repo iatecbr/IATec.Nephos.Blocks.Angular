@@ -253,6 +253,9 @@
       "bold"
     ],
     "rule": "Só a escala NOMEADA (por função, não por tamanho). Máximo 2 pesos por região. Nunca tamanho cru.",
+    "unit": "px",
+    "rootFontSize": 14,
+    "unitRule": "A escala é entregue em px. O root do produto é 14px, então rem NÃO reproduz estes valores (title-lg em 2.125rem sairia 29,75px, não 34px). O mesmo root faz a geometria em rem do PrimeNG chegar a 87,5% do nominal.",
     "scale": {
       "overline": 10.5,
       "caption": 12,

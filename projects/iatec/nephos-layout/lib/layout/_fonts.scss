@@ -1,36 +1,59 @@
-/* poppins-regular - latin */
+/* ─────────────────────────────────────────────────────────────
+ * Fontes do layout
+ * ─────────────────────────────────────────────────────────────
+ * A família do produto é **Noto Sans** (`design-system/design.md` ›
+ * Tipografia). Decisão da Indiane em 03/08/2026, fechando o conflito
+ * entre o repo (que entregava Poppins) e o Design System.
+ *
+ * Os arquivos ficam AQUI DENTRO, do mesmo jeito que o Poppins ficava:
+ * a lib é publicada e não pode obrigar quem a consome a instalar um
+ * pacote de fonte. (Os `.woff2`/`.woff` vieram do `@fontsource/noto-sans`,
+ * subconjunto latin.)
+ *
+ * Os quatro pesos são exatamente os que o `nephos-ui.scss` declara:
+ * 400 regular · 500 medium · 600 semibold · 700 bold.
+ * ───────────────────────────────────────────────────────────── */
+
+/* noto-sans-regular - latin */
 @font-face {
-    font-family: 'Poppins';
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: local(''),
-         url("./fonts/poppins-v20-latin-regular.woff2") format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url("./fonts/poppins-v20-latin-regular.woff") format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* poppins-500 - latin */
-  @font-face {
-    font-family: 'Poppins';
+         url("./fonts/noto-sans-latin-400-normal.woff2") format('woff2'),
+         url("./fonts/noto-sans-latin-400-normal.woff") format('woff');
+}
+
+/* noto-sans-500 - latin */
+@font-face {
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 500;
+    font-display: swap;
     src: local(''),
-         url("./fonts/poppins-v20-latin-500.woff2") format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url("./fonts/poppins-v20-latin-500.woff") format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* poppins-600 - latin */
-  @font-face {
-    font-family: 'Poppins';
+         url("./fonts/noto-sans-latin-500-normal.woff2") format('woff2'),
+         url("./fonts/noto-sans-latin-500-normal.woff") format('woff');
+}
+
+/* noto-sans-600 - latin */
+@font-face {
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 600;
+    font-display: swap;
     src: local(''),
-         url("./fonts/poppins-v20-latin-600.woff2") format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url("./fonts/poppins-v20-latin-600.woff") format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* poppins-700 - latin */
-  @font-face {
-    font-family: 'Poppins';
+         url("./fonts/noto-sans-latin-600-normal.woff2") format('woff2'),
+         url("./fonts/noto-sans-latin-600-normal.woff") format('woff');
+}
+
+/* noto-sans-700 - latin */
+@font-face {
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
+    font-display: swap;
     src: local(''),
-         url("./fonts/poppins-v20-latin-700.woff2") format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url("./fonts/poppins-v20-latin-700.woff") format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+         url("./fonts/noto-sans-latin-700-normal.woff2") format('woff2'),
+         url("./fonts/noto-sans-latin-700-normal.woff") format('woff');
+}

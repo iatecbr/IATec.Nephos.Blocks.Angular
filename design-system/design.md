@@ -443,11 +443,15 @@ Uma família, quatro pesos, doze tamanhos. Igual nas sete marcas. A escala é no
 
 Regra: no máximo **dois pesos** de fonte numa mesma região.
 
+**A escala é entregue em px.** O root do produto é `14px`, então `rem` **não** reproduz os valores da tabela acima — `title-lg` em `2.125rem` sairia 29,75px, não 34px.
+
 ---
 
 ## Geometria — raio, espaçamento, densidade, foco
 
 No produto real cada componente já aplica estes valores automaticamente. Eles estão aqui para referência e para que protótipos fiquem fiéis. **Nunca fixar px "no olho".**
+
+Os valores em `rem` abaixo são os do componente. Como o root do produto é `14px`, eles chegam à tela a **87,5%** do nominal (`0.75rem` = 10,5px, não 12px). Num protótipo à mão, ou se usa `rem` com root de 14px, ou se usa o px já convertido.
 
 ### Raio de canto
 

@@ -285,6 +285,9 @@
         "bold"
       ],
       "rule": "Só a escala NOMEADA (por função, não por tamanho). Máximo 2 pesos por região. Nunca tamanho cru.",
+      "unit": "px",
+      "rootFontSize": 14,
+      "unitRule": "A escala é entregue em px. O root do produto é 14px, então rem NÃO reproduz estes valores (title-lg em 2.125rem sairia 29,75px, não 34px). O mesmo root faz a geometria em rem do PrimeNG chegar a 87,5% do nominal.",
       "scale": {
         "overline": 10.5,
         "caption": 12,
@@ -8141,14 +8144,14 @@
             "text": "surface/muted"
           },
           "ilustracao": {
-            "color": "surface/300"
+            "color": "surface/muted"
           },
           "acao": {
             "background": "primary/500",
             "text": "primary/contrast"
           }
         },
-        "note": "Cor por papel (surface para texto neutro; primary só na ação). Espaçamento/centralização herdam do sistema. Nunca hex."
+        "note": "Cor por papel (surface para texto neutro; primary só na ação). Espaçamento/centralização herdam do sistema. Nunca hex. A ilustração usa o papel de APOIO (`surface/muted`), não um passo fixo da rampa: a rampa de surface não inverte entre claro e escuro, então um passo cru sairia igual nos dois modos e, no escuro, a ilustração viraria o elemento mais claro da tela — o oposto do anti-padrão abaixo. (Corrigido em 03/08/2026, medido no Storybook; antes dizia `surface/300`.)"
       },
       "antiPatterns": [
         {

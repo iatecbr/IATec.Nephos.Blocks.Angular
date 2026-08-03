@@ -2,29 +2,48 @@
  * Estilos exclusivos do banco de provas (Storybook)
  * ─────────────────────────────────────────────────────────────
  * Este arquivo NÃO entra no bundle do app `stage` — ele é carregado só
- * pelo alvo `stage:storybook` do `angular.json`. Está separado de
- * propósito: as duas coisas abaixo são fundação declarada do Nephos, mas
- * a forma de entregá-las em produção ainda é decisão de configuração da
- * engenharia, e o banco de provas não deve forçar essa decisão.
+ * pelo alvo `stage:storybook` do `angular.json`.
  *
- * 1. FONT AWESOME — o set de ícones do Nephos (`design.md` › Ícones).
- *    Aqui entra a edição **Free** 7.3.1 (solid/regular/brands). A
- *    organização tem licença **Pro**; quando o kit Pro for configurado no
- *    repo, é ele que deve valer — inclusive para sobrescrever os ícones
- *    INTERNOS do PrimeNG, que hoje ainda são PrimeIcons.
+ * ⚠️ Quanto MENOS coisa houver aqui, melhor. Tudo que existe só neste
+ * arquivo é algo que o banco de provas tem e a produção não — ou seja,
+ * um jeito de a prova mentir. O objetivo é esvaziá-lo.
  *
- * 2. NOTO SANS — a família declarada no `design.md` › Tipografia. O
- *    layout do repo hoje entrega **Poppins**
- *    (`nephos-layout/lib/layout/_fonts.scss`), o que é um conflito real
- *    entre repo e Design System. Sem esta linha, a escala do Nephos
- *    apareceria em fonte de sistema e a prova tipográfica não provaria
- *    nada. Qual das duas famílias vale em produção é decisão pendente.
+ * ✅ **NOTO SANS SAIU DAQUI (03/08/2026).** A família foi decidida para
+ * produção e agora é entregue pelo próprio layout
+ * (`nephos-layout/lib/layout/_fonts.scss`), o mesmo caminho do app.
+ * O Storybook passou a provar a entrega de verdade, não uma montagem
+ * exclusiva dele.
+ *
+ * ⏳ **FONT AWESOME — o que resta, e como fechar.** O set do Nephos
+ * (`design.md` › Ícones) é Font Awesome, e a edição é a **Pro**
+ * (decidido em 03/08/2026). Aqui embaixo está a **Free** 7.3.1, que é a
+ * única que instala sem credencial.
+ *
+ * O que falta é só o acesso ao registry da Font Awesome — quem tiver o
+ * token da licença fecha isto em minutos:
+ *
+ *   npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+ *   npm config set "//npm.fontawesome.com/:_authToken" <TOKEN>
+ *   npm i @fortawesome/fontawesome-pro
+ *
+ * e troca a linha abaixo por:
+ *
+ *   @use '@fortawesome/fontawesome-pro/css/all.css';
+ *
+ * Nada mais muda: a sintaxe `fa-solid fa-<nome>` é a mesma nas duas
+ * edições, e o `IconComponent` já aceita os cinco estilos.
+ *
+ * Enquanto o Pro não entra, `light`, `thin` e `duotone` não renderizam —
+ * mas o estilo padrão do Nephos é `solid`, que existe na Free, então
+ * **nenhum ícone do catálogo está quebrado hoje**.
+ *
+ * ℹ️ Uma pergunta antiga que se resolveu sozinha: os ícones INTERNOS do
+ * PrimeNG (setinha do select, X do dialog, setas do paginator) **não são
+ * mais PrimeIcons**. No PrimeNG 21 eles são SVG embutido
+ * (`<svg data-p-icon="chevron-down">`), verificado no DOM renderizado —
+ * não há o que sobrescrever. O `primeicons` que ainda entra pelo
+ * `styles.scss` é usado pelo `@iatec/nephos-layout`, que escreve
+ * `pi pi-*` à mão em ~10 lugares; migrar esses é tarefa separada.
  * ───────────────────────────────────────────────────────────── */
 
 @use '@fortawesome/fontawesome-free/css/all.css';
-
-/* O `as` é obrigatório: o Sass não consegue derivar um namespace de "400". */
-@use '@fontsource/noto-sans/400.css' as noto-regular;
-@use '@fontsource/noto-sans/500.css' as noto-medium;
-@use '@fontsource/noto-sans/600.css' as noto-semibold;
-@use '@fontsource/noto-sans/700.css' as noto-bold;

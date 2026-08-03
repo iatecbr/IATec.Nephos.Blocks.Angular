@@ -34,15 +34,18 @@
 
   /* Escala nomeada — por FUNÇÃO, não por tamanho.
    *
-   * ⚠️ EM px, DE PROPÓSITO, e a razão importa: o layout do repo declara
-   * `html { font-size: 14px }` (`nephos-layout/lib/layout/_main.scss`).
-   * Com `rem`, todo valor sairia a 87,5% do declarado — `title-lg` viraria
-   * 29,75px em vez de 34px. Isso seria mudar o token em silêncio, e valor
-   * de token só muda com confirmação explícita.
+   * ⚠️ EM px, DE PROPÓSITO, e agora por decisão fechada: o layout declara
+   * `html { font-size: 14px }` (`nephos-layout/lib/layout/_main.scss`) e
+   * **o root fica em 14px** (confirmado pela Indiane em 03/08/2026). Com
+   * `rem`, todo valor daqui sairia a 87,5% do declarado — `title-lg`
+   * viraria 29,75px em vez de 34px, ou seja, o token mudaria em silêncio.
+   * Em px, a escala entrega exatamente o que o `design.md` declara.
    *
-   * (O mesmo root de 14px reescala os `rem` do Aura, então a geometria do
-   * PrimeNG também roda a 87,5% do nominal. Isso é achado do repo, não
-   * deste arquivo — está registrado para decisão.) */
+   * A outra metade da mesma decisão: o root de 14px também reescala os
+   * `rem` do Aura, então a geometria do PrimeNG (raio, padding, altura,
+   * densidade) roda a 87,5% do nominal. Isso foi medido e ACEITO — é
+   * proporcional e coerente, e é por isso que o espaço entre as peças
+   * (abaixo) fica em rem: ele precisa encolher junto com os componentes. */
   --nph-font-size-overline: 10.5px;
   --nph-font-size-caption: 12px;
   --nph-font-size-button-sm: 14px;
@@ -64,11 +67,12 @@
    * herdar do sistema. Estes três passos NÃO são valores novos: cada um
    * é um número que o `design.md` já declara, reusado como gap.
    *
-   * ⚠️ EM rem, ao contrário da escala tipográfica, e a razão é a mesma
-   * que fez a tipografia ir para px: o root de 14px do layout reescala
-   * os `rem`. A geometria do PrimeNG (padding, raio, altura) também é
-   * rem e roda a 87,5%. O espaço entre as peças TEM que encolher junto
-   * com elas, senão o bloco descola do componente que ele compõe. */
+   * ⚠️ EM rem, ao contrário da escala tipográfica — e o motivo é o mesmo
+   * que mandou a tipografia para px, lido ao contrário: o root de 14px
+   * reescala os `rem`, e a geometria do PrimeNG (padding, raio, altura)
+   * também é rem. A tipografia precisa do valor declarado; o espaço
+   * precisa acompanhar os componentes. Se o gap ficasse em px, o bloco
+   * descolaria do componente que ele compõe. */
   --nph-space-sm: 0.5rem;   /* = button.gap */
   --nph-space-md: 0.75rem;  /* = formField.paddingX */
   --nph-space-lg: 1.25rem;  /* = card.bodyPadding */
@@ -252,12 +256,12 @@
 }
 
 /* ── Confirmação destrutiva ─────────────────────────────────────── */
-/* ⚠️ VALOR DECLARADO, ABERTO PARA CONFIRMAÇÃO. O `design.md` não tem
-   token de largura de diálogo, e o p-dialog nasce do tamanho do
-   conteúdo — o que deixaria a janela larguíssima quando a consequência
-   é uma frase longa. 28rem é a largura em que a pergunta e a
-   consequência cabem em ~2 linhas. Fica AQUI, na camada de token, e não
-   solto num componente, justamente por ser um número sem fonte.
+/* ✅ VALOR CONFIRMADO (Indiane, 03/08/2026). O `design.md` não tem token
+   de largura de diálogo, e o p-dialog nasce do tamanho do conteúdo — o
+   que deixaria a janela larguíssima quando a consequência é uma frase
+   longa. 28rem é a largura em que a pergunta e a consequência cabem em
+   ~2 linhas. Fica AQUI, na camada de token, e não solto num componente,
+   justamente por ser um número sem fonte no `design.md`.
 
    Medido: na prática isto é um PISO. O `.p-dialog` é item de um flex
    container e itens flex não encolhem abaixo do `min-content`, então um

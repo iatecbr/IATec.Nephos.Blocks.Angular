@@ -4,6 +4,12 @@
 
 html {
     height: 100%;
+    /* CONFIRMADO (Indiane, 03/08/2026): o root fica em 14px.
+       Consequência conhecida e aceita: toda medida em `rem` — inclusive a
+       geometria do PrimeNG (raio, padding, altura, densidade) — sai a
+       87,5% do nominal. Por isso a escala tipográfica do Nephos é
+       declarada em px no `nephos-ui.scss`: ela precisa entregar o valor
+       que o `design.md` declara, não 87,5% dele. */
     font-size: 14px;
     line-height: 1.5;
 }
@@ -15,7 +21,12 @@ body {
     min-height: 100%;
     background: var(--surface-ground);
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
+    /* A família é do Design System, não do layout: quando o
+       `nephos-ui.scss` está carregado, quem manda é o token. O valor
+       literal é só a rede de segurança para quem consome esta lib
+       sozinha. Os dois dizem Noto Sans — se um dia divergirem, o token
+       vence, que é o comportamento certo. */
+    font-family: var(--nph-font-family, 'Noto Sans', sans-serif);
     font-feature-settings: "cv02","cv03","cv04","cv11";
     font-variation-settings: normal;
     -webkit-font-smoothing: antialiased;

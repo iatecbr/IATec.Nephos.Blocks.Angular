@@ -70,10 +70,10 @@ export const emptyStateBlockMeta: NephosComponentMeta = {
     byState: {
       titulo: { text: 'surface/text' },
       descricao: { text: 'surface/muted' },
-      ilustracao: { color: 'surface/300' },
+      ilustracao: { color: 'surface/muted' },
       acao: { background: 'primary/500', text: 'primary/contrast' },
     },
-    note: 'Cor por papel (surface para texto neutro; primary só na ação). Espaçamento/centralização herdam do sistema. Nunca hex.',
+    note: 'Cor por papel (surface para texto neutro; primary só na ação). Espaçamento/centralização herdam do sistema. Nunca hex. A ilustração usa o papel de APOIO (`surface/muted`), não um passo fixo da rampa: a rampa de surface não inverte entre claro e escuro, então um passo cru sairia igual nos dois modos e, no escuro, a ilustração viraria o elemento mais claro da tela — o oposto do anti-padrão abaixo. (Corrigido em 03/08/2026, medido no Storybook; antes dizia `surface/300`.)',
   },
 
   antiPatterns: [
