@@ -13,6 +13,9 @@
       "@iatec/nephos-pages": [
         "./projects/iatec/nephos-pages/src/public-api.ts"
       ],
+      "@iatec/nephos-ui": [
+        "./projects/iatec/nephos-ui/src/public-api.ts"
+      ],
       "@iatec/nephos-utils": [
         "./projects/iatec/nephos-utils/src/public-api.ts"
       ]

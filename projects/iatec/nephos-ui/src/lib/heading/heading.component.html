@@ -1,0 +1,24 @@
+<!-- O conteúdo é projetado uma única vez e reusado em cada ramo: dois
+     `<ng-content>` no mesmo componente só alimentariam o primeiro. -->
+<ng-template #conteudo><ng-content></ng-content></ng-template>
+
+@switch (level()) {
+    @case (1) {
+        <h1 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h1>
+    }
+    @case (2) {
+        <h2 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h2>
+    }
+    @case (3) {
+        <h3 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h3>
+    }
+    @case (4) {
+        <h4 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h4>
+    }
+    @case (5) {
+        <h5 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h5>
+    }
+    @default {
+        <h6 [class]="classes()"><ng-container *ngTemplateOutlet="conteudo"></ng-container></h6>
+    }
+}

@@ -1,0 +1,22 @@
+<ng-template #conteudo>
+    <ng-content></ng-content>
+    @if (external()) {
+        <span class="nph-visually-hidden">(abre em nova aba)</span>
+    }
+</ng-template>
+
+@if (routerLink(); as destinoInterno) {
+    <a [routerLink]="destinoInterno"
+       [class]="classes()"
+       [attr.target]="target()"
+       [attr.rel]="rel()">
+        <ng-container *ngTemplateOutlet="conteudo"></ng-container>
+    </a>
+} @else {
+    <a [attr.href]="href()"
+       [class]="classes()"
+       [attr.target]="target()"
+       [attr.rel]="rel()">
+        <ng-container *ngTemplateOutlet="conteudo"></ng-container>
+    </a>
+}

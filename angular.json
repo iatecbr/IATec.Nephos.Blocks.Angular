@@ -104,7 +104,8 @@
             "compodoc": false,
             "tsConfig": "projects/stage/tsconfig.storybook.json",
             "styles": [
-              "projects/stage/src/styles.scss"
+              "projects/stage/src/styles.scss",
+              "projects/stage/src/storybook-styles.scss"
             ],
             "port": 6006
           }
@@ -117,7 +118,8 @@
             "compodoc": false,
             "tsConfig": "projects/stage/tsconfig.storybook.json",
             "styles": [
-              "projects/stage/src/styles.scss"
+              "projects/stage/src/styles.scss",
+              "projects/stage/src/storybook-styles.scss"
             ],
             "outputDir": "storybook-static"
           }
@@ -182,6 +184,39 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/iatec/nephos-pages/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "@iatec/nephos-ui": {
+      "projectType": "library",
+      "root": "projects/iatec/nephos-ui",
+      "sourceRoot": "projects/iatec/nephos-ui/src",
+      "prefix": "nph-ui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/iatec/nephos-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/iatec/nephos-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/iatec/nephos-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/iatec/nephos-ui/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

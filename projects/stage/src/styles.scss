@@ -6,3 +6,8 @@
 
 /* Layout styles - carregando direto da source */
 @use "../../iatec/nephos-layout/lib/layout/layout.scss";
+
+/* Design System Nephos — primitivos `nephos-own` (escala tipografica,
+   link, rotulo, texto de apoio, logo, botao de icone). Carregando direto
+   da source, mesmo padrao do layout acima. */
+@use "../../iatec/nephos-ui/lib/nephos-ui.scss";

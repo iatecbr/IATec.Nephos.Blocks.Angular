@@ -1,0 +1,206 @@
+/* ─────────────────────────────────────────────────────────────
+ * Nephos UI · camada de estilo dos primitivos (`origin: nephos-own`)
+ * ─────────────────────────────────────────────────────────────
+ * Como carregar (uma linha, no styles.scss do app):
+ *
+ *   @use '@iatec/nephos-ui/lib/nephos-ui.scss';
+ *
+ * ⚠️ ESTE ARQUIVO É CAMADA DE TOKEN — é o único lugar do pacote onde
+ * valor bruto pode aparecer, pela mesma razão que `tokens.core.json` e
+ * `nephos.palettes.ts` podem (exceção declarada na skill
+ * `nephos-token-audit`). Nenhum componente escreve px ou cor: todos
+ * consomem as classes e as custom properties daqui.
+ *
+ * De onde vem cada número:
+ *   · tamanhos de fonte  → `design-system/tokens.roles.json` › typography.size
+ *                          (espelhado em `design.md` › Tipografia)
+ *   · pesos              → `design-system/tokens.core.json` › font.weight
+ *   · família            → Noto Sans (design.md › Tipografia)
+ *   · TODA cor           → variável `--p-*` do preset PrimeNG/Nephos.
+ *                          Nunca hex aqui — a cor é do tema, não deste arquivo.
+ *
+ * Entrelinha NÃO é declarada de propósito: `design.md` manda herdar do
+ * sistema ("nunca fixar valor bruto"), e o primitivo de lineheight da
+ * Brand/Core nunca foi capturado (ver design.md › Achados › lineheight órfão).
+ * ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* Família e pesos ------------------------------------------------ */
+  --nph-font-family: 'Noto Sans', sans-serif;
+  --nph-font-weight-regular: 400;
+  --nph-font-weight-medium: 500;
+  --nph-font-weight-semibold: 600;
+  --nph-font-weight-bold: 700;
+
+  /* Escala nomeada — por FUNÇÃO, não por tamanho.
+   *
+   * ⚠️ EM px, DE PROPÓSITO, e a razão importa: o layout do repo declara
+   * `html { font-size: 14px }` (`nephos-layout/lib/layout/_main.scss`).
+   * Com `rem`, todo valor sairia a 87,5% do declarado — `title-lg` viraria
+   * 29,75px em vez de 34px. Isso seria mudar o token em silêncio, e valor
+   * de token só muda com confirmação explícita.
+   *
+   * (O mesmo root de 14px reescala os `rem` do Aura, então a geometria do
+   * PrimeNG também roda a 87,5% do nominal. Isso é achado do repo, não
+   * deste arquivo — está registrado para decisão.) */
+  --nph-font-size-overline: 10.5px;
+  --nph-font-size-caption: 12px;
+  --nph-font-size-button-sm: 14px;
+  --nph-font-size-body-sm: 14px;
+  --nph-font-size-button-lg: 16px;
+  --nph-font-size-body-lg: 16px;
+  --nph-font-size-body-xl: 24px;
+  --nph-font-size-title-sm: 20px;
+  --nph-font-size-title-md: 24px;
+  --nph-font-size-title-lg: 34px;
+  --nph-font-size-title-xlg: 48px;
+  --nph-font-size-title-xxlg: 60px;
+}
+
+/* ── Escala tipográfica ──────────────────────────────────────────
+ * Uma classe por token. A classe controla SÓ tamanho (e, nos títulos,
+ * o peso) — o nível semântico é da tag, não daqui.
+ * ─────────────────────────────────────────────────────────────── */
+.nph-overline,
+.nph-caption,
+.nph-body-sm,
+.nph-body-lg,
+.nph-body-xl,
+.nph-title-sm,
+.nph-title-md,
+.nph-title-lg,
+.nph-title-xlg,
+.nph-title-xxlg {
+  font-family: var(--nph-font-family);
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+.nph-overline {
+  font-size: var(--nph-font-size-overline);
+  font-weight: var(--nph-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nph-caption { font-size: var(--nph-font-size-caption); }
+.nph-body-sm { font-size: var(--nph-font-size-body-sm); }
+.nph-body-lg { font-size: var(--nph-font-size-body-lg); }
+.nph-body-xl { font-size: var(--nph-font-size-body-xl); }
+
+/* Títulos: um único peso extra (semibold) — a regra é no máximo dois
+   pesos por região, então o corpo fica regular e o título semibold. */
+.nph-title-sm,
+.nph-title-md,
+.nph-title-lg,
+.nph-title-xlg,
+.nph-title-xxlg {
+  font-weight: var(--nph-font-weight-semibold);
+}
+
+.nph-title-sm   { font-size: var(--nph-font-size-title-sm); }
+.nph-title-md   { font-size: var(--nph-font-size-title-md); }
+.nph-title-lg   { font-size: var(--nph-font-size-title-lg); }
+.nph-title-xlg  { font-size: var(--nph-font-size-title-xlg); }
+.nph-title-xxlg { font-size: var(--nph-font-size-title-xxlg); }
+
+/* Título: o NÍVEL (`<h1>`…`<h6>`) é hierarquia e vem da tag; a classe de
+   tamanho é aparência. O peso é o mesmo em qualquer nível. */
+.nph-heading { font-weight: var(--nph-font-weight-semibold); }
+
+/* ── Ênfase de cor do texto ─────────────────────────────────────── */
+.nph-text-muted { color: var(--p-text-muted-color); }
+
+/* ── Rótulo de campo ────────────────────────────────────────────── */
+.nph-label {
+  display: inline-block;
+  font-family: var(--nph-font-family);
+  font-size: var(--nph-font-size-body-sm);
+  font-weight: var(--nph-font-weight-medium);
+  color: var(--p-text-color);
+}
+
+/* ── Texto de apoio / erro do campo ─────────────────────────────── */
+.nph-helper-text {
+  display: block;
+  font-family: var(--nph-font-family);
+  font-size: var(--nph-font-size-caption);
+  color: var(--p-text-muted-color);
+}
+
+/* Erro: `feedback.danger/500` = a rampa `red` do PrimeNG.
+   A cor NUNCA é o único sinal — o texto sempre diz o que corrigir. */
+.nph-helper-text--danger { color: var(--p-red-500); }
+
+.app-dark .nph-helper-text--danger { color: var(--p-red-400); }
+
+/* ── Link ───────────────────────────────────────────────────────── */
+/* Única cor de marca permitida em texto: é ação de navegação. */
+.nph-link {
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--p-primary-color);
+  text-decoration: none;
+  border-radius: var(--p-border-radius-xs);
+}
+
+.nph-link:hover { color: var(--p-primary-hover-color); }
+.nph-link:active { color: var(--p-primary-active-color); }
+
+/* Dentro de um parágrafo o link é sublinhado: a distinção do texto ao
+   redor não pode depender só da cor. */
+.nph-link--inline { text-decoration: underline; }
+
+.nph-link--muted { color: var(--p-text-muted-color); text-decoration: underline; }
+.nph-link--muted:hover { color: var(--p-text-color); }
+
+.nph-link:focus-visible,
+.nph-icon-button:focus-visible {
+  outline: var(--p-focus-ring-width) var(--p-focus-ring-style) var(--p-focus-ring-color);
+  outline-offset: var(--p-focus-ring-offset);
+}
+
+/* ── Ícone (Font Awesome) ───────────────────────────────────────── */
+/* O ícone escala pela fonte do contexto — nunca px fixo. */
+.nph-icon { font-size: 1em; line-height: inherit; }
+
+/* ── Botão de ícone (theme-toggle e afins) ──────────────────────── */
+.nph-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--p-button-icon-only-width);
+  min-height: var(--p-button-icon-only-width);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--p-text-color);
+  cursor: pointer;
+}
+
+.nph-icon-button:hover { background: var(--p-content-hover-background); }
+
+/* ── Logo ───────────────────────────────────────────────────────── */
+/* Asset de marca: não recebe cor de papel e não é distorcido. */
+.nph-logo { display: inline-flex; align-items: center; }
+.nph-logo img { display: block; width: auto; max-width: 100%; height: auto; }
+
+/* ── Rótulo presente para quem ouve, ausente para quem vê ───────── */
+.nph-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Movimento ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .nph-icon.fa-spin { animation: none; }
+}

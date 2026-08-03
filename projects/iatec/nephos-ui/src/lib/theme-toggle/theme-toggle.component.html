@@ -1,0 +1,21 @@
+<!-- `button` anuncia a ação e o estado por aria-pressed; `switch` anuncia
+     ligado/desligado por aria-checked. Nos dois o ícone é decorativo: o
+     nome vem do controle, não do glifo. -->
+@if (display() === 'switch') {
+    <button type="button"
+            role="switch"
+            class="nph-icon-button"
+            [attr.aria-label]="label()"
+            [attr.aria-checked]="escuro()"
+            (click)="alternar()">
+        <nph-ui-icon [name]="iconName()"></nph-ui-icon>
+    </button>
+} @else {
+    <button type="button"
+            class="nph-icon-button"
+            [attr.aria-label]="label()"
+            [attr.aria-pressed]="escuro()"
+            (click)="alternar()">
+        <nph-ui-icon [name]="iconName()"></nph-ui-icon>
+    </button>
+}

@@ -1,0 +1,17 @@
+<!-- Sem asset resolvido não se desenha nada: um `<img>` quebrado é pior
+     do que a ausência do logo, e inventar um valor violaria a multimarca. -->
+@if (assetUrl(); as asset) {
+    <ng-template #marca>
+        <img [src]="asset" [alt]="altText() ?? ''"/>
+    </ng-template>
+
+    @if (href(); as destino) {
+        <a [attr.href]="destino" class="nph-logo">
+            <ng-container *ngTemplateOutlet="marca"></ng-container>
+        </a>
+    } @else {
+        <span class="nph-logo">
+            <ng-container *ngTemplateOutlet="marca"></ng-container>
+        </span>
+    }
+}

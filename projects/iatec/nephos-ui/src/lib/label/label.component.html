@@ -1,0 +1,6 @@
+<label [attr.for]="htmlFor()" [class]="classes()">
+    <ng-content></ng-content>
+    @if (required()) {
+        <span aria-hidden="true">*</span>
+    }
+</label>

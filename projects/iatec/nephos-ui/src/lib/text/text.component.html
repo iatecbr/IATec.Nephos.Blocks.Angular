@@ -1,0 +1,17 @@
+<!-- Um só `<ng-content>`, reusado por template: em ramos diferentes de um
+     `@switch`, apenas o primeiro `<ng-content>` receberia a projeção. -->
+<ng-template #conteudo><ng-content></ng-content></ng-template>
+
+<p [class]="classes()">
+    @switch (emphasis()) {
+        @case ('strong') {
+            <strong><ng-container *ngTemplateOutlet="conteudo"></ng-container></strong>
+        }
+        @case ('em') {
+            <em><ng-container *ngTemplateOutlet="conteudo"></ng-container></em>
+        }
+        @default {
+            <ng-container *ngTemplateOutlet="conteudo"></ng-container>
+        }
+    }
+</p>
