@@ -35,7 +35,8 @@ semântico. É o mesmo rigor da "checagem de fidelidade" do `design.md`, agora c
 | 8 | **Campo sem `<label>`** associado, ou **estado só por cor** (sem texto/ARIA) | Acessibilidade obrigatória |
 
 Exceções legítimas (não são achado):
-- a **camada primitiva** de tokens (`tokens.core.json`, `nephos.palettes.ts`) — é onde o hex
+- a **camada primitiva** de tokens (`tokens.core.json` e o `nephos.palettes.ts`, hoje em
+  `projects/iatec/nephos-ui/src/lib/theme/`) — é onde o hex
   mora de propósito; e os **protótipos/galeria** (`prototipos/`), que citam valores reais e
   trazem o seletor de marca como andaime de teste;
 - **hex como DADO, não como token de design:** o ColorPicker guarda uma cor arbitrária escolhida

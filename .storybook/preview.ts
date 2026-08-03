@@ -3,16 +3,17 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/themes';
 
-import {
-  NEPHOS_THEMES,
-  NephosTheme,
-  SURFACE_SLATE,
-} from '../design-system/nephos.palettes';
+// O tema vem do PACOTE, pelo mesmo caminho que um projeto de fora usaria.
+// Isso não é detalhe: enquanto o preset morava numa pasta de documentação,
+// o banco de provas era o único lugar do mundo capaz de montá-lo.
 import {
   applyNephosTheme,
-  nephosPreset,
   NEPHOS_DEFAULT_THEME,
-} from '../design-system/nephos.preset';
+  NEPHOS_THEMES,
+  NephosTheme,
+  nephosPreset,
+  SURFACE_SLATE,
+} from '@iatec/nephos-ui';
 
 /**
  * O preset de bootstrap de uma marca, com o `surface` já dentro.

@@ -26,7 +26,7 @@ Com o manual + o bibliotecário + o cartão de regras na cozinha, **qualquer coz
 
 A base visual: cor, tipografia e geometria.
 
-- **Cor e tema multimarca.** As paletas das 7 marcas ficam em `nephos.palettes.ts` e o tema em `nephos.preset.ts`. A fábrica `nephosPreset(theme)` pluga cada marca no motor de temas: trocar de marca troca o tema ativo e um único papel de cor varia — `primary`. O tema é hand-written sobre o preset **Aura**, sem Theme Designer. Feedback e neutros seguem o padrão do PrimeNG; marca e tipografia são próprias.
+- **Cor e tema multimarca.** As paletas das 7 marcas e o preset ficam no PACOTE `@iatec/nephos-ui` (`src/lib/theme/`), não nesta pasta — o tema precisa ser instalável por quem não clona o repositório. Ver [[Onde mora o tema]]. A fábrica `nephosPreset(theme)` pluga cada marca no motor de temas: trocar de marca troca o tema ativo e um único papel de cor varia — `primary`. O tema é hand-written sobre o preset **Aura**, sem Theme Designer. Feedback e neutros seguem o padrão do PrimeNG; marca e tipografia são próprias.
 - **Tipografia.** Uma família (**Noto Sans**), quatro pesos e uma escala nomeada por função (`button-sm`, `title-lg`), idêntica nas sete marcas.
 - **Geometria.** Raio, espaçamento, densidade e foco herdados do PrimeNG. Cada componente já aplica esses valores automaticamente.
 
@@ -86,7 +86,6 @@ Tudo dentro do repo `IATec.Nephos.Blocks.Angular`, numa pasta própria (ex.: `de
 design-system/
   design.md                     ← lê primeiro (inclui a checagem de fidelidade)
   tokens.core.json / tokens.roles.json
-  nephos.preset.ts / nephos.palettes.ts     ← tema das 7 marcas
   nephos-foundations.json       ← espelho legível por máquina das fundações
   componentes/
     component-meta.type.ts       ← contrato

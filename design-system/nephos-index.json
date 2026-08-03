@@ -82,7 +82,7 @@
       "theme": {
         "regra": "O tema é o que faz a cor da marca existir. Sem ele os componentes do PrimeNG renderizam sem nenhuma variável `--p-*`.",
         "provider": "providePrimeNG({ theme: { preset: nephosPreset(<marca>), options: { darkModeSelector: '.app-dark' } } })",
-        "origemDoPreset": "`nephosPreset` vem de `design-system/nephos.preset.ts` do repositório do Design System. ⚠️ ELE AINDA NÃO É DISTRIBUÍDO NUM PACOTE — hoje é preciso copiar `nephos.preset.ts` + `nephos.palettes.ts` para o projeto. Enquanto isso não muda, confirmar com o time de DS antes de montar um projeto novo.",
+        "origemDoPreset": "`import { nephosPreset } from '@iatec/nephos-ui'` — o tema das 7 marcas vem no mesmo pacote dos primitivos. Para trocar de marca com a aplicação já em pé, use `applyNephosTheme(marca)`.",
         "marca": "A vertical NUNCA é escolha do usuário: vem do ambiente (domínio, tenant, sessão). Não gerar seletor de marca.",
         "modo": "Claro/escuro é a exceção — pode ser controle de produto. O seletor é a classe `.app-dark` na raiz; o componente `theme-toggle` já a aplica."
       },

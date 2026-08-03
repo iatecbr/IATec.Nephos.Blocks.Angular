@@ -18,6 +18,19 @@
 export * from './lib/nephos-ui.tokens';
 export * from './lib/nephos-brand';
 
+/* ── Tema ────────────────────────────────────────────────────────
+ * As 7 marcas e o preset que as pluga no `@primeuix/themes`.
+ *
+ * Mora AQUI, e não numa pasta de documentação, por um motivo prático:
+ * um projeto que consome o Nephos precisa do tema para os componentes
+ * do PrimeNG terem cor. Enquanto estes arquivos ficaram fora de um
+ * pacote, a única forma de montar o tema num projeto novo era copiá-los
+ * à mão — o que inviabilizava o cenário de um agente que **não clona o
+ * repositório** e só lê a documentação de como instalar.
+ * ─────────────────────────────────────────────────────────────── */
+export * from './lib/theme/nephos.palettes';
+export * from './lib/theme/nephos.preset';
+
 export * from './lib/heading/heading.component';
 export * from './lib/text/text.component';
 export * from './lib/label/label.component';

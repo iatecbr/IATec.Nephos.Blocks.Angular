@@ -210,12 +210,14 @@ A ordem importa: o `nephos-ui.scss` declara os tokens `--nph-*` em `:root` e o `
 **Tema** — é o que faz a cor da marca existir; sem ele os componentes do PrimeNG saem sem nenhuma variável `--p-*`:
 
 ```ts
+import { nephosPreset } from '@iatec/nephos-ui';
+
 providePrimeNG({
   theme: { preset: nephosPreset(marcaAtiva), options: { darkModeSelector: '.app-dark' } }
 })
 ```
 
-⚠️ O `nephosPreset` ainda **não é distribuído num pacote** — hoje ele vive em `nephos.preset.ts` + `nephos.palettes.ts` no repositório do Design System, e precisa ser copiado. Confirmar com o time de DS ao montar um projeto novo.
+O tema das 7 marcas vem no mesmo pacote dos primitivos. Para trocar de marca com a aplicação já em pé, `applyNephosTheme(marca)`.
 
 **Marca** — `provideNephosBrand({ name, logoFull, logoSymbol })`. É por aqui que o logo e o nome da vertical chegam. A vertical vem do ambiente (domínio, tenant, sessão), **nunca** de um seletor para o usuário. Claro/escuro é a exceção: é a classe `.app-dark` na raiz, e o `theme-toggle` já a aplica.
 

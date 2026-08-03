@@ -8,8 +8,7 @@
   "include": [
     "../../.storybook/**/*",
     "../../stories/**/*",
-    "./src/stories/**/*",
-    "../../design-system/nephos.*.ts"
+    "./src/stories/**/*"
   ],
   "exclude": []
 }
