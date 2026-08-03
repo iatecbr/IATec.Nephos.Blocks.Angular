@@ -50,3 +50,13 @@ storybook-static
 # Design System (pacote Nephos)
 design-system/node_modules
 design-system/mcp/node_modules
+
+# Skills de agente instaladas por `npx skills add` (codigo de terceiros,
+# MIT, do repositorio oficial do Angular). Ficam FORA do versionamento de
+# proposito: sao instalaveis num comando e assim cada maquina pega a
+# versao atual. Os symlinks de .claude/skills sao absolutos e quebrariam
+# em outro computador.
+#
+#   npx skills add https://github.com/angular/skills
+.agents/
+.claude/skills/
