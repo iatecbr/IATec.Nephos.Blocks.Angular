@@ -2,12 +2,12 @@ import { applicationConfig, type Preview } from '@storybook/angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 
-import { NEPHOS_THEMES } from '../projects/stage/src/design-system/nephos.palettes';
+import { NEPHOS_THEMES } from '../design-system/nephos.palettes';
 import {
   applyNephosTheme,
   nephosPreset,
   NEPHOS_DEFAULT_THEME,
-} from '../projects/stage/src/design-system/nephos.preset';
+} from '../design-system/nephos.preset';
 
 // Estilos globais (incluindo os PrimeIcons dos ícones internos do PrimeNG)
 // entram pela opção `styles` do builder no angular.json, apontando para o

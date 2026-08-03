@@ -101,14 +101,10 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "stage:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              ".",
-              "--tsconfig",
-              "projects/stage/tsconfig.storybook.json"
+            "compodoc": false,
+            "tsConfig": "projects/stage/tsconfig.storybook.json",
+            "styles": [
+              "projects/stage/src/styles.scss"
             ],
             "port": 6006
           }
@@ -118,16 +114,12 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "stage:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              ".",
-              "--tsconfig",
-              "projects/stage/tsconfig.storybook.json"
+            "compodoc": false,
+            "tsConfig": "projects/stage/tsconfig.storybook.json",
+            "styles": [
+              "projects/stage/src/styles.scss"
             ],
-            "outputDir": "dist/storybook/stage"
+            "outputDir": "storybook-static"
           }
         }
       }

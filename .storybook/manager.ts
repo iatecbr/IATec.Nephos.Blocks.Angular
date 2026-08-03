@@ -1,5 +1,8 @@
-import { addons } from '@storybook/manager-api';
-import { create } from '@storybook/theming';
+// Storybook 10: `@storybook/manager-api` e `@storybook/theming` deixaram de
+// existir como pacotes próprios e passaram a ser subcaminhos do `storybook`.
+// A marca definida abaixo é a que já estava no repositório — só os imports mudaram.
+import { addons } from 'storybook/manager-api';
+import { create } from 'storybook/theming';
 
 const theme = create({
   base: 'light', // ou 'dark'

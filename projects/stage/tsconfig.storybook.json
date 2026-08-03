@@ -7,7 +7,9 @@
   "files": [],
   "include": [
     "../../.storybook/**/*",
-    "../../stories/**/*"
+    "../../stories/**/*",
+    "./src/stories/**/*",
+    "../../design-system/**/*"
   ],
   "exclude": []
 }
