@@ -1,0 +1,67 @@
+{
+  "$schema": "nephos-tokens-roles",
+  "version": "4.0.0-draft",
+  "updated": "2026-07-23",
+  "layer": "role",
+  "decisao": "23/07/2026 — por ora, só as PALETAS. Sem camada de função (hover, active, border, focus, texto-sobre-cor). As funções serão definidas depois, provavelmente junto com o PrimeNG. Os valores brutos vivem em tokens.core.json.",
+
+  "roles": {
+    "primary": {
+      "description": "Cor da marca. É a ÚNICA paleta que varia entre os 7 temas.",
+      "per_theme": true,
+      "palette_ref": "core.brand.{theme}",
+      "ramp": ["color", "50", "100", "200", "300", "400", "500", "600", "700", "800", "900"]
+    },
+    "secondary": {
+      "description": "Paleta de apoio azul-acinzentada, comum a todos os temas.",
+      "palette_ref": "core.brand.slate",
+      "ramp": ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"],
+      "_confirmar": "Assumi que 'secondary' = a rampa `slate` (era usada como `surface` antes). É a única rampa de marca não-tema e não-neutra que sobra. Se secondary for outra coisa, avisar."
+    },
+    "neutral": {
+      "description": "Cinza neutro para texto, bordas e divisores. Comum a todos os temas.",
+      "palette_ref": "core.gray",
+      "ramp": ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"]
+    },
+    "feedback": {
+      "description": "Cores de estado/mensagem. Comuns a todos os temas. Cada uma é uma rampa completa 50–900.",
+      "info": "core.sky",
+      "success": "core.green",
+      "warn": "core.orange",
+      "danger": "core.red",
+      "help": "core.purple"
+    }
+  },
+
+  "themes": ["global", "educacao", "financeiro", "comercial", "igrejas", "recursos-humanos", "gerencial"],
+
+  "base": {
+    "white": "core.base.white",
+    "dark": "core.base.dark"
+  },
+
+  "typography": {
+    "family": "core.font.family.noto-sans",
+    "weight": {
+      "regular": "core.font.weight.regular",
+      "medium": "core.font.weight.medium",
+      "semibold": "core.font.weight.semibold",
+      "bold": "core.font.weight.bold"
+    },
+    "size": {
+      "overline": 10.5, "caption": 12,
+      "button-sm": 14, "button-lg": 16,
+      "body-sm": 14, "body-lg": 16, "body-xl": 24,
+      "title-sm": 20, "title-md": 24, "title-lg": 34, "title-xlg": 48, "title-xxlg": 60
+    }
+  },
+
+  "_adiado_para_quando_houver_funcoes": {
+    "nota": "Estas decisões não valem enquanto só há paletas. Ficam registradas para não se perderem.",
+    "estados": "hover, active, focus, border por componente.",
+    "fundo_de_superficie": "qual passo da secondary/neutral vira fundo de cartão (era o achado A1).",
+    "texto_sobre_cor": "cor do texto sobre fundos coloridos (feedback e primary).",
+    "danger_no_figma": "No Figma, o alias funcional danger/color apontava para vermelho sobre vermelho (invisível). Só importa quando funções forem criadas.",
+    "comercial_50_no_figma": "No Figma, o mode comercial da Alias Collection mapeava primary/50 → financeiro/50 (achado A2). No modelo por paletas isso NÃO acontece: a paleta primary do comercial lê direto core.brand.comercial (limpa). Só reaparece se alguém exportar os modes da alias do Figma em vez de usar este arquivo."
+  }
+}

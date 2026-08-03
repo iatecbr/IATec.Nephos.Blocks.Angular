@@ -1,0 +1,394 @@
+{
+  "note": "Fundações do Nephos em forma legível por máquina — o essencial do design.md que o Moses precisa ANTES de escolher componentes. O design.md continua a fonte NORMATIVA; este arquivo é derivado dele. Se o design.md mudar num ponto normativo, regenerar este. Consumido pelo nephos-index.json (via build) e servido pelo MCP.",
+  "stack": {
+    "framework": "angular",
+    "componentBase": "primeng",
+    "primeng": "21.0.2",
+    "themes": "@primeuix/themes 2.0.2",
+    "themePreset": "aura",
+    "output": "html-semantic",
+    "iconSet": "font-awesome-7-pro"
+  },
+  "multibrand": {
+    "mechanism": "theme-switch",
+    "themes": [
+      "global",
+      "educacao",
+      "financeiro",
+      "comercial",
+      "recursos-humanos",
+      "igrejas",
+      "gerencial"
+    ],
+    "themeDependent": [
+      "primary"
+    ],
+    "rule": "Nenhum componente sabe em qual marca roda. NUNCA escrever nome de marca em componente/HTML. Só o papel `primary` varia entre temas; o resto é idêntico nas 7 verticais.",
+    "brandFromContext": "A vertical é definida pelo CONTEXTO/tema ativo — o agente já sabe em qual vertical gera. A saída nasce NA COR daquela vertical e NÃO inclui um seletor de marca para o usuário trocar de vertical. Trocar de vertical é decisão de ambiente (tema), não funcionalidade da tela. O seletor de marca que aparece nos protótipos/galeria é andaime de teste, não produto — não reproduzir no HTML gerado.",
+    "colorSchemeIsProductControl": "Claro/escuro (surface) SIM pode ser um controle de produto (theme-toggle), porque é preferência da pessoa. Isso é diferente da troca de marca, que não é controle de usuário.",
+    "axes": {
+      "brand": "primary (a vertical ativa, vinda do contexto — não um seletor de usuário)",
+      "colorScheme": "surface (claro/escuro via darkModeSelector '.app-dark' — pode ser controle de produto)"
+    }
+  },
+  "colorModel": {
+    "model": "paletas-por-papel",
+    "rule": "Cor SEMPRE por papel + passo (ex.: primary/500, surface/50, feedback.danger/500). NUNCA hex. NUNCA nome de marca. Escala 50–900 (marca) / 0–950 (surface/feedback do PrimeNG).",
+    "roles": {
+      "primary": "rampa da marca ativa — varia por tema (NOSSA)",
+      "surface": "= slate do PrimeNG (fundo, borda, texto). Não varia por tema",
+      "neutral": "= gray do PrimeNG (2º neutro, reserva)",
+      "feedback": [
+        "info (sky)",
+        "success (green)",
+        "warn (orange)",
+        "danger (red)",
+        "help (purple)"
+      ]
+    },
+    "functionsVocabulary": {
+      "note": "Funções (hover/active/foco/texto-sobre-cor) = camada semantic do PrimeNG. Não inventar — mapear por cima.",
+      "hover": "colorScheme.*.primary.hoverColor",
+      "active": "colorScheme.*.primary.activeColor",
+      "textOnPrimary": "colorScheme.*.primary.contrastColor — DECLARADO POR MARCA (ver bloco emphasisContrast). Não é fixo por modo.",
+      "focusRing": "semantic.focusRing.* — a cor é DECLARADA POR MARCA, por colorScheme (ver bloco emphasisContrast).",
+      "textDefault": "text.color",
+      "textMuted": "text.mutedColor",
+      "cardBackground": "content.background",
+      "border": "content.borderColor"
+    }
+  },
+  "emphasisContrast": {
+    "rule": "O texto sobre a cor de ênfase e a cor do anel de foco NÃO são fixos por modo: são declarados MARCA A MARCA, com a razão medida par a par. Motivo: a ênfase muda de tom entre os modos (primary/500 no claro, primary/400 no escuro) e as 7 rampas têm luminosidades muito diferentes — nenhuma cor de texto fixa passa AA nas 7. O branco some nas marcas de rampa clara; o quase-preto some nas de rampa escura.",
+    "source": "nephos.palettes.ts › BRAND_ON_PRIMARY e BRAND_FOCUS_RING. O preset apenas consome.",
+    "minimums": {
+      "texto": "4.5:1",
+      "anelDeFoco": "3:1 (elemento não-textual, contra o fundo da página)"
+    },
+    "pageBackground": {
+      "light": "surface/0",
+      "dark": "surface/900"
+    },
+    "textOnEmphasis": {
+      "global": {
+        "light": "surface/950",
+        "lightRatio": 5.48,
+        "dark": "surface/950",
+        "darkRatio": 7.27
+      },
+      "educacao": {
+        "light": "surface/950",
+        "lightRatio": 10.04,
+        "dark": "surface/950",
+        "darkRatio": 11.53
+      },
+      "financeiro": {
+        "light": "#FFFFFF",
+        "lightRatio": 5.4,
+        "dark": "surface/950",
+        "darkRatio": 5.64
+      },
+      "comercial": {
+        "light": "#FFFFFF",
+        "lightRatio": 6.16,
+        "dark": "surface/950",
+        "darkRatio": 6.6
+      },
+      "igrejas": {
+        "light": "#FFFFFF",
+        "lightRatio": 9.22,
+        "dark": "#FFFFFF",
+        "darkRatio": 5.59
+      },
+      "recursos-humanos": {
+        "light": "#FFFFFF",
+        "lightRatio": 11.59,
+        "dark": "#FFFFFF",
+        "darkRatio": 6.57
+      },
+      "gerencial": {
+        "light": "#FFFFFF",
+        "lightRatio": 12.61,
+        "dark": "#FFFFFF",
+        "darkRatio": 6.98
+      }
+    },
+    "focusRingColor": {
+      "note": "O padrão é a própria ênfase; três marcas precisam de um passo vizinho da PRÓPRIA rampa para alcançar 3:1 contra o fundo da página.",
+      "global": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "educacao": {
+        "light": "primary/600",
+        "dark": "primary/400"
+      },
+      "financeiro": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "comercial": {
+        "light": "primary/600",
+        "dark": "primary/400"
+      },
+      "igrejas": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "recursos-humanos": {
+        "light": "primary/500",
+        "dark": "primary/300"
+      },
+      "gerencial": {
+        "light": "primary/500",
+        "dark": "primary/300"
+      }
+    },
+    "authoring": "Ao mexer numa rampa de marca, MEDIR de novo os pares — e não só o estado parado: base, hover e active, nos dois modos. Contraste é verificado, nunca deduzido — nem por semelhança com outra marca. O ajuste é sempre no texto por cima ou no passo da ênfase — NUNCA na cor da marca.",
+    "forTheAgent": "Ao gerar UI, não escolha a cor do texto sobre a ênfase: use o token primary.contrastColor, que o tema já resolve com o valor certo da marca ativa. Escrever branco ou preto na mão aqui é erro.",
+    "emphasisStep": {
+      "note": "O passo da rampa usado como ênfase também é declarado por marca. Padrão: primary/500 no claro, primary/400 no escuro. Subir/descer o passo muda o TOM do botão, nunca a cor da marca — é o segundo recurso, usado só quando nenhum texto passa com folga sobre o passo padrão.",
+      "global": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "educacao": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "financeiro": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "comercial": {
+        "light": "primary/600",
+        "dark": "primary/400"
+      },
+      "igrejas": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "recursos-humanos": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "gerencial": {
+        "light": "primary/500",
+        "dark": "primary/400"
+      },
+      "exception": "comercial no claro: o teal 500 passava raspando com os dois textos (4,32 com branco, 4,67 com escuro). A ênfase do claro subiu para primary/600 com texto BRANCO (6,16)."
+    },
+    "states": {
+      "rule": "Hover e active seguem o TEXTO, não o modo: o fundo se afasta da cor do texto, para o contraste SUBIR durante a interação. Texto branco → hover/active escurecem (um e dois passos abaixo). Texto escuro → hover/active clareiam (um e dois passos acima).",
+      "why": "Amarrar a direção ao modo (padrão herdado do Aura) só funciona quando o texto é sempre o mesmo. Com texto por marca, o hover reprovava o AA em 5 dos 14 pares — global no claro caía de 5,48 para 3,75, porque o fundo escurecia na direção do texto escuro.",
+      "verified": "Medido nos 3 estados (base, hover, active) das 7 marcas nos 2 modos: 42 pares >= 4,5:1."
+    }
+  },
+  "chartColors": {
+    "note": "Gráficos reusam as rampas existentes — NUNCA se introduz matiz nova. As séries categóricas são independentes de marca (uma série não muda de significado quando a vertical troca).",
+    "categorical": {
+      "rule": "Séries qualitativas (sem ordem): sequência FIXA, passo 500, nesta ordem — escolhida para máxima distinção e sem vizinhança vermelho↔verde. Mais de 6 séries: usar o passo 300 e depois o 700 das mesmas rampas.",
+      "sequence": [
+        {
+          "order": 1,
+          "role": "feedback.info",
+          "hue": "sky",
+          "step": 500,
+          "hex": "#0284C7"
+        },
+        {
+          "order": 2,
+          "role": "feedback.warn",
+          "hue": "orange",
+          "step": 500,
+          "hex": "#EA580C"
+        },
+        {
+          "order": 3,
+          "role": "feedback.success",
+          "hue": "green",
+          "step": 500,
+          "hex": "#16A34A"
+        },
+        {
+          "order": 4,
+          "role": "feedback.help",
+          "hue": "purple",
+          "step": 500,
+          "hex": "#9333EA"
+        },
+        {
+          "order": 5,
+          "role": "feedback.danger",
+          "hue": "red",
+          "step": 500,
+          "hex": "#DC2626"
+        },
+        {
+          "order": 6,
+          "role": "neutral",
+          "hue": "gray",
+          "step": 500,
+          "hex": "#4B5563"
+        }
+      ]
+    },
+    "sequential": "Uma métrica (baixo → alto): rampa da marca ativa primary/100…900. Como sequencial não compara categorias, variar o matiz por marca é seguro.",
+    "diverging": "Negativo ↔ neutro ↔ positivo: feedback.danger/500 ↔ surface/200 ↔ feedback.success/500.",
+    "semantic": "No gráfico (KPI, variação): alta/positivo = feedback.success · queda/negativo = feedback.danger · neutro/meta = neutral.",
+    "frame": "Moldura do gráfico: fundo = surface · grelha = surface/200 · eixo e rótulos = text.mutedColor.",
+    "rules": [
+      "Cor de série IDENTIFICA, não significa — exceto quando o dado é literalmente status (aí usar feedback).",
+      "Nunca depender só de cor: rótulo direto na série ou legenda; para daltônicos, reforçar com forma/rótulo/traçado.",
+      "Todo gráfico tem alternativa textual — aria-label + tabela equivalente em <details>.",
+      "Variação de KPI nunca só cor/seta: sinal + texto."
+    ]
+  },
+  "typography": {
+    "family": "Noto Sans",
+    "weights": [
+      "regular",
+      "medium",
+      "semibold",
+      "bold"
+    ],
+    "rule": "Só a escala NOMEADA (por função, não por tamanho). Máximo 2 pesos por região. Nunca tamanho cru.",
+    "scale": {
+      "overline": 10.5,
+      "caption": 12,
+      "button-sm": 14,
+      "body-sm": 14,
+      "button-lg": 16,
+      "body-lg": 16,
+      "body-xl": 24,
+      "title-sm": 20,
+      "title-md": 24,
+      "title-lg": 34,
+      "title-xlg": 48,
+      "title-xxlg": 60
+    }
+  },
+  "icons": {
+    "set": "Font Awesome 7 Pro",
+    "syntax": "<i class=\"fa-solid fa-<nome>\"></i>",
+    "defaultStyle": "solid",
+    "availableStyles": [
+      "solid",
+      "regular",
+      "light",
+      "thin",
+      "duotone"
+    ],
+    "rule": "Escolher pelo significado; nomes em kebab-case validados no catálogo oficial (fontawesome.com/icons). Nomes mudaram FA5→6→7 (search→magnifying-glass, times→xmark, trash→trash-can, pencil→pen-to-square, home→house, info-circle→circle-info). Decorativo = aria-hidden; significativo = aria-label. Fora do set = pedir, não inventar nem misturar com PrimeIcons.",
+    "allIcons": "TODOS os ícones são Font Awesome (última versão), inclusive os INTERNOS dos componentes PrimeNG (setinha do dropdown, X do dialog, toggler da árvore etc.) — sobrescritos para FA via os templates de ícone de cada componente e/ou a config de ícone do tema. NÃO se usa PrimeIcons em lugar nenhum."
+  },
+  "geometry": {
+    "rule": "Raio, espaçamento, altura e densidade vêm prontos do componente — nunca fixar px 'no olho'. Valores reais: raio campo/botão 6px, card 12px; formField paddingX 0.75rem / paddingY 0.5rem; anel de foco 1px offset 2px.",
+    "spacer": "Não existe elemento 'spacer'. Espaço = gap/padding do contêiner. Nunca <div> vazio."
+  },
+  "fidelityChecklist": [
+    "1. Cor — só por papel + passo (primary/500, surface/50, feedback.danger/500). Nunca hex, nunca nome de marca.",
+    "2. Geometria (raio/espaço/tamanho) — nunca px 'no olho': vem do componente PrimeNG.",
+    "3. Tipografia — só a escala nomeada (button-lg, title-sm…), Noto Sans.",
+    "4. Componente — abrir o .meta.ts e respeitar states, invalidCombinations, antiPatterns e origin.",
+    "5. Fora do catálogo → perguntar ao time de DS, não inventar.",
+    "6. Saída → HTML semântico puro (tag certa), sem classes de framework.",
+    "Regra-mãe: na dúvida, herdar ou perguntar — nunca inventar valor."
+  ],
+  "ethicalFloor": {
+    "note": "Piso ético — outro eixo que a checagem de fidelidade. Fidelidade = a tela está CORRETA; piso ético = a tela TRATA COM RESPEITO quem usa. Dá para ter uma tela 100% fiel e ainda assim confundir/pressionar a pessoa. Piso MÍNIMO: cresce só com caso real, não por antecipação.",
+    "autoRefuse": [
+      {
+        "antiPattern": "Opt-in disfarçado de padrão",
+        "oQueE": "Caixa pré-marcada para newsletter/compartilhar dado ou qualquer opção que amplia o que é coletado/compartilhado",
+        "emVezDisso": "Toda opção desse tipo nasce DESMARCADA"
+      },
+      {
+        "antiPattern": "Erro que esconde a causa",
+        "oQueE": "Mensagem genérica ('algo deu errado') quando o sistema sabe o que falhou",
+        "emVezDisso": "Dizer o que falhou e o que fazer a seguir (herda de message/toast)"
+      },
+      {
+        "antiPattern": "Ação destrutiva sem fricção proporcional",
+        "oQueE": "Excluir, cancelar matrícula, estornar sem confirmação clara",
+        "emVezDisso": "Passa por destructive-confirm — foco no cancelar, verbo real, nunca 'OK'"
+      },
+      {
+        "antiPattern": "Falso vazio / falso carregando",
+        "oQueE": "Tela de 'nenhum resultado' que na verdade é erro disfarçado",
+        "emVezDisso": "Erro é message/estado de erro; vazio de verdade é empty-state — nunca confundir"
+      }
+    ],
+    "askFirst": [
+      {
+        "caso": "Contador / prazo / 'restam X'",
+        "regra": "Só gerar se corresponder a um limite REAL já existente no sistema (ex.: data de fechamento de matrícula). Se não estiver claro que o prazo é real, perguntar antes de inventar."
+      },
+      {
+        "caso": "Exposição de dado (CPF, nota, salário, histórico completo)",
+        "regra": "Mostrar o MÍNIMO que a tarefa da tela precisa; detalhe completo atrás de uma ação explícita de abrir. Se não estiver claro que a tela precisa do dado completo, perguntar antes de expor."
+      }
+    ],
+    "protocol": "Não recusar a tarefa inteira: gerar a tela SEM o padrão da recusa automática e avisar, numa linha, qual regra protegeu (ex.: 'opt-in não nasce pré-marcado'). Para os itens de 'perguntar antes', parar e perguntar em vez de decidir sozinho."
+  },
+  "a11yComposition": {
+    "note": "Cada .meta.ts já traz a a11y da SUA peça (rótulo, aria-*, foco em modal, erro não só por cor). Isto é a a11y que só quebra na COMPOSIÇÃO da tela. Teste: alguém navegando só de teclado e alguém OUVINDO a tela conseguem usar? Se não, não está pronta — mesmo com cada peça 100% fiel.",
+    "orderFocusHeading": [
+      "Ordem visual e ordem de foco/leitura (Tab + leitor) TÊM que bater. CSS que reordena a posição sem reordenar o HTML quebra isso.",
+      "Nível de heading de cada bloco é decidido no contexto da PÁGINA montada — não o nível 'de exemplo' da ficha. Um <h1> por página, hierarquia sem pular nível.",
+      "Depois de uma ação que muda a tela (enviar form, abrir modal, aplicar filtro), o foco vai pra onde faz sentido (confirmação, primeiro erro, título do conteúdo novo) — nunca fica perdido num botão que sumiu nem volta ao topo sem motivo."
+    ],
+    "perceptionMotionTarget": [
+      "Cor nunca é o único sinal — reforçar na composição (dashboard de badges coloridos sem texto/ícone falha).",
+      "Gráfico/tabela com alternativa textual não é opcional quando o dado importa pra decisão (ver chartColors).",
+      "Texto de erro/ajuda/rótulo escrito pra quem não conhece o sistema — sem jargão interno ('erro 4022') sem explicação ao lado.",
+      "prefers-reduced-motion respeitado nas transições (drawer, aba, skeleton).",
+      "Toast/alerta que some sozinho nunca carrega a única cópia de info importante — também fica em lugar persistente (histórico, mensagem inline).",
+      "Alvo de toque nunca menor que o mínimo do PrimeNG. Zoom de texto funciona sem cortar/sobrepor — não travar em px onde o PrimeNG usa rem."
+    ],
+    "contrast": {
+      "rule": "Cor certa != contraste suficiente. Texto NUNCA nasce de uma combinação nova: só os PARES já garantidos pelo tema (primary.contrastColor sobre primary.color; text.color/text.mutedColor sobre surface). Fundo sem par de texto definido → usar o par testado mais próximo ou perguntar, nunca estimar 'parece claro o suficiente'.",
+      "wcagAA": {
+        "textoNormal": "4.5:1",
+        "textoGrandeEUi": "3:1 (>=24px, ou >=18.66px bold; e ícone de estado/borda de campo em erro)"
+      },
+      "gotchas": [
+        "Texto sobre a ênfase: o par certo VARIA POR MARCA (ver bloco emphasisContrast) — nunca assumir branco. Usar o token primary.contrastColor.",
+        "Tons CLAROS da rampa (primary/50, feedback/50, highlight.background): NUNCA contrastColor (é pro tom 500+); usar text.color/text.mutedColor.",
+        "Badge/Tag/Chip com fundo de feedback: usar o par da ficha; não trocar por cor mais vibrante nem peso de fonte fino.",
+        "mutedColor/helper-text fora do surface padrão (card alternativo, selecionado/hover): recalcular, não presumir.",
+        "Placeholder segue o mesmo mínimo (é texto lido, não decoração).",
+        "Ícone sozinho com significado sobre fundo colorido: 3:1, par verificado."
+      ],
+      "neverAcceptable": "Cinza-claro sobre branco/surface 'pra ficar sutil'; branco sobre pastel da marca; texto sobre imagem/gráfico sem verificar o pior caso da área."
+    }
+  },
+  "lifecycle": {
+    "statuses": [
+      "draft",
+      "beta",
+      "stable",
+      "deprecated"
+    ],
+    "rule": "Toda ficha declara um `status`. `deprecated` NÃO entra em tela nova — o agente procura o substituto (o campo `replaces` da peça nova aponta o `id` da antiga). Se a depreciada for a única opção viável, AVISAR numa linha em vez de usar em silêncio.",
+    "discovery": "A busca do MCP (nephos_search) rebaixa o que está `deprecated` — aparece por último, nunca como 1ª escolha. `nephos_list(status:'deprecated')` lista o que saiu de circulação; `nephos_get` sempre traz o `status` da ficha.",
+    "current": "Hoje: 98 stable + 12 beta + 0 deprecated (informativo — pode mudar; a regra é o que vale)."
+  },
+  "globalRules": {
+    "always": [
+      "Escolher a cor por papel + passo da rampa",
+      "Uma única cor de ênfase (primary) por região de decisão",
+      "HTML semântico: <button> age, <a> navega, <table> é dado tabular",
+      "Todo campo com <label> associado"
+    ],
+    "never": [
+      "Não introduzir matiz nova — cor fora da paleta = pedir, não inventar hex",
+      "Não usar valor bruto (hex) onde existe passo de paleta",
+      "Não escrever nome de marca em componente ou metadado",
+      "Não usar <div> clicável no lugar de <button>",
+      "Não usar mais de dois pesos de fonte numa mesma região",
+      "Não emitir classes de framework no HTML gerado",
+      "Não inventar função (hover/foco/fundo): usar o token semantic do PrimeNG"
+    ]
+  }
+}
