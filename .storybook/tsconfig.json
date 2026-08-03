@@ -1,0 +1,15 @@
+/* tsconfig usado apenas pelo Storybook.
+   O builder compila o `.storybook/preview.ts` e as stories, que não fazem
+   parte do tsconfig.app.json (esse tem só o `src/main.ts` como entry point). */
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/storybook",
+    "types": ["node"]
+  },
+  "include": [
+    "../.storybook/**/*.ts",
+    "../projects/stage/src/stories/**/*.ts",
+    "../projects/stage/src/design-system/**/*.ts"
+  ]
+}
