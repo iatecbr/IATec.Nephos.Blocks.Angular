@@ -1,13 +1,48 @@
 import { applicationConfig, type Preview } from '@storybook/angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { definePreset } from '@primeuix/themes';
 
-import { NEPHOS_THEMES } from '../design-system/nephos.palettes';
+import {
+  NEPHOS_THEMES,
+  NephosTheme,
+  SURFACE_SLATE,
+} from '../design-system/nephos.palettes';
 import {
   applyNephosTheme,
   nephosPreset,
   NEPHOS_DEFAULT_THEME,
 } from '../design-system/nephos.preset';
+
+/**
+ * O preset de bootstrap de uma marca, com o `surface` já dentro.
+ *
+ * `nephosPreset()` sozinho traz só o que é NOSSO na camada semantic (a
+ * rampa da marca, o texto sobre a ênfase, o anel de foco). O `surface`
+ * fica de fora porque, no repo, ele é aplicado à parte pelo
+ * `surfacePalette()` — tanto no `layout.configurator.ts` quanto no
+ * `applyNephosTheme()`.
+ *
+ * No app isso funciona: o configurador roda com a aplicação já em pé. No
+ * Storybook, não — o bootstrap acontece depois do decorator, e o
+ * resultado é que o modo escuro renderizava no `zinc` padrão do Aura em
+ * vez do `slate` que o `design.md` declara. Como surface é fundação
+ * ("surface = slate do PrimeNG", igual nas 7 marcas), o banco de provas
+ * precisa nascer com ele.
+ *
+ * Este `definePreset` faz exatamente o que o `surfacePalette()` do
+ * `@primeuix/themes` faz por dentro: grava `semantic.colorScheme.
+ * {light,dark}.surface`. Nenhum valor novo — o mesmo `SURFACE_SLATE`.
+ */
+const presetDeBootstrap = (marca: NephosTheme) =>
+  definePreset(nephosPreset(marca), {
+    semantic: {
+      colorScheme: {
+        light: { surface: SURFACE_SLATE },
+        dark: { surface: SURFACE_SLATE },
+      },
+    },
+  });
 
 // Estilos globais (incluindo os PrimeIcons dos ícones internos do PrimeNG)
 // entram pela opção `styles` do builder no angular.json, apontando para o
@@ -57,39 +92,45 @@ const preview: Preview = {
   },
 
   decorators: [
-    applicationConfig({
-      providers: [
-        provideAnimationsAsync(),
-        providePrimeNG({
-          theme: {
-            preset: nephosPreset(NEPHOS_DEFAULT_THEME),
-            options: { darkModeSelector: '.app-dark' },
-          },
-        }),
-      ],
-    }),
-
     (story, context) => {
-      const marca = context.globals['marca'] ?? NEPHOS_DEFAULT_THEME;
+      const marca = (context.globals['marca'] ?? NEPHOS_DEFAULT_THEME) as NephosTheme;
       const escuro = context.globals['modo'] === 'escuro';
-
-      // ⚠️ ORDEM IMPORTA. O `providePrimeNG` do applicationConfig acima roda
-      // no bootstrap do Angular, que acontece DEPOIS deste decorator — e ele
-      // reescreve o tema com a marca padrão. Se `applyNephosTheme` for chamado
-      // aqui direto, o bootstrap sobrescreve e as 7 verticais saem todas na
-      // cor do `global`. Por isso a troca de marca vai para um macrotask, que
-      // roda depois do bootstrap.
-      //
-      // É a mesma cadeia do configurador do repo:
-      //   $t().preset(Aura).preset(ext).surfacePalette(slate).use()
-      setTimeout(() => applyNephosTheme(marca), 0);
 
       document.documentElement.classList.toggle('app-dark', escuro);
       document.body.style.background = 'var(--p-content-background)';
       document.body.style.color = 'var(--p-text-color)';
       document.body.style.padding = '1.5rem';
 
-      return story();
+      // ⚠️ ORDEM IMPORTA — e é por isso que o `providePrimeNG` é montado
+      // AQUI DENTRO, com a marca do contexto, em vez de num
+      // `applicationConfig` estático lá fora.
+      //
+      // O bootstrap do Angular roda DEPOIS deste decorator. Com um preset
+      // estático, ele nascia sempre na marca padrão e sobrescrevia qualquer
+      // troca feita antes — inclusive a que vem da URL. Resultado: abrir uma
+      // story já apontando para uma vertical (`?globals=marca:educacao`)
+      // renderizava na cor do `global`, e só passava a obedecer depois de
+      // mexer no seletor à mão. Montando o preset com a marca do contexto,
+      // o bootstrap já nasce certo e não há corrida nenhuma.
+      const comTema = applicationConfig({
+        providers: [
+          provideAnimationsAsync(),
+          providePrimeNG({
+            theme: {
+              preset: presetDeBootstrap(marca),
+              options: { darkModeSelector: '.app-dark' },
+            },
+          }),
+        ],
+      })(story, context);
+
+      // Para a troca de marca com a aplicação já em pé (o seletor da barra,
+      // quando o Storybook reaproveita o bootstrap): é a mesma cadeia do
+      // configurador do repo —
+      //   $t().preset(Aura).preset(ext).surfacePalette(slate).use()
+      setTimeout(() => applyNephosTheme(marca), 0);
+
+      return comTema;
     },
   ],
 
