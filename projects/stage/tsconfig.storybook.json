@@ -9,7 +9,7 @@
     "../../.storybook/**/*",
     "../../stories/**/*",
     "./src/stories/**/*",
-    "../../design-system/**/*"
+    "../../design-system/nephos.*.ts"
   ],
   "exclude": []
 }

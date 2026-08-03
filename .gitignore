@@ -46,3 +46,7 @@ Thumbs.db
 
 *storybook.log
 storybook-static
+
+# Design System (pacote Nephos)
+design-system/node_modules
+design-system/mcp/node_modules
