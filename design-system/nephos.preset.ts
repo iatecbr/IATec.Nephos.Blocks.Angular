@@ -38,12 +38,15 @@ import {
 } from './nephos.palettes';
 
 /**
- * Preset base = Aura (confirmado pelo Elvys, 24/07).
- * ⚠️ Achado ao reconciliar: o app `stage` do repo hoje roda de fato o
- * Lara (o `layout.service` tem `preset:'Lara'` e o `app.config.ts`
- * importa de `'@primeuix/themes/lara'` numa variável CHAMADA `Aura` —
- * provável resquício). Como o Elvys decidiu Aura, seguimos Aura; vale a
- * Indiane confirmar com ele se o padrão do `stage` também deve virar Aura.
+ * Preset base = Aura (confirmado pelo Elvys em 24/07).
+ *
+ * ✅ RESOLVIDO em 03/08/2026. Ao reconciliar, o repo rodava de fato o
+ * **Lara** por dois caminhos independentes: o `layout.service` tinha
+ * `preset:'Lara'` e o `app.config.ts` importava de
+ * `'@primeuix/themes/lara'` numa variável CHAMADA `Aura` — o que fazia
+ * qualquer leitura casual do `providePrimeNG` parecer certa. Os dois
+ * foram corrigidos juntos, porque arrumar só um deixava o Lara valendo
+ * pelo outro (o configurador reaplica o preset do serviço por cima).
  */
 const BASE_PRESET = Aura;
 

@@ -44,7 +44,10 @@ export interface Profile {
 export class LayoutService {
     _config: layoutConfig = {
         ripple: false,
-        preset: 'Lara',
+        // Aura é o preset base do Design System Nephos (03/08/2026). É este
+        // valor que o `layout.configurator.ts` lê no `ngOnInit` e reaplica
+        // por cima do tema — mudar só o `app.config.ts` não bastava.
+        preset: 'Aura',
         primary: 'noir',
         inputStyle: 'outlined',
         surface: null,
