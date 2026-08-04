@@ -31,6 +31,44 @@ steps:
       workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'run build-storybook'
 
+  # ── Nephos Design System · o índice do catálogo ─────────────────────
+  # O `design-system/nephos-index.json` é o catálogo que o Moses lê pelo
+  # MCP. Ele é GERADO das 110 fichas `.meta.ts` e fica VERSIONADO — ou
+  # seja, dá para editar uma ficha, esquecer de regerar, e o Moses passar
+  # a ler documentação velha sem nenhum erro aparecer.
+  #
+  # Este passo NÃO regera para commitar de volta: ele CONFERE. Roda o
+  # gerador e falha se o resultado diferir do que está no repositório.
+  # Regerar em silêncio esconderia o problema em vez de mostrá-lo.
+  #
+  # O `npm install` separado é necessário porque o `design-system/` tem
+  # o próprio `package.json` (precisa do esbuild para transpilar as
+  # fichas `.meta.ts`) e o `design-system/node_modules` é gitignored.
+  - task: Npm@1
+    displayName: 'Nephos DS · instalar (esbuild)'
+    inputs:
+      command: 'custom'
+      workingDir: '$(Build.SourcesDirectory)/design-system'
+      customCommand: 'install'
+
+  - task: Npm@1
+    displayName: 'Nephos DS · gerar o índice do catálogo'
+    inputs:
+      command: 'custom'
+      workingDir: '$(Build.SourcesDirectory)/design-system'
+      customCommand: 'run build:index'
+
+  - task: CmdLine@2
+    displayName: 'Nephos DS · o índice versionado está atualizado?'
+    inputs:
+      workingDirectory: '$(Build.SourcesDirectory)'
+      script: |
+        if ! git diff --exit-code -- design-system/nephos-index.json; then
+          echo "##vso[task.logissue type=error]O design-system/nephos-index.json esta desatualizado: alguma ficha .meta.ts mudou sem o indice ser regerado. Rode 'npm run build:index' dentro de design-system/ e commite o resultado."
+          exit 1
+        fi
+        echo "Indice em dia."
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'dist/storybook/stage'
