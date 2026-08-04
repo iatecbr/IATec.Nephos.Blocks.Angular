@@ -47,6 +47,21 @@ steps:
       command: 'install'
       workingDir: '$(Build.SourcesDirectory)'
 
+  # Página depende de átomo desde 04/08/2026 (os templates `listing`,
+  # `detail-form` e `dashboard` usam o `heading` e a camada de token): o
+  # `tsconfig.lib.json` daqui resolve o `@iatec/nephos-ui` pelo pacote
+  # CONSTRUÍDO, porque o ng-packagr não compila o fonte de outra lib
+  # dentro desta. Sem o passo abaixo o build quebra no agente, com uma
+  # mensagem que não diz nada ("Cannot destructure property 'pos'").
+  # Este artefato NÃO é publicado aqui; só alimenta a compilação.
+  # Mesmo passo que o pipeline do `@iatec/nephos-blocks` já tem.
+  - task: Npm@1
+    displayName: 'Build - @iatec/nephos-ui (dependência)'
+    inputs:
+      command: 'custom'
+      customCommand: 'run ng build @iatec/nephos-ui'
+      workingDir: '$(Build.SourcesDirectory)'
+
   - task: Npm@1
     displayName: 'Build - @iatec/nephos-pages'
     inputs:
