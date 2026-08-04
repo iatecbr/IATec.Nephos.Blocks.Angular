@@ -1,0 +1,98 @@
+/* ─────────────────────────────────────────────────────────────
+ * Página `detail-form` — só ARRANJO
+ * ─────────────────────────────────────────────────────────────
+ * A grade de campos, a coluna de metadados e a barra de ações. Nenhuma
+ * cor, nenhum raio, nenhum tamanho de fonte: campo, rótulo e erro são
+ * dos componentes, cada um com a sua ficha.
+ * ───────────────────────────────────────────────────────────── */
+
+/* O breakpoint vem do arquivo do `@iatec/nephos-layout`, e não de uma
+   cópia local, para a família inteira quebrar na mesma largura. É um
+   `@use` de SASS: resolve na hora de construir a lib, não vira
+   dependência do pacote publicado. */
+@use '../../../../nephos-layout/lib/layout/sass_variables' as *;
+
+:host {
+    display: block;
+
+    /* Rede de segurança para quem consome esta lib sem o pacote de
+       primitivos — mesmo padrão do `_main.scss` com a família
+       tipográfica. Valores copiados do `nephos-ui.scss`, não novos. */
+    --nph-pg-space-sm: var(--nph-space-sm, 0.5rem);
+    --nph-pg-space-md: var(--nph-space-md, 0.75rem);
+    --nph-pg-space-lg: var(--nph-space-lg, 1.25rem);
+}
+
+.nph-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nph-pg-space-lg);
+}
+
+.nph-detail__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nph-pg-space-md);
+}
+
+.nph-detail__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--nph-pg-space-sm);
+}
+
+/* Slots opcionais: vazios, não ocupam o `gap` da página. */
+.nph-detail__acoes:empty,
+.nph-detail__meta:empty,
+.nph-detail__barra:empty {
+    display: none;
+}
+
+/* Campos e metadados. No mobile é uma coluna só — o painel de apoio
+   desce para depois do que se edita, que já é a ordem do DOM. */
+.nph-detail__corpo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nph-pg-space-lg);
+}
+
+.nph-detail__secoes {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--nph-pg-space-lg);
+    min-width: 0;
+
+    /* A grade dos CAMPOS não pode ser aplicada daqui: o `<fieldset>` é
+       conteúdo projetado, e o encapsulamento do Angular não alcança lá
+       dentro. Então a moldura publica o VALOR — que é o que ela sabe
+       calcular, porque conhece o `columns` e o breakpoint — e quem monta
+       a seção o gasta:
+           style="display:grid; grid-template-columns: var(--nph-detail-grid)"
+       Custom property herda para o conteúdo projetado; regra de CSS,
+       não. */
+    --nph-detail-grid: 1fr;
+}
+
+/* ── Desktop ────────────────────────────────────────────────────── */
+@media screen and (min-width: $breakpoint) {
+    .nph-detail__corpo {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    /* Uma PROPORÇÃO, não uma medida: a coluna de apoio é um terço do
+       corpo. Proporção é arranjo; medida seria valor de token, e não
+       existe token de largura de painel no `design.md`. */
+    .nph-detail__meta {
+        flex: 0 1 33%;
+        min-width: 0;
+    }
+
+    .nph-detail__secoes[data-columns='2'] {
+        --nph-detail-grid: repeat(2, minmax(0, 1fr));
+    }
+}

@@ -6,7 +6,27 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    /* ⚠️ Vale só para o BUILD desta biblioteca — a MESMA nota que já está
+     * no `tsconfig.lib.json` do `@iatec/nephos-blocks`, pela mesma razão.
+     *
+     * O `tsconfig.json` da raiz mapeia `@iatec/nephos-ui` para o FONTE
+     * (`src/public-api.ts`), e é isso que faz o app e o Storybook verem as
+     * mudanças na hora, sem rebuild. Mas o `ng-packagr` não compila o
+     * fonte de OUTRA biblioteca dentro deste pacote: ele tenta e quebra
+     * com um erro que não diz nada
+     * ("Cannot destructure property 'pos' of 'file.referencedFiles[index]'").
+     *
+     * Aqui o alias aponta para o pacote JÁ CONSTRUÍDO. A consequência é
+     * uma ordem de build: o `@iatec/nephos-ui` vem antes.
+     *
+     *   npx ng build @iatec/nephos-ui && npx ng build @iatec/nephos-pages
+     */
+    "paths": {
+      "@iatec/nephos-ui": [
+        "../../../dist/iatec/nephos-ui"
+      ]
+    }
   },
   "exclude": [
     "**/*.spec.ts"

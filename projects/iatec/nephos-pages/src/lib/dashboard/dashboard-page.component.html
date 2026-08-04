@@ -1,0 +1,48 @@
+<section class="nph-dashboard"
+         [attr.aria-labelledby]="idTitulo"
+         [attr.data-period]="period()">
+
+    <div class="nph-dashboard__cabecalho">
+        <nph-ui-heading [id]="idTitulo" [level]="1">{{title()}}</nph-ui-heading>
+
+        <!-- Slot `pageHeader`: o filtro de período. Quem troca o período
+             é quem tem o filtro; a moldura só reage ao valor. -->
+        <div class="nph-dashboard__filtro">
+            <ng-content select="[nphPageActions]"></ng-content>
+        </div>
+    </div>
+
+    <!-- O período em TEXTO, e anunciado quando muda. Quem vê já sabe
+         pelo filtro; sem isto, quem ouve a tela receberia números novos
+         sem saber de quando são. -->
+    <p class="nph-dashboard__periodo nph-caption nph-text-muted" role="status">
+        Indicadores do período: {{period()}}
+    </p>
+
+    <!-- Slot `kpiGrid`: os cartões de indicador. A grade é da moldura —
+         cada cartão decidindo a sua daria uma parede desalinhada. -->
+    <div class="nph-dashboard__kpis"
+         [attr.data-columns]="columns()"
+         [attr.aria-busy]="loading()">
+        <ng-content select="[nphKpi]"></ng-content>
+    </div>
+
+    <!-- Slot `charts`: cada gráfico dentro do seu cartão, com título e
+         alternativa textual (o `<canvas>` é opaco para quem ouve). -->
+    <div class="nph-dashboard__graficos" [attr.aria-busy]="loading()">
+        <ng-content select="[nphChart]"></ng-content>
+    </div>
+
+    <!-- Slot `breakdown`: a composição por categoria, com legenda. -->
+    <div class="nph-dashboard__composicao">
+        <ng-content select="[nphBreakdown]"></ng-content>
+    </div>
+
+    <!-- Slot `activity`: atividades recentes / mini-tabela. -->
+    <div class="nph-dashboard__atividade">
+        <ng-content select="[nphActivity]"></ng-content>
+    </div>
+
+    <!-- Conteúdo solto que não coube em nenhum slot nomeado. -->
+    <ng-content></ng-content>
+</section>

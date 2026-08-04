@@ -1,0 +1,31 @@
+<section class="nph-listing" [attr.aria-labelledby]="idTitulo">
+
+    <div class="nph-listing__cabecalho">
+        <nph-ui-heading [id]="idTitulo" [level]="1">{{title()}}</nph-ui-heading>
+
+        <!-- Slot `pageHeader`: as ações da página ("Nova escola"). O
+             título não vem por aqui — ele é da moldura, senão a região
+             ficaria sem nome. -->
+        <div class="nph-listing__acoes">
+            <ng-content select="[nphPageActions]"></ng-content>
+        </div>
+    </div>
+
+    <!-- Slot `filters`: o bloco search-filters, que já traz o
+         `role="search"` e os chips do que está aplicado. -->
+    <ng-content select="[nphFilters]"></ng-content>
+
+    <!-- Slot `results` (padrão) e `empty`: os dois caem na MESMA região,
+         porque são alternativas — ou há resultado, ou há o vazio. Quem
+         escolhe é quem tem os dados. -->
+    <div class="nph-listing__resultado"
+         [attr.data-view]="view()"
+         [attr.aria-busy]="loading()">
+        <ng-content></ng-content>
+        <ng-content select="[nphEmpty]"></ng-content>
+    </div>
+
+    <!-- Slot `pagination`: o paginator, que traz o próprio
+         `<nav aria-label="Paginação">`. -->
+    <ng-content select="[nphPagination]"></ng-content>
+</section>

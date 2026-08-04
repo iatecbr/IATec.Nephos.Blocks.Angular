@@ -1,0 +1,90 @@
+/* ─────────────────────────────────────────────────────────────
+ * Página `dashboard` — só ARRANJO
+ * ─────────────────────────────────────────────────────────────
+ * A grade dos widgets, e nada mais. Cartão, número, variação e gráfico
+ * têm cada um a sua ficha — cor e tipografia são deles, não daqui.
+ * ───────────────────────────────────────────────────────────── */
+
+/* O breakpoint vem do arquivo do `@iatec/nephos-layout`, e não de uma
+   cópia local, para a família inteira quebrar na mesma largura. É um
+   `@use` de SASS: resolve na hora de construir a lib, não vira
+   dependência do pacote publicado. */
+@use '../../../../nephos-layout/lib/layout/sass_variables' as *;
+
+:host {
+    display: block;
+
+    /* Rede de segurança para quem consome esta lib sem o pacote de
+       primitivos — mesmo padrão do `_main.scss` com a família
+       tipográfica. Valores copiados do `nephos-ui.scss`, não novos. */
+    --nph-pg-space-sm: var(--nph-space-sm, 0.5rem);
+    --nph-pg-space-md: var(--nph-space-md, 0.75rem);
+    --nph-pg-space-lg: var(--nph-space-lg, 1.25rem);
+}
+
+.nph-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nph-pg-space-lg);
+}
+
+.nph-dashboard__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nph-pg-space-md);
+}
+
+.nph-dashboard__filtro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--nph-pg-space-sm);
+}
+
+/* O anúncio de período fica colado no cabeçalho, não a uma distância de
+   seção: ele é legenda do painel, não um bloco à parte. */
+.nph-dashboard__periodo {
+    margin-top: calc(var(--nph-pg-space-lg) * -1 + var(--nph-pg-space-sm));
+}
+
+/* Slots opcionais: vazios, não ocupam o `gap` da página. */
+.nph-dashboard__filtro:empty,
+.nph-dashboard__kpis:empty,
+.nph-dashboard__graficos:empty,
+.nph-dashboard__composicao:empty,
+.nph-dashboard__atividade:empty {
+    display: none;
+}
+
+/* Uma coluna no celular. `columns` só vale onde há largura para ele —
+   quatro KPIs espremidos não são quatro KPIs, são quatro números
+   ilegíveis. */
+.nph-dashboard__kpis,
+.nph-dashboard__graficos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--nph-pg-space-lg);
+}
+
+/* ── Desktop ────────────────────────────────────────────────────── */
+@media screen and (min-width: $breakpoint) {
+    .nph-dashboard__kpis[data-columns='2'] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nph-dashboard__kpis[data-columns='3'] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .nph-dashboard__kpis[data-columns='4'] {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* Gráfico precisa de mais largura que KPI para a série ser legível:
+       metade do painel, sempre — é proporção, não medida nova. */
+    .nph-dashboard__graficos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

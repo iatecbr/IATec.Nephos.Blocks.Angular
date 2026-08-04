@@ -1,0 +1,46 @@
+<section class="nph-detail"
+         [attr.aria-labelledby]="idTitulo"
+         [attr.data-mode]="mode()"
+         [attr.data-dirty]="dirty()">
+
+    <!-- Slot `breadcrumb`: a trilha, com o próprio `<nav aria-label>`. -->
+    <ng-content select="[nphBreadcrumb]"></ng-content>
+
+    <div class="nph-detail__cabecalho">
+        <nph-ui-heading [id]="idTitulo" [level]="1">{{title()}}</nph-ui-heading>
+
+        <!-- Slot `pageHeader`: Salvar (primary) e Cancelar (ghost). Uma
+             ênfase só — duas ações primárias destruiriam a hierarquia. -->
+        <div class="nph-detail__acoes">
+            <ng-content select="[nphPageActions]"></ng-content>
+        </div>
+    </div>
+
+    <!-- Slot `errorSummary`: ANTES das seções, de propósito. É o destino
+         do foco ao submeter inválido, e quem ouve a tela precisa do
+         resumo antes de voltar aos campos. -->
+    <ng-content select="[nphErrorSummary]"></ng-content>
+
+    <div class="nph-detail__corpo">
+        <!-- Slot `sections`: um `<fieldset><legend>` por seção. A grade
+             de campos é da moldura (`columns`), para as seções não
+             desalinharem entre si. -->
+        <div class="nph-detail__secoes" [attr.data-columns]="columns()">
+            <ng-content></ng-content>
+        </div>
+
+        <!-- Slot `asideMeta`: metadados do registro (criado em, status).
+             Vem DEPOIS no DOM: é apoio, e a leitura começa pelo que se
+             edita. Vazio, o painel some e as seções ocupam a largura. -->
+        <aside class="nph-detail__meta">
+            <ng-content select="[nphAsideMeta]"></ng-content>
+        </aside>
+    </div>
+
+    <!-- Slot `actionsBar`: a barra fixa dos formulários longos. Fica por
+         último no DOM porque é a última coisa da leitura, mesmo quando
+         está grudada na base da tela. -->
+    <div class="nph-detail__barra">
+        <ng-content select="[nphActionsBar]"></ng-content>
+    </div>
+</section>

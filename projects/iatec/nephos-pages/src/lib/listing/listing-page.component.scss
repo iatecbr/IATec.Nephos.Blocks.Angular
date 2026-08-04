@@ -1,0 +1,51 @@
+/* ─────────────────────────────────────────────────────────────
+ * Página `listing` — só ARRANJO
+ * ─────────────────────────────────────────────────────────────
+ * Nenhuma cor, nenhum raio, nenhum tamanho de fonte: a página não
+ * inventa identidade. O espaço vem da camada de token do
+ * `@iatec/nephos-ui`; tudo o mais é dos blocos que ela encaixa.
+ * ───────────────────────────────────────────────────────────── */
+
+:host {
+    display: block;
+
+    /* Rede de segurança para quem consome esta lib sem o pacote de
+       primitivos — mesmo padrão do `_main.scss` com a família
+       tipográfica. Com o `nephos-ui.scss` carregado quem manda é o
+       token; os valores literais são cópias dele, não novos. */
+    --nph-pg-space-sm: var(--nph-space-sm, 0.5rem);
+    --nph-pg-space-md: var(--nph-space-md, 0.75rem);
+    --nph-pg-space-lg: var(--nph-space-lg, 1.25rem);
+}
+
+.nph-listing {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nph-pg-space-lg);
+}
+
+/* Título à esquerda, ações à direita; embaixo um do outro quando não
+   couberem lado a lado. */
+.nph-listing__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nph-pg-space-md);
+}
+
+.nph-listing__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--nph-pg-space-sm);
+}
+
+/* Slot opcional: sem ação projetada não ocupa o espaço do cabeçalho. */
+.nph-listing__acoes:empty {
+    display: none;
+}
+
+.nph-listing__resultado {
+    min-width: 0;
+}
