@@ -8,37 +8,43 @@
  * arquivo é algo que o banco de provas tem e a produção não — ou seja,
  * um jeito de a prova mentir. O objetivo é esvaziá-lo.
  *
- * ✅ **NOTO SANS SAIU DAQUI (03/08/2026).** A família foi decidida para
- * produção e agora é entregue pelo próprio layout
- * (`nephos-layout/lib/layout/_fonts.scss`), o mesmo caminho do app.
- * O Storybook passou a provar a entrega de verdade, não uma montagem
- * exclusiva dele.
+ * 🎉 **O ARQUIVO ESTÁ VAZIO (04/08/2026), E ISSO É A NOTÍCIA.** As duas
+ * únicas coisas que moravam aqui foram para a produção, cada uma pelo
+ * caminho que o app já usa:
  *
- * ✅ **FONT AWESOME PRO ENTROU (04/08/2026).** O set do Nephos
- * (`design.md` › Ícones) é Font Awesome, edição **Pro** (decidida em
- * 03/08). O token da licença chegou pelo Elvys e a Free saiu do
- * `package.json`. Agora os cinco estilos existem de verdade: `light`,
- * `thin` e `duotone` renderizam, e não só o `solid` que a Free dava.
+ * - **Noto Sans (03/08)** → é entregue pelo próprio layout
+ *   (`nephos-layout/lib/layout/_fonts.scss`). O conflito era real: o
+ *   layout entregava Poppins, o `design.md` declarava Noto Sans, e o
+ *   Storybook só *parecia* certo porque carregava a fonte num arquivo
+ *   exclusivo dele.
+ * - **Font Awesome (04/08)** → entrou no `styles.scss`, junto com o resto.
+ *   Era o mesmo padrão de falha, um passo adiante: o Storybook provava os
+ *   ícones pelo **pacote npm Pro** enquanto a produção os entregava por um
+ *   **script de kit hospedado** no `index.html`. Dois caminhos diferentes
+ *   para a mesma coisa. Agora é um só, e o kit por CDN saiu — de quebra,
+ *   uma dependência de rede a menos em runtime.
  *
- * ⚠️ **O pacote não está no npm público.** Quem for rodar este
- * repositório numa máquina nova precisa apontar o escopo para o registry
- * da Font Awesome ANTES do `npm install` — senão o install quebra com 404:
+ * **A regra que os dois casos ensinaram:** se uma linha existe só aqui, a
+ * pergunta não é "está funcionando?", é **"a produção faz assim também?"**.
+ *
+ * ⚠️ **Font Awesome Pro é licenciado e não existe no npm público.** Numa
+ * máquina nova, apontar o escopo ANTES do `npm install`, senão o install
+ * quebra com 404:
  *
  *   npm config set "@fortawesome:registry" https://npm.fontawesome.com/
  *   npm config set "//npm.fontawesome.com/:_authToken" <TOKEN>
  *
- * O token NÃO mora no repositório: em máquina de gente ele fica no
- * `~/.npmrc` (fora do projeto) e no CI ele entra pelo `.npmrc.pipeline`,
- * como a variável `FONTAWESOME_TOKEN` do grupo `nuget-credentials`.
+ * O token NÃO mora no repositório: em máquina de gente fica no `~/.npmrc`
+ * (fora do projeto) e no CI entra pelo `.npmrc.pipeline`, como a variável
+ * `FONTAWESOME_TOKEN` do grupo `nuget-credentials`.
  *
- * ℹ️ Uma pergunta antiga que se resolveu sozinha: os ícones INTERNOS do
- * PrimeNG (setinha do select, X do dialog, setas do paginator) **não são
- * mais PrimeIcons**. No PrimeNG 21 eles são SVG embutido
- * (`<svg data-p-icon="chevron-down">`), verificado no DOM renderizado —
- * não há o que sobrescrever. E o `@iatec/nephos-layout`, que era o último
- * consumidor real de `pi pi-*` (18 lugares), **migrou para Font Awesome em
- * 04/08**. O `primeicons` que ainda entra pelo `styles.scss` só serve ao
- * aplicativo de demonstração (`stage`) — tirá-lo é tarefa separada.
+ * ℹ️ E o `primeicons` saiu do `styles.scss` no mesmo dia: depois da
+ * migração dos 18 `pi pi-*` do `@iatec/nephos-layout` não sobrou nenhum
+ * uso no repositório, e os ícones INTERNOS do PrimeNG 21 são SVG embutido
+ * (`<svg data-p-icon="chevron-down">`), não PrimeIcons — não havia o que
+ * sobrescrever. Era peso morto no bundle.
+ *
+ * 👉 **Antes de acrescentar qualquer coisa aqui, tente pôr no
+ * `styles.scss`.** Este arquivo só deve receber o que é genuinamente da
+ * bancada e não pode existir na produção.
  * ───────────────────────────────────────────────────────────── */
-
-@use '@fortawesome/fontawesome-pro/css/all.css';

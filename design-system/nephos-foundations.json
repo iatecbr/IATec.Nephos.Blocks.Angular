@@ -41,7 +41,7 @@
       "regra": "É por aqui que o logo e o nome da vertical chegam ao `nph-ui-logo`. Sem este provider, nenhum componente sabe qual marca mostrar — e escrever o nome de uma marca num template é proibido."
     },
     "fonts": "Noto Sans vem embutida no `@iatec/nephos-layout` (`lib/layout/_fonts.scss`), carregada junto com o `layout.scss`. Não instalar pacote de fonte à parte.",
-    "icons": "Font Awesome não vem nos pacotes: o projeto carrega o CSS da edição licenciada (Pro). Sem ele os ícones não renderizam. A sintaxe é `fa-solid fa-<nome>`.",
+    "icons": "Font Awesome NÃO vem dentro dos pacotes `@iatec/*`: o projeto instala e carrega o CSS por conta própria. Instalar `@fortawesome/fontawesome-pro` e pôr `@use '@fortawesome/fontawesome-pro/css/all.css';` no `styles.scss`. ⚠️ O pacote é LICENCIADO e não existe no npm público — antes do `npm install` o projeto precisa apontar o escopo: `npm config set \"@fortawesome:registry\" https://npm.fontawesome.com/` e `npm config set \"//npm.fontawesome.com/:_authToken\" <TOKEN>`. Sem isso o install falha com 404, e sem o CSS nenhum ícone renderiza. A sintaxe é `fa-solid fa-<nome>`, e os cinco estilos (`solid` `regular` `light` `thin` `duotone`) existem na edição Pro. Carregar no `styles.scss`, nunca só no arquivo de estilos do Storybook: o banco de provas tem que provar o que a produção entrega.",
     "rootFontSize": "O `layout.scss` declara `html { font-size: 14px }`. É intencional e a escala tipográfica do Nephos já é entregue em px por causa disso. Não sobrescrever."
   },
   "multibrand": {

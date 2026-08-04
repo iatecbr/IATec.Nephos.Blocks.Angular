@@ -25,5 +25,9 @@
 </app-root>
 </body>
 </html>
-<script crossorigin="anonymous"
-        src="https://kit.fontawesome.com/5f525eb16e.js"></script>
+<!-- O kit do Font Awesome por CDN (kit.fontawesome.com/5f525eb16e.js) saiu em
+     04/08/2026. Motivo: o Storybook provava os icones pelo pacote npm Pro e a
+     producao os entregava por um script hospedado — dois caminhos diferentes
+     para a mesma coisa, que e como a fonte Poppins passou meses despercebida.
+     Agora os dois carregam `@fortawesome/fontawesome-pro/css/all.css` pelo
+     `styles.scss`. De quebra, sai uma dependencia de rede em runtime. -->

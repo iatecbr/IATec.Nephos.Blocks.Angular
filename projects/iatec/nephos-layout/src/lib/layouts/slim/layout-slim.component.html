@@ -79,8 +79,14 @@
             <div class="topbar-content">
               <!-- Breadcrumb -->
               <div class="breadcrumb-section">
-                <i class="fa-solid fa-house" style="color: #94A3B8; margin-right: 7px;"></i>
-                <span style="color: #64748B; font-size: 14px;">Dashboard</span>
+                <!-- Eram `#94A3B8` (slate-400), `#64748B` (slate-500), `7px` e `14px` fixos.
+                     Trocados pelo papel e pela escala: `--text-color-secondary` e o texto de
+                     apoio que o proprio layout ja declara em `variables/_common.scss`,
+                     `--nph-space-sm` = 0.5rem (= 7px no root de 14px) e
+                     `--nph-font-size-body-sm` = 14px. Nenhuma medida mudou de tamanho; o que
+                     mudou e que agora acompanham o modo claro/escuro e a escala. -->
+                <i class="fa-solid fa-house" style="color: var(--text-color-secondary); margin-right: var(--nph-space-sm, 0.5rem);"></i>
+                <span style="color: var(--text-color-secondary); font-size: var(--nph-font-size-body-sm, 14px);">Dashboard</span>
               </div>
               
               <!-- Actions -->

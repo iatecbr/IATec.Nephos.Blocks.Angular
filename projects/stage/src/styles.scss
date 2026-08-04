@@ -1,5 +1,17 @@
-/* PrimeIcons */
-@use 'primeicons/primeicons.css';
+/* Icones: Font Awesome 7 Pro, a norma do Nephos (design.md > Icones).
+   Entra AQUI, no styles.scss da producao, e nao no storybook-styles.scss:
+   o banco de provas tem que provar o que o produto entrega. Foi o mesmo
+   conserto que a fonte Noto Sans recebeu em 03/08/2026.
+
+   ⚠️ O pacote e licenciado e nao existe no npm publico — ver o
+   `storybook-styles.scss` para os dois `npm config set` que uma maquina
+   nova precisa antes do `npm install`.
+
+   O `primeicons` saiu daqui em 04/08/2026: depois da migracao dos 18
+   `pi pi-*` do `@iatec/nephos-layout` nao sobrou nenhum uso no
+   repositorio, e os icones INTERNOS do PrimeNG 21 sao SVG embutido
+   (`<svg data-p-icon>`), nao PrimeIcons. Era peso morto no bundle. */
+@use '@fortawesome/fontawesome-pro/css/all.css';
 
 /* Custom layout */
 @use './tailwind.css';
