@@ -27,6 +27,20 @@ export * from './lib/nephos-brand';
  * pacote, a única forma de montar o tema num projeto novo era copiá-los
  * à mão — o que inviabilizava o cenário de um agente que **não clona o
  * repositório** e só lê a documentação de como instalar.
+ *
+ * ℹ️ E é ESTE bloco que explica por que o `package.json` daqui declara
+ * `primeng` sem que nenhum arquivo do pacote o importe (conferido em
+ * 04/08/2026: zero imports). Não é sobra — uma varredura de dependências
+ * vai continuar apontando, então fica escrito.
+ *
+ * Os 8 primitivos são de fato independentes do PrimeNG: são justamente
+ * as peças que ele não tem. Mas o tema acima é um preset DELE, e um
+ * preset do PrimeNG sem o PrimeNG instalado não faz nada — o
+ * `providePrimeNG({ theme: nephosPreset(...) })` que a doc de instalação
+ * manda escrever nem compila. Declarar é dizer a verdade sobre o que o
+ * pacote precisa para cumprir o que promete.
+ *
+ * Quem for "limpar" isto: ou tira o tema daqui junto, ou deixa como está.
  * ─────────────────────────────────────────────────────────────── */
 export * from './lib/theme/nephos.palettes';
 export * from './lib/theme/nephos.preset';
