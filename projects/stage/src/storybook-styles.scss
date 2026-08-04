@@ -14,36 +14,31 @@
  * O Storybook passou a provar a entrega de verdade, não uma montagem
  * exclusiva dele.
  *
- * ⏳ **FONT AWESOME — o que resta, e como fechar.** O set do Nephos
- * (`design.md` › Ícones) é Font Awesome, e a edição é a **Pro**
- * (decidido em 03/08/2026). Aqui embaixo está a **Free** 7.3.1, que é a
- * única que instala sem credencial.
+ * ✅ **FONT AWESOME PRO ENTROU (04/08/2026).** O set do Nephos
+ * (`design.md` › Ícones) é Font Awesome, edição **Pro** (decidida em
+ * 03/08). O token da licença chegou pelo Elvys e a Free saiu do
+ * `package.json`. Agora os cinco estilos existem de verdade: `light`,
+ * `thin` e `duotone` renderizam, e não só o `solid` que a Free dava.
  *
- * O que falta é só o acesso ao registry da Font Awesome — quem tiver o
- * token da licença fecha isto em minutos:
+ * ⚠️ **O pacote não está no npm público.** Quem for rodar este
+ * repositório numa máquina nova precisa apontar o escopo para o registry
+ * da Font Awesome ANTES do `npm install` — senão o install quebra com 404:
  *
  *   npm config set "@fortawesome:registry" https://npm.fontawesome.com/
  *   npm config set "//npm.fontawesome.com/:_authToken" <TOKEN>
- *   npm i @fortawesome/fontawesome-pro
  *
- * e troca a linha abaixo por:
- *
- *   @use '@fortawesome/fontawesome-pro/css/all.css';
- *
- * Nada mais muda: a sintaxe `fa-solid fa-<nome>` é a mesma nas duas
- * edições, e o `IconComponent` já aceita os cinco estilos.
- *
- * Enquanto o Pro não entra, `light`, `thin` e `duotone` não renderizam —
- * mas o estilo padrão do Nephos é `solid`, que existe na Free, então
- * **nenhum ícone do catálogo está quebrado hoje**.
+ * O token NÃO mora no repositório: em máquina de gente ele fica no
+ * `~/.npmrc` (fora do projeto) e no CI ele entra pelo `.npmrc.pipeline`,
+ * como a variável `FONTAWESOME_TOKEN` do grupo `nuget-credentials`.
  *
  * ℹ️ Uma pergunta antiga que se resolveu sozinha: os ícones INTERNOS do
  * PrimeNG (setinha do select, X do dialog, setas do paginator) **não são
  * mais PrimeIcons**. No PrimeNG 21 eles são SVG embutido
  * (`<svg data-p-icon="chevron-down">`), verificado no DOM renderizado —
- * não há o que sobrescrever. O `primeicons` que ainda entra pelo
- * `styles.scss` é usado pelo `@iatec/nephos-layout`, que escreve
- * `pi pi-*` à mão em ~10 lugares; migrar esses é tarefa separada.
+ * não há o que sobrescrever. E o `@iatec/nephos-layout`, que era o último
+ * consumidor real de `pi pi-*` (18 lugares), **migrou para Font Awesome em
+ * 04/08**. O `primeicons` que ainda entra pelo `styles.scss` só serve ao
+ * aplicativo de demonstração (`stage`) — tirá-lo é tarefa separada.
  * ───────────────────────────────────────────────────────────── */
 
-@use '@fortawesome/fontawesome-free/css/all.css';
+@use '@fortawesome/fontawesome-pro/css/all.css';

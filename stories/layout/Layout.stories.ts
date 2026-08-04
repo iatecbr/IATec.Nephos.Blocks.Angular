@@ -167,7 +167,7 @@ Template para substituir ou complementar o topbar padrão.
 <ng-template #topbar>
   <div class="custom-topbar">
     <button (click)="onNotifications()">
-      <i class="pi pi-bell"></i>
+      <i class="fa-solid fa-bell"></i>
     </button>
   </div>
 </ng-template>

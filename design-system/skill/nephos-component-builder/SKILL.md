@@ -36,14 +36,19 @@ Um `componentes/<id>.meta.ts` tipado por **`NephosComponentMeta`**
 Para ler a **API real** e validar nomes, instalar no scratchpad:
 
 ```bash
-npm i --legacy-peer-deps --ignore-scripts primeng@21.0.2 @primeuix/themes@2.0.2 @fortawesome/fontawesome-free@7
+npm i --legacy-peer-deps --ignore-scripts primeng@21.0.2 @primeuix/themes@2.0.2
 ```
 
 - API de cada componente: `node_modules/primeng/types/primeng-<componente>.d.ts` — a linha
   `ɵɵComponentDeclaration` traz **selector + inputs + outputs exatos**.
 - Modelo `MenuItem` e afins: `node_modules/primeng/types/primeng-api.d.ts`.
 - Tokens reais do Aura: `@primeuix/themes` (para citar valor de geometria quando preciso).
-- Nomes de ícone FA: metadata `icons.yml` do pacote FontAwesome (kebab-case, FA7).
+- **Nomes de ícone FA: validar no `node_modules/@fortawesome/fontawesome-pro/` DO PRÓPRIO
+  REPOSITÓRIO** — `svgs/<estilo>/<nome>.svg` existir é a prova de que aquele nome existe
+  naquele estilo. ⚠️ **Não instalar a Free no scratchpad para isso:** o metadata da Free
+  lista só os ícones gratuitos, então um nome válido do Pro seria rejeitado por engano. O
+  Pro é licenciado e não instala sem credencial — por isso a validação usa o repositório,
+  que já o tem (entrou em 04/08/2026).
 
 ---
 

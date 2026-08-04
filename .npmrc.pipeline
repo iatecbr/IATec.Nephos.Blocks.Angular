@@ -1,6 +1,13 @@
 registry=https://registry.npmjs.org/
 @iatec:registry=https://#{NPM_IATEC_HOST_COMMUNITY}#/npm/registry/
 
+; Font Awesome Pro (licenciado) — o `@fortawesome/fontawesome-pro` do
+; package.json NAO existe no npm publico. Sem estas duas linhas o
+; `npm install` de TODOS os pipelines falha com 404 no pacote.
+; A variavel FONTAWESOME_TOKEN precisa existir no grupo `nuget-credentials`.
+@fortawesome:registry=https://npm.fontawesome.com/
+//npm.fontawesome.com/:_authToken=#{FONTAWESOME_TOKEN}#
+
 always-auth=true
 
 ; begin auth token

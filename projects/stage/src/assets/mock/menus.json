@@ -1,7 +1,7 @@
 [
   {
     "label": "Dashboard",
-    "icon": "pi pi-th-large",
+    "icon": "fa-solid fa-table-cells-large",
     "routerLink": [
       "/"
     ],

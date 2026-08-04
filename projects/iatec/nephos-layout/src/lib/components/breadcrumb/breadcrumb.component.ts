@@ -28,7 +28,9 @@ export class BreadcrumbComponent {
 
     constructor(private router: Router) {
         // Set the home item
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
+        // Font Awesome, nunca PrimeIcons (design.md › Ícones). `pi-home` era o
+        // nome FA5; no FA7 o ícone se chama `house`.
+        this.home = { icon: 'fa-solid fa-house', routerLink: '/' };
 
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(event => {
             const root = this.router.routerState.snapshot.root;
