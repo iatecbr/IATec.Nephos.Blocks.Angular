@@ -42,7 +42,14 @@ export const authTemplateMeta: NephosComponentMeta = {
   api: {
     // Template: a "API" são os slots de composição + a config da moldura.
     inputs: [
-      { name: 'variant', type: "'login' | 'signup' | 'reset'", default: 'login', description: 'Qual fluxo hospedar: entrar, criar conta ou recuperar senha. Muda o bloco no slot do formulário.' },
+      // ✅ DECIDIDO (Indiane, 04/08/2026): TEMPLATE É MOLDURA, não tela
+      // pronta. A moldura dá a ESTRUTURA — região com nome, um `<h1>` só,
+      // ordem de leitura, a grade — e as peças entram pelos SLOTS, já
+      // ligadas por quem as tem. Consequência: só sobrevivem os inputs que
+      // a moldura consegue honrar sozinha, e os eventos ficam com a peça
+      // projetada. Uma moldura que reemitisse evento de peça seria um
+      // repasse — e um repasse se desatualiza.
+      { name: 'variant', type: "'login' | 'signup' | 'reset'", default: 'login', description: 'Qual fluxo está hospedado. A moldura é IDÊNTICA nos três — o que muda é o bloco no slot do formulário. Sai como `data-variant` para CSS, QA e teste identificarem a tela sem adivinhar pelo conteúdo projetado.' },
       { name: 'layout', type: "'centered' | 'split'", default: 'centered', description: '`centered` = cartão único no meio; `split` = painel de marca de um lado e o formulário do outro.' },
       { name: 'brandPanel', type: '{ imagem?: string; texto?: string }', default: '—', description: 'No layout split, o painel de identidade (imagem/mensagem). Conteúdo decorativo — nunca a única fonte de informação essencial.' },
     ],
@@ -70,14 +77,26 @@ export const authTemplateMeta: NephosComponentMeta = {
   },
 
   tokens: {
-    typography: 'title-sm (título da tela)',
+    // ✅ DECIDIDO (Indiane, 04/08/2026): título de PÁGINA é `title-lg`.
+    // O `design.md` (a especificação normativa) declara title-lg = título
+    // de página, e o átomo `heading` já implementa esse mapa no nível 1.
+    // A ficha dizia `title-sm` e discordava do sistema em silêncio.
+    typography: 'title-lg (título da tela, vindo do bloco do formulário)',
     byState: {
       // A moldura não inventa cor: herda do bloco e das superfícies.
-      fundo: { background: 'surface/50' },
+      // ✅ DECIDIDO (Indiane, 04/08/2026): o fundo de tela é o papel de
+      // FUNDO DE PÁGINA (`surface/ground`), não o passo cru `surface/50`.
+      // Medido: a rampa slate NÃO inverte entre os modos, então
+      // `surface/50` deixaria a tela quase branca no modo escuro. O papel
+      // acompanha o modo — `surface/100` no claro, `surface/950` no
+      // escuro — e é o mesmo fundo que o `<body>` do produto usa, então a
+      // tela nasce no fundo das telas de dentro. Mesmo raciocínio que
+      // corrigiu a ilustração do `empty-state` em 03/08/2026.
+      fundo: { background: 'surface/ground' },
       cartao: { background: 'surface/0', border: 'surface/200' },
       painelMarca: { background: 'primary/500', text: 'primary/contrast' },
     },
-    note: 'Fundo da tela = surface; cartão do formulário = surface/0 com raio de card (herdado). No split, o painel de marca usa a `primary` da vertical ativa. Nenhum hex, nenhum nome de marca — a identidade vem do tema.',
+    note: 'Fundo da tela = `surface/ground` (surface/100 no claro, surface/950 no escuro); cartão do formulário = surface/0 com raio de card (herdado). A largura do cartão é a do bloco `login-form` provado (24rem) mais o espaço interno do cartão — confirmado pela Indiane em 04/08/2026. No split, o painel de marca usa a `primary` da vertical ativa. Nenhum hex, nenhum nome de marca — a identidade vem do tema.',
   },
 
   antiPatterns: [

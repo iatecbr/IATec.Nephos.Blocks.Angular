@@ -44,21 +44,30 @@ export const detailFormTemplateMeta: NephosComponentMeta = {
   },
 
   api: {
-    // Template: a "API" são os slots de composição + a config da página.
+    // ✅ DECIDIDO (Indiane, 04/08/2026): TEMPLATE É MOLDURA, não tela
+    // pronta. A moldura dá a ESTRUTURA — região com nome, um `<h1>` só,
+    // ordem de leitura, a grade — e as peças entram pelos SLOTS, já
+    // ligadas por quem as tem. Consequência: só sobrevivem os inputs que
+    // a moldura consegue honrar sozinha, e os eventos ficam com a peça
+    // projetada. Uma moldura que reemitisse evento de peça seria um
+    // repasse — e um repasse se desatualiza.
     inputs: [
-      { name: 'mode', type: "'view' | 'edit' | 'create'", default: 'view', description: '`view` = só leitura; `edit` = campos editáveis de um registro existente; `create` = registro novo em branco.' },
-      { name: 'columns', type: "1 | 2", default: '2', description: 'Colunas do grid de campos dentro de cada seção. 2 no desktop; cai para 1 no mobile.' },
-      { name: 'dirty', type: 'boolean', default: 'false', description: 'Há mudanças não salvas. Liga o aviso ao tentar sair e habilita o Salvar.' },
-      { name: 'errors', type: 'string[]', default: '—', description: 'Erros de validação a resumir no topo (cada um com link para o campo). Vazio = sem resumo.' },
+      { name: 'title', type: 'string', default: '—', description: 'Nome do registro (o `<h1>`). É da MOLDURA porque é ele que dá nome à região (`aria-labelledby`).' },
+      { name: 'mode', type: "'view' | 'edit' | 'create'", default: 'view', description: '`view` = só leitura; `edit` = registro existente; `create` = em branco. Sai como `data-mode`; quem torna os campos editáveis são os próprios campos.' },
+      { name: 'columns', type: "1 | 2", default: '2', description: 'Colunas do grid de campos. A moldura CALCULA (conhece o columns e o breakpoint) e publica em `--nph-detail-grid`; a seção projetada GASTA o valor. Custom property herda para conteúdo projetado — regra de CSS não atravessa o encapsulamento. 2 no desktop, sempre 1 no mobile.' },
+      { name: 'dirty', type: 'boolean', default: 'false', description: 'Há mudanças não salvas. Sai como `data-dirty`. Avisar antes de sair é guarda de rota (CanDeactivate), decisão da APLICAÇÃO — a moldura só dá onde se apoiar.' },
+      // ⛔ REMOVIDO em 04/08/2026: `errors: string[]`. A ficha exige que o
+      // resumo tenha LINKS para os campos, e uma lista de strings não carrega
+      // as âncoras — um resumo sem links seria exatamente o meio-termo que o
+      // anti-padrão desta ficha proíbe. O resumo entra pronto pelo slot
+      // `errorSummary`.
     ],
-    outputs: [
-      { name: 'save', payload: '{ dados }', description: 'Emitido ao salvar (após validar).' },
-      { name: 'cancel', payload: 'void', description: 'Emitido ao cancelar (confirmar descarte se dirty).' },
-      { name: 'fieldChange', payload: '{ campo, valor }', description: 'Emitido ao alterar um campo.' },
-    ],
+    // ⛔ REMOVIDOS em 04/08/2026: `save`, `cancel` e `fieldChange`. Os botões
+    // e os campos são projetados; quem os tem já está ligado neles.
+    outputs: [],
     slots: [
       { name: 'breadcrumb', accepts: 'breadcrumb (trilha) no topo', optional: true },
-      { name: 'pageHeader', accepts: 'heading (nome do registro) + button Salvar (primary) e Cancelar (ghost)' },
+      { name: 'pageHeader', accepts: 'os buttons Salvar (primary) e Cancelar (ghost), já ligados a quem salva. O NOME do registro não vem por aqui — é da moldura' },
       { name: 'errorSummary', accepts: 'message com o resumo de erros (role="alert"), links para os campos', optional: true },
       { name: 'sections', accepts: 'fieldset por seção; dentro, os form-field (label + campo + helper/erro)' },
       { name: 'actionsBar', accepts: 'barra de ações fixa ao rolar (Salvar/Cancelar) em formulários longos', optional: true },
@@ -81,7 +90,10 @@ export const detailFormTemplateMeta: NephosComponentMeta = {
   },
 
   tokens: {
-    typography: 'title-sm (título) · body-lg (campos)',
+    // ✅ DECIDIDO (Indiane, 04/08/2026): título de PÁGINA é `title-lg`,
+    // conforme o `design.md`. O `title-sm` segue valendo para a legenda de
+    // cada seção, que é um nível abaixo. Ver a nota em `auth.template.meta.ts`.
+    typography: 'title-lg (título da página) · title-sm (legenda de seção) · body-lg (campos)',
     byState: {
       // O template não inventa cor: herda dos campos e das superfícies.
       secao: { background: 'surface/0', border: 'surface/200' },

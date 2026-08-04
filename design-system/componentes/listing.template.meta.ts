@@ -42,16 +42,25 @@ export const listingTemplateMeta: NephosComponentMeta = {
   },
 
   api: {
-    // Template: a "API" são os slots de composição + a config da página.
+    // ✅ DECIDIDO (Indiane, 04/08/2026): TEMPLATE É MOLDURA, não tela
+    // pronta. A moldura dá a ESTRUTURA — região com nome, um `<h1>` só,
+    // ordem de leitura, a grade — e as peças entram pelos SLOTS, já
+    // ligadas por quem as tem. Consequência: só sobrevivem os inputs que
+    // a moldura consegue honrar sozinha, e os eventos ficam com a peça
+    // projetada. Uma moldura que reemitisse evento de peça seria um
+    // repasse — e um repasse se desatualiza.
     inputs: [
-      { name: 'title', type: 'string', default: '—', description: 'Título da página (o `<h1>`). Nomeia o que está sendo listado (ex.: "Escolas").' },
-      { name: 'primaryAction', type: '{ label: string }', default: '—', description: 'Ação primária da página (ex.: "Nova escola") — vira o Button de ênfase no cabeçalho.', },
-      { name: 'view', type: "'table' | 'cards'", default: 'table', description: 'Como mostrar o resultado: tabela (data-table) para colunas comparáveis; cards (dataview) para itens visuais.' },
-      { name: 'loading', type: 'boolean', default: 'false', description: 'Carregando: skeleton no lugar das linhas/cards enquanto os dados chegam.' },
+      { name: 'title', type: 'string', default: '—', description: 'Título da página (o `<h1>`). É da MOLDURA, e não de um slot, porque é ele que dá nome à região (`aria-labelledby`) — a moldura não alcança o id de um conteúdo projetado.' },
+      { name: 'view', type: "'table' | 'cards'", default: 'table', description: 'Qual bloco está no slot de resultado. NÃO muda o arranjo: quem desenha tabela ou cards é o bloco projetado (data-table × dataview). Sai como `data-view` para CSS, QA e teste identificarem a variante sem adivinhar pelo conteúdo.' },
+      { name: 'loading', type: 'boolean', default: 'false', description: 'Marca a região do resultado com `aria-busy`. O esqueleto de carregamento é do BLOCO, que é quem sabe quantas linhas ou cards desenhar.' },
+      // ⛔ REMOVIDO em 04/08/2026: `primaryAction: { label: string }`. Um
+      // rótulo sem um output correspondente é um botão que não faz nada. A
+      // ação primária entra pelo slot `pageHeader`, já ligada por quem a
+      // dispara.
     ],
     outputs: [],
     slots: [
-      { name: 'pageHeader', accepts: 'heading (título) + button da ação primária ("Novo…")' },
+      { name: 'pageHeader', accepts: 'o button da ação primária ("Novo…"), já ligado. O TÍTULO não vem por aqui — é da moldura, senão a região fica sem nome' },
       { name: 'filters', accepts: 'o bloco search-filters (busca + filtros + chips ativos)', optional: true },
       { name: 'results', accepts: 'o bloco data-table (padrão) ou dataview (view=cards)' },
       { name: 'empty', accepts: 'empty-state quando não há resultados', optional: true },
@@ -74,7 +83,9 @@ export const listingTemplateMeta: NephosComponentMeta = {
   },
 
   tokens: {
-    typography: 'title-sm (título da página)',
+    // ✅ DECIDIDO (Indiane, 04/08/2026): título de PÁGINA é `title-lg`,
+    // conforme o `design.md`. Ver a nota em `auth.template.meta.ts`.
+    typography: 'title-lg (título da página)',
     byState: {
       // O template não inventa cor: herda dos blocos que encaixa.
       cabecalhoPagina: { titulo: 'surface/text' },

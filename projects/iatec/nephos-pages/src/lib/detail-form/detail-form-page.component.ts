@@ -42,24 +42,25 @@ let sequencia = 0;
  * A regra fica num lugar só; se cada seção decidisse a sua, elas
  * desalinhariam entre si.
  *
- * ⚠️ Divergências da ficha, registradas e não resolvidas por conta
- * própria (ver o handoff):
+ * ✅ As perguntas que este template abriu foram FECHADAS pela Indiane em
+ * 04/08/2026, e a ficha foi corrigida para descrever o que a peça
+ * realmente é:
  *
- * - **os outputs `save` / `cancel` / `fieldChange` não nascem aqui.** Os
- *   botões e os campos são projetados; quem os tem já está ligado neles.
- *   Uma moldura que reemitisse esses eventos seria só um repasse — e um
- *   repasse que se desatualiza.
- * - **`errors: string[]` não virou input.** A ficha exige que o resumo
- *   tenha LINKS para os campos, e uma lista de strings não carrega os
- *   âncoras. Um resumo sem links seria exatamente o meio-termo que o
- *   anti-padrão da própria ficha proíbe. O resumo entra pronto pelo slot
+ * - **template é MOLDURA, não tela pronta.** Por isso os outputs `save` /
+ *   `cancel` / `fieldChange` saíram da ficha: os botões e os campos são
+ *   projetados, e quem os tem já está ligado neles. Uma moldura que
+ *   reemitisse esses eventos seria só um repasse — e um repasse que se
+ *   desatualiza.
+ * - **`errors: string[]` saiu da ficha.** Ela exige que o resumo tenha
+ *   LINKS para os campos, e uma lista de strings não carrega as âncoras.
+ *   Um resumo sem links seria exatamente o meio-termo que o anti-padrão
+ *   da própria ficha proíbe. O resumo entra pronto pelo slot
  *   `nphErrorSummary`.
  * - **`dirty` não bloqueia a saída.** Avisar antes de sair é guarda de
  *   rota (`CanDeactivate`), decisão da aplicação. Aqui ele só sai como
  *   `data-dirty`, para quem monta a guarda ter onde se apoiar.
- * - **tamanho do título**: a ficha diz `title-sm`; o `design.md` e o
- *   átomo `heading` dizem `title-lg` para título de página. Vale o
- *   `design.md` — a ficha precisa de decisão.
+ * - **título de página é `title-lg`**, como o `design.md` sempre disse; o
+ *   `title-sm` segue valendo para a legenda de cada seção.
  */
 @Component({
     selector: 'nph-pages-detail-form',

@@ -46,18 +46,24 @@ export const dashboardTemplateMeta: NephosComponentMeta = {
   },
 
   api: {
-    // Template: a "API" são os slots de composição + a config do painel.
+    // ✅ DECIDIDO (Indiane, 04/08/2026): TEMPLATE É MOLDURA, não tela
+    // pronta. A moldura dá a ESTRUTURA — região com nome, um `<h1>` só,
+    // ordem de leitura, a grade — e as peças entram pelos SLOTS, já
+    // ligadas por quem as tem. Consequência: só sobrevivem os inputs que
+    // a moldura consegue honrar sozinha, e os eventos ficam com a peça
+    // projetada. Uma moldura que reemitisse evento de peça seria um
+    // repasse — e um repasse se desatualiza.
     inputs: [
-      { name: 'period', type: "'dia' | 'semana' | 'mês' | 'ano'", default: 'mês', description: 'Janela de tempo dos indicadores. Um filtro no cabeçalho recalcula todos os widgets.' },
-      { name: 'columns', type: "2 | 3 | 4", default: '4', description: 'Colunas da grade de KPIs no desktop (cai para 1–2 no mobile). Gráficos ocupam mais colunas.' },
-      { name: 'loading', type: 'boolean', default: 'false', description: 'Carregando: skeleton no lugar de cada widget enquanto os dados chegam.' },
+      { name: 'title', type: 'string', default: '—', description: 'Título do painel (o `<h1>`). É da MOLDURA porque é ele que dá nome à região (`aria-labelledby`).' },
+      { name: 'period', type: "'dia' | 'semana' | 'mês' | 'ano'", default: 'mês', description: 'Janela de tempo em vigor. Quem troca é o filtro projetado; a moldura REAGE — põe o período em texto num `role="status"`, para a atualização ser anunciada a quem ouve a tela. Sai também como `data-period`.' },
+      { name: 'columns', type: "2 | 3 | 4", default: '4', description: 'Colunas da grade de KPIs no desktop; sempre 1 no mobile. É da moldura: cada cartão decidindo a sua daria uma parede desalinhada.' },
+      { name: 'loading', type: 'boolean', default: 'false', description: 'Marca a grade com `aria-busy`. O esqueleto é de cada widget, que é quem sabe a própria forma.' },
     ],
-    outputs: [
-      { name: 'periodChange', payload: '{ period }', description: 'Emitido ao trocar a janela de tempo.' },
-      { name: 'widgetDrill', payload: '{ widget }', description: 'Emitido ao aprofundar num widget (ir para a listagem/detalhe correspondente).' },
-    ],
+    // ⛔ REMOVIDOS em 04/08/2026: `periodChange` e `widgetDrill`. O filtro de
+    // período e os widgets são projetados; quem os tem já está ligado neles.
+    outputs: [],
     slots: [
-      { name: 'pageHeader', accepts: 'heading (título) + filtro de período (select/segmented)' },
+      { name: 'pageHeader', accepts: 'o filtro de período (select/segmented), já ligado a quem recalcula. O TÍTULO não vem por aqui — é da moldura' },
       { name: 'kpiGrid', accepts: 'cartões de KPI: card + número grande + tag de variação (sinal + texto)' },
       { name: 'charts', accepts: 'gráficos (chart) dentro de card, cada um com título e alternativa textual' },
       { name: 'breakdown', accepts: 'metergroup (composição por categoria) com legenda rotulada', optional: true },
@@ -80,7 +86,10 @@ export const dashboardTemplateMeta: NephosComponentMeta = {
   },
 
   tokens: {
-    typography: 'title-lg (número do KPI) · title-sm (título) · caption (rótulo)',
+    // ✅ DECIDIDO (Indiane, 04/08/2026): título de PÁGINA é `title-lg`,
+    // conforme o `design.md`. O `title-sm` segue valendo para o título de
+    // cada widget, que é um nível abaixo. Ver a nota em `auth.template.meta.ts`.
+    typography: 'title-lg (título da página e número do KPI) · title-sm (título de widget) · caption (rótulo)',
     byState: {
       // O template não inventa cor: herda dos cartões, gráficos e das superfícies.
       widget: { background: 'surface/0', border: 'surface/200' },

@@ -34,20 +34,21 @@ let sequencia = 0;
  * que só a moldura pode fazer é avisar que aquela região está em
  * atualização.
  *
- * ⚠️ Divergências da ficha, registradas e não resolvidas por conta
- * própria (ver o handoff):
+ * ✅ As três perguntas que este template abriu foram FECHADAS pela
+ * Indiane em 04/08/2026, e a ficha foi corrigida para descrever o que a
+ * peça realmente é:
  *
- * - **`primaryAction: { label }` não virou input.** Um rótulo sem um
+ * - **template é MOLDURA, não tela pronta.** As peças entram pelos
+ *   slots, já ligadas por quem as tem.
+ * - **`primaryAction: { label }` saiu da ficha.** Um rótulo sem um
  *   output correspondente seria um botão que não faz nada. A ação
- *   primária entra pelo slot `nphPageActions`, já ligada por quem a
- *   dispara.
+ *   primária entra pelo slot `nphPageActions`.
  * - **`view` não muda o arranjo**, só sai como `data-view`: quem desenha
  *   tabela ou cards é o bloco projetado (`data-table` × `dataview`), e a
  *   moldura não deve adivinhar qual chegou.
- * - **tamanho do título**: a ficha diz `title-sm`; o `design.md` e o
- *   átomo `heading` dizem `title-lg` para título de página. Aqui vale o
- *   `design.md`, que é a especificação normativa — a ficha precisa de
- *   decisão.
+ * - **título de página é `title-lg`**, como o `design.md` (a
+ *   especificação normativa) sempre disse. As 5 fichas diziam `title-sm`
+ *   e foram corrigidas.
  */
 @Component({
     selector: 'nph-pages-listing',

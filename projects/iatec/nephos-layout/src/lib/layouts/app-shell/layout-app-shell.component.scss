@@ -61,10 +61,10 @@
 }
 
 /* ── A moldura ──────────────────────────────────────────────────── */
-/* `fundoApp: surface/50` na ficha; aqui vai o papel de fundo de página
-   que esta lib já mantém (`--surface-ground`), pela mesma razão do
-   template `auth`: um passo cru da rampa slate não inverte no modo
-   escuro. Divergência registrada, não corrigida por conta própria. */
+/* ✅ DECIDIDO (Indiane, 04/08/2026): o fundo do app é o papel de fundo
+   de página que esta lib já mantém (`--surface-ground`), pela mesma
+   razão do template `auth` — um passo cru da rampa slate não inverte no
+   modo escuro. A ficha foi corrigida para dizer `surface/ground`. */
 .nph-shell {
     display: flex;
     flex-direction: column;

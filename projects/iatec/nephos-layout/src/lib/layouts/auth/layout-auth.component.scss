@@ -25,15 +25,16 @@
 }
 
 /* ── A moldura ──────────────────────────────────────────────────── */
-/* A ficha declara `fundo: surface/50`. Aqui vai o papel de FUNDO DE
+/* ✅ DECIDIDO (Indiane, 04/08/2026): o fundo é o papel de FUNDO DE
    PÁGINA que esta lib já mantém (`--surface-ground`: `surface/100` no
-   claro, `surface/950` no escuro), e a razão é a mesma que moveu a
-   ilustração do `empty-state`: um passo cru da rampa slate é o MESMO tom
-   nos dois modos, então `surface/50` deixaria a tela de acesso branca no
-   modo escuro. `--surface-ground` acompanha o modo e é exatamente o
-   fundo que o `body` do produto usa — a porta de entrada nasce no mesmo
-   fundo das telas de dentro. Divergência registrada para decisão de
-   token, não corrigida por conta própria. */
+   claro, `surface/950` no escuro), e a ficha foi corrigida para dizer
+   `surface/ground`.
+
+   O motivo é o mesmo que moveu a ilustração do `empty-state`: um passo
+   cru da rampa slate é o MESMO tom nos dois modos, então `surface/50`
+   deixaria a tela de acesso branca no modo escuro. `--surface-ground`
+   acompanha o modo e é exatamente o fundo que o `body` do produto usa —
+   a porta de entrada nasce no mesmo fundo das telas de dentro. */
 .nph-auth {
     display: flex;
     min-height: 100dvh;
@@ -51,14 +52,16 @@
 }
 
 /* ── O cartão ───────────────────────────────────────────────────── */
-/* ⚠️ VALOR SEM FONTE NO `design.md` — PRECISA DE CONFIRMAÇÃO (Indiane).
-   Mesmo caso da largura do diálogo (28rem): o `design.md` não tem token
-   de largura de cartão. A largura NÃO foi escolhida no olho — é a que o
-   bloco `login-form` já foi provado, `24rem` no
-   `stories/login-form.stories.ts`, mais o padding do próprio cartão.
-   Escrita como conta, e não como um número novo, justamente para o dia
-   em que o padding mudar: a área do formulário continua sendo as 24rem
-   em que ele foi medido. */
+/* ✅ VALOR CONFIRMADO (Indiane, 04/08/2026), mesmo caso da largura do
+   diálogo (28rem): o `design.md` não tem token de largura de cartão.
+
+   A largura NÃO foi escolhida no olho — é a que o bloco `login-form` já
+   foi provado, `24rem` no `stories/login-form.stories.ts`, mais o
+   padding do próprio cartão. Fica escrita como CONTA, e não como um
+   número novo, justamente para o dia em que o padding mudar: a área do
+   formulário continua sendo as 24rem em que ele foi medido.
+
+   Medido no navegador: 371px com o root de 14px. */
 .nph-auth__cartao {
     display: flex;
     flex-direction: column;

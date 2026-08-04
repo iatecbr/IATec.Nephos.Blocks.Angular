@@ -45,7 +45,15 @@ export const appShellTemplateMeta: NephosComponentMeta = {
     inputs: [
       { name: 'showSidebar', type: 'boolean', default: 'true', description: 'Mostra a navegação lateral. Desligar em telas foco-no-conteúdo (ex.: leitura, wizard em tela cheia).' },
       { name: 'showBreadcrumb', type: 'boolean', default: 'true', description: 'Mostra a trilha (breadcrumb) no topo do conteúdo. Desligar em telas rasas (1 nível).' },
-      { name: 'sidebarCollapsed', type: 'boolean', default: 'false', description: 'Inicia a sidebar recolhida (trilha de ícones). Delega ao bloco sidebar.' },
+      // ✅ DECIDIDO (Indiane, 04/08/2026): TEMPLATE É MOLDURA, não tela
+      // pronta. A moldura dá a ESTRUTURA — região com nome, um `<h1>` só,
+      // ordem de leitura, a grade — e as peças entram pelos SLOTS, já
+      // ligadas por quem as tem. Consequência: só sobrevivem os inputs que
+      // a moldura consegue honrar sozinha, e os eventos ficam com a peça
+      // projetada. Uma moldura que reemitisse evento de peça seria um
+      // repasse — e um repasse se desatualiza.
+      { name: 'sidebarCollapsed', type: 'boolean', default: 'false', description: 'É LARGURA, não estado do bloco: reserva a coluna estreita (trilha de ícones) em vez da larga, porque a moldura não alcança um bloco projetado. Ligar ao MESMO sinal que controla o `collapsed` do bloco sidebar, para os dois concordarem.' },
+      { name: 'skipLinkLabel', type: 'string', default: 'Pular para o conteúdo', description: 'Texto do skip link — traduzível pela aplicação.' },
     ],
     outputs: [],
     slots: [
@@ -75,10 +83,18 @@ export const appShellTemplateMeta: NephosComponentMeta = {
     typography: 'body-lg',
     byState: {
       // A moldura não inventa cor: herda dos blocos e das superfícies.
-      fundoApp: { background: 'surface/50' },
+      // ✅ DECIDIDO (Indiane, 04/08/2026): o fundo de tela é o papel de
+      // FUNDO DE PÁGINA (`surface/ground`), não o passo cru `surface/50`.
+      // Medido: a rampa slate NÃO inverte entre os modos, então
+      // `surface/50` deixaria a tela quase branca no modo escuro. O papel
+      // acompanha o modo — `surface/100` no claro, `surface/950` no
+      // escuro — e é o mesmo fundo que o `<body>` do produto usa, então a
+      // tela nasce no fundo das telas de dentro. Mesmo raciocínio que
+      // corrigiu a ilustração do `empty-state` em 03/08/2026.
+      fundoApp: { background: 'surface/ground' },
       areaConteudo: { background: 'surface/0' },
     },
-    note: 'A grade (áreas de header/sidebar/conteúdo), larguras e espaçamentos herdam dos tokens do PrimeNG e dos blocos. A moldura só posiciona; a cor vem das superfícies (surface) e a ênfase, da `primary` da vertical ativa. Nenhum hex, nenhum nome de marca.',
+    note: 'Fundo do app = `surface/ground` (surface/100 no claro, surface/950 no escuro). A grade (áreas de header/sidebar/conteúdo) e os espaçamentos herdam dos tokens do PrimeNG e dos blocos; a LARGURA da lateral é da moldura (256px expandida, 90px recolhida — os valores que o layout do repositório já usa em produção), porque o bloco `sidebar` não declara largura de propósito. A moldura só posiciona; a cor vem das superfícies (surface) e a ênfase, da `primary` da vertical ativa. Nenhum hex, nenhum nome de marca.',
   },
 
   antiPatterns: [

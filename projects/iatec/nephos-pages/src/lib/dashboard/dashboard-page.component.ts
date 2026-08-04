@@ -32,17 +32,18 @@ let sequencia = 0;
  * título de widget — isso é do cartão projetado. O que ela garante é que
  * existe exatamente um título de página acima de todos.
  *
- * ⚠️ Divergências da ficha, registradas e não resolvidas por conta
- * própria (ver o handoff):
+ * ✅ As perguntas que este template abriu foram FECHADAS pela Indiane em
+ * 04/08/2026, e a ficha foi corrigida para descrever o que a peça
+ * realmente é:
  *
- * - **os outputs `periodChange` / `widgetDrill` não nascem aqui.** O
- *   filtro de período e os widgets são projetados; quem os tem já está
- *   ligado neles. A moldura só REAGE ao período que recebe.
+ * - **template é MOLDURA, não tela pronta.** Por isso os outputs
+ *   `periodChange` / `widgetDrill` saíram da ficha: o filtro de período e
+ *   os widgets são projetados, e quem os tem já está ligado neles. A
+ *   moldura só REAGE ao período que recebe — e o anúncio depende disso.
  * - **`loading` não desenha esqueleto**, marca `aria-busy` na grade. O
  *   esqueleto é de cada widget, que é quem sabe a própria forma.
- * - **tamanho do título**: a ficha diz `title-sm`; o `design.md` e o
- *   átomo `heading` dizem `title-lg` para título de página. Vale o
- *   `design.md` — a ficha precisa de decisão.
+ * - **título de página é `title-lg`**, como o `design.md` sempre disse; o
+ *   `title-sm` segue valendo para o título de cada widget.
  */
 @Component({
     selector: 'nph-pages-dashboard',

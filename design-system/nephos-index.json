@@ -717,7 +717,13 @@
             "name": "sidebarCollapsed",
             "type": "boolean",
             "default": "false",
-            "description": "Inicia a sidebar recolhida (trilha de ícones). Delega ao bloco sidebar."
+            "description": "É LARGURA, não estado do bloco: reserva a coluna estreita (trilha de ícones) em vez da larga, porque a moldura não alcança um bloco projetado. Ligar ao MESMO sinal que controla o `collapsed` do bloco sidebar, para os dois concordarem."
+          },
+          {
+            "name": "skipLinkLabel",
+            "type": "string",
+            "default": "Pular para o conteúdo",
+            "description": "Texto do skip link — traduzível pela aplicação."
           }
         ],
         "outputs": [],
@@ -793,13 +799,13 @@
         "typography": "body-lg",
         "byState": {
           "fundoApp": {
-            "background": "surface/50"
+            "background": "surface/ground"
           },
           "areaConteudo": {
             "background": "surface/0"
           }
         },
-        "note": "A grade (áreas de header/sidebar/conteúdo), larguras e espaçamentos herdam dos tokens do PrimeNG e dos blocos. A moldura só posiciona; a cor vem das superfícies (surface) e a ênfase, da `primary` da vertical ativa. Nenhum hex, nenhum nome de marca."
+        "note": "Fundo do app = `surface/ground` (surface/100 no claro, surface/950 no escuro). A grade (áreas de header/sidebar/conteúdo) e os espaçamentos herdam dos tokens do PrimeNG e dos blocos; a LARGURA da lateral é da moldura (256px expandida, 90px recolhida — os valores que o layout do repositório já usa em produção), porque o bloco `sidebar` não declara largura de propósito. A moldura só posiciona; a cor vem das superfícies (surface) e a ênfase, da `primary` da vertical ativa. Nenhum hex, nenhum nome de marca."
       },
       "antiPatterns": [
         {
@@ -911,7 +917,7 @@
             "name": "variant",
             "type": "'login' | 'signup' | 'reset'",
             "default": "login",
-            "description": "Qual fluxo hospedar: entrar, criar conta ou recuperar senha. Muda o bloco no slot do formulário."
+            "description": "Qual fluxo está hospedado. A moldura é IDÊNTICA nos três — o que muda é o bloco no slot do formulário. Sai como `data-variant` para CSS, QA e teste identificarem a tela sem adivinhar pelo conteúdo projetado."
           },
           {
             "name": "layout",
@@ -991,10 +997,10 @@
         ]
       },
       "tokens": {
-        "typography": "title-sm (título da tela)",
+        "typography": "title-lg (título da tela, vindo do bloco do formulário)",
         "byState": {
           "fundo": {
-            "background": "surface/50"
+            "background": "surface/ground"
           },
           "cartao": {
             "background": "surface/0",
@@ -1005,7 +1011,7 @@
             "text": "primary/contrast"
           }
         },
-        "note": "Fundo da tela = surface; cartão do formulário = surface/0 com raio de card (herdado). No split, o painel de marca usa a `primary` da vertical ativa. Nenhum hex, nenhum nome de marca — a identidade vem do tema."
+        "note": "Fundo da tela = `surface/ground` (surface/100 no claro, surface/950 no escuro); cartão do formulário = surface/0 com raio de card (herdado). A largura do cartão é a do bloco `login-form` provado (24rem) mais o espaço interno do cartão — confirmado pela Indiane em 04/08/2026. No split, o painel de marca usa a `primary` da vertical ativa. Nenhum hex, nenhum nome de marca — a identidade vem do tema."
       },
       "antiPatterns": [
         {
@@ -4902,40 +4908,35 @@
       "api": {
         "inputs": [
           {
+            "name": "title",
+            "type": "string",
+            "default": "—",
+            "description": "Título do painel (o `<h1>`). É da MOLDURA porque é ele que dá nome à região (`aria-labelledby`)."
+          },
+          {
             "name": "period",
             "type": "'dia' | 'semana' | 'mês' | 'ano'",
             "default": "mês",
-            "description": "Janela de tempo dos indicadores. Um filtro no cabeçalho recalcula todos os widgets."
+            "description": "Janela de tempo em vigor. Quem troca é o filtro projetado; a moldura REAGE — põe o período em texto num `role=\"status\"`, para a atualização ser anunciada a quem ouve a tela. Sai também como `data-period`."
           },
           {
             "name": "columns",
             "type": "2 | 3 | 4",
             "default": "4",
-            "description": "Colunas da grade de KPIs no desktop (cai para 1–2 no mobile). Gráficos ocupam mais colunas."
+            "description": "Colunas da grade de KPIs no desktop; sempre 1 no mobile. É da moldura: cada cartão decidindo a sua daria uma parede desalinhada."
           },
           {
             "name": "loading",
             "type": "boolean",
             "default": "false",
-            "description": "Carregando: skeleton no lugar de cada widget enquanto os dados chegam."
+            "description": "Marca a grade com `aria-busy`. O esqueleto é de cada widget, que é quem sabe a própria forma."
           }
         ],
-        "outputs": [
-          {
-            "name": "periodChange",
-            "payload": "{ period }",
-            "description": "Emitido ao trocar a janela de tempo."
-          },
-          {
-            "name": "widgetDrill",
-            "payload": "{ widget }",
-            "description": "Emitido ao aprofundar num widget (ir para a listagem/detalhe correspondente)."
-          }
-        ],
+        "outputs": [],
         "slots": [
           {
             "name": "pageHeader",
-            "accepts": "heading (título) + filtro de período (select/segmented)"
+            "accepts": "o filtro de período (select/segmented), já ligado a quem recalcula. O TÍTULO não vem por aqui — é da moldura"
           },
           {
             "name": "kpiGrid",
@@ -5006,7 +5007,7 @@
         ]
       },
       "tokens": {
-        "typography": "title-lg (número do KPI) · title-sm (título) · caption (rótulo)",
+        "typography": "title-lg (título da página e número do KPI) · title-sm (título de widget) · caption (rótulo)",
         "byState": {
           "widget": {
             "background": "surface/0",
@@ -6526,47 +6527,31 @@
       "api": {
         "inputs": [
           {
+            "name": "title",
+            "type": "string",
+            "default": "—",
+            "description": "Nome do registro (o `<h1>`). É da MOLDURA porque é ele que dá nome à região (`aria-labelledby`)."
+          },
+          {
             "name": "mode",
             "type": "'view' | 'edit' | 'create'",
             "default": "view",
-            "description": "`view` = só leitura; `edit` = campos editáveis de um registro existente; `create` = registro novo em branco."
+            "description": "`view` = só leitura; `edit` = registro existente; `create` = em branco. Sai como `data-mode`; quem torna os campos editáveis são os próprios campos."
           },
           {
             "name": "columns",
             "type": "1 | 2",
             "default": "2",
-            "description": "Colunas do grid de campos dentro de cada seção. 2 no desktop; cai para 1 no mobile."
+            "description": "Colunas do grid de campos. A moldura CALCULA (conhece o columns e o breakpoint) e publica em `--nph-detail-grid`; a seção projetada GASTA o valor. Custom property herda para conteúdo projetado — regra de CSS não atravessa o encapsulamento. 2 no desktop, sempre 1 no mobile."
           },
           {
             "name": "dirty",
             "type": "boolean",
             "default": "false",
-            "description": "Há mudanças não salvas. Liga o aviso ao tentar sair e habilita o Salvar."
-          },
-          {
-            "name": "errors",
-            "type": "string[]",
-            "default": "—",
-            "description": "Erros de validação a resumir no topo (cada um com link para o campo). Vazio = sem resumo."
+            "description": "Há mudanças não salvas. Sai como `data-dirty`. Avisar antes de sair é guarda de rota (CanDeactivate), decisão da APLICAÇÃO — a moldura só dá onde se apoiar."
           }
         ],
-        "outputs": [
-          {
-            "name": "save",
-            "payload": "{ dados }",
-            "description": "Emitido ao salvar (após validar)."
-          },
-          {
-            "name": "cancel",
-            "payload": "void",
-            "description": "Emitido ao cancelar (confirmar descarte se dirty)."
-          },
-          {
-            "name": "fieldChange",
-            "payload": "{ campo, valor }",
-            "description": "Emitido ao alterar um campo."
-          }
-        ],
+        "outputs": [],
         "slots": [
           {
             "name": "breadcrumb",
@@ -6575,7 +6560,7 @@
           },
           {
             "name": "pageHeader",
-            "accepts": "heading (nome do registro) + button Salvar (primary) e Cancelar (ghost)"
+            "accepts": "os buttons Salvar (primary) e Cancelar (ghost), já ligados a quem salva. O NOME do registro não vem por aqui — é da moldura"
           },
           {
             "name": "errorSummary",
@@ -6652,7 +6637,7 @@
         ]
       },
       "tokens": {
-        "typography": "title-sm (título) · body-lg (campos)",
+        "typography": "title-lg (título da página) · title-sm (legenda de seção) · body-lg (campos)",
         "byState": {
           "secao": {
             "background": "surface/0",
@@ -13110,32 +13095,26 @@
             "name": "title",
             "type": "string",
             "default": "—",
-            "description": "Título da página (o `<h1>`). Nomeia o que está sendo listado (ex.: \"Escolas\")."
-          },
-          {
-            "name": "primaryAction",
-            "type": "{ label: string }",
-            "default": "—",
-            "description": "Ação primária da página (ex.: \"Nova escola\") — vira o Button de ênfase no cabeçalho."
+            "description": "Título da página (o `<h1>`). É da MOLDURA, e não de um slot, porque é ele que dá nome à região (`aria-labelledby`) — a moldura não alcança o id de um conteúdo projetado."
           },
           {
             "name": "view",
             "type": "'table' | 'cards'",
             "default": "table",
-            "description": "Como mostrar o resultado: tabela (data-table) para colunas comparáveis; cards (dataview) para itens visuais."
+            "description": "Qual bloco está no slot de resultado. NÃO muda o arranjo: quem desenha tabela ou cards é o bloco projetado (data-table × dataview). Sai como `data-view` para CSS, QA e teste identificarem a variante sem adivinhar pelo conteúdo."
           },
           {
             "name": "loading",
             "type": "boolean",
             "default": "false",
-            "description": "Carregando: skeleton no lugar das linhas/cards enquanto os dados chegam."
+            "description": "Marca a região do resultado com `aria-busy`. O esqueleto de carregamento é do BLOCO, que é quem sabe quantas linhas ou cards desenhar."
           }
         ],
         "outputs": [],
         "slots": [
           {
             "name": "pageHeader",
-            "accepts": "heading (título) + button da ação primária (\"Novo…\")"
+            "accepts": "o button da ação primária (\"Novo…\"), já ligado. O TÍTULO não vem por aqui — é da moldura, senão a região fica sem nome"
           },
           {
             "name": "filters",
@@ -13207,7 +13186,7 @@
         ]
       },
       "tokens": {
-        "typography": "title-sm (título da página)",
+        "typography": "title-lg (título da página)",
         "byState": {
           "cabecalhoPagina": {
             "titulo": "surface/text"
