@@ -1,0 +1,141 @@
+/* ─────────────────────────────────────────────────────────────
+ * Template `app-shell` — a moldura das telas de dentro
+ * ─────────────────────────────────────────────────────────────
+ * Só ARRANJO: a grade das três regiões e a largura da coluna lateral.
+ * Nenhuma cor nova, nenhum raio, nenhum tamanho de fonte — vem tudo do
+ * preset (`--p-*`), da camada de token do `@iatec/nephos-ui` (`--nph-*`)
+ * ou dos papéis que esta lib já mantém (`--surface-ground`).
+ * ───────────────────────────────────────────────────────────── */
+
+@use '../../../../lib/layout/sass_variables' as *;
+
+:host {
+    display: block;
+
+    /* Rede de segurança para quem consome esta lib sem o pacote de
+       primitivos — mesmo padrão do `_main.scss` com a família
+       tipográfica. Com o `nephos-ui.scss` carregado quem manda é o
+       token. Valores copiados de lá, não inventados. */
+    --nph-shell-space-sm: var(--nph-space-sm, 0.5rem);
+    --nph-shell-space-md: var(--nph-space-md, 0.75rem);
+    --nph-shell-space-lg: var(--nph-space-lg, 1.25rem);
+
+    /* A largura da lateral é decisão da MOLDURA (o bloco `sidebar` não
+       declara largura de propósito: espaço é do contêiner). Os dois
+       valores NÃO são novos — são os que o layout deste repositório já
+       usa em produção, em `lib/layout/_responsive.scss`: 256px a
+       expandida (`.layout-static .layout-sidebar`) e 90px a recolhida
+       (mixin `collapsed-sidebar`). Em px, como lá: são as duas medidas
+       que o produto já entrega. */
+    --nph-shell-lateral-largura: 256px;
+    --nph-shell-lateral-largura-recolhida: 90px;
+}
+
+/* ── Pular para o conteúdo ──────────────────────────────────────── */
+/* Presente para quem usa teclado, fora do caminho de quem não usa: sai
+   da tela por transform (nunca por `display:none`, que o tiraria da
+   ordem de foco e o tornaria inútil). */
+.nph-shell__pular {
+    position: fixed;
+    top: var(--nph-shell-space-md);
+    left: var(--nph-shell-space-md);
+    z-index: 1;
+    padding: var(--nph-shell-space-sm) var(--nph-shell-space-md);
+    border-radius: var(--p-content-border-radius);
+    background: var(--p-content-background);
+    color: var(--p-primary-color);
+    transform: translateY(-200%);
+    transition: transform var(--p-transition-duration);
+}
+
+.nph-shell__pular:focus {
+    transform: translateY(0);
+    outline: var(--p-focus-ring-width) var(--p-focus-ring-style) var(--p-focus-ring-color);
+    outline-offset: var(--p-focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nph-shell__pular {
+        transition: none;
+    }
+}
+
+/* ── A moldura ──────────────────────────────────────────────────── */
+/* `fundoApp: surface/50` na ficha; aqui vai o papel de fundo de página
+   que esta lib já mantém (`--surface-ground`), pela mesma razão do
+   template `auth`: um passo cru da rampa slate não inverte no modo
+   escuro. Divergência registrada, não corrigida por conta própria. */
+.nph-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background: var(--surface-ground);
+}
+
+/* Abaixo do breakpoint a lateral é uma gaveta (o bloco resolve isso
+   sozinho): o `<div>` fica com altura zero e não reserva coluna
+   nenhuma. */
+.nph-shell__lateral {
+    min-width: 0;
+}
+
+/* `areaConteudo: surface/0` — a superfície de conteúdo do preset, que
+   acompanha o modo. */
+.nph-shell__conteudo {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--nph-shell-space-lg);
+    min-width: 0;
+    padding: var(--nph-shell-space-lg);
+    background: var(--p-content-background);
+}
+
+/* O `<main>` recebe foco pelo skip link, mas não é um controle: o anel
+   marcaria uma região inteira. O destino já é evidente — a página
+   rolou até ele. */
+.nph-shell__conteudo:focus {
+    outline: none;
+}
+
+/* Slot opcional: sem nada projetado não ocupa o `gap` do `<main>`. */
+.nph-shell__cabecalho-pagina {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nph-shell-space-md);
+}
+
+.nph-shell__cabecalho-pagina:empty {
+    display: none;
+}
+
+/* ── Desktop: a grade de três regiões ───────────────────────────── */
+@media screen and (min-width: $breakpoint) {
+    .nph-shell {
+        display: grid;
+        grid-template-areas:
+            'topo topo'
+            'lateral conteudo';
+        grid-template-columns: var(--nph-shell-lateral-largura) minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .nph-shell__topo { grid-area: topo; }
+    .nph-shell__lateral { grid-area: lateral; }
+    .nph-shell__conteudo { grid-area: conteudo; }
+
+    .nph-shell--recolhida {
+        grid-template-columns: var(--nph-shell-lateral-largura-recolhida) minmax(0, 1fr);
+    }
+
+    /* Sem lateral a grade volta a ter uma coluna só — o conteúdo ocupa
+       a largura inteira em vez de deixar uma faixa vazia. */
+    .nph-shell--sem-lateral {
+        grid-template-areas:
+            'topo'
+            'conteudo';
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

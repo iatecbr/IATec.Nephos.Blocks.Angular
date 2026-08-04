@@ -1,0 +1,48 @@
+<!-- A projeção do painel sai do `@if` e vem para um `<ng-template>` por
+     obrigação do Angular: dois `<ng-content>` do mesmo seletor em ramos
+     diferentes não funcionam — só o primeiro recebe o conteúdo. Uma
+     projeção só, instanciada onde precisa. -->
+<ng-template #painelDeMarca>
+    <ng-content select="[nphAside]"></ng-content>
+</ng-template>
+
+<main class="nph-auth"
+      [class.nph-auth--split]="ehSplit()"
+      [attr.data-variant]="variant()">
+
+    <!-- Decorativo do começo ao fim: `aria-hidden` na região e `alt`
+         vazio na imagem. O que estivesse só aqui sumiria no mobile. -->
+    @if (ehSplit()) {
+        <aside class="nph-auth__painel" aria-hidden="true">
+            @if (imagemDoPainel(); as imagem) {
+                <img class="nph-auth__painel-imagem" [src]="imagem" alt="" />
+            }
+
+            <!-- `.nph-body-xl` é a classe da camada de token do
+                 `nephos-ui` — a forma sancionada de gastar a escala
+                 tipográfica sem escrever px. -->
+            @if (textoDoPainel(); as texto) {
+                <p class="nph-auth__painel-texto nph-body-xl">{{texto}}</p>
+            }
+
+            <ng-container *ngTemplateOutlet="painelDeMarca"></ng-container>
+        </aside>
+    }
+
+    <div class="nph-auth__conteudo">
+        <div class="nph-auth__cartao">
+            <!-- Slot `brand`: o logo da vertical ativa. A moldura não sabe qual é. -->
+            <ng-content select="[nphBrand]"></ng-content>
+
+            <!-- Slot `form`: o bloco do fluxo (login-form, cadastro,
+                 recuperação). É ele que traz o único `<h1>` da tela. -->
+            <ng-content></ng-content>
+        </div>
+
+        <!-- `<footer>` descendente de `<main>` NÃO é o `contentinfo` da
+             página, então não briga com o rodapé do app. Vazio, some. -->
+        <footer class="nph-auth__rodape">
+            <ng-content select="[nphFooter]"></ng-content>
+        </footer>
+    </div>
+</main>

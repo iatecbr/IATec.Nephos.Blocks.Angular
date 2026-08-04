@@ -1,0 +1,50 @@
+<!-- Slots que vivem dentro de um `@if` saem para `<ng-template>`: é a
+     única forma de garantir UMA projeção só por seletor. -->
+<ng-template #lateral>
+    <ng-content select="[nphSidebar]"></ng-content>
+</ng-template>
+
+<ng-template #trilha>
+    <ng-content select="[nphBreadcrumb]"></ng-content>
+</ng-template>
+
+<!-- Primeiro elemento focável da página, sempre. Invisível até receber o
+     foco — presente para quem usa teclado, fora do caminho de quem não usa. -->
+<a class="nph-shell__pular" [href]="'#' + idConteudo">{{skipLinkLabel()}}</a>
+
+<div class="nph-shell"
+     [class.nph-shell--sem-lateral]="!showSidebar()"
+     [class.nph-shell--recolhida]="sidebarCollapsed()">
+
+    <!-- Slot `header`: o bloco header, que já traz o `role="banner"` e o
+         `<nav aria-label="Navegação principal">`. -->
+    <div class="nph-shell__topo">
+        <ng-content select="[nphHeader]"></ng-content>
+    </div>
+
+    <!-- Slot `sidebar`: o bloco sidebar, que já traz o
+         `<nav aria-label="Seções">` — rótulo DIFERENTE do header. -->
+    @if (showSidebar()) {
+        <div class="nph-shell__lateral">
+            <ng-container *ngTemplateOutlet="lateral"></ng-container>
+        </div>
+    }
+
+    <!-- `tabindex="-1"`: sem ele o skip link rola a página mas não move o
+         foco, e o Tab seguinte volta para a navegação. -->
+    <main class="nph-shell__conteudo" [id]="idConteudo" tabindex="-1">
+
+        @if (showBreadcrumb()) {
+            <ng-container *ngTemplateOutlet="trilha"></ng-container>
+        }
+
+        <!-- Slot `pageHeader`: o `<h1>` da página e as ações dela. O
+             título é da PÁGINA, não da moldura. -->
+        <div class="nph-shell__cabecalho-pagina">
+            <ng-content select="[nphPageHeader]"></ng-content>
+        </div>
+
+        <!-- Slot `content`: o que cada página troca. -->
+        <ng-content></ng-content>
+    </main>
+</div>

@@ -1,0 +1,135 @@
+/* ─────────────────────────────────────────────────────────────
+ * Template `auth` — a moldura das telas de acesso
+ * ─────────────────────────────────────────────────────────────
+ * Aqui só mora ARRANJO: o que fica ao lado do quê e quanto espaço há
+ * entre eles. Nenhuma cor nova, nenhum tamanho de fonte novo, nenhum
+ * raio — tudo vem do preset (`--p-*`), da camada de token do
+ * `@iatec/nephos-ui` (`--nph-*`) ou do papel de fundo que esta própria
+ * lib já declara (`--surface-ground`).
+ * ───────────────────────────────────────────────────────────── */
+
+@use '../../../../lib/layout/sass_variables' as *;
+
+:host {
+    display: block;
+
+    /* Rede de segurança, mesmo padrão que o `_main.scss` já usa para a
+       família tipográfica: com o `nephos-ui.scss` carregado quem manda é
+       o token; o literal existe só para quem consome esta lib sozinha,
+       sem o pacote de primitivos. Se um dia divergirem, o token vence —
+       que é o comportamento certo. Os três valores são os declarados em
+       `nephos-ui.scss`, copiados, não inventados. */
+    --nph-auth-space-sm: var(--nph-space-sm, 0.5rem);
+    --nph-auth-space-md: var(--nph-space-md, 0.75rem);
+    --nph-auth-space-lg: var(--nph-space-lg, 1.25rem);
+}
+
+/* ── A moldura ──────────────────────────────────────────────────── */
+/* A ficha declara `fundo: surface/50`. Aqui vai o papel de FUNDO DE
+   PÁGINA que esta lib já mantém (`--surface-ground`: `surface/100` no
+   claro, `surface/950` no escuro), e a razão é a mesma que moveu a
+   ilustração do `empty-state`: um passo cru da rampa slate é o MESMO tom
+   nos dois modos, então `surface/50` deixaria a tela de acesso branca no
+   modo escuro. `--surface-ground` acompanha o modo e é exatamente o
+   fundo que o `body` do produto usa — a porta de entrada nasce no mesmo
+   fundo das telas de dentro. Divergência registrada para decisão de
+   token, não corrigida por conta própria. */
+.nph-auth {
+    display: flex;
+    min-height: 100dvh;
+    background: var(--surface-ground);
+}
+
+.nph-auth__conteudo {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nph-auth-space-lg);
+    padding: var(--nph-auth-space-lg);
+}
+
+/* ── O cartão ───────────────────────────────────────────────────── */
+/* ⚠️ VALOR SEM FONTE NO `design.md` — PRECISA DE CONFIRMAÇÃO (Indiane).
+   Mesmo caso da largura do diálogo (28rem): o `design.md` não tem token
+   de largura de cartão. A largura NÃO foi escolhida no olho — é a que o
+   bloco `login-form` já foi provado, `24rem` no
+   `stories/login-form.stories.ts`, mais o padding do próprio cartão.
+   Escrita como conta, e não como um número novo, justamente para o dia
+   em que o padding mudar: a área do formulário continua sendo as 24rem
+   em que ele foi medido. */
+.nph-auth__cartao {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nph-auth-space-lg);
+    width: 100%;
+    max-width: calc(24rem + 2 * var(--nph-auth-space-lg));
+    padding: var(--nph-auth-space-lg);
+    border: 1px solid var(--p-content-border-color);
+    border-radius: var(--p-card-border-radius);
+    background: var(--p-content-background);
+}
+
+/* ── Rodapé legal ───────────────────────────────────────────────── */
+.nph-auth__rodape {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nph-auth-space-md);
+    text-align: center;
+}
+
+/* O slot é opcional: sem nada projetado o `<footer>` não deve ocupar o
+   `gap` do contêiner. `:empty` ignora comentários, então ele casa
+   exatamente no caso "ninguém preencheu o slot". */
+.nph-auth__rodape:empty {
+    display: none;
+}
+
+/* ── Painel de marca (só no `split`) ────────────────────────────── */
+/* O único lugar da moldura que veste a cor da vertical — e usa o PAR
+   verificado (`primary` + o contraste declarado marca a marca), nunca um
+   passo solto. */
+.nph-auth__painel {
+    display: none;
+    background: var(--p-primary-color);
+    color: var(--p-primary-contrast-color);
+}
+
+.nph-auth__painel-imagem {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* A classe `.nph-body-xl` da camada de token também fixa
+   `color: --p-text-color`, que é a cor de texto sobre fundo NEUTRO.
+   Sobre o fundo da marca quem vale é o contraste do painel — daí o
+   `inherit`. O tamanho continua vindo do token; só a cor é local. */
+.nph-auth__painel-texto {
+    color: inherit;
+    text-align: center;
+}
+
+/* O painel só existe onde há largura para ele. Abaixo do breakpoint a
+   tela volta a ser o cartão centrado — que é o comportamento que a ficha
+   descreve ao proibir informação essencial aqui dentro. */
+@media screen and (min-width: $breakpoint) {
+    .nph-auth--split .nph-auth__painel {
+        display: flex;
+        flex: 1 1 50%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--nph-auth-space-md);
+        padding: var(--nph-auth-space-lg);
+        overflow: hidden;
+    }
+
+    .nph-auth--split .nph-auth__conteudo {
+        flex: 1 1 50%;
+    }
+}
