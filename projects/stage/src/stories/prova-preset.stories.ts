@@ -54,10 +54,26 @@ export const Prova: Story = {
     props: {
       texto: '',
       marcado: true,
+      // ⚠️ NÃO usar nome de vertical aqui (corrigido em 04/08/2026).
+      //
+      // Estas opções existiam como "Educação / Financeiro / Igrejas", com o
+      // placeholder "Selecione a vertical". Eram dois problemas, não um:
+      //
+      // 1. nome de marca escrito à mão no código — a regra 4 do
+      //    `nephos-token-audit`, e a única violação viva que restava no
+      //    repositório;
+      // 2. pior que isso, o conjunto lia como um SELETOR DE MARCA, que o
+      //    `AGENTS.md` proíbe explicitamente: a vertical vem do contexto e
+      //    nunca é escolha de quem usa. O seletor das 7 marcas na barra do
+      //    Storybook é andaime de bancada; dentro de uma tela, não existe.
+      //
+      // O campo aqui prova GEOMETRIA (padding, raio, anel de foco), então o
+      // conteúdo da lista é indiferente — só precisa ser algo que ninguém
+      // confunda com marca.
       opcoes: [
-        { label: 'Educação', value: 1 },
-        { label: 'Financeiro', value: 2 },
-        { label: 'Igrejas', value: 3 },
+        { label: 'Manhã', value: 1 },
+        { label: 'Tarde', value: 2 },
+        { label: 'Noite', value: 3 },
       ],
       escolhido: null,
     },
@@ -87,7 +103,7 @@ export const Prova: Story = {
               <label for="nome">Nome completo</label>
             </p-floatlabel>
             <p-select [options]="opcoes" [(ngModel)]="escolhido"
-                      optionLabel="label" placeholder="Selecione a vertical"
+                      optionLabel="label" placeholder="Selecione o turno"
                       [style]="{ minWidth: '16rem' }"></p-select>
           </div>
         </section>
