@@ -155,6 +155,8 @@ de CDN). Hoje aquele arquivo está vazio de propósito.
   violações (hex cru, px "no olho", nome de marca, PrimeIcons, `<div>` clicável, campo
   sem label…).
 
-⚠️ **O `README.md` está desatualizado.** Ele descreve três bibliotecas (hoje são cinco) e
-uma seção de documentação humana no Storybook que foi removida em 04/08/2026. Para o
-estado real, prefira este arquivo e o `design-system/`.
+O [`README.md`](./README.md) cobre o uso das bibliotecas **em outro projeto** (pacotes,
+ordem do `styles.scss`, os dois providers). Este arquivo cobre o trabalho **dentro** deste
+repositório. Foi reescrito em 04/08/2026 — antes disso ele descrevia três bibliotecas
+(são cinco), mandava importar NgModules que não existem e linkava cinco documentos
+apagados.
