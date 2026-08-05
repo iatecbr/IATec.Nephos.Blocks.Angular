@@ -55,6 +55,32 @@ const meta: Meta<DetailFormPageComponent> = {
     }),
     applicationConfig({ providers: [provideRouter(ROTAS_DE_PROVA)] }),
   ],
+
+  /**
+   * ESTA PEÇA PRECISA DE IFRAME NA PÁGINA DE DOCS — e a causa é o título.
+   *
+   * O `@storybook/angular` monta cada story de uma página de Docs com um
+   * `bootstrapApplication` cujo seletor sai do ID da story. O ID desta
+   * peça é `nephos-templates-detalhe-·-formulário--edicao`, e o `·` não
+   * sobrevive à conversão para seletor CSS: o Angular acabava procurando
+   * `-formulario--edicao-0` enquanto o elemento no DOM continuava com o
+   * nome inteiro. Resultado medido: `NG05104 — The selector did not match
+   * any elements`, 4 vezes, só nesta página. As outras 20 passam limpas.
+   *
+   * (Acento sozinho não é o problema: `Confirmação destrutiva` e
+   * `Autenticação` não acusam nada. É o `·`.)
+   *
+   * Com `inline: false` cada story renderiza no próprio iframe, onde a
+   * raiz é o `#storybook-root` de sempre e não existe seletor derivado do
+   * ID. Preferido a renomear a peça: o título é nome de catálogo, e não se
+   * troca nome de catálogo para contornar bug de ferramenta.
+   *
+   * ⚠️ `height` é obrigatório quando `inline: false` — sem ele o bloco
+   * quebra.
+   */
+  parameters: {
+    docs: { story: { inline: false, height: '760px' } },
+  },
 };
 
 export default meta;

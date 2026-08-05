@@ -51,6 +51,18 @@ const meta: Meta<ListingPageComponent> = {
     }),
     applicationConfig({ providers: [provideRouter(ROTAS_DE_PROVA)] }),
   ],
+
+  /**
+   * Template de página inteira: na página de Docs, cada story vai para o
+   * PRÓPRIO iframe. Inline, a página renderiza espremida no bloco estreito
+   * da documentação, e os `provideRouter` das stories passam a dividir o
+   * mesmo `window.location`.
+   *
+   * ⚠️ `height` é obrigatório quando `inline: false`.
+   */
+  parameters: {
+    docs: { story: { inline: false, height: '760px' } },
+  },
 };
 
 export default meta;

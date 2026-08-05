@@ -77,6 +77,18 @@ const meta: Meta<LayoutAuthComponent> = {
       ],
     }),
   ],
+
+  /**
+   * Template de página inteira: na página de Docs, cada story vai para o
+   * PRÓPRIO iframe. Inline, a moldura de tela cheia renderiza espremida no
+   * bloco estreito da documentação, e os `provideRouter` das 5 stories
+   * passam a dividir o mesmo `window.location`.
+   *
+   * ⚠️ `height` é obrigatório quando `inline: false`.
+   */
+  parameters: {
+    docs: { story: { inline: false, height: '760px' } },
+  },
 };
 
 export default meta;

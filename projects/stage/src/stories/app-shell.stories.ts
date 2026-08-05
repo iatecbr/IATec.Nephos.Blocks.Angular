@@ -60,6 +60,21 @@ const meta: Meta<LayoutAppShellComponent> = {
       ],
     }),
   ],
+
+  /**
+   * Template de página inteira: na página de Docs, cada story vai para o
+   * PRÓPRIO iframe.
+   *
+   * Inline, a peça renderiza dentro do bloco estreito da página de Docs —
+   * uma moldura de tela cheia espremida num contêiner de documentação não
+   * tem como ficar certa, e ainda por cima os `provideRouter` de 3-5 stories
+   * passam a dividir o mesmo `window.location`.
+   *
+   * ⚠️ `height` é obrigatório quando `inline: false` — sem ele o bloco quebra.
+   */
+  parameters: {
+    docs: { story: { inline: false, height: '760px' } },
+  },
 };
 
 export default meta;

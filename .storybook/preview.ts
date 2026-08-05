@@ -1,4 +1,4 @@
-import { applicationConfig, type Preview } from '@storybook/angular';
+import { applicationConfig, componentWrapperDecorator, type Preview } from '@storybook/angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/themes';
@@ -93,14 +93,46 @@ const preview: Preview = {
   },
 
   decorators: [
+    /**
+     * O RESPIRO É POR STORY, NÃO NO `<body>`.
+     *
+     * Isto morava no decorator abaixo, como `document.body.style.padding`.
+     * Em Canvas funcionava por coincidência: ali o `<body>` **é** o quadro
+     * de uma story só. Em Docs o `<body>` é a página inteira — então cada
+     * bloco de preview ficava com `padding: 0` (medido) e as peças
+     * encostavam na borda.
+     *
+     * Agravante: `layout: 'fullscreen'` desliga o padding que o Storybook
+     * daria ao bloco, e o `storybook-styles.scss` está vazio de propósito.
+     * Aquela linha era a única fonte de respiro da bancada, e em Docs ela
+     * pintava o lugar errado.
+     *
+     * O estilo vai inline aqui, e não no `storybook-styles.scss`, porque é
+     * MÓVEL DA BANCADA — não é CSS de produto. A regra daquele arquivo
+     * continua valendo: se uma linha existe só lá, a pergunta é "a produção
+     * faz assim também?". Esta não deve existir na produção.
+     */
+    componentWrapperDecorator(
+      // ⚠️ O estilo vai NO TEMPLATE, não no 2º argumento.
+      //
+      // O 2º argumento do `componentWrapperDecorator` são **props do
+      // componente**, não atributos do elemento envolvente. Passar
+      // `{ style: ... }` ali compila sem erro e não faz nada: medido, o
+      // `<div>` saía com `padding: 0px` e fundo transparente.
+      //
+      // `min-height: 100%` faz o fundo cobrir o quadro inteiro em Canvas sem
+      // esticar a página de Docs, onde cada bloco tem a própria altura.
+      (story) =>
+        `<div class="nph-bancada" style="padding: 1.5rem; min-height: 100%; box-sizing: border-box; background: var(--p-content-background); color: var(--p-text-color);">${story}</div>`,
+    ),
+
     (story, context) => {
       const marca = (context.globals['marca'] ?? NEPHOS_DEFAULT_THEME) as NephosTheme;
       const escuro = context.globals['modo'] === 'escuro';
 
+      // O modo escuro é global por natureza: `.app-dark` é o
+      // `darkModeSelector` que o PrimeNG procura na raiz. Fica onde está.
       document.documentElement.classList.toggle('app-dark', escuro);
-      document.body.style.background = 'var(--p-content-background)';
-      document.body.style.color = 'var(--p-text-color)';
-      document.body.style.padding = '1.5rem';
 
       // ⚠️ ORDEM IMPORTA — e é por isso que o `providePrimeNG` é montado
       // AQUI DENTRO, com a marca do contexto, em vez de num
@@ -135,9 +167,45 @@ const preview: Preview = {
     },
   ],
 
+  /**
+   * Autodocs em TODAS as stories de uma vez.
+   *
+   * Não é documentação nova: é a que já estava escrita. Cada `*.stories.ts`
+   * traz JSDoc em português acima do `const meta` e acima de cada `export
+   * const` — o porquê da peça existir, o que a story precisa provar, os
+   * anti-padrões, e o caminho da ficha `.meta.ts`. Até aqui esse texto só
+   * existia para quem abrisse o arquivo.
+   *
+   * Marcar no nível do projeto (em vez de repetir `tags: ['autodocs']` nos
+   * 21 arquivos) é o que a 10.5.6 suporta e evita 21 lugares para esquecer.
+   */
+  tags: ['autodocs'],
+
   parameters: {
     layout: 'fullscreen',
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
+
+    // Índice navegável na página de Docs. Os JSDoc daqui são longos de
+    // propósito (regra, anti-padrão, o que a story prova), e sem sumário a
+    // página vira rolagem cega.
+    docs: { toc: true },
+
+    /**
+     * A ordem da sidebar é uma afirmação sobre o Design System, não
+     * alfabetação. Ela sobe do menor para o maior — átomo, bloco, template —
+     * que é a mesma progressão do `design.md` e a ordem em que as peças
+     * foram construídas.
+     *
+     * `Prova` fica por último de propósito: não é uma peça do catálogo, é a
+     * matriz de componentes PrimeNG que prova o preset nas 7 marcas × 2
+     * modos. Quem chega procurando um componente não deve esbarrar nela
+     * primeiro.
+     */
+    options: {
+      storySort: {
+        order: ['Nephos UI', ['Átomos'], 'Nephos Blocks', 'Nephos Templates', 'Prova'],
+      },
+    },
   },
 };
 

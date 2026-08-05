@@ -1,0 +1,34 @@
+<!--
+  A fonte do CHROME do Storybook (sidebar, barra, painéis).
+
+  O manager é um documento separado do preview: ele não recebe a opção
+  `styles` do builder, então o `styles.scss` — que é quem traz o Noto Sans
+  para as stories — não chega até aqui. Sem este arquivo, declarar
+  `fontBase: 'Noto Sans'` no `manager.ts` não teria efeito nenhum e o chrome
+  cairia na fonte de sistema.
+
+  Os `.woff2` são os MESMOS que a produção usa (`@iatec/nephos-layout`,
+  subconjunto latin do `@fontsource/noto-sans`) — não uma segunda cópia e não
+  um CDN. Eles chegam a `/fonts` pelo `staticDirs` do `main.ts`.
+
+  Só dois pesos: o chrome não precisa dos quatro que o produto declara.
+-->
+<style>
+  @font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/noto-sans-latin-400-normal.woff2') format('woff2'),
+         url('/fonts/noto-sans-latin-400-normal.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/noto-sans-latin-600-normal.woff2') format('woff2'),
+         url('/fonts/noto-sans-latin-600-normal.woff') format('woff');
+  }
+</style>
