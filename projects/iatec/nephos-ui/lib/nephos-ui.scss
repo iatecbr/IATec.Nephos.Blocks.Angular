@@ -210,9 +210,37 @@
 .nph-icon-button:hover { background: var(--p-content-hover-background); }
 
 /* ── Logo ───────────────────────────────────────────────────────── */
-/* Asset de marca: não recebe cor de papel e não é distorcido. */
-.nph-logo { display: inline-flex; align-items: center; }
-.nph-logo img { display: block; width: auto; max-width: 100%; height: auto; }
+/* Asset de marca: não recebe cor de papel e não é distorcido.
+ *
+ * ⚠️ O TAMANHO SAI DA ALTURA, NÃO DA LARGURA — E ISSO NÃO É ESTILO, É
+ * NECESSIDADE. O `@iatec/nephos-layout` declara, global e sem escopo:
+ *
+ *     img { max-width: none !important; }   ← _main.scss, desde out/2025
+ *
+ * Um `!important` num seletor de elemento nu ganha de qualquer regra
+ * nossa por especificidade — a versão anterior daqui pedia
+ * `max-width: 100%` e era simplesmente descartada. O logo renderizava no
+ * tamanho natural do arquivo (1801×529 no `nephos.png`), cobrindo o
+ * cartão de login e estourando a página na horizontal. Passou despercebido
+ * porque a bateria do projeto media erro de console, cor e a11y — nunca
+ * geometria.
+ *
+ * A saída é não disputar `max-width`: declarando a ALTURA e deixando
+ * `width: auto`, a largura passa a ser derivada, e `max-width: none` não
+ * tem mais o que deixar de restringir.
+ *
+ * Segundo defeito consertado aqui: `nph-ui-logo` não tinha regra de
+ * `display` em lugar nenhum do repositório. Elemento customizado sem regra
+ * nasce `display: inline`, e altura em elemento inline é ignorada — por
+ * isso os `style="height:2rem"` espalhados pelas stories nunca surtiram
+ * efeito. Com o host em `inline-flex`, eles passam a valer.
+ *
+ * O contexto ajusta por `--nph-logo-height`, que é o contrato declarado na
+ * ficha `design-system/componentes/logo.meta.ts`.
+ */
+nph-ui-logo { display: inline-flex; height: var(--nph-logo-height, 2rem); }
+.nph-logo { display: inline-flex; align-items: center; height: 100%; }
+.nph-logo img { display: block; height: 100%; width: auto; }
 
 /* ── Rótulo presente para quem ouve, ausente para quem vê ───────── */
 .nph-visually-hidden {

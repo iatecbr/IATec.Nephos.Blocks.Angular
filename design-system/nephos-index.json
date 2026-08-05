@@ -13550,9 +13550,11 @@
       "tokens": {
         "typography": "—",
         "byState": {
-          "default": {}
+          "default": {
+            "height": "--nph-logo-height (padrão 2rem)"
+          }
         },
-        "note": "O logo é asset de marca (SVG), não usa a paleta de papéis. A cor vem do próprio arquivo/tema da vertical. Preferir SVG por nitidez em qualquer tamanho/tela."
+        "note": "O logo é asset de marca (SVG), não usa a paleta de papéis — a cor vem do próprio arquivo/tema da vertical. Preferir SVG por nitidez em qualquer tamanho/tela. TAMANHO: o componente tem altura própria (`--nph-logo-height`, padrão 2rem) e a largura é DERIVADA dela — nunca declarar largura no logo. Para mudar o tamanho num contexto, sobrescrever a custom property no contêiner (ex.: `.meu-cabecalho { --nph-logo-height: 2.5rem }`), nunca `width`/`max-width` na imagem: o `@iatec/nephos-layout` declara `img { max-width: none !important }` global, e qualquer tentativa de limitar por largura é descartada em silêncio."
       },
       "antiPatterns": [
         {
@@ -13569,6 +13571,11 @@
           "regra": "Nunca distorcer ou recolorir o logo para caber/combinar.",
           "porque": "Descaracteriza a marca; proporções e cores do logo são fixas.",
           "emVezDisso": "Usar a variante certa (full/symbol) e respeitar a área de proteção."
+        },
+        {
+          "regra": "Nunca dimensionar o logo por largura (`width` / `max-width` na imagem).",
+          "porque": "O `@iatec/nephos-layout` declara `img { max-width: none !important }` global e sem escopo. Qualquer limite por largura é descartado sem erro nenhum — o logo simplesmente renderiza no tamanho natural do arquivo e estoura o contêiner.",
+          "emVezDisso": "Sobrescrever `--nph-logo-height` no contêiner. A largura sai da altura, e aí não há o que o `!important` desfaça."
         }
       ],
       "examples": {
